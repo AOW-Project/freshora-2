@@ -12,9 +12,11 @@ export default function Services() {
   return (
     <>
 
-      <AnimatedParticles />
+    
       {/* <Navbar /> */}
       {/* <Footer /> */}
+      <AnimatedParticles zIndex={5} />
+      {/* Content Wrapper */}
       <ServiceBanner />
       <ServicesGrid />
       <LaundryService />

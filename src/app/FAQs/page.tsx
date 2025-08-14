@@ -1,8 +1,10 @@
 "use client"
 
+import AnimatedParticles from "@/component/AnimatedParticles"
 import { Poppins } from "next/font/google"
 import Link from "next/link"
 import { useState } from "react"
+
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -92,6 +94,7 @@ export default function FAQPage() {
   }
 
   return (
+    <> <AnimatedParticles zIndex={5} />
     <div>
       {/* Header Section */}
       <div
@@ -200,6 +203,7 @@ export default function FAQPage() {
           </form>
         </div>
       </section>
-    </div>
+    </div></>
+   
   )
 }

@@ -4,6 +4,7 @@ import { CheckCircle2, Clock, CreditCard, Leaf, Phone } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
+import AnimatedParticles from "@/component/AnimatedParticles";
 // import img01 from '../../../public/images/img01.jpg';
 
 
@@ -17,6 +18,7 @@ const TeamSection = dynamic(() => import("@/component/TeamSection"), { ssr: fals
 export default function AboutSection() {
   return (
     <>
+    <AnimatedParticles  zIndex={5}/>
       <div
         className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center flex items-center"
         style={{

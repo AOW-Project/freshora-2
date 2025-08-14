@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CheckCircle, ShoppingCart, ClipboardList, Zap, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import PickupForm from "@/component/SchedulePickupModal"
+import AnimatedParticles from "@/component/AnimatedParticles"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -192,6 +193,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ icon: Icon, title, features, 
 
   return (
     <>
+    <AnimatedParticles zIndex={5} />
     <Card
       className="group relative flex flex-col transition-all duration-300 hover:shadow-lg bg-white border-none cursor-pointer"
       onClick={() => setIsExpanded(!isExpanded)}

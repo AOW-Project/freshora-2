@@ -3,6 +3,7 @@
 import Link from "next/link";
 // import NotFound from "@/component/NotFound";
 import React from "react";
+import AnimatedParticles from "@/component/AnimatedParticles";
 
 export default function ContactPage({
   params,
@@ -13,6 +14,8 @@ export default function ContactPage({
 
   return (
     // <NotFound/>
+    <> 
+    <AnimatedParticles zIndex={5} />
     <main className="min-h-screen bg-gray-50">
                          <div
         className="relative h-64 bg-cover bg-center flex items-center"
@@ -138,6 +141,7 @@ export default function ContactPage({
           ></iframe>
         </div>
       </section>
-    </main>
+    </main></>
+   
   );
 }
