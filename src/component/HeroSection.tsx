@@ -137,7 +137,7 @@ export default function HeroSection() {
                 {/* Text content is on the top layer (z-20) */}
                 <div className="relative z-20 flex h-full items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                     <div className="max-w-2xl text-white text-center lg:text-left">
-                        <p className={`font-semibold text-base md:text-lg mb-3 text-cyan-400 transition-all duration-700 ease-out ${currentSlide !== null ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5'}`} style={{ transitionDelay: '200ms' }}>
+                        <p className={`font-semibold text-base md:text-lg mb-3 text-white transition-all duration-700 ease-out ${currentSlide !== null ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5'}`} style={{ transitionDelay: '200ms' }}>
                             {slides[currentSlide].subtitle}
                         </p>
                         <h2 className={`font-bold text-3xl md:text-5xl leading-tight mb-4 transition-all duration-700 ease-out ${currentSlide !== null ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5'}`} style={{ transitionDelay: '400ms', color: '#52b765' }}>

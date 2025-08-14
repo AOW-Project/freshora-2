@@ -52,27 +52,40 @@ export default function LaundryStats() {
     <>
       <section className="relative bg-[#f3f6f4] py-8 sm:py-12 lg:py-16 xl:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 xl:gap-16">
-            <div className="relative flex-shrink-0 w-full lg:w-1/2 max-w-lg lg:max-w-none">
-              <div className="relative aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3]">
-              <Image
-  src={img01}
-  alt="Laundry Experience"
-  fill
-  className="shadow-lg object-cover"
-/>
-                <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 lg:bottom-6 lg:right-6 bg-green-600 text-white rounded-full w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 flex flex-col items-center justify-center text-center shadow-lg">
-                  <span className="text-lg sm:text-2xl lg:text-3xl font-extrabold">25</span>
-                  <span className="text-xs sm:text-sm text-center leading-tight px-1">years of experience</span>
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+            {/* Image Section */}
+            <div className="relative flex-shrink-0 w-full lg:w-5/12 max-w-md lg:max-w-none">
+              <div className="relative aspect-square">
+                <Image
+                  src={img01}
+                  alt="Laundry Experience"
+                  fill
+                  className="shadow-lg object-cover rounded-lg"
+                />
+                {/* FIX: Adjusted circle to match the reference image */}
+                <div className="absolute top-3/4 -translate-y-1/2 right-[-60px] bg-green-500 text-white rounded-full w-32 h-32 flex flex-col items-center justify-center text-center shadow-2xl">
+                  <span className="text-4xl font-extrabold">25</span>
+                  <span className="text-sm font-semibold text-center leading-tight px-1">years of experience</span>
                 </div>
               </div>
             </div>
 
-            <div className="flex-1 w-full lg:w-1/2 text-center lg:text-left">
+            {/* Text Content Section */}
+            <div className="relative flex-1 w-full lg:w-7/12 text-center lg:text-left lg:pl-16">
+              {/* Dotted line connector for large screens */}
+             {/*<div className="hidden lg:block absolute top-[15%] left-[-20px] transform -translate-y-1/2 h-12 w-20">
+                <Image
+                  src="/images/arrow-img-right.png"
+                  alt="Decorative arrow"
+                  width={120}
+                  height={60}
+                />
+              </div> */}
+
               <p className="text-green-600 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
                 More than 25 Years of Experience
               </p>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
+              <h2 className="text-xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
                 We are Passionate About Laundry
               </h2>
               <p className="text-gray-600 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base lg:text-lg max-w-2xl mx-auto lg:mx-0">
@@ -113,7 +126,7 @@ export default function LaundryStats() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-12 sm:mt-16 lg:mt-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-24 sm:mt-28 lg:mt-32">
             <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 text-center sm:text-left">
               <Clock className="text-green-600 mb-3 sm:mb-4 w-6 h-6 sm:w-8 sm:h-8 mx-auto sm:mx-0" />
               <h3 className="font-semibold text-green-600 mb-2 sm:mb-3 text-base sm:text-lg">Save Time & Money</h3>

@@ -57,7 +57,7 @@ export default function Footer() {
               <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-start gap-3">
                   <MdLocationOn className="text-green-500 mt-1 flex-shrink-0" size={16} />
-                  <span className="text-sm sm:text-base">8494 Signal Hill Road Manassas, VA, 20110</span>
+                  <span className="text-sm sm:text-base">Address : Shop no 4, Azizi riviera 42 , Meydan , Al Merkadh , Dubai UAE </span>
                 </div>
                 <div className="flex items-start gap-3">
                   <MdAccessTime className="text-green-500 mt-1 flex-shrink-0" size={16} />
@@ -68,7 +68,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-start gap-3">
                   <MdEmail className="text-green-500 mt-1 flex-shrink-0" size={16} />
-                  <span className="text-sm sm:text-base break-all">info@yourlaundrysite.com</span>
+                  <span className="text-sm sm:text-base break-all">freshorappc@gmail.com</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <MdPhone className="text-green-500 mt-1 flex-shrink-0" size={16} />

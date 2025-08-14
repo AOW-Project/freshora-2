@@ -1,5 +1,6 @@
 "use client"
 import Link from "next/link"
+import Image from "next/image" // Import the Image component
 import { useState, useEffect } from "react"
 import {
   FaPhoneAlt,
@@ -39,7 +40,6 @@ const navItems: NavItem[] = [
       { title: "Soft Toy Cleaning Service", href: "/services/soft-toy-cleaning-service" },
     ],
   },
-  { title: "Blog", href: "/Blogs" },
   { title: "Prices", href: "/prices" },
   { title: "FAQ", href: "/FAQs" },
   { title: "Contacts", href: "/contact" },
@@ -52,26 +52,23 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
   const { getTotalItems } = useCart()
 
-  // --- FIX: Added useEffect to handle scroll detection ---
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
-    // Cleanup function to remove the event listener
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
 
   return (
     <>
       <header className="w-full bg-white border-b border-gray-200 sticky top-0 z-50">
         {/* Top Info Bar */}
         <div className="bg-gray-100 text-xs sm:text-sm text-gray-700 py-2 px-4 flex flex-wrap justify-between items-center gap-2">
-          <div>8494 Signal Hill Road Manassas, VA, 20110</div>
+          <div>Address : Shop no 4, Azizi riviera 42 , Meydan , Al Merkadh , Dubai UAE </div>
           <div className="hidden md:flex gap-4">
             <span>Mon-Fri 08:00 AM - 05:00 PM</span>
-            <span>info@yourcompany.com</span>
+            <span>freshorappc@gmail.com</span>
           </div>
           <div className="flex gap-3 items-center text-sm">
             <span className="flex items-center gap-1">
@@ -89,17 +86,25 @@ const Navbar = () => {
           className={`max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 transition-all duration-300 ${scrolled ? "py-2" : "py-3"}`}
         >
           {/* Logo */}
-          <div
-            className={`font-bold transition-all duration-300 ${scrolled ? "text-lg sm:text-xl" : "text-lg sm:text-xl lg:text-2xl"}`}
-          >
-            <Link href="/">
-                <span className="text-green-600">Freshora </span>
-                <span className="text-black">Laundry</span>
-            </Link>
-          </div>
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/images/F.png" // The path to your logo in the `public` folder
+              alt="Freshora Laundry Logo"
+              width={50} // Reduced width for a smaller logo
+              height={50} // Reduced height for a smaller logo
+              className="transition-all duration-300"
+              priority // Prioritize loading the logo
+            />
+            <div
+              className={`font-bold transition-all duration-300 ${scrolled ? "text-lg sm:text-xl" : "text-lg sm:text-xl lg:text-2xl"}`}
+            >
+              <span className="text-green-600">Freshora </span>
+              <span className="text-black">Laundry</span>
+            </div>
+          </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex space-x-6 font-medium text-gray-700 relative">
+          <nav className="hidden lg:flex space-x-6 font-medium text-gray-700 relative">
             {navItems.map((item, index) => (
               <div
                 key={index}
@@ -148,7 +153,7 @@ const Navbar = () => {
             </button>
 
             {/* Mobile Menu Button */}
-            <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
+            <button className="lg:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
               {mobileOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
             </button>
           </div>
@@ -156,7 +161,7 @@ const Navbar = () => {
 
         {/* Mobile Sidebar Overlay */}
         {mobileOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200">
+          <div className="lg:hidden bg-white border-t border-gray-200">
             {navItems.map((item, index) => (
               <div key={index} className="border-b border-gray-100">
                 <Link href={item.href} className="block px-4 py-3 font-medium text-gray-700">
@@ -180,7 +185,7 @@ const Navbar = () => {
             <button
               onClick={() => {
                 setShowForm(true);
-                setMobileOpen(false); // Close menu on click
+                setMobileOpen(false);
               }}
               className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-3"
             >
@@ -188,7 +193,7 @@ const Navbar = () => {
             </button>
           </div>
         )}
-      </header> {/* --- FIX: Added the missing closing </header> tag --- */}
+      </header>
 
       {/* Pickup Form Modal */}
       <PickupForm open={showForm} onClose={() => setShowForm(false)} />
