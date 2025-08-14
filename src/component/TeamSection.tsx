@@ -14,47 +14,47 @@ const teamMembers: TeamMember[] = [
   {
     name: "Justin Stein",
     title: "Service Manager",
-    image: "/images/pesonal-info-img01.jpg?height=160&width=160&text=Justin+Stein",
+    image: "/images/pesonal-info-img01.jpg",
   },
   {
     name: "Amy Hellickson",
     title: "Wash Expert",
-    image: "/images/pesonal-info-img02.jpg?height=160&width=160&text=Amy+Hellickson",
+    image: "/images/pesonal-info-img02.jpg",
   },
   {
     name: "Charles Rock",
     title: "Operations Manager",
-    image: "/images/pesonal-info-img03.jpg?height=160&width=160&text=Charles+Rock",
+    image: "/images/pesonal-info-img03.jpg",
   },
   {
     name: "Sarah Johnson",
     title: "Quality Control",
-    image: "/images/pesonal-info-img01.jpg?height=160&width=160&text=Sarah+Johnson",
+    image: "/images/pesonal-info-img01.jpg",
   },
   {
     name: "Mike Davis",
     title: "Dry Cleaning Specialist",
-    image: "/images/pesonal-info-img02.jpg?height=160&width=160&text=Mike+Davis",
+    image: "/images/pesonal-info-img02.jpg",
   },
   {
     name: "Lisa Chen",
     title: "Customer Service Lead",
-    image: "/images/pesonal-info-img03.jpg?height=160&width=160&text=Lisa+Chen",
+    image: "/images/pesonal-info-img03.jpg",
   },
   {
     name: "Robert Wilson",
     title: "Maintenance Supervisor",
-    image: "/images/pesonal-info-img03.jpg?height=160&width=160&text=Robert+Wilson",
+    image: "/images/pesonal-info-img03.jpg",
   },
   {
     name: "Emma Thompson",
     title: "Pickup & Delivery",
-    image: "/images/pesonal-info-img01.jpg?height=160&width=160&text=Emma+Thompson",
+    image: "/images/pesonal-info-img01.jpg",
   },
   {
     name: "David Martinez",
     title: "Stain Removal Expert",
-    image: "/images/pesonal-info-img02.jpg?height=160&width=160&text=David+Martinez",
+    image: "/images/pesonal-info-img02.jpg",
   },
 ]
 
