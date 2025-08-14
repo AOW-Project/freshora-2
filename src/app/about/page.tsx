@@ -56,7 +56,7 @@ export default function AboutSection() {
   className="absolute -top-3 -right-6 sm:-top-5 sm:-right-10 w-16 sm:w-20 lg:w-24 h-auto opacity-80 hidden sm:block"
 />
                 <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 lg:-bottom-8 lg:-left-8 bg-white rounded-lg p-3 sm:p-4 lg:p-6 shadow-2xl text-center">
-                  <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-cyan-500">25</div>
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-600">25</div>
                   <div className="text-xs sm:text-sm text-gray-700 leading-tight">
                     years of <br /> experience
                   </div>

@@ -3,6 +3,7 @@
 import { useMemo } from "react"
 import { notFound } from "next/navigation"
 import Link from "next/link"
+import Image from "next/image" // FIX: Import the next/image component
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -10,12 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { MapPin, Clock, Mail, Phone, CheckCircle } from "lucide-react"
 import type { Service } from "../../../lib/services-data"
 
-interface ServiceItem {
-  id: string
-  name: string
-  price: number
-  description: string
-}
+// FIX: Removed unused 'ServiceItem' interface
 
 export default function ServicePageClient({
   slug,
@@ -109,11 +105,11 @@ export default function ServicePageClient({
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section - Enhanced responsive hero */}
+      {/* Hero Section */}
       <div
         className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center flex items-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/modern-office-laundry.png?height=400&width=1200&text=Laundry+Machines+Background')`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/modern-office-laundry.png')`,
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -124,14 +120,14 @@ export default function ServicePageClient({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
-          {/* Left Sidebar - Better responsive sidebar */}
+          {/* Left Sidebar */}
           <div className="lg:col-span-1 order-2 lg:order-1">
-            <Card className="sticky top-4">
+            <Card className="sticky top-24">
               <CardContent className="p-0">
-                <div className="lg:max-h-96 lg:overflow-y-auto">
-                  {serviceCategories.map((category, index) => (
+                <div className="lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
+                  {serviceCategories.map((category) => (
                     <Link
-                      key={index}
+                      key={category.slug}
                       href={`/services/${category.slug}`}
                       className={`block px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 last:border-b-0 transition-colors text-sm sm:text-base ${
                         category.slug === slug ? "bg-green-600 text-white" : "hover:bg-gray-50 text-gray-700"
@@ -145,26 +141,26 @@ export default function ServicePageClient({
             </Card>
           </div>
 
-          {/* Main Content - Enhanced responsive main content */}
+          {/* Main Content */}
           <div className="lg:col-span-3 order-1 lg:order-2">
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
-              {/* Service Image - Better responsive image */}
-              <div className="xl:col-span-2">
-                <img
-                  src="/images/layout01-img01.jpg?height=400&width=600&text=Person+Loading+Washing+Machine"
+              {/* Service Image */}
+              <div className="xl:col-span-2 relative w-full h-48 sm:h-56 md:h-64 lg:h-80 rounded-lg shadow-lg overflow-hidden">
+                {/* FIX: Replaced <image> with next/image <Image> component */}
+                <Image
+                  src="/images/layout01-img01.jpg"
                   alt="Laundry Service"
-                  className="w-full h-48 sm:h-56 md:h-64 lg:h-80 object-cover rounded-lg shadow-lg"
+                  fill
+                  className="object-cover"
                 />
               </div>
 
-              {/* Contact Info - Enhanced responsive contact card */}
+              {/* Contact Info */}
               <div className="xl:col-span-1">
                 <Card className="h-fit">
                   <CardContent className="p-4 sm:p-6">
                     <h3 className="text-lg font-semibold mb-4 text-gray-800">Our Contacts</h3>
-
                     {contactInfo}
-
                     <div className="space-y-3">
                       <Button className="w-full bg-green-600 hover:bg-green-700 text-sm sm:text-base">
                         Schedule a Pickup
@@ -183,18 +179,15 @@ export default function ServicePageClient({
               </div>
             </div>
 
-            {/* Service Description - Better responsive content layout */}
+            {/* Service Description */}
             <div className="mt-6 sm:mt-8 grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
               <div className="xl:col-span-2">
                 <div className="mb-6 sm:mb-8">
                   <div className="border-l-4 border-green-600 pl-4 mb-6">
                     <h4 className="text-green-600 font-medium mb-2 text-sm sm:text-base">What we offer</h4>
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">Laundry Services</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">{service.title}</h2>
                     <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                      Laundry&apos;s Wash and Fold, also called Fluff and Fold, or simply Drop Off Laundry, is the
-                      perfect solution to your laundry needs as a busy parent, professional, senior citizen or student.
-                      Use drop off laundry and free more of your time and energy to work, play, or just relax. Let wash,
-                      dry, and fold your clothes for you!
+                      {service.description}
                     </p>
                   </div>
 
@@ -206,12 +199,10 @@ export default function ServicePageClient({
                     laundry experts. We offer one-day or same-day laundry service with a 100% satisfaction guarantee to
                     customers in our service areas, combining the excellence of our premium dry cleaning with the
                     ultimate convenience in laundry service and delivery. Enjoy free home pickup and delivery for your
-                    wash and fold laundry items, or use a safe and secure 24-hour drop box located at our stores and
-                    lockers to drop off your fluff and fold laundry whenever it&apos;s convenient for you. Our Laundry
-                    Clients Include:
+                    wash and fold laundry items. Our Laundry Clients Include:
                   </p>
 
-                  {/* Service Features Grid - Better responsive grid */}
+                  {/* Service Features Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
                     {serviceFeatures.map((feature, index) => (
                       <div key={index} className="flex items-center gap-2">
@@ -221,18 +212,24 @@ export default function ServicePageClient({
                     ))}
                   </div>
 
-                  {/* Service Images - Enhanced responsive image grid */}
+                  {/* Service Images */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 sm:mb-8">
-                    <img
-                      src="/images/img09.jpg?height=200&width=300&text=Ironing+Service"
-                      alt="Ironing Service"
-                      className="w-full h-40 sm:h-48 object-cover rounded-lg"
-                    />
-                    <img
-                      src="/images/img11.jpg?height=200&width=300&text=Hanging+Clothes"
-                      alt="Hanging Clothes"
-                      className="w-full h-40 sm:h-48 object-cover rounded-lg"
-                    />
+                    <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden">
+                      <Image
+                        src="/images/img09.jpg"
+                        alt="Ironing Service"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden">
+                      <Image
+                        src="/images/img11.jpg"
+                        alt="Hanging Clothes"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
                   </div>
 
                   {/* How It Works Section */}
@@ -246,7 +243,7 @@ export default function ServicePageClient({
                     </p>
                     <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                       Simply use one of our many convenient drop-off or pickup services, tell us any specific
-                      instructions for your garments, and well take care of the rest. You can pick it up from there! We
+                      instructions for your garments, and we&apos;ll take care of the rest. You can pick it up from there! We
                       use state-of-the-art equipment and the best detergents and fabric softeners to ensure your clothes
                       are cleaned properly and thoroughly.
                     </p>
@@ -254,12 +251,11 @@ export default function ServicePageClient({
                 </div>
               </div>
 
-              {/* Contact Form - Better responsive form */}
+              {/* Contact Form */}
               <div className="xl:col-span-1">
-                <Card className="sticky top-4">
+                <Card className="sticky top-24">
                   <CardContent className="p-4 sm:p-6">
                     <h3 className="text-lg font-semibold mb-4 text-gray-800">Ask Your Question</h3>
-
                     <form className="space-y-4">
                       <Input placeholder="Your name" className="text-sm sm:text-base" />
                       <Input type="email" placeholder="E-mail" className="text-sm sm:text-base" />

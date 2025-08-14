@@ -5,7 +5,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { FaTshirt, FaHandsWash } from "react-icons/fa"
 import { MdIron } from "react-icons/md"
-import { Button } from "@/components/ui/button"
+
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle } from "lucide-react"
 import PickupForm from "@/component/SchedulePickupModal"

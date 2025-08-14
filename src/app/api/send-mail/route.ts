@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     // Email content
     const mailOptions = {
       from: `"ProLaundry" <${process.env.EMAIL_SERVER_USER}>`, // Sender address
-      to: 'youremail@gmail.com', // List of receivers (where you want to receive the form data)
+      to: 'freshorappc@gmail.com', // List of receivers (where you want to receive the form data)
       subject: 'New Pickup Scheduled from ProLaundry Website', // Subject line
       html: `
         <h1>New Pickup Request</h1>
