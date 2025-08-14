@@ -66,7 +66,7 @@ export default function ServicesSlider() {
             {services.map((service, i) => (
               <SwiperSlide key={i}>
                 <div
-                  className="relative h-[450px] rounded-lg overflow-hidden group"
+                  className="relative h-[450px]  overflow-hidden group"
                   style={{
                     backgroundImage: `url(${service.image})`,
                     backgroundSize: "cover",
