@@ -388,7 +388,7 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
                     <TabsList className="grid w-full grid-cols-3">
                       <TabsTrigger value="men">Men&lsquo;s Items</TabsTrigger>
                       <TabsTrigger value="women">Women&apos;s Items</TabsTrigger>
-                      <TabsTrigger value="children">Children&apos;s Items</TabsTrigger>
+                      <TabsTrigger value="children">House&apos;s Items</TabsTrigger>
                     </TabsList>
 
                     <TabsContent value="men" className="mt-6">
