@@ -2,10 +2,12 @@
 
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa"
 import { MdLocationOn, MdAccessTime, MdEmail, MdPhone } from "react-icons/md"
+import AnimatedParticles from "./AnimatedParticles"
 
 export default function Footer() {
   return (
     <>
+    <AnimatedParticles />
       {/* Map Section - Better responsive map */}
       <div className="w-full h-64 sm:h-80 md:h-96 lg:h-[350px] bg-gray-200 overflow-hidden">
         <iframe
@@ -133,6 +135,7 @@ export default function Footer() {
             </svg>
           </button>
         </div>
+       
       </footer>
     </>
   )
