@@ -6,6 +6,7 @@ import HomepagePricingCards from '@/component/HomePagePricingCard';
 import HomepagePricePackages from '@/component/HomepagePricePackages';
 import TestimonialsSection from '@/component/TestimonialsSection'; 
 import HomepageServices from '@/component/HomepageService';
+import MapSection from '@/component/map-section';
 
 
 export default function HomePage() {
@@ -19,6 +20,7 @@ export default function HomePage() {
       <HomepagePricingCards />
       <TestimonialsSection />
       <HomepagePricePackages />
+      <MapSection/>
     </>
   );
 }
