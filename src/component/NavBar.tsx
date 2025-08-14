@@ -144,13 +144,15 @@ const Navbar = () => {
                 </span>
               )}
             </Link>
-
-            <button
-              onClick={() => setShowForm(true)}
+            <Link href="/services">
+                        <button
+              
               className="hidden sm:block bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded"
             >
               Schedule a Pickup
             </button>
+            </Link>
+
 
             {/* Mobile Menu Button */}
             <button className="lg:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
@@ -182,21 +184,20 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-            <button
-              onClick={() => {
-                setShowForm(true);
-                setMobileOpen(false);
-              }}
+            <Link href="/services">
+                        <button
               className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-3"
             >
               Schedule a Pickup
             </button>
+            </Link>
+
           </div>
         )}
       </header>
 
       {/* Pickup Form Modal */}
-      <PickupForm open={showForm} onClose={() => setShowForm(false)} />
+
     </>
   )
 }

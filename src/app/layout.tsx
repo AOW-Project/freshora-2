@@ -22,44 +22,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* Global styles for the particle animation */}
-        <style>{`
-            @keyframes float-up {
-                0% {
-                    transform: translateX(0) scale(0.5);
-                    opacity: 0;
-                }
-                10% {
-                    opacity: 0.8;
-                }
-                90% {
-                    opacity: 0.8;
-                }
-                100% {
-                    bottom: 100%;
-                    transform: translateX(calc(var(--left-end) - var(--left-start))) scale(1);
-                    opacity: 0;
-                }
-            }
-            .particle {
-                position: absolute;
-                bottom: -150px;
-                left: var(--left-start);
-                animation: float-up var(--duration) linear var(--delay) infinite;
-                user-select: none;
-                pointer-events: none;
-            }
-        `}</style>
-      </head>
       <body>
         <CartProvider>
-          {/* Call the global animation component here */}
-          <AnimatedParticles />
-          <div className="relative z-0 bg-gray-50">
+          {/* FIX: Particles now with proper z-index */}
+          <AnimatedParticles zIndex={-10} />
+          <div className="relative z-10 bg-gray-50 min-h-screen">
             <Navbar/>
-            <main>
-              
+            <main className="relative z-20">
               {children}
             </main>
             <Footer/>

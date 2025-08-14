@@ -40,7 +40,7 @@ interface AnimatedParticlesProps {
 
 const AnimatedParticles: React.FC<AnimatedParticlesProps> = ({ 
   particleCount = 25,
-  zIndex = 10,
+  zIndex = -10, // FIX: Changed to negative z-index to stay behind content
   opacity = 0.8,
   className = "",
   enableStars = true,
@@ -171,11 +171,17 @@ const AnimatedParticles: React.FC<AnimatedParticlesProps> = ({
           user-select: none;
           pointer-events: none;
         }
+        .particles-container {
+          pointer-events: none !important;
+        }
       `}</style>
       
       <div 
-        className={`absolute top-0 left-0 w-full h-full overflow-hidden ${className}`}
-        style={{ zIndex }}
+        className={`fixed top-0 left-0 w-full h-full overflow-hidden particles-container ${className}`}
+        style={{ 
+          zIndex,
+          pointerEvents: 'none' // FIX: Ensure container doesn't block interactions
+        }}
         aria-hidden="true"
       >
         {particles.map((p) => (
@@ -186,7 +192,10 @@ const AnimatedParticles: React.FC<AnimatedParticlesProps> = ({
             width={p.width}
             height={p.height}
             className="particle"
-            style={p.style}
+            style={{
+              ...p.style,
+              pointerEvents: 'none' // FIX: Explicitly disable pointer events on each particle
+            }}
             loading="lazy"
           />
         ))}
