@@ -75,7 +75,7 @@ export default function SchedulePickupModal({ open, onClose }: SchedulePickupMod
           </button>
           <div className="text-center">
             <h2 className="text-2xl font-bold text-white mb-2">Schedule Your Pickup</h2>
-            <p className="text-emerald-100">We'll collect your laundry at your convenience</p>
+            <p className="text-emerald-100">We&apos;ll collect your laundry at your convenience</p>
           </div>
         </div>
 

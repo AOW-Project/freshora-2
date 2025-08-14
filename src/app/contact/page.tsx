@@ -80,9 +80,9 @@ export default function ContactPage() {
         {/* Form Section */}
         <div className="bg-white p-6 sm:p-8 lg:p-10 flex flex-col justify-center order-2 lg:order-1">
           <h3 className="text-2xl sm:text-3xl font-bold mb-2 text-gray-800">Get in Touch.</h3>
-          <h4 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800">We're Here to Help.</h4>
+          <h4 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800">We&apos;re to Help.</h4>
           <p className="text-gray-600 mb-6 text-sm leading-relaxed">
-            We look forward to helping you create and maintain a clean, healthy environment that's as enjoyable as it is
+            We look forward to helping you create and maintain a clean, healthy environment that&apos;s enjoyable as it is
             functional.
           </p>
 

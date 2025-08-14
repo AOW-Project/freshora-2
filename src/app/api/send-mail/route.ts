@@ -3,7 +3,8 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
   try {
-    const { name, email, phone, address, service, date, time, comment } = await req.json();
+    const { name, email, phone, address, service, date, time, comment } =
+      await req.json();
 
     // Create a test SMTP account from ethereal.email
     const testAccount = await nodemailer.createTestAccount();
@@ -12,7 +13,7 @@ export async function POST(req: Request) {
     const transporter = nodemailer.createTransport({
       host: "smtp.ethereal.email",
       port: 587,
-      secure: false, // use TLS on 587
+      secure: false,
       auth: {
         user: testAccount.user,
         pass: testAccount.pass,
@@ -20,8 +21,7 @@ export async function POST(req: Request) {
     });
 
     // Email HTML for customer
-    const customerEmailHTML = `
-     <!DOCTYPE html>
+    const customerEmailHTML = `<!DOCTYPE html>
       <html>
         <head>
           <meta charset="utf-8">
@@ -61,11 +61,11 @@ export async function POST(req: Request) {
                         <table width="100%" cellpadding="8" cellspacing="0">
                           <tr>
                             <td style="color: #6b7280; font-weight: 500; width: 120px;">Pickup Date:</td>
-                            <td style="color: #1f2937; font-weight: 600;">$</td>
+                            <td style="color: #1f2937; font-weight: 600;">${date}</td>
                           </tr>
                           <tr>
                             <td style="color: #6b7280; font-weight: 500;">Delivery Date:</td>
-                            <td style="color: #1f2937; font-weight: 600;">$</td>
+                            <td style="color: #1f2937; font-weight: 600;">${time}</td>
                           </tr>
                           <tr>
                             <td style="color: #6b7280; font-weight: 500;">Address:</td>
@@ -129,7 +129,8 @@ export async function POST(req: Request) {
             </tr>
           </table>
         </body>
-      </html>`
+      </html>
+    `
 
     // Email HTML for business
     const businessEmailHTML = `
@@ -148,7 +149,7 @@ export async function POST(req: Request) {
 
     // Send customer confirmation email
     await transporter.sendMail({
-      from: `"Freshora Laundry" <${testAccount.user}>`, // ✅ fixed sender
+      from: `"Freshora Laundry" <${testAccount.user}>`,
       to: email,
       subject: "Pickup Confirmation - Freshora Laundry",
       html: customerEmailHTML,
@@ -156,8 +157,8 @@ export async function POST(req: Request) {
 
     // Send business notification email
     await transporter.sendMail({
-      from: `"Freshora Laundry" <${testAccount.user}>`, // ✅ fixed sender
-      to: process.env.BUSINESS_EMAIL || testAccount.user, // fallback for testing
+      from: `"Freshora Laundry" <${testAccount.user}>`,
+      to: process.env.BUSINESS_EMAIL || testAccount.user,
       subject: `New Pickup Request from ${name}`,
       html: businessEmailHTML,
     });
@@ -165,10 +166,23 @@ export async function POST(req: Request) {
     console.log("Preview URL (Customer):", nodemailer.getTestMessageUrl);
     console.log("Preview URL (Business):", nodemailer.getTestMessageUrl);
 
-    return NextResponse.json({ success: true, message: "Emails sent successfully!" });
-
-  } catch (error: any) {
-    console.error("Email sending error:", error);
-    return NextResponse.json({ success: false, message: error.message }, { status: 500 });
+    return NextResponse.json({
+      success: true,
+      message: "Emails sent successfully!",
+    });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Email sending error:", error.message);
+      return NextResponse.json(
+        { success: false, message: error.message },
+        { status: 500 }
+      );
+    } else {
+      console.error("Unexpected error:", error);
+      return NextResponse.json(
+        { success: false, message: "An unexpected error occurred" },
+        { status: 500 }
+      );
+    }
   }
 }
