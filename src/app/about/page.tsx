@@ -1,10 +1,11 @@
 "use client";
 
+import { CheckCircle2, Clock, CreditCard, Leaf, Phone } from "lucide-react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, Clock, CreditCard, Leaf, CheckCircle2 } from "lucide-react";
-import dynamic from "next/dynamic";
-import img01 from '../public/images/img01.jpg';
+// import img01 from '../../../public/images/img01.jpg';
+
 
 // Dynamically import components with SSR disabled
 const LaundryStats = dynamic(() => import("@/component/LaundryStatus"), { ssr: false });
@@ -40,12 +41,13 @@ export default function AboutSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div className="relative order-2 lg:order-1">
               <div className="relative">
-                <Image
-  src={img01}
-  alt="Laundry Experience"
-  fill
-  className="shadow-lg object-cover"
-/>
+           <Image
+             src="/images/box02-img04.jpg" // Make sure to save your image in public/images/guarantee.png
+             alt="Smiling woman with laundry"
+             width={500}
+             height={800}
+             className=""
+           />
                <Image
   src="/images/arrow-img-right.png" // make sure this exists in public/images
   alt="Arrow"

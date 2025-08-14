@@ -5,7 +5,7 @@ import { FaTshirt, FaWater, FaUserCheck } from "react-icons/fa"
 import { GiClothes } from "react-icons/gi"
 import Image from "next/image"
 import { Phone, Clock, CreditCard, Leaf, CheckCircle2 } from "lucide-react"
-import img01 from '../public/images/img01.jpg';
+import img01 from '../../public/images/img01.jpg';
 
 const statsData = [
   {
