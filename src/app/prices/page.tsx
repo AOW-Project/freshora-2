@@ -468,8 +468,8 @@ const PricingSection = () => {
                 "1 Towel",
                 "1 Set of Sheets",
               ]}
-              originalPrice="$349.00"
-              price="$349.00"
+              originalPrice="349.00"
+              price="349.00"
             />
             {/* <PackageCard
               icon={ClipboardList}
@@ -502,8 +502,8 @@ const PricingSection = () => {
                 "2 Towel",
                 "3 Set of Sheets",
               ]}
-              originalPrice="$449.00"
-              price="$449.00"
+              originalPrice="449.00"
+              price="449.00"
               isFeatured={true}
             />
           </div>

@@ -7,7 +7,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowLeft, Star, ShoppingCart, X } from "lucide-react"
-import { useCart } from "../../../context/cart-context"
+import { useCart } from "@/app/context/cart-context"
+import { useForgottenItems } from "@/app/hooks/use-forgotten-items"
+import { useToast } from "@/app/hooks/use-toast"
 import type { Service } from "../../../../lib/services-data"
 
 interface ServiceOrderClientProps {
@@ -92,6 +94,7 @@ ItemCard.displayName = "ItemCard"
 
 export default function ServiceOrderClient({ slug, service }: ServiceOrderClientProps) {
   const { addToCart, getTotalItems } = useCart()
+  const { toast } = useToast()
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({})
   const [tempOrder, setTempOrder] = useState<OrderItem[]>([])
 
@@ -233,32 +236,6 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
     [quantities],
   )
 
-  const handleAddToOrder = useCallback(
-    (item: ServiceItem, category: string) => {
-      const quantity = quantities[item.id] || 0
-      if (quantity === 0) return
-
-      const orderItem: OrderItem = {
-        ...item,
-        quantity,
-        category,
-      }
-
-      setTempOrder((prev) => {
-        const existingIndex = prev.findIndex((orderItem) => orderItem.id === item.id)
-        if (existingIndex >= 0) {
-          const updated = [...prev]
-          updated[existingIndex] = { ...updated[existingIndex], quantity: updated[existingIndex].quantity + quantity }
-          return updated
-        }
-        return [...prev, orderItem]
-      })
-
-      setQuantities((prev) => ({ ...prev, [item.id]: 0 }))
-    },
-    [quantities],
-  )
-
   const removeFromOrder = useCallback((itemId: string) => {
     setTempOrder((prev) => prev.filter((item) => item.id !== itemId))
   }, [])
@@ -290,6 +267,106 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
       console.error("Error adding items to cart:", error)
     }
   }, [tempOrder, slug, service.title, addToCart])
+
+  const handleAddForgottenItems = useCallback(() => {
+    Object.entries(items).forEach(([category, categoryItems]) => {
+      categoryItems.forEach((item) => {
+        const quantity = quantities[item.id] || 0
+        const isInTempOrder = tempOrder.some((order) => order.id === item.id)
+
+        if (quantity > 0 && !isInTempOrder) {
+          const categoryName =
+            category === "men" ? "Men" : category === "women" ? "Women" : category === "children" ? "Children" : "Toys"
+          setTempOrder((prev) => [...prev, { ...item, quantity, category: categoryName } as OrderItem])
+        }
+      })
+    })
+  }, [items, quantities, tempOrder])
+
+  const handleShowNotification = useCallback(
+    (forgottenItems: Array<{ item: ServiceItem; quantity: number; category: string }>) => {
+      const itemCount = forgottenItems.length
+      const totalQuantity = forgottenItems.reduce((sum, item) => sum + item.quantity, 0)
+
+      toast({
+        title: "Don't forget your items!",
+        description: `You have ${totalQuantity} item${totalQuantity > 1 ? "s" : ""} selected but not added to your order.`,
+        variant: "default",
+        duration: 10000,
+        action: (
+          <div className="flex gap-2">
+            <Button
+              size="sm"
+              onClick={() => {
+                // Add all forgotten items to temp order
+                forgottenItems.forEach(({ item, quantity, category }) => {
+                  const orderItem: OrderItem = {
+                    ...item,
+                    quantity,
+                    category,
+                  }
+
+                  setTempOrder((prev) => {
+                    const existingIndex = prev.findIndex((orderItem) => orderItem.id === item.id)
+                    if (existingIndex >= 0) {
+                      const updated = [...prev]
+                      updated[existingIndex] = {
+                        ...updated[existingIndex],
+                        quantity: updated[existingIndex].quantity + quantity,
+                      }
+                      return updated
+                    }
+                    return [...prev, orderItem]
+                  })
+
+                  // Clear the quantity for this item
+                  setQuantities((prev) => ({ ...prev, [item.id]: 0 }))
+                })
+              }}
+              className="bg-amber-600 hover:bg-amber-700 text-white"
+            >
+              Add All
+            </Button>
+          </div>
+        ),
+      })
+    },
+    [toast],
+  )
+
+  const handleAddToOrder = useCallback(
+    (item: ServiceItem, category: string) => {
+      const quantity = quantities[item.id] || 0
+      if (quantity === 0) return
+
+      const orderItem: OrderItem = {
+        ...item,
+        quantity,
+        category,
+      }
+
+      setTempOrder((prev) => {
+        const existingIndex = prev.findIndex((orderItem) => orderItem.id === item.id)
+        if (existingIndex >= 0) {
+          const updated = [...prev]
+          updated[existingIndex] = { ...updated[existingIndex], quantity: updated[existingIndex].quantity + quantity }
+          return updated
+        }
+        return [...prev, orderItem]
+      })
+
+      setQuantities((prev) => ({ ...prev, [item.id]: 0 }))
+    },
+    [quantities],
+  )
+
+  // Initialize forgotten items hook
+  const { resetNotification } = useForgottenItems({
+    quantities,
+    tempOrder,
+    items,
+    onShowNotification: handleShowNotification,
+  })
 
   if (!hasItems) {
     return noItemsContent

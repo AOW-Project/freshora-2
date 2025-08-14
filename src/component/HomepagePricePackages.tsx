@@ -117,7 +117,7 @@ const HomepagePricePackages = () => {
               Our prices are simple and affordable which are easy on pocket in comparison with the high street prices.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 justify-center">
+          <div className="flex justify-center gap-6 sm:gap-11 flex-wrap">
   <PackageCard
     icon={FaTshirt}
     title="Standard Package"
@@ -132,8 +132,8 @@ const HomepagePricePackages = () => {
       "1 Towel",
       "1 Set of Sheets",
     ]}
-    originalPrice="$349.00"
-    price="$349.00"
+    originalPrice="349.00"
+    price="349.00"
   />
   <PackageCard
     icon={MdIron}
@@ -149,8 +149,8 @@ const HomepagePricePackages = () => {
       "2 Towel",
       "2 Set of Sheets",
     ]}
-    originalPrice="$449.00"
-    price="$449.00"
+    originalPrice="449.00"
+    price="449.00"
   />
 </div>
 

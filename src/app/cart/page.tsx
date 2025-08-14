@@ -32,27 +32,24 @@ export default function CartPage() {
     return (
       <div>
         <div
-                   className="relative h-64 bg-cover bg-center flex items-center"
-                   style={{
-                     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/modern-office-laundry.png?height=400&width=1200&text=Laundry+Machines+Background')`,
-                   }}
-                 >
-            <div className="max-w-7xl mx-auto px-4 w-full">
-             {/* Breadcrumb */}
-             <nav className="flex items-center space-x-2 text-white mb-4">
-               <Link href="/" className="hover:text-green-400">
-                 Home
-               </Link>
-               <span className="px-2">/</span>
-               <span className="hover:text-green-400">
-                 Cart
-               </span>
-             </nav>
-           
-             <h1 className="text-4xl md:text-5xl font-bold text-white">Cart</h1>
-           </div>
-           
-                 </div>
+          className="relative h-64 bg-cover bg-center flex items-center"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/modern-office-laundry.png?height=400&width=1200&text=Laundry+Machines+Background')`,
+          }}
+        >
+          <div className="max-w-7xl mx-auto px-4 w-full">
+            {/* Breadcrumb */}
+            <nav className="flex items-center space-x-2 text-white mb-4">
+              <Link href="/" className="hover:text-green-400">
+                Home
+              </Link>
+              <span className="px-2">/</span>
+              <span className="hover:text-green-400">Cart</span>
+            </nav>
+
+            <h1 className="text-4xl md:text-5xl font-bold text-white">Cart</h1>
+          </div>
+        </div>
         <div className="min-h-screen bg-gray-50 py-8">
           <div className="max-w-4xl mx-auto px-4">
             <Link href="/services" className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 mb-6">
@@ -64,9 +61,7 @@ export default function CartPage() {
               <CardContent>
                 <ShoppingCart className="h-16 w-16 text-gray-300 mx-auto mb-4" />
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h2>
-                <p className="text-gray-600 mb-6">
-  Looks like you haven&apos;t added any items to your cart yet.
-</p>
+                <p className="text-gray-600 mb-6">Looks like you haven&apos;t added any items to your cart yet.</p>
 
                 <Link href="/services">
                   <Button className="bg-green-600 hover:bg-green-700">Browse Services</Button>
@@ -81,7 +76,6 @@ export default function CartPage() {
 
   return (
     <div>
-
       <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-6xl mx-auto px-4">
           {/* Header */}
@@ -213,13 +207,13 @@ export default function CartPage() {
                   </div>
 
                   <div className="mt-6 space-y-3">
-                              <button
-            onClick={() => setShowForm(true)}
-            className="w-full bg-green-600 hover:bg-green-700 text-lg py-3 text-amber-100"
-          >
-            Schedule a Pickup
-          </button>
-          <PickupForm open={showForm} onClose={() => setShowForm(false)} />
+                    <button
+                      onClick={() => setShowForm(true)}
+                      className="w-full bg-green-600 hover:bg-green-700 text-lg py-3 text-amber-100"
+                    >
+                      Schedule a Pickup
+                    </button>
+                    <PickupForm open={showForm} onClose={() => setShowForm(false)} />
                     <Button variant="outline" className="w-full bg-transparent">
                       Get Quote First
                     </Button>

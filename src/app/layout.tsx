@@ -7,6 +7,8 @@ import "./globals.css";
 import Navbar from "@/component/NavBar";
 import Footer from "@/component/Footer";
 import AnimatedParticles from "@/component/AnimatedParticles"; 
+// import { ToastProvider } from "@/components/ui/toast";
+import { ToastProvider } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Freshora Laundry",
@@ -29,7 +31,9 @@ export default function RootLayout({
           <div className="relative z-10 min-h-screen">
             <Navbar />
             <main className="relative z-20">
-              {children}
+          <ToastProvider>
+                {children}
+              </ToastProvider>
             </main>
             <Footer />
           </div>
