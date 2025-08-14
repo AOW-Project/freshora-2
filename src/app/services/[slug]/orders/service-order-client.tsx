@@ -27,6 +27,69 @@ interface OrderItem extends ServiceItem {
   category: string
 }
 
+interface ItemCardProps {
+  item: ServiceItem
+  category: string
+  quantities: { [key: string]: number }
+  onAddToOrder: (item: ServiceItem, category: string) => void
+  onUpdateQuantity: (itemId: string, change: number) => void
+}
+
+const ItemCard = ({ item, category, quantities, onAddToOrder, onUpdateQuantity }: ItemCardProps) => {
+  const quantity = quantities[item.id] || 0
+  const totalAmount = item.price * quantity
+
+  return (
+    <Card className="p-4">
+      <div className="flex justify-between items-start mb-2">
+        <div className="flex-1">
+          <h4 className="font-semibold text-lg">{item.name}</h4>
+          <p className="text-sm text-gray-600 mb-2">{item.description}</p>
+          <div className="flex items-center gap-4">
+            <p className="text-green-600 font-bold text-lg">${item.price}</p>
+            {quantity > 0 && (
+              <div className="flex items-center gap-2">
+                <span className="text-gray-400">×</span>
+                <span className="text-gray-600">{quantity}</span>
+                <span className="text-gray-400">=</span>
+                <p className="text-blue-600 font-bold text-lg">${totalAmount.toFixed(2)}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between mt-4">
+        <div className="flex items-center gap-3">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onUpdateQuantity(item.id, -1)}
+            disabled={quantity === 0}
+            className="h-8 w-8 p-0"
+          >
+            -
+          </Button>
+          <span className="font-medium min-w-[2rem] text-center">{quantity}</span>
+          <Button variant="outline" size="sm" onClick={() => onUpdateQuantity(item.id, 1)} className="h-8 w-8 p-0">
+            +
+          </Button>
+        </div>
+
+        <Button
+          onClick={() => onAddToOrder(item, category)}
+          disabled={quantity === 0}
+          className="bg-blue-600 hover:bg-blue-700"
+        >
+          Add
+        </Button>
+      </div>
+    </Card>
+  )
+}
+
+ItemCard.displayName = "ItemCard"
+
 export default function ServiceOrderClient({ slug, service }: ServiceOrderClientProps) {
   const { addToCart, getTotalItems } = useCart()
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({})
@@ -228,61 +291,6 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
     }
   }, [tempOrder, slug, service.title, addToCart])
 
-  const ItemCard = useMemo(() => {
-    return ({ item, category }: { item: ServiceItem; category: string }) => {
-      const quantity = quantities[item.id] || 0
-      const totalAmount = item.price * quantity
-
-      return (
-        <Card className="p-4">
-          <div className="flex justify-between items-start mb-2">
-            <div className="flex-1">
-              <h4 className="font-semibold text-lg">{item.name}</h4>
-              <p className="text-sm text-gray-600 mb-2">{item.description}</p>
-              <div className="flex items-center gap-4">
-                <p className="text-green-600 font-bold text-lg">${item.price}</p>
-                {quantity > 0 && (
-                  <div className="flex items-center gap-2">
-                    <span className="text-gray-400">×</span>
-                    <span className="text-gray-600">{quantity}</span>
-                    <span className="text-gray-400">=</span>
-                    <p className="text-blue-600 font-bold text-lg">${totalAmount.toFixed(2)}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between mt-4">
-            <div className="flex items-center gap-3">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => updateQuantity(item.id, -1)}
-                disabled={quantity === 0}
-                className="h-8 w-8 p-0"
-              >
-                -
-              </Button>
-              <span className="font-medium min-w-[2rem] text-center">{quantity}</span>
-              <Button variant="outline" size="sm" onClick={() => updateQuantity(item.id, 1)} className="h-8 w-8 p-0">
-                +
-              </Button>
-            </div>
-
-            <Button
-              onClick={() => handleAddToOrder(item, category)}
-              disabled={quantity === 0}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
-              Add
-            </Button>
-          </div>
-        </Card>
-      )
-    }
-  }, [quantities, handleAddToOrder, updateQuantity])
-
   if (!hasItems) {
     return noItemsContent
   }
@@ -365,7 +373,14 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
                 {isSoftToyService ? (
                   <div className="grid md:grid-cols-2 gap-4">
                     {items.children.map((item) => (
-                      <ItemCard key={item.id} item={item} category="Toys" />
+                      <ItemCard
+                        key={item.id}
+                        item={item}
+                        category="Toys"
+                        quantities={quantities}
+                        onAddToOrder={handleAddToOrder}
+                        onUpdateQuantity={updateQuantity}
+                      />
                     ))}
                   </div>
                 ) : (
@@ -379,7 +394,14 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
                     <TabsContent value="men" className="mt-6">
                       <div className="grid md:grid-cols-2 gap-4">
                         {items.men.map((item) => (
-                          <ItemCard key={item.id} item={item} category="Men" />
+                          <ItemCard
+                            key={item.id}
+                            item={item}
+                            category="Men"
+                            quantities={quantities}
+                            onAddToOrder={handleAddToOrder}
+                            onUpdateQuantity={updateQuantity}
+                          />
                         ))}
                       </div>
                     </TabsContent>
@@ -387,7 +409,14 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
                     <TabsContent value="women" className="mt-6">
                       <div className="grid md:grid-cols-2 gap-4">
                         {items.women.map((item) => (
-                          <ItemCard key={item.id} item={item} category="Women" />
+                          <ItemCard
+                            key={item.id}
+                            item={item}
+                            category="Women"
+                            quantities={quantities}
+                            onAddToOrder={handleAddToOrder}
+                            onUpdateQuantity={updateQuantity}
+                          />
                         ))}
                       </div>
                     </TabsContent>
@@ -395,7 +424,14 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
                     <TabsContent value="children" className="mt-6">
                       <div className="grid md:grid-cols-2 gap-4">
                         {items.children.map((item) => (
-                          <ItemCard key={item.id} item={item} category="Children" />
+                          <ItemCard
+                            key={item.id}
+                            item={item}
+                            category="Children"
+                            quantities={quantities}
+                            onAddToOrder={handleAddToOrder}
+                            onUpdateQuantity={updateQuantity}
+                          />
                         ))}
                       </div>
                     </TabsContent>
