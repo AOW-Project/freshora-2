@@ -65,22 +65,32 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="w-full bg-white border-b border-gray-200 sticky top-0 z-50">
-        {/* Top Info Bar */}
-        <div className="bg-gray-100 text-xs sm:text-sm text-gray-700 py-2 px-4 flex flex-wrap justify-between items-center gap-2">
-          <div>8494 Signal Hill Road Manassas, VA, 20110</div>
-          <div className="hidden md:flex gap-4">
-            <span>Mon-Fri 08:00 AM - 05:00 PM</span>
-            <span>info@yourcompany.com</span>
-          </div>
-          <div className="flex gap-3 items-center text-sm">
-            <span className="flex items-center gap-1">
-              <FaPhoneAlt className="text-green-500" />+971 50 925 9667
-            </span>
-            <FaTwitter className="cursor-pointer" />
-            <FaFacebookF className="cursor-pointer" />
-            <FaLinkedinIn className="cursor-pointer" />
-            <FaInstagram className="cursor-pointer" />
+      <header
+        className={`w-full bg-white border-b border-gray-200 sticky top-0 z-50 transition-all duration-300 ${scrolled ? "shadow-md" : ""}`}
+      >
+        {/* Top Info Bar - Hidden when scrolled on desktop */}
+        <div
+          className={`bg-gray-100 text-xs sm:text-sm text-gray-700 hidden lg:block ${scrolled ? "hidden lg:hidden" : "block"}`}
+        >
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4 py-2 px-4 sm:px-6">
+            <div className="text-xs sm:text-sm">8494 Signal Hill Road Manassas, VA, 20110</div>
+            <div className="hidden lg:flex gap-4 text-xs">
+              <span>Mon-Fri 08:00 AM - 05:00 PM</span>
+              <span>info@yourcompany.com</span>
+            </div>
+            <div className="flex gap-2 sm:gap-3 items-center text-xs sm:text-sm">
+              <span className="flex items-center gap-1">
+                <FaPhoneAlt className="text-green-500" />
+                <span className="hidden sm:inline">+971 50 925 9667</span>
+                <span className="sm:hidden">Call</span>
+              </span>
+              <div className="flex gap-2">
+                <FaTwitter className="cursor-pointer hover:text-green-500 transition-colors" />
+                <FaFacebookF className="cursor-pointer hover:text-green-500 transition-colors" />
+                <FaLinkedinIn className="cursor-pointer hover:text-green-500 transition-colors" />
+                <FaInstagram className="cursor-pointer hover:text-green-500 transition-colors" />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -154,44 +164,122 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Sidebar Overlay */}
-        {mobileOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200">
-            {navItems.map((item, index) => (
-              <div key={index} className="border-b border-gray-100">
-                <Link href={item.href} className="block px-4 py-3 font-medium text-gray-700">
-                  {item.title}
-                </Link>
-                {item.subItems && (
-                  <div className="pl-6 pb-2">
-                    {item.subItems.map((sub, subIndex) => (
-                      <Link
-                        key={subIndex}
-                        href={sub.href}
-                        className="block py-1 text-sm text-gray-600 hover:text-green-600"
-                      >
-                        {sub.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+      {/* Mobile Sidebar Overlay */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <div
+            className="absolute inset-0 bg-white/20 backdrop-blur-sm transition-opacity duration-300 ease-in-out"
+            onClick={() => setMobileOpen(false)}
+          />
+          <div
+            className={`mobile-sidebar fixed left-0 top-0 h-full w-80 bg-white shadow-2xl transform transition-all duration-300 ease-in-out overflow-y-auto ${
+              mobileOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
+          >
+            {/* Sidebar Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <div className="text-xl font-bold">
+                <span className="text-green-600">Pro</span>
+                <span className="text-black">Laundry</span>
               </div>
-            ))}
-            <button
-              onClick={() => {
-                setShowForm(true);
-                setMobileOpen(false); // Close menu on click
-              }}
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-3"
-            >
-              Schedule a Pickup
-            </button>
-          </div>
-        )}
-      </header> {/* --- FIX: Added the missing closing </header> tag --- */}
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center p-2 hover:bg-gray-100 rounded-md transition-colors"
+              >
+                <FaTimes size={16} />
+                <span className="ml-2 text-sm">Close</span>
+              </button>
+            </div>
 
-      {/* Pickup Form Modal */}
-      <PickupForm open={showForm} onClose={() => setShowForm(false)} />
+            {/* Navigation Links */}
+            <div className="py-4">
+              {navItems.map((item, index) => (
+                <div key={index} className="border-b border-gray-100 last:border-b-0">
+                  <div className="flex items-center justify-between">
+                    <Link
+                      href={item.href}
+                      className="flex-1 block px-4 py-3 font-medium text-gray-700 hover:text-green-600 transition-colors"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                    {item.subItems && (
+                      <button
+                        onClick={() => setExpandedMobileItem(expandedMobileItem === index ? null : index)}
+                        className="p-3 hover:bg-gray-100 transition-colors"
+                      >
+                        <FaChevronRight
+                          className={`text-gray-400 transition-transform duration-300 ease-in-out ${
+                            expandedMobileItem === index ? "rotate-90" : ""
+                          }`}
+                          size={12}
+                        />
+                      </button>
+                    )}
+                  </div>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      item.subItems && expandedMobileItem === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    {item.subItems && (
+                      <div className="bg-gray-50 border-t border-gray-100">
+                        {item.subItems.map((sub, subIndex) => (
+                          <Link
+                            key={subIndex}
+                            href={sub.href}
+                            className="block py-3 px-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors"
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            {sub.title}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Contact Information */}
+            <div className="px-4 py-6 bg-gray-50 border-t border-gray-200">
+              <div className="space-y-4 text-sm text-gray-600">
+                <div className="flex items-start gap-3">
+                  <FaMapMarkerAlt className="text-green-500 mt-1 flex-shrink-0" size={14} />
+                  <span>8494 Signal Hill Road Manassas, VA, 20110</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <FaClock className="text-green-500 flex-shrink-0" size={14} />
+                  <span>Mon-Fri 08:00 AM - 05:00 PM</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <FaEnvelope className="text-green-500 flex-shrink-0" size={14} />
+                  <span>info@yourlaundrysite.com</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <FaPhoneAlt className="text-green-500 flex-shrink-0" size={14} />
+                  <span>1 (800) 765-43-21</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Schedule Pickup Button */}
+            <div className="p-4 border-t border-gray-200">
+              <button
+                onClick={() => {
+                  setShowForm(true)
+                  setMobileOpen(false)
+                }}
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded transition-colors"
+              >
+                Schedule a Pickup
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+ 
     </>
   )
 }
