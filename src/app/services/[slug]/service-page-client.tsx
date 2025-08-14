@@ -162,9 +162,9 @@ export default function ServicePageClient({
                     <h3 className="text-lg font-semibold mb-4 text-gray-800">Our Contacts</h3>
                     {contactInfo}
                     <div className="space-y-3">
-                      <Button className="w-full bg-green-600 hover:bg-green-700 text-sm sm:text-base">
+                      {/* <Button className="w-full bg-green-600 hover:bg-green-700 text-sm sm:text-base">
                         Schedule a Pickup
-                      </Button>
+                      </Button> */}
                       <Link href={`/services/${slug}/orders`}>
                         <Button
                           variant="outline"
