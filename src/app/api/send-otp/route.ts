@@ -1,7 +1,9 @@
-import { type NextRequest, NextResponse } from "next/server";
-import pool from "../../../lib/db";
-import { sendOtpSms } from "../../../lib/sms";
-import type { OkPacket } from "mysql2"; // ✅ use proper MySQL result type
+
+import { type NextRequest, NextResponse } from "next/server"
+import type { PoolConnection, ResultSetHeader } from "mysql2/promise"
+import pool from "../../../lib/db"
+import { sendOtpSms } from "../../../lib/sms"
+
 
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
@@ -34,8 +36,10 @@ export async function POST(req: NextRequest) {
       hasPassword: !!process.env.DB_PASS,
     });
 
-    let connection: Awaited<ReturnType<typeof pool.getConnection>> | null = null;
-    let dbStorageSuccess = false;
+
+    let connection: PoolConnection | undefined
+    let dbStorageSuccess = false
+
 
     try {
       connection = await pool.getConnection();
@@ -57,16 +61,19 @@ export async function POST(req: NextRequest) {
       await connection.query("DELETE FROM otp_codes WHERE mobile = ?", [mobile]);
       console.log("[v0] Cleared existing OTPs for mobile:", mobile);
 
-      const [result] = await connection.query<OkPacket>(
+
+      const [result] = await connection.query<ResultSetHeader>(
         "INSERT INTO otp_codes (mobile, otp, expires_at) VALUES (?, ?, ?)",
         [mobile, otp, expiresAt]
-      );
+      )
+
 
       dbStorageSuccess = true;
       console.log("[v0] OTP stored in database successfully:", {
         mobile,
         otp,
-        insertId: result.insertId, // ✅ typed, no any
+        insertId: result.insertId,
+
         expiresAt: expiresAt.toISOString(),
       });
     } catch (dbError: unknown) {
@@ -90,18 +97,23 @@ export async function POST(req: NextRequest) {
               : undefined,
         },
         { status: 500 }
-      );
+
+      )
+
+
     }
 
     let smsStatus = false;
     let smsError: string | null = null;
 
     try {
-      smsStatus = await sendOtpSms(mobile, otp);
-      console.log("[v0] SMS sending result:", smsStatus);
+
+      smsStatus = await sendOtpSms(mobile, otp)
+      console.log("[v0] SMS sending result:", smsStatus)
     } catch (smsErr: unknown) {
-      console.error("[v0] SMS sending failed:", smsErr);
-      smsError = smsErr instanceof Error ? smsErr.message : String(smsErr);
+      console.error("[v0] SMS sending failed:", smsErr)
+      smsError = smsErr instanceof Error ? smsErr.message : String(smsErr)
+
       // Don't throw error - OTP is already stored in database
     }
 
@@ -120,17 +132,13 @@ export async function POST(req: NextRequest) {
               dbStored: dbStorageSuccess,
             }
           : undefined,
-    });
+
+    })
   } catch (err: unknown) {
-    console.error("[v0] API Error:", err);
+    console.error("[v0] API Error:", err)
+    const errorMessage = err instanceof Error ? err.message : "Unknown error"
+    const errorCode = typeof err === "object" && err !== null && "code" in err ? (err as { code: string }).code : "UNKNOWN"
 
-    let errorMessage = "Unknown error";
-    let errorCode = "UNKNOWN";
-
-    if (err instanceof Error) {
-      errorMessage = err.message;
-      errorCode = (err as { code?: string }).code ?? "UNKNOWN";
-    }
 
     return NextResponse.json(
       {
@@ -147,6 +155,8 @@ export async function POST(req: NextRequest) {
             : undefined,
       },
       { status: 500 }
-    );
+
+    )
+
   }
 }

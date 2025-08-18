@@ -13,9 +13,9 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa"
-import  {useCart}  from "../app/context/cart-context"
-import { FaUserCircle } from "react-icons/fa";
-import LoginModal from "./LoginModel";
+import { useCart } from "../app/context/cart-context"
+import { FaUserCircle } from "react-icons/fa"
+import LoginModal from "./LoginModel"
 
 interface NavItem {
   title: string
@@ -47,11 +47,27 @@ const navItems: NavItem[] = [
 ]
 
 const Navbar = () => {
-  // const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [openDropdown, setOpenDropdown] = useState<number | null>(null)
+  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { getTotalItems } = useCart()
-  const [loginOpen, setLoginOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false)
+
+  const handleDropdownEnter = (index: number) => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout)
+      setHoverTimeout(null)
+    }
+    setOpenDropdown(index)
+  }
+
+  const handleDropdownLeave = () => {
+    const timeout = setTimeout(() => {
+      setOpenDropdown(null)
+    }, 200) // 200ms delay before closing
+    setHoverTimeout(timeout)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,6 +76,14 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout)
+      }
+    }
+  }, [hoverTimeout])
 
   return (
     <>
@@ -76,7 +100,7 @@ const Navbar = () => {
           }`}
         >
           <div className="max-w-7xl mx-auto flex justify-between items-center py-2 px-6">
-            <div>Address : Shop no 4, Azizi riviera 42 , Meydan , Al Merkadh , Dubai UAE{" "}</div>
+            <div>Address : Shop no 4, Azizi riviera 42 , Meydan , Al Merkadh , Dubai UAE </div>
             <div className="flex gap-4">
               <span>Mon-Fri 08:00 AM - 05:00 PM</span>
               <span>freshorappc@gmail.com</span>
@@ -114,9 +138,7 @@ const Navbar = () => {
             />
             <div
               className={`font-bold transition-all duration-300 ${
-                scrolled
-                  ? "text-base sm:text-lg lg:text-xl"
-                  : "text-base sm:text-lg lg:text-xl xl:text-2xl"
+                scrolled ? "text-base sm:text-lg lg:text-xl" : "text-base sm:text-lg lg:text-xl xl:text-2xl"
               }`}
             >
               <span className="text-green-600">Freshora </span>
@@ -126,35 +148,48 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-8">
-          {navItems.map((item, index) => (
-            <div key={index} className="relative group">
-              <Link
-                href={item.href}
-                className="flex items-center hover:text-green-600 transition-colors py-2"
+            {navItems.map((item, index) => (
+              <div
+                key={index}
+                className="relative"
+                onMouseEnter={() => item.subItems && handleDropdownEnter(index)}
+                onMouseLeave={() => item.subItems && handleDropdownLeave()}
               >
-                {item.title}
-                {item.subItems && <FaChevronDown className="ml-1 text-xs" />}
-              </Link>
+                <Link href={item.href} className="flex items-center hover:text-green-600 transition-colors py-2">
+                  {item.title}
+                  {item.subItems && (
+                    <FaChevronDown
+                      className={`ml-1 text-xs transition-transform duration-200 ${
+                        openDropdown === index ? "rotate-180" : "rotate-0"
+                      }`}
+                    />
+                  )}
+                </Link>
 
-              {item.subItems && (
-                <div className="absolute top-full left-0 hidden group-hover:block bg-white shadow-lg rounded-lg mt-1 w-56 z-50 border border-gray-100">
-                  {item.subItems.map((sub, subIndex) => (
-                    <Link
-                      key={subIndex}
-                      href={sub.href}
-                      className="block px-4 py-3 text-sm hover:bg-green-50 hover:text-green-700"
-                    >
-                      {sub.title}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-          <FaUserCircle size={20} onClick={() => setLoginOpen(true)} className="cursor-pointer mt-3" />
+                {item.subItems && (
+                  <div
+                    className={`absolute top-full left-0 bg-white shadow-lg rounded-lg mt-1 w-56 z-50 border border-gray-100 transition-all duration-200 ${
+                      openDropdown === index
+                        ? "opacity-100 visible translate-y-0"
+                        : "opacity-0 invisible -translate-y-2"
+                    }`}
+                  >
+                    {item.subItems.map((sub, subIndex) => (
+                      <Link
+                        key={subIndex}
+                        href={sub.href}
+                        className="block px-4 py-3 text-sm hover:bg-green-50 hover:text-green-700 transition-colors"
+                      >
+                        {sub.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+            <FaUserCircle size={20} onClick={() => setLoginOpen(true)} className="cursor-pointer mt-3" />
             <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
-        </nav>
-
+          </nav>
 
           {/* Right Icons */}
           <div className="flex items-center space-x-2 sm:space-x-3">
@@ -180,56 +215,55 @@ const Navbar = () => {
       </header>
 
       {/* Mobile Menu */}
-{/* Mobile Sidebar */}
-<div
-  className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 z-50
-    ${mobileOpen ? "translate-x-0" : "-translate-x-full"}`}
->
-  <div className="flex justify-between items-center p-4 border-b">
-    <span className="font-bold text-lg">Menu</span>
-    <button onClick={() => setMobileOpen(false)}>
-      <FaTimes size={22} />
-    </button>
-  </div>
+      {/* Mobile Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 z-50 ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex justify-between items-center p-4 border-b">
+          <span className="font-bold text-lg">Menu</span>
+          <button onClick={() => setMobileOpen(false)}>
+            <FaTimes size={22} />
+          </button>
+        </div>
 
-  <nav className="flex flex-col">
-    {navItems.map((item, index) => (
-      <div key={index} className="border-b border-gray-100">
-        <Link
-          href={item.href}
-          className="block px-4 py-3 font-medium text-gray-700"
-          onClick={() => setMobileOpen(false)}
-        >
-          {item.title}
-        </Link>
-        {item.subItems && (
-          <div className="pl-6 pb-2">
-            {item.subItems.map((sub, subIndex) => (
+        <nav className="flex flex-col">
+          {navItems.map((item, index) => (
+            <div key={index} className="border-b border-gray-100">
               <Link
-                key={subIndex}
-                href={sub.href}
-                className="block py-1 text-sm text-gray-600 hover:text-green-600"
+                href={item.href}
+                className="block px-4 py-3 font-medium text-gray-700"
                 onClick={() => setMobileOpen(false)}
               >
-                {sub.title}
+                {item.title}
               </Link>
-            ))}
-          </div>
-        )}
+              {item.subItems && (
+                <div className="pl-6 pb-2">
+                  {item.subItems.map((sub, subIndex) => (
+                    <Link
+                      key={subIndex}
+                      href={sub.href}
+                      className="block py-1 text-sm text-gray-600 hover:text-green-600"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {sub.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+          <Link href="/services">
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-3"
+            >
+              Schedule a Pickup
+            </button>
+          </Link>
+        </nav>
       </div>
-    ))}
-
-    <Link href="/services">
-      <button
-        onClick={() => setMobileOpen(false)}
-        className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-3"
-      >
-        Schedule a Pickup
-      </button>
-    </Link>
-  </nav>
-</div>
-
     </>
   )
 }
