@@ -13,7 +13,7 @@ const slides = [
     title: "Professional Laundry & Dry Cleaning",
     description: "We are professionals in the laundry and dry cleaning business, which means we always stay up to date on the latest technologies, cleaning methods, and solutions for dealing with stains or delicate fabrics.",
     buttonText: "Schedule a Pickup",
-    buttonLink: "/schedule-pickup"
+    buttonLink: "/services"
   },
   {
     image: "/images/img07.jpg",
@@ -40,7 +40,7 @@ const slides = [
     title: "100% Customer Satisfaction",
     description: "We pride ourselves on delivering a service that exceeds expectations. If you're not completely satisfied with the results, we promise to make it right.",
     buttonText: "Read Testimonials",
-    buttonLink: "/testimonials"
+    buttonLink: "/about"
   }
 ];
 

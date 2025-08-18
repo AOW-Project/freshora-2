@@ -26,7 +26,7 @@ const ServicePriceCard: React.FC<ServicePriceCardProps> = ({ icon: Icon, title, 
     >
       <div
         className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-300 ease-in-out p-4 ${
-          isHovered ? "opacity-0 translate-y-[-30px] sm:translate-y-[-50px]" : "opacity-100 translate-y-0"
+          isHovered ? "opacity-50 translate-y-[-30px] sm:translate-y-[-50px]" : "opacity-100 translate-y-0"
         }`}
       >
         <Icon size={32} className="text-green-600 mb-3 sm:mb-4 sm:text-[40px]" />
@@ -36,7 +36,7 @@ const ServicePriceCard: React.FC<ServicePriceCardProps> = ({ icon: Icon, title, 
       </div>
       <div
         className={`absolute bottom-0 left-0 right-0 p-3 sm:p-4 bg-white transition-all duration-300 ease-in-out ${
-          isHovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+          isHovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-50"
         }`}
       >
         <Button className="w-full bg-green-600 hover:bg-green-700 text-sm sm:text-base py-2 sm:py-3">Order Now</Button>
