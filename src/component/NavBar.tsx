@@ -13,7 +13,9 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa"
-import { useCart } from "../app/context/cart-context"
+import  {useCart}  from "../app/context/cart-context"
+import { FaUserCircle } from "react-icons/fa";
+import LoginModal from "./LoginModel";
 
 interface NavItem {
   title: string
@@ -45,10 +47,11 @@ const navItems: NavItem[] = [
 ]
 
 const Navbar = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  // const [openIndex, setOpenIndex] = useState<number | null>(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { getTotalItems } = useCart()
+  const [loginOpen, setLoginOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -122,37 +125,36 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex space-x-4 xl:space-x-6 font-medium text-gray-700">
-            {navItems.map((item, index) => (
-              <div
-                key={index}
-                className="relative group"
-                onMouseEnter={() => setOpenIndex(index)}
-                onMouseLeave={() => setOpenIndex(null)}
+          <nav className="hidden lg:flex space-x-8">
+          {navItems.map((item, index) => (
+            <div key={index} className="relative group">
+              <Link
+                href={item.href}
+                className="flex items-center hover:text-green-600 transition-colors py-2"
               >
-                <Link
-                  href={item.href}
-                  className="flex items-center hover:text-green-600 transition-colors py-2"
-                >
-                  {item.title}
-                  {item.subItems && <FaChevronDown className="ml-1 text-xs" />}
-                </Link>
-                {item.subItems && openIndex === index && (
-                  <div className="absolute top-full left-0 bg-white shadow-lg rounded-lg mt-1 w-56 z-50 border border-gray-100">
-                    {item.subItems.map((sub, subIndex) => (
-                      <Link
-                        key={subIndex}
-                        href={sub.href}
-                        className="block px-4 py-3 text-sm hover:bg-green-50 hover:text-green-700"
-                      >
-                        {sub.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
+                {item.title}
+                {item.subItems && <FaChevronDown className="ml-1 text-xs" />}
+              </Link>
+
+              {item.subItems && (
+                <div className="absolute top-full left-0 hidden group-hover:block bg-white shadow-lg rounded-lg mt-1 w-56 z-50 border border-gray-100">
+                  {item.subItems.map((sub, subIndex) => (
+                    <Link
+                      key={subIndex}
+                      href={sub.href}
+                      className="block px-4 py-3 text-sm hover:bg-green-50 hover:text-green-700"
+                    >
+                      {sub.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+          <FaUserCircle size={20} onClick={() => setLoginOpen(true)} className="cursor-pointer mt-3" />
+            <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
+        </nav>
+
 
           {/* Right Icons */}
           <div className="flex items-center space-x-2 sm:space-x-3">
@@ -178,35 +180,56 @@ const Navbar = () => {
       </header>
 
       {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-200">
-          {navItems.map((item, index) => (
-            <div key={index} className="border-b border-gray-100">
-              <Link href={item.href} className="block px-4 py-3 font-medium text-gray-700">
-                {item.title}
+{/* Mobile Sidebar */}
+<div
+  className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 z-50
+    ${mobileOpen ? "translate-x-0" : "-translate-x-full"}`}
+>
+  <div className="flex justify-between items-center p-4 border-b">
+    <span className="font-bold text-lg">Menu</span>
+    <button onClick={() => setMobileOpen(false)}>
+      <FaTimes size={22} />
+    </button>
+  </div>
+
+  <nav className="flex flex-col">
+    {navItems.map((item, index) => (
+      <div key={index} className="border-b border-gray-100">
+        <Link
+          href={item.href}
+          className="block px-4 py-3 font-medium text-gray-700"
+          onClick={() => setMobileOpen(false)}
+        >
+          {item.title}
+        </Link>
+        {item.subItems && (
+          <div className="pl-6 pb-2">
+            {item.subItems.map((sub, subIndex) => (
+              <Link
+                key={subIndex}
+                href={sub.href}
+                className="block py-1 text-sm text-gray-600 hover:text-green-600"
+                onClick={() => setMobileOpen(false)}
+              >
+                {sub.title}
               </Link>
-              {item.subItems && (
-                <div className="pl-6 pb-2">
-                  {item.subItems.map((sub, subIndex) => (
-                    <Link
-                      key={subIndex}
-                      href={sub.href}
-                      className="block py-1 text-sm text-gray-600 hover:text-green-600"
-                    >
-                      {sub.title}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-          <Link href="/services">
-            <button className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-3">
-              Schedule a Pickup
-            </button>
-          </Link>
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
+    ))}
+
+    <Link href="/services">
+      <button
+        onClick={() => setMobileOpen(false)}
+        className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-3"
+      >
+        Schedule a Pickup
+      </button>
+    </Link>
+  </nav>
+</div>
+
     </>
   )
 }
