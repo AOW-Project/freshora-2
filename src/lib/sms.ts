@@ -1,79 +1,45 @@
-// SMS service using MSG91 (better for Indian phone numbers)
+// SMS service using Twilio
+import twilio from "twilio"
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID
+const authToken = process.env.TWILIO_AUTH_TOKEN
+const fromNumber = process.env.TWILIO_PHONE_NUMBER
+
+// Initialize Twilio client only if credentials are available
+const client = accountSid && authToken ? twilio(accountSid, authToken) : null
+
 export const sendOtpSms = async (mobile: string, otp: string): Promise<boolean> => {
   try {
-    const authKey = process.env.MSG91_AUTH_KEY
-    const templateId = process.env.MSG91_TEMPLATE_ID
-
-    // If MSG91 is not configured, fall back to console logging for development
-    if (!authKey) {
+    // If Twilio is not configured, fall back to console logging for development
+    if (!client || !fromNumber) {
       console.log(`[SMS FALLBACK] OTP ${otp} for ${mobile}`)
-      console.log("⚠️  Configure MSG91 credentials to send real SMS messages")
+      console.log("⚠️  Configure Twilio credentials to send real SMS messages")
       console.log("Required environment variables:")
-      console.log("- MSG91_AUTH_KEY (get from https://msg91.com)")
-      console.log("MSG91 is much easier for Indian phone numbers!")
+      console.log("- TWILIO_ACCOUNT_SID")
+      console.log("- TWILIO_AUTH_TOKEN")
+      console.log("- TWILIO_PHONE_NUMBER")
       return true // Return true for development mode
     }
 
-    // Clean mobile number (remove +91 if present, MSG91 handles it)
-    const cleanMobile = mobile.replace(/^\+91/, "").replace(/\D/g, "")
-
-    console.log(`[v0] MSG91 Request - Mobile: ${cleanMobile}, OTP: ${otp}`)
-    console.log(`[v0] MSG91 Auth Key: ${authKey?.substring(0, 10)}...`)
-
-    const params = new URLSearchParams({
-      authkey: authKey,
-      mobile: `91${cleanMobile}`,
-      otp: otp,
-      sender: "FRESHORA", // Add sender ID for better delivery
-      DLT_TE_ID: templateId || "", // Template ID if available
+    // Send actual SMS via Twilio
+    const message = await client.messages.create({
+      body: `Your Freshora verification code is: ${otp}. This code expires in 5 minutes.`,
+      from: fromNumber,
+      to: mobile.startsWith("+") ? mobile : `+91${mobile}`, // Add country code if not present
     })
 
-    const apiUrl = `https://control.msg91.com/api/v5/otp?${params.toString()}`
-    console.log(`[v0] MSG91 API URL: ${apiUrl}`)
-
-    // Send OTP via MSG91
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-
-    const result = await response.json()
-
-    console.log(`[v0] MSG91 Response Status: ${response.status}`)
-    console.log(`[v0] MSG91 Response Body:`, result)
-
-    if (response.ok && (result.type === "success" || result.message === "OTP sent successfully")) {
-      console.log(`[SMS SUCCESS] OTP sent to ${mobile} via MSG91`)
-      console.log(`[v0] MSG91 Request ID: ${result.request_id}`)
-
-      if (result.request_id) {
-        console.log("✅ MSG91 accepted the request. If SMS not received, check:")
-        console.log("1. MSG91 account verification status")
-        console.log("2. Account balance/credits")
-        console.log("3. Sender ID approval status")
-        console.log("4. Mobile number not in DND registry")
-      }
-
-      return true
-    } else {
-      console.error("[MSG91 ERROR] Failed to send OTP:", result)
-      if (result.message?.includes("Invalid")) {
-        console.error("[MSG91 ERROR] Check your auth key or mobile number format")
-      }
-      if (result.message?.includes("balance") || result.message?.includes("credit")) {
-        console.error("[MSG91 ERROR] Insufficient balance in your MSG91 account")
-      }
-
-      console.log("[v0] Trying TextLocal as fallback...")
-      return await sendOtpSmsTextLocal(mobile, otp)
-    }
+    console.log(`[SMS SUCCESS] Message sent with SID: ${message.sid}`)
+    return true
   } catch (error) {
     console.error("[SMS ERROR] Failed to send SMS:", error)
 
-    console.log("[v0] Trying TextLocal as fallback...")
-    return await sendOtpSmsTextLocal(mobile, otp)
+    // In production, you might want to throw the error
+    // In development, we'll log it and continue
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("Failed to send SMS")
+    }
+
+    return false
   }
 }
 
