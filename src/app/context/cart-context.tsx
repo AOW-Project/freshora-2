@@ -2,69 +2,58 @@
 
 import { createContext, useContext, useState, type ReactNode } from "react"
 
-export interface CartItem {
+interface CartItem {
   id: string
   name: string
   category: string
+  serviceType: string
   price: number
   quantity: number
-  serviceType: string
 }
 
 interface CartContextType {
   cart: CartItem[]
-  addToCart: (item: Omit<CartItem, "quantity">, quantity: number) => void
-  removeFromCart: (itemId: string) => void
-  updateQuantity: (itemId: string, quantity: number) => void
+  addToCart: (item: CartItem) => void
+  removeFromCart: (id: string) => void
+  updateQuantity: (id: string, quantity: number) => void
   clearCart: () => void
-  getTotalPrice: () => number
   getTotalItems: () => number
+  getTotalPrice: () => number
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
-export function CartProvider({ children }: { children: ReactNode }) {
+export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([])
 
-  const addToCart = (item: Omit<CartItem, "quantity">, quantity: number) => {
-    if (quantity <= 0) return
-
-    const existingItem = cart.find((cartItem) => cartItem.id === item.id)
-
-    if (existingItem) {
-      setCart(
-        cart.map((cartItem) =>
-          cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + quantity } : cartItem,
-        ),
-      )
-    } else {
-      setCart([...cart, { ...item, quantity }])
-    }
+  const addToCart = (item: CartItem) => {
+    setCart((prev) => {
+      const existing = prev.find((i) => i.id === item.id)
+      if (existing) {
+        return prev.map((i) => (i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : i))
+      }
+      return [...prev, item]
+    })
   }
 
-  const removeFromCart = (itemId: string) => {
-    setCart(cart.filter((item) => item.id !== itemId))
+  const removeFromCart = (id: string) => {
+    setCart((prev) => prev.filter((item) => item.id !== id))
   }
 
-  const updateQuantity = (itemId: string, quantity: number) => {
-    if (quantity <= 0) {
-      removeFromCart(itemId)
-      return
-    }
-
-    setCart(cart.map((item) => (item.id === itemId ? { ...item, quantity } : item)))
+  const updateQuantity = (id: string, quantity: number) => {
+    setCart((prev) => prev.map((item) => (item.id === id ? { ...item, quantity } : item)))
   }
 
   const clearCart = () => {
     setCart([])
   }
 
-  const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0)
-  }
-
   const getTotalItems = () => {
     return cart.reduce((total, item) => total + item.quantity, 0)
+  }
+
+  const getTotalPrice = () => {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0)
   }
 
   return (
@@ -75,8 +64,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
         removeFromCart,
         updateQuantity,
         clearCart,
-        getTotalPrice,
         getTotalItems,
+        getTotalPrice,
       }}
     >
       {children}
@@ -84,9 +73,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   )
 }
 
-export function useCart() {
+// ✅ No arguments required here
+export const useCart = () => {
   const context = useContext(CartContext)
-  if (context === undefined) {
+  if (!context) {
     throw new Error("useCart must be used within a CartProvider")
   }
   return context

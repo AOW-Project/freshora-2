@@ -10,12 +10,15 @@ interface ServiceOrderPageProps {
 
 export default async function ServiceOrderPage({ params }: ServiceOrderPageProps) {
   const { slug } = await params
-
   const service = getServiceBySlug(slug)
 
   if (!service) {
     notFound()
   }
 
-  return <ServiceOrderClient slug={slug} service={service} />
+  return (
+    <>
+      <ServiceOrderClient slug={slug} service={service} />
+    </>
+  )
 }
