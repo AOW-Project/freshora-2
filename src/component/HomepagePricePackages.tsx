@@ -98,14 +98,14 @@ const HomepagePricePackages = () => {
     <div className="relative overflow-hidden" style={{ backgroundColor: '#f3f6f4' }}>
       
       {/* 2. Add the decorative shape Image component */}
-      <Image
+    { /* <Image
         // IMPORTANT: Replace 'price-shape.png' with your actual image file name
         src="/images/price-shape.png" 
         alt="Decorative background shape"
         fill
         style={{ objectFit: "contain", objectPosition: "bottom right" }}
         className="-z-0 opacity-40" // Use z-index to place it behind content
-      />
+      /> */ }
       
       {/* 3. Make the section itself transparent and ensure it's in front of the shape */}
       <section className="relative z-10 py-16 bg-transparent">
