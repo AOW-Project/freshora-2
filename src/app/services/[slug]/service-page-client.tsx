@@ -147,12 +147,7 @@ export default function ServicePageClient({
               {/* Service Image */}
               <div className="xl:col-span-2 relative w-full h-48 sm:h-56 md:h-64 lg:h-80 rounded-lg shadow-lg overflow-hidden">
                 {/* FIX: Replaced <image> with next/image <Image> component */}
-                <Image
-                  src="/images/layout01-img01.jpg"
-                  alt="Laundry Service"
-                  fill
-                  className="object-cover"
-                />
+                <Image src="/images/layout01-img01.jpg" alt="Laundry Service" fill className="object-cover" />
               </div>
 
               {/* Contact Info */}
@@ -186,9 +181,7 @@ export default function ServicePageClient({
                   <div className="border-l-4 border-green-600 pl-4 mb-6">
                     <h4 className="text-green-600 font-medium mb-2 text-sm sm:text-base">What we offer</h4>
                     <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">{service.title}</h2>
-                    <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                      {service.description}
-                    </p>
+                    <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{service.description}</p>
                   </div>
 
                   <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800">
@@ -215,20 +208,10 @@ export default function ServicePageClient({
                   {/* Service Images */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 sm:mb-8">
                     <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden">
-                      <Image
-                        src="/images/img09.jpg"
-                        alt="Ironing Service"
-                        fill
-                        className="object-cover"
-                      />
+                      <Image src="/images/img09.jpg" alt="Ironing Service" fill className="object-cover" />
                     </div>
                     <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden">
-                      <Image
-                        src="/images/img11.jpg"
-                        alt="Hanging Clothes"
-                        fill
-                        className="object-cover"
-                      />
+                      <Image src="/images/img11.jpg" alt="Hanging Clothes" fill className="object-cover" />
                     </div>
                   </div>
 
@@ -243,9 +226,9 @@ export default function ServicePageClient({
                     </p>
                     <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                       Simply use one of our many convenient drop-off or pickup services, tell us any specific
-                      instructions for your garments, and we&apos;ll take care of the rest. You can pick it up from there! We
-                      use state-of-the-art equipment and the best detergents and fabric softeners to ensure your clothes
-                      are cleaned properly and thoroughly.
+                      instructions for your garments, and we&apos;ll take care of the rest. You can pick it up from
+                      there! We use state-of-the-art equipment and the best detergents and fabric softeners to ensure
+                      your clothes are cleaned properly and thoroughly.
                     </p>
                   </div>
                 </div>
