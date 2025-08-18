@@ -5,33 +5,13 @@ import { FaTshirt, FaWater, FaUserCheck } from "react-icons/fa"
 import { GiClothes } from "react-icons/gi"
 import Image from "next/image"
 import { Phone, Clock, CreditCard, Leaf, CheckCircle2 } from "lucide-react"
-import img01 from '../../public/images/img01.jpg';
+import img01 from "../../public/images/img01.jpg"
 
 const statsData = [
-  {
-    icon: <FaTshirt className="text-green-600 text-xl sm:text-2xl lg:text-3xl" />,
-    value: 50000,
-    suffix: "+",
-    label: "Shirts Washed",
-  },
-  {
-    icon: <FaWater className="text-green-600 text-xl sm:text-2xl lg:text-3xl" />,
-    value: 50,
-    suffix: "",
-    label: "Washing Machines",
-  },
-  {
-    icon: <GiClothes className="text-green-600 text-xl sm:text-2xl lg:text-3xl" />,
-    value: 10000,
-    suffix: "+",
-    label: "Dry Cleaned Items",
-  },
-  {
-    icon: <FaUserCheck className="text-green-600 text-xl sm:text-2xl lg:text-3xl" />,
-    value: 100,
-    suffix: "%",
-    label: "Happy Customers",
-  },
+  { icon: <FaTshirt className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 50000, suffix: "+", label: "Shirts Washed" },
+  { icon: <FaWater className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 50, suffix: "", label: "Washing Machines" },
+  { icon: <GiClothes className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 10000, suffix: "+", label: "Dry Cleaned Items" },
+  { icon: <FaUserCheck className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 100, suffix: "%", label: "Happy Customers" },
 ]
 
 export default function LaundryStats() {
@@ -41,7 +21,9 @@ export default function LaundryStats() {
     const interval = setInterval(() => {
       setCounts((prev) =>
         prev.map((count, i) =>
-          count < statsData[i].value ? Math.min(count + Math.ceil(statsData[i].value / 50), statsData[i].value) : count,
+          count < statsData[i].value
+            ? Math.min(count + Math.ceil(statsData[i].value / 50), statsData[i].value)
+            : count,
         ),
       )
     }, 30)
@@ -50,75 +32,66 @@ export default function LaundryStats() {
 
   return (
     <>
+      {/* Main About Section */}
       <section className="relative bg-[#f3f6f4] py-8 sm:py-12 lg:py-16 xl:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+            
             {/* Image Section */}
-            <div className="relative flex-shrink-0 w-full lg:w-5/12 max-w-md lg:max-w-none">
+            <div className="relative w-full max-w-sm sm:max-w-md lg:w-5/12">
               <div className="relative aspect-square">
                 <Image
                   src={img01}
                   alt="Laundry Experience"
                   fill
                   className="shadow-lg object-cover rounded-lg"
+                  priority
                 />
-                {/* FIX: Adjusted circle to match the reference image */}
-                <div className="absolute top-3/4 -translate-y-1/2 right-[-60px] bg-green-500 text-white rounded-full w-32 h-32 flex flex-col items-center justify-center text-center shadow-2xl">
-                  <span className="text-4xl font-extrabold">25</span>
-                  <span className="text-sm font-semibold text-center leading-tight px-1">years of experience</span>
+                {/* Floating Circle */}
+                <div className="absolute bottom-[-20px] right-[-20px] sm:bottom-6 sm:right-[-40px] bg-green-500 text-white rounded-full w-24 h-24 sm:w-32 sm:h-32 flex flex-col items-center justify-center text-center shadow-2xl">
+                  <span className="text-2xl sm:text-4xl font-extrabold">25</span>
+                  <span className="text-[10px] sm:text-sm font-semibold leading-tight px-1">
+                    years of experience
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Text Content Section */}
-            <div className="relative flex-1 w-full lg:w-7/12 text-center lg:text-left lg:pl-16">
-              {/* Dotted line connector for large screens */}
-             {/*<div className="hidden lg:block absolute top-[15%] left-[-20px] transform -translate-y-1/2 h-12 w-20">
-                <Image
-                  src="/images/arrow-img-right.png"
-                  alt="Decorative arrow"
-                  width={120}
-                  height={60}
-                />
-              </div> */}
-
+            {/* Text Section */}
+            <div className="flex-1 w-full text-center lg:text-left lg:pl-8">
               <p className="text-green-600 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
                 More than 25 Years of Experience
               </p>
-              <h2 className="text-xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
+              <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-6 leading-tight">
                 We are Passionate About Laundry
               </h2>
-              <p className="text-gray-600 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base lg:text-lg max-w-2xl mx-auto lg:mx-0">
-                We are professionals in the laundry and dry cleaning business, which means we always stay up to date on
-                the latest technologies, cleaning methods, and solutions for dealing with stains or delicate fabrics.
-                Plus, we maintain the highest standards of business integrity by following local and national
-                regulations and environmental safety rules.
+              <p className="text-gray-600 mb-5 sm:mb-8 leading-relaxed text-sm sm:text-base lg:text-lg max-w-2xl mx-auto lg:mx-0">
+                We are professionals in the laundry and dry cleaning business, always up to date with
+                the latest technologies, cleaning methods, and solutions for stains and delicate fabrics.
+                We also follow the highest standards of integrity and environmental safety.
               </p>
 
+              {/* Features List */}
               <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 text-gray-700 text-sm sm:text-base">
-                <li className="flex items-center gap-3 justify-center lg:justify-start">
-                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0" />
-                  <span>100% Customer Satisfaction</span>
-                </li>
-                <li className="flex items-center gap-3 justify-center lg:justify-start">
-                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0" />
-                  <span>Free Collection & Delivery</span>
-                </li>
-                <li className="flex items-center gap-3 justify-center lg:justify-start">
-                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0" />
-                  <span>Affordable Prices</span>
-                </li>
-                <li className="flex items-center gap-3 justify-center lg:justify-start">
-                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0" />
-                  <span>Best Quality</span>
-                </li>
+                {[
+                  "100% Customer Satisfaction",
+                  "Free Collection & Delivery",
+                  "Affordable Prices",
+                  "Best Quality",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2 justify-center lg:justify-start">
+                    <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
 
-              <div className="flex items-center gap-4 justify-center lg:justify-start">
+              {/* Contact CTA */}
+              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start">
                 <div className="bg-green-100 p-3 sm:p-4 rounded-full">
                   <Phone className="text-green-700 w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
-                <div className="text-center lg:text-left">
+                <div className="text-center sm:text-left">
                   <p className="text-gray-500 text-xs sm:text-sm">Call for Quality Services</p>
                   <p className="text-base sm:text-lg lg:text-xl font-bold text-green-700">1 (800) 765-43-21</p>
                 </div>
@@ -126,45 +99,36 @@ export default function LaundryStats() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-24 sm:mt-28 lg:mt-32">
-            <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 text-center sm:text-left">
-              <Clock className="text-green-600 mb-3 sm:mb-4 w-6 h-6 sm:w-8 sm:h-8 mx-auto sm:mx-0" />
-              <h3 className="font-semibold text-green-600 mb-2 sm:mb-3 text-base sm:text-lg">Save Time & Money</h3>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                No more wasted time driving to the laundromats, we pickup and deliver for free!
-              </p>
-            </div>
-            <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 text-center sm:text-left">
-              <CreditCard className="text-green-600 mb-3 sm:mb-4 w-6 h-6 sm:w-8 sm:h-8 mx-auto sm:mx-0" />
-              <h3 className="font-semibold text-green-600 mb-2 sm:mb-3 text-base sm:text-lg">Pay Online in Seconds</h3>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                Manage your Press account and billing online from your smartphone or computer.
-              </p>
-            </div>
-            <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 text-center sm:text-left sm:col-span-2 lg:col-span-1">
-              <Leaf className="text-green-600 mb-3 sm:mb-4 w-6 h-6 sm:w-8 sm:h-8 mx-auto sm:mx-0" />
-              <h3 className="font-semibold text-green-600 mb-2 sm:mb-3 text-base sm:text-lg">Eco-Friendly</h3>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                We use safe and clean perc-free solvents so you and the Earth can look good.
-              </p>
-            </div>
+          {/* 3 Feature Boxes */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-16 sm:mt-20 lg:mt-28">
+            {[
+              { icon: <Clock className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Save Time & Money", desc: "We pick up and deliver for free—no more wasted trips to the laundromat." },
+              { icon: <CreditCard className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Pay Online in Seconds", desc: "Manage your billing and account online easily from any device." },
+              { icon: <Leaf className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Eco-Friendly", desc: "We use safe, clean, perc-free solvents so you and the Earth stay safe." },
+            ].map((card, i) => (
+              <div key={i} className="bg-white p-5 sm:p-6 lg:p-8 rounded-lg shadow-md hover:shadow-lg transition">
+                <div className="mb-3 sm:mb-4">{card.icon}</div>
+                <h3 className="font-semibold text-green-600 mb-2 text-base sm:text-lg">{card.title}</h3>
+                <p className="text-gray-600 text-sm sm:text-base">{card.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-8 sm:py-12 lg:py-16 xl:py-20 relative">
+      {/* Stats Section */}
+      <section className="bg-white py-10 sm:py-14 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 xl:gap-12 text-center">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
             {statsData.map((stat, i) => (
-              <div key={i} className="flex flex-col items-center p-3 sm:p-4 lg:p-6">
-                <div className="bg-white rounded-full shadow-lg p-3 sm:p-4 lg:p-5 mb-3 sm:mb-4 lg:mb-6 border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+              <div key={i} className="flex flex-col items-center p-3 sm:p-4">
+                <div className="bg-white rounded-full shadow-md p-3 sm:p-5 mb-3 sm:mb-5 border border-gray-100">
                   {stat.icon}
                 </div>
-                <h3 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 mb-1 sm:mb-2 leading-tight">
-                  {counts[i]}
-                  {stat.suffix}
+                <h3 className="text-lg sm:text-2xl font-bold text-gray-900">
+                  {counts[i]}{stat.suffix}
                 </h3>
-                <p className="text-gray-500 text-xs sm:text-sm lg:text-base leading-tight px-1 sm:px-2">{stat.label}</p>
+                <p className="text-gray-500 text-xs sm:text-sm">{stat.label}</p>
               </div>
             ))}
           </div>

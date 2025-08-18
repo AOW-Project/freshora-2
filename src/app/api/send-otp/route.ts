@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
+import type { PoolConnection, ResultSetHeader } from "mysql2/promise"
 import pool from "../../../lib/db"
 import { sendOtpSms } from "../../../lib/sms"
 
@@ -30,7 +31,7 @@ export async function POST(req: NextRequest) {
       hasPassword: !!process.env.DB_PASS,
     })
 
-    let connection
+    let connection: PoolConnection | undefined
     let dbStorageSuccess = false
 
     try {
@@ -53,17 +54,16 @@ export async function POST(req: NextRequest) {
       await connection.query("DELETE FROM otp_codes WHERE mobile = ?", [mobile])
       console.log("[v0] Cleared existing OTPs for mobile:", mobile)
 
-      const [result] = await connection.query("INSERT INTO otp_codes (mobile, otp, expires_at) VALUES (?, ?, ?)", [
-        mobile,
-        otp,
-        expiresAt,
-      ])
+      const [result] = await connection.query<ResultSetHeader>(
+        "INSERT INTO otp_codes (mobile, otp, expires_at) VALUES (?, ?, ?)",
+        [mobile, otp, expiresAt]
+      )
 
       dbStorageSuccess = true
       console.log("[v0] OTP stored in database successfully:", {
         mobile,
         otp,
-        insertId: (result as any).insertId,
+        insertId: result.insertId,
         expiresAt: expiresAt.toISOString(),
       })
     } catch (dbError) {
@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
           message: "Failed to store OTP in database. Please try again.",
           error: process.env.NODE_ENV === "development" ? "Database connection or query failed" : undefined,
         },
-        { status: 500 },
+        { status: 500 }
       )
     }
 
@@ -93,7 +93,7 @@ export async function POST(req: NextRequest) {
     try {
       smsStatus = await sendOtpSms(mobile, otp)
       console.log("[v0] SMS sending result:", smsStatus)
-    } catch (smsErr) {
+    } catch (smsErr: unknown) {
       console.error("[v0] SMS sending failed:", smsErr)
       smsError = smsErr instanceof Error ? smsErr.message : String(smsErr)
       // Don't throw error - OTP is already stored in database
@@ -115,10 +115,10 @@ export async function POST(req: NextRequest) {
             }
           : undefined,
     })
-  } catch (err) {
+  } catch (err: unknown) {
     console.error("[v0] API Error:", err)
     const errorMessage = err instanceof Error ? err.message : "Unknown error"
-    const errorCode = (err as any)?.code || "UNKNOWN"
+    const errorCode = typeof err === "object" && err !== null && "code" in err ? (err as { code: string }).code : "UNKNOWN"
 
     return NextResponse.json(
       {
@@ -133,7 +133,7 @@ export async function POST(req: NextRequest) {
               }
             : undefined,
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }

@@ -10,14 +10,12 @@ export async function POST(req: Request) {
     const testAccount = await nodemailer.createTestAccount();
 
     // Create reusable transporter object using the test account SMTP
-    const transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
-      port: 587,
-      secure: false,
+const transporter = nodemailer.createTransport({
+       service: "gmail",                                                                          //lczr wrpu dtld mmht
       auth: {
-        user: testAccount.user,
-        pass: testAccount.pass,
-      },
+    user: "mondalrohan201@gmail.com",
+    pass: process.env.GMAIL_APP_PASSWORD || "lczr wrpu dtld mmht", // store in .env
+  },
     });
 
     // Email HTML for customer
@@ -37,9 +35,12 @@ export async function POST(req: Request) {
                   <!-- Header with Logo -->
                   <tr>
                     <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 30px; text-align: center;">
-                      <img src="${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/freshora-laundry-logo.png" 
-                           alt="Freshora Laundry" 
-                           style="max-width: 200px; height: auto; margin-bottom: 15px; filter: brightness(0) invert(1);">
+                      <img 
+  src="https://freshoralaundry.com/images/F.png" 
+  alt="Freshora Laundry" 
+  style="max-width:200px;height:auto;margin-bottom:15px;filter:brightness(0) invert(1);"
+/>
+
                       <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 600;">Pickup Confirmed!</h1>
                       <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 16px;">Your laundry pickup has been scheduled</p>
                     </td>
@@ -88,7 +89,7 @@ export async function POST(req: Request) {
                       <div style="background-color: #eff6ff; border-radius: 8px; padding: 20px; margin: 25px 0;">
                         <h3 style="color: #1e40af; margin: 0 0 10px 0; font-size: 16px;">Need to make changes?</h3>
                         <p style="color: #1e40af; margin: 0; font-size: 14px;">
-                          Call us at <strong>(555) 123-4567</strong> or email <strong>support@freshora.com</strong>
+                          Call us at <strong>+971 50 925 9667</strong> or email <strong>freshorappc@gmail.com</strong>
                         </p>
                       </div>
 
@@ -148,20 +149,20 @@ export async function POST(req: Request) {
     `;
 
     // Send customer confirmation email
-    await transporter.sendMail({
-      from: `"Freshora Laundry" <${testAccount.user}>`,
-      to: email,
-      subject: "Pickup Confirmation - Freshora Laundry",
-      html: customerEmailHTML,
-    });
+await transporter.sendMail({
+  from: `"Freshora Laundry" <freshorappc@gmail.com>`,
+  to: email, // customer's email
+  subject: "Pickup Confirmation - Freshora Laundry",
+  html: customerEmailHTML,
+})
 
     // Send business notification email
-    await transporter.sendMail({
-      from: `"Freshora Laundry" <${testAccount.user}>`,
-      to: process.env.BUSINESS_EMAIL || testAccount.user,
-      subject: `New Pickup Request from ${name}`,
-      html: businessEmailHTML,
-    });
+await transporter.sendMail({
+  from: `"Freshora Laundry" <freshorappc@gmail.com>`,
+  to: "freshorappc@gmail.com", // business inbox
+  subject: `New Pickup Request from ${name}`,
+  html: businessEmailHTML,
+});
 
     console.log("Preview URL (Customer):", nodemailer.getTestMessageUrl);
     console.log("Preview URL (Business):", nodemailer.getTestMessageUrl);
