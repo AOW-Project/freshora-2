@@ -14,8 +14,8 @@ import {
   FaTimes,
 } from "react-icons/fa"
 import { useCart } from "../app/context/cart-context"
-import { FaUserCircle } from "react-icons/fa"
-import LoginModal from "./LoginModel"
+
+
 
 interface NavItem {
   title: string
@@ -187,8 +187,7 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-            <FaUserCircle size={20} onClick={() => setLoginOpen(true)} className="cursor-pointer mt-3" />
-            <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
+
           </nav>
 
           {/* Right Icons */}

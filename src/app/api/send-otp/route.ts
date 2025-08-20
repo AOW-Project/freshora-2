@@ -1,162 +1,72 @@
-
 import { type NextRequest, NextResponse } from "next/server"
-import type { PoolConnection, ResultSetHeader } from "mysql2/promise"
-import pool from "../../../lib/db"
-import { sendOtpSms } from "../../../lib/sms"
+import { storeOTP } from "@/lib/otp-storage"
+import nodemailer from "nodemailer"
 
-
-const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
-
-export async function POST(req: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
-    const body: { mobile?: string } = await req.json();
-    const { mobile } = body;
+    const { email } = await request.json()
 
-    if (!mobile) {
-      return NextResponse.json({ message: "Mobile number is required" }, { status: 400 });
+    if (!email) {
+      return NextResponse.json({ success: false, message: "Email is required" })
     }
 
-    const mobileRegex = /^[6-9]\d{9}$/; // Indian mobile number format
-    if (!mobileRegex.test(mobile.replace(/^\+91/, ""))) {
-      return NextResponse.json(
-        { message: "Please enter a valid 10-digit mobile number" },
-        { status: 400 }
-      );
-    }
+    // Generate 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString()
 
-    const otp = generateOTP();
-    const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
-
-    console.log("[v0] Testing database connection...");
-    console.log("[v0] DB Config:", {
-      host: process.env.DB_HOST || "localhost",
-      port: process.env.DB_PORT || "3306",
-      user: process.env.DB_USER || "root",
-      database: process.env.DB_NAME,
-      hasPassword: !!process.env.DB_PASS,
-    });
-
-
-    let connection: PoolConnection | undefined
-    let dbStorageSuccess = false
-
+    storeOTP(email, otp)
 
     try {
-      connection = await pool.getConnection();
-      console.log("[v0] Database connection acquired successfully");
-
-      await connection.query(`
-        CREATE TABLE IF NOT EXISTS otp_codes (
-          id INT AUTO_INCREMENT PRIMARY KEY,
-          mobile VARCHAR(15) NOT NULL,
-          otp VARCHAR(6) NOT NULL,
-          expires_at DATETIME NOT NULL,
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-          INDEX idx_mobile (mobile),
-          INDEX idx_expires_at (expires_at)
-        )
-      `);
-      console.log("[v0] otp_codes table verified/created");
-
-      await connection.query("DELETE FROM otp_codes WHERE mobile = ?", [mobile]);
-      console.log("[v0] Cleared existing OTPs for mobile:", mobile);
-
-
-      const [result] = await connection.query<ResultSetHeader>(
-        "INSERT INTO otp_codes (mobile, otp, expires_at) VALUES (?, ?, ?)",
-        [mobile, otp, expiresAt]
-      )
-
-
-      dbStorageSuccess = true;
-      console.log("[v0] OTP stored in database successfully:", {
-        mobile,
-        otp,
-        insertId: result.insertId,
-
-        expiresAt: expiresAt.toISOString(),
-      });
-    } catch (dbError: unknown) {
-      console.error("[v0] Database operation failed:", dbError);
-      dbStorageSuccess = false;
-    } finally {
-      if (connection) {
-        connection.release();
-        console.log("[v0] Database connection released");
-      }
-    }
-
-    if (!dbStorageSuccess) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Failed to store OTP in database. Please try again.",
-          error:
-            process.env.NODE_ENV === "development"
-              ? "Database connection or query failed"
-              : undefined,
+      // Create transporter
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL_USER || "mondalrohan201@gmail.com",
+          pass: process.env.EMAIL_PASS || "lczr wrpu dtld mmht",
         },
-        { status: 500 }
+      })
 
-      )
+      // Email content
+      const mailOptions = {
+        from: process.env.EMAIL_USER || "your-email@gmail.com",
+        to: email,
+        subject: "Email Verification - OTP Code",
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h2 style="color: #333; text-align: center;">Email Verification</h2>
+            <p style="color: #666; font-size: 16px;">Hello,</p>
+            <p style="color: #666; font-size: 16px;">Your OTP code for email verification is:</p>
+            <div style="background-color: #f8f9fa; border: 2px dashed #dee2e6; border-radius: 8px; padding: 20px; text-align: center; margin: 20px 0;">
+              <h1 style="color: #007bff; font-size: 32px; margin: 0; letter-spacing: 4px;">${otp}</h1>
+            </div>
+            <p style="color: #666; font-size: 14px;">This code will expire in 10 minutes.</p>
+            <p style="color: #666; font-size: 14px;">If you didn't request this code, please ignore this email.</p>
+          </div>
+        `,
+      }
 
+      // Send email
+      await transporter.sendMail(mailOptions)
 
+      console.log(`📧 OTP sent to ${email}: ${otp}`)
+
+      return NextResponse.json({
+        success: true,
+        message: "OTP sent to your email address successfully",
+      })
+    } catch (emailError) {
+      console.error("Email sending failed:", emailError)
+      // Fallback to console log if email fails
+      console.log(`📧 OTP for ${email}: ${otp} (Email failed, check terminal)`)
+
+      return NextResponse.json({
+        success: true,
+        message: "OTP generated (check terminal - email service not configured)",
+        // Remove this in production - only for testing
+        otp: process.env.NODE_ENV === "development" ? otp : undefined,
+      })
     }
-
-    let smsStatus = false;
-    let smsError: string | null = null;
-
-    try {
-
-      smsStatus = await sendOtpSms(mobile, otp)
-      console.log("[v0] SMS sending result:", smsStatus)
-    } catch (smsErr: unknown) {
-      console.error("[v0] SMS sending failed:", smsErr)
-      smsError = smsErr instanceof Error ? smsErr.message : String(smsErr)
-
-      // Don't throw error - OTP is already stored in database
-    }
-
-    return NextResponse.json({
-      success: true,
-      message: smsStatus
-        ? "OTP sent successfully"
-        : "OTP generated and stored. SMS may be delayed - check your phone or try again.",
-      debug:
-        process.env.NODE_ENV === "development"
-          ? {
-              otp,
-              smsStatus,
-              smsError,
-              expiresAt: expiresAt.toISOString(),
-              dbStored: dbStorageSuccess,
-            }
-          : undefined,
-
-    })
-  } catch (err: unknown) {
-    console.error("[v0] API Error:", err)
-    const errorMessage = err instanceof Error ? err.message : "Unknown error"
-    const errorCode = typeof err === "object" && err !== null && "code" in err ? (err as { code: string }).code : "UNKNOWN"
-
-
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Failed to generate OTP. Please check database connection.",
-        error:
-          process.env.NODE_ENV === "development"
-            ? {
-                message: errorMessage,
-                code: errorCode,
-                details:
-                  "Make sure MySQL server is running and environment variables are set correctly",
-              }
-            : undefined,
-      },
-      { status: 500 }
-
-    )
-
+  } catch (error) {
+    console.error("Error sending OTP:", error)
+    return NextResponse.json({ success: false, message: "Failed to send OTP" })
   }
 }

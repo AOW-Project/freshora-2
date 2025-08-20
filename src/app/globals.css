@@ -276,3 +276,19 @@ body::before {
 .content-swiper .swiper-pagination-bullet-active {
   opacity: 1;
 }
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Added custom backdrop blur utility */
+@layer utilities {
+  .backdrop-blur-custom {
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+  }
+}

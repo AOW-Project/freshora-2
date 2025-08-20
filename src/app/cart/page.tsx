@@ -38,7 +38,7 @@ export default function CartPage() {
             <CardContent>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h2>
               <p className="text-gray-600 mb-8">Add some items to your cart to get started with your laundry order.</p>
-              <Link href="/services">
+              <Link href="/services/laundry-services">
                 <Button className="bg-green-600 hover:bg-green-700">Browse Services</Button>
               </Link>
             </CardContent>
@@ -49,6 +49,7 @@ export default function CartPage() {
   }
 
   return (
+    <>
     <div className="min-h-screen bg-gray-50">
       <div
         className="relative h-64 bg-cover bg-center flex items-center"
@@ -177,7 +178,9 @@ export default function CartPage() {
           </div>
         </div>
       </div>
-       <PickupForm open={checkoutOpen} onClose={() => setCheckoutOpen(false)} />
+       
     </div>
+    <PickupForm open={checkoutOpen} onClose={() => setCheckoutOpen(false)} />
+    </>
   )
 }
