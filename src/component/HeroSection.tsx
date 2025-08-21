@@ -7,7 +7,7 @@ import Link from 'next/link';
 // The array of slide data
 const slides = [
   {
-    image: "/images/slider1.webp",
+    image: "/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.JPG",
     alt: "A woman smiling while holding a basket of fresh laundry",
     subtitle: "Free Pickup & Delivery",
     title: "Professional Laundry & Dry Cleaning",
@@ -16,7 +16,7 @@ const slides = [
     buttonLink: "/services"
   },
   {
-    image: "/images/img07.jpg",
+    image: "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc.jpg",
     alt: "A laundry professional handing clean clothes to a customer",
     subtitle: "25+ Years of Experience",
     title: "Quality Care For Your Clothes",
@@ -25,7 +25,7 @@ const slides = [
     buttonLink: "/services"
   },
   {
-    image: "/images/img09.jpg",
+    image: "/images/cleaning-lady-using-a-canister-vacuum-cleaner-2024-10-20-21-05-25-utc.jpg",
     alt: "A woman professionally steaming a blue shirt",
     subtitle: "Perfectly Pressed, Every Time",
     title: "Expert Ironing Services",
@@ -34,7 +34,7 @@ const slides = [
     buttonLink: "/prices"
   },
   {
-    image: "/images/img07.jpg",
+    image: "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.jpg",
     alt: "A happy customer receiving their clean clothes",
     subtitle: "Your Happiness, Guaranteed",
     title: "100% Customer Satisfaction",
@@ -62,7 +62,6 @@ const AnimatedParticles = () => {
     }, []);
     if (!isMounted) { return null; }
     
-    // FIX: The z-index was changed from -z-10 to z-10 to ensure particles appear above the background image.
     return (
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-10" aria-hidden="true">
             {particles.map(p => (<Image key={p.id} src={p.src} alt={p.alt} width={p.width} height={p.height} className="particle" style={p.style} />))}
@@ -123,10 +122,9 @@ export default function HeroSection() {
                 {/* Background Images and Overlay Container */}
                 <div className="absolute inset-0 w-full h-full z-0">
                     {slides.map((slide, index) => (
-                        // FIX: Removed z-10 from the active slide to let the particle layer sit on top.
                         <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}>
                             <Image src={slide.image} alt={slide.alt} fill priority={index === 0} className="object-cover" />
-                            <div className="absolute inset-0 bg-black/50"></div>
+                            {/* THIS LINE WAS REMOVED: <div className="absolute inset-0 bg-black/50"></div> */}
                         </div>
                     ))}
                 </div>

@@ -1,24 +1,63 @@
-"use client"
+"use client";
 
-import { useMemo } from "react"
-import { notFound } from "next/navigation"
-import Link from "next/link"
-import Image from "next/image" // FIX: Import the next/image component
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { MapPin, Clock, Mail, Phone, CheckCircle } from "lucide-react"
-import type { Service } from "../../../lib/services-data"
+import { useMemo } from "react";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { MapPin, Clock, Mail, Phone, CheckCircle } from "lucide-react";
 
-// FIX: Removed unused 'ServiceItem' interface
+// --- We define the types directly inside this component's props ---
+// This ensures it uses the same structure as the data passed from the parent page.
+interface ServiceItem {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  unit: string;
+  image?: string;
+}
+
+interface Service {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  fullDescription: string;
+  image?: string;
+  rating: number;
+  reviews: number;
+  duration: string;
+  items: {
+    [category: string]: ServiceItem[];
+  };
+  gallery?: string[];
+  features?: string[];
+  pricing?: {
+    [key: string]: any;
+  };
+  process?: {
+    step: number;
+    title: string;
+    description: string;
+  }[];
+  faq?: {
+    question: string;
+    answer: string;
+  }[];
+}
+// --- End of type definitions ---
+
 
 export default function ServicePageClient({
   slug,
   service,
 }: {
-  slug: string
-  service: Service
+  slug: string;
+  service: Service; // This now uses the correct Service type defined above
 }) {
   const serviceCategories = useMemo(
     () => [
@@ -33,7 +72,7 @@ export default function ServicePageClient({
       { name: "Soft Toy Cleaning Service", slug: "soft-toy-cleaning-service", active: false },
     ],
     [],
-  )
+  );
 
   const serviceFeatures = useMemo(
     () => [
@@ -47,7 +86,7 @@ export default function ServicePageClient({
       "Athletic Facilities / Gyms",
     ],
     [],
-  )
+  );
 
   const breadcrumbNav = useMemo(
     () => (
@@ -64,7 +103,7 @@ export default function ServicePageClient({
       </nav>
     ),
     [],
-  )
+  );
 
   const contactInfo = useMemo(
     () => (
@@ -97,10 +136,10 @@ export default function ServicePageClient({
       </div>
     ),
     [],
-  )
+  );
 
   if (!service) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -146,7 +185,6 @@ export default function ServicePageClient({
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
               {/* Service Image */}
               <div className="xl:col-span-2 relative w-full h-48 sm:h-56 md:h-64 lg:h-80 rounded-lg shadow-lg overflow-hidden">
-                {/* FIX: Replaced <image> with next/image <Image> component */}
                 <Image src="/images/layout01-img01.jpg" alt="Laundry Service" fill className="object-cover" />
               </div>
 
@@ -157,9 +195,6 @@ export default function ServicePageClient({
                     <h3 className="text-lg font-semibold mb-4 text-gray-800">Our Contacts</h3>
                     {contactInfo}
                     <div className="space-y-3">
-                      {/* <Button className="w-full bg-green-600 hover:bg-green-700 text-sm sm:text-base">
-                        Schedule a Pickup
-                      </Button> */}
                       <Link href={`/services/${slug}/orders`}>
                         <Button
                           variant="outline"
@@ -256,5 +291,5 @@ export default function ServicePageClient({
         </div>
       </div>
     </div>
-  )
+  );
 }

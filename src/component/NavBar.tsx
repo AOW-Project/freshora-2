@@ -14,8 +14,13 @@ import {
   FaTimes,
 } from "react-icons/fa"
 import { useCart } from "../app/context/cart-context"
+<<<<<<< Updated upstream
 
 
+=======
+import { FaUserCircle } from "react-icons/fa";
+import LoginModal from "./LoginModel";
+>>>>>>> Stashed changes
 
 interface NavItem {
   title: string
@@ -44,11 +49,16 @@ const navItems: NavItem[] = [
   { title: "Prices", href: "/prices" },
   { title: "FAQ", href: "/FAQs" },
   { title: "Contacts", href: "/contact" },
+  // FIX: This line ensures the link points to the correct URL path "/track".
+  { title: "Track Order", href: "/track" },
 ]
 
 const Navbar = () => {
+<<<<<<< Updated upstream
   const [openDropdown, setOpenDropdown] = useState<number | null>(null)
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null)
+=======
+>>>>>>> Stashed changes
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { getTotalItems } = useCart()
@@ -216,6 +226,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {/* Mobile Sidebar */}
       <div
+<<<<<<< Updated upstream
         className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 z-50 ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
@@ -262,6 +273,54 @@ const Navbar = () => {
             </button>
           </Link>
         </nav>
+=======
+      className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 z-50
+        ${mobileOpen ? "translate-x-0" : "-translate-x-full"}`}
+      >
+      <div className="flex justify-between items-center p-4 border-b">
+        <span className="font-bold text-lg">Menu</span>
+        <button onClick={() => setMobileOpen(false)}>
+          <FaTimes size={22} />
+        </button>
+      </div>
+
+      <nav className="flex flex-col">
+        {navItems.map((item, index) => (
+          <div key={index} className="border-b border-gray-100">
+            <Link
+              href={item.href}
+              className="block px-4 py-3 font-medium text-gray-700"
+              onClick={() => setMobileOpen(false)}
+            >
+              {item.title}
+            </Link>
+            {item.subItems && (
+              <div className="pl-6 pb-2">
+                {item.subItems.map((sub, subIndex) => (
+                  <Link
+                    key={subIndex}
+                    href={sub.href}
+                    className="block py-1 text-sm text-gray-600 hover:text-green-600"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {sub.title}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+
+        <Link href="/services">
+          <button
+            onClick={() => setMobileOpen(false)}
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-3"
+          >
+            Schedule a Pickup
+          </button>
+        </Link>
+      </nav>
+>>>>>>> Stashed changes
       </div>
     </>
   )
