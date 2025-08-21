@@ -192,12 +192,7 @@ export default function CartPage() {
       </div>
        
     </div>
-<<<<<<< Updated upstream
     <PickupForm open={checkoutOpen} onClose={() => setCheckoutOpen(false)} />
     </>
   )
 }
-=======
-  );
-}
->>>>>>> Stashed changes

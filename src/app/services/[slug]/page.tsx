@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import ServicePageClient from "./service-page-client";
 
 // --- Type Definitions ---
+// These types define the shape of the data being fetched from your backend.
 interface ServiceItem {
   id: string;
   name: string;
@@ -41,9 +42,10 @@ interface Service {
 }
 // --- End of Type Definitions ---
 
+// This function calls your backend API to get the data for a specific service.
 async function fetchServiceBySlug(slug: string): Promise<Service | null> {
   try {
-    const response = await fetch(`http://localhost:3001/api/services/${slug}`, {
+    const response = await fetch(`https://freshora-2-backend-seven.vercel.app/api/services/${slug}`, {
       cache: 'no-store', 
     });
 
@@ -64,20 +66,24 @@ async function fetchServiceBySlug(slug: string): Promise<Service | null> {
   }
 }
 
-// FIX: The type for params is now a plain object, not a Promise.
+// This defines the props that Next.js will pass to your page.
 interface ServicePageProps {
   params: { slug: string };
 }
 
+// This is the main component for the page.
 export default async function ServicePage({ params }: ServicePageProps) {
-  // FIX: 'await' has been removed. You can access the slug directly.
+  // This is the corrected way to get the 'slug' from the URL.
   const { slug } = params; 
   
+  // Here we call the function to fetch the data from the backend.
   const service = await fetchServiceBySlug(slug);
 
+  // If no service is found, show the 404 page.
   if (!service) {
     notFound();
   }
 
+  // If data is found, render the client component and pass the data to it.
   return <ServicePageClient slug={slug} service={service} />;
 }

@@ -1,4 +1,4 @@
-import AnimatedParticles from "@/component/AnimatedParticles";
+//import AnimatedParticles from "@/component/AnimatedParticles";
 import CouponCarousel from "@/component/CouponCarousel";
 import FeaturesComponent from "@/component/FeaturesComponent";
 // import Footer from "@/component/Footer";
@@ -15,7 +15,7 @@ export default function Services() {
     
       {/* <Navbar /> */}
       {/* <Footer /> */}
-      <AnimatedParticles zIndex={5} />
+     {/* <AnimatedParticles zIndex={5} /> */ }
       {/* Content Wrapper */}
       <ServiceBanner />
       <ServicesGrid />
