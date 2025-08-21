@@ -1,6 +1,5 @@
 "use client"
 
-import AnimatedParticles from "@/component/AnimatedParticles"
 import { Poppins } from "next/font/google"
 import Link from "next/link"
 import { useState } from "react"
@@ -94,7 +93,7 @@ export default function FAQPage() {
   }
 
   return (
-    <> <AnimatedParticles zIndex={5} />
+    <> 
     <div>
       {/* Header Section */}
       <div

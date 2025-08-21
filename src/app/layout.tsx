@@ -4,7 +4,7 @@ import { CartProvider } from "@/app/context/cart-context";
 import "./globals.css";
 import Navbar from "@/component/NavBar";
 import Footer from "@/component/Footer";
-import AnimatedParticles from "@/component/AnimatedParticles";
+// import AnimatedParticles from "@/component/AnimatedParticles";
 import MissingItemsNotifier from "@/component/MissingItemsNotifier"; 
 import { ToastContainer } from "react-toastify";// ✅ now imported from client component
 
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <CartProvider>
           
-            <AnimatedParticles zIndex={5} />
+            {/* <AnimatedParticles zIndex={5} /> */}
             <MissingItemsNotifier />
             <div className="relative z-10 min-h-screen">
               <Navbar />

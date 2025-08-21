@@ -14,7 +14,7 @@ export default function Footer() {
   return (
     <>
       <footer className="bg-[#2d2d2d] text-white relative overflow-hidden">
-        <AnimatedParticles />
+        {/* <AnimatedParticles /> */}
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 text-sm">
