@@ -1,18 +1,28 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowLeft, Minus, Plus, Trash2 } from "lucide-react"
-import { useCart } from "../context/cart-context"
-import PickupForm from "@/component/SchedulePickupModal"
-import { useState } from "react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowLeft, Minus, Plus, Trash2 } from "lucide-react";
+import { useCart } from "../context/cart-context";
+import PickupForm from "@/component/SchedulePickupModal";
+import { useState } from "react";
 
 export default function CartPage() {
-  const { cart, removeFromCart, updateQuantity, clearCart, getTotalPrice } = useCart()
-  const [checkoutOpen, setCheckoutOpen] = useState(false)
+  // FIX: The context now provides 'cartItems' and 'isLoading'.
+  const { cartItems, removeFromCart, updateQuantity, clearCart, getTotalPrice, isLoading } = useCart();
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
 
-  if (cart.length === 0) {
+  // Show a loading state while the cart is being fetched from the backend.
+  if (isLoading) {
+    return (
+        <div className="flex justify-center items-center min-h-screen">
+            <p className="text-xl text-gray-500">Loading your cart...</p>
+        </div>
+    );
+  }
+
+  if (cartItems.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50">
         <div
@@ -45,7 +55,7 @@ export default function CartPage() {
           </Card>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -81,7 +91,8 @@ export default function CartPage() {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle>Cart Items ({cart.length})</CardTitle>
+                  {/* FIX: Use cartItems.length */}
+                  <CardTitle>Cart Items ({cartItems.length})</CardTitle>
                   <Button
                     variant="outline"
                     size="sm"
@@ -94,21 +105,22 @@ export default function CartPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {cart.map((item) => (
+                  {/* FIX: Map over cartItems */}
+                  {cartItems.map((item) => (
                     <div key={item.id} className="flex items-center gap-4 p-4 border rounded-lg">
                       <div className="flex-1">
                         <h3 className="font-semibold">{item.name}</h3>
                         <p className="text-sm text-gray-600">
                           {item.category} • {item.serviceType}
                         </p>
-                        <p className="text-lg font-bold text-green-600">{item.price}</p>
+                        <p className="text-lg font-bold text-green-600">${item.price.toFixed(2)}</p>
                       </div>
 
                       <div className="flex items-center gap-2">
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
                           className="h-8 w-8 p-0"
                         >
                           <Minus className="h-4 w-4" />
@@ -165,13 +177,13 @@ export default function CartPage() {
                     </div>
                   </div>
                           <Button
-                    onClick={() => setCheckoutOpen(true)} // 👈 open form
+                    onClick={() => setCheckoutOpen(true)}
                     className="w-full bg-green-600 hover:bg-green-700"
                     size="lg"
                   >
                     Proceed to Checkout
                   </Button>
-             
+                
                 </div>
               </CardContent>
             </Card>

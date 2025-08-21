@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CheckCircle, ShoppingCart,  Zap, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import PickupForm from "@/component/SchedulePickupModal"
+import AnimatedParticles from "@/component/AnimatedParticles"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -44,7 +45,7 @@ const ServiceBanner: React.FC = () => {
     <div
       className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center flex items-center"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/modern-office-laundry.png?height=400&width=1200&text=Laundry+Machines+Background')`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.JPG?height=400&width=1200&text=Laundry+Machines+Background')`,
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -192,6 +193,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ icon: Icon, title, features, 
 
   return (
     <>
+    <AnimatedParticles zIndex={5} />
     <Card
       className="group relative flex flex-col transition-all duration-300 hover:shadow-lg bg-white border-none cursor-pointer"
       onClick={() => setIsExpanded(!isExpanded)}

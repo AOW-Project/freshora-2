@@ -12,15 +12,15 @@ import { useState, useEffect } from "react";
 import clsx from "clsx";
 
 const services = [
-  { title: "Laundry", description: "Thorough washing using eco-friendly detergents to keep your clothes fresh and soft.", image: "/images/box02-img01.webp", icon: <FaBroom /> },
-  { title: "Dry Cleaning", description: "Gentle dry cleaning for delicate fabrics, ensuring they maintain their quality and shape.", image: "/images/img01.jpg", icon: <FaTshirt /> },
-  { title: "Express Laundry Service", description: "Quick turnaround laundry service with the same premium care.", image: "/images/img08.jpg", icon: <FaHandsWash /> },
-  { title: "Bag & Shoe Spa", description: "Professional cleaning and restoration for handbags and shoes.", image: "/images/layout01-img01.jpg", icon: <MdIron /> },
-  { title: "Luxury Shoe Cleaning Service", description: "Specialized treatment to clean and restore luxury shoes.", image: "/images/download.jfif", icon: <FaShoePrints /> },
-  { title: "Commercial Laundry Service", description: "Large-scale laundry solutions for hotels, restaurants, and offices.", image: "/images/download.jfif", icon: <FaBusinessTime /> },
-  { title: "Carpet Cleaning Service", description: "Deep cleaning for carpets, removing dirt, dust, and allergens.", image: "/images/download.jfif", icon: <FaRug /> },
-  { title: "Curtain Cleaning Service", description: "Gentle cleaning for curtains to remove dust and stains while preserving fabric quality.", image: "/images/download.jfif", icon: <FaWindowMaximize /> },
-  { title: "Soft Toy Cleaning Service", description: "Sanitizing and cleaning soft toys to make them safe and fresh for children.", image: "/images/download.jfif", icon: <FaChild /> },
+  { title: "Laundry", description: "Thorough washing using eco-friendly detergents to keep your clothes fresh and soft.", image: "/images/women-sorting-clothes-in-the-laundry-2025-03-14-03-27-51-utc.jpg", icon: <FaBroom /> },
+  { title: "Dry Cleaning", description: "Gentle dry cleaning for delicate fabrics, ensuring they maintain their quality and shape.", image: "/images/iron-and-stack-of-shirts-on-ironing-board-space-f-2025-03-25-22-33-47-utc.jpg", icon: <FaTshirt /> },
+  { title: "Express Laundry Service", description: "Quick turnaround laundry service with the same premium care.", image: "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.jpg", icon: <FaHandsWash /> },
+  { title: "Bag & Shoe Spa", description: "Professional cleaning and restoration for handbags and shoes.", image: "/images/light-blue-sneakers-and-backpack-2025-01-09-09-02-14-utc.jpg", icon: <MdIron /> },
+  { title: "Luxury Shoe Cleaning Service", description: "Specialized treatment to clean and restore luxury shoes.", image: "/images/soak-shoes-before-washing-cleaning-dirty-sneakers-2025-03-09-07-54-41-utc.jpg", icon: <FaShoePrints /> },
+  { title: "Commercial Laundry Service", description: "Large-scale laundry solutions for hotels, restaurants, and offices.", image: "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.jpg", icon: <FaBusinessTime /> },
+  { title: "Carpet Cleaning Service", description: "Deep cleaning for carpets, removing dirt, dust, and allergens.", image: "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc.jpg", icon: <FaRug /> },
+  { title: "Curtain Cleaning Service", description: "Gentle cleaning for curtains to remove dust and stains while preserving fabric quality.", image: "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.jpg", icon: <FaWindowMaximize /> },
+  { title: "Soft Toy Cleaning Service", description: "Sanitizing and cleaning soft toys to make them safe and fresh for children.", image: "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.jpg", icon: <FaChild /> },
 ];
 
 export default function ServicesSlider() {

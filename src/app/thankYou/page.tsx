@@ -1,80 +1,49 @@
 'use client'
+
 import Link from 'next/link';
-import { CheckCircle } from 'lucide-react'; // Import the icon
+import { useSearchParams } from 'next/navigation';
+import { CheckCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 
 export default function ThankYouPage() {
+  // This hook allows us to read the parameters from the URL (e.g., ?orderId=...)
+  const searchParams = useSearchParams();
+  const orderId = searchParams.get('orderId');
+
   return (
-    // Main container to center the content on the page
-    <main style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: 'calc(100vh - 80px)', // Adjust height to account for a potential header
-      backgroundColor: '#f1f5f9', // A neutral, modern background color
-      padding: '2rem',
-    }}>
-      {/* The card element, mirroring the hero form's container */}
-      <div style={{
-        background: 'white',
-        borderRadius: '16px', // Matching the form's border-radius
-        boxShadow: '0 4px 24px rgba(0, 0, 0, 0.08)', // A similar subtle shadow
-        padding: '3rem 2.5rem',
-        textAlign: 'center',
-        maxWidth: '500px',
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        border: '1px solid #e2e8f0',
-      }}>
-        {/* The success icon from Lucide */}
-        <CheckCircle
-          size={72} // A prominent size for the icon
-          color="#16a34a" // Using the primary green from your hero button
-          style={{ marginBottom: '1.5rem' }}
-        />
+    <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <Card className="w-full max-w-lg text-center p-6 sm:p-8">
+        <CardContent>
+          <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-6" />
+          <h1 className="text-3xl font-bold text-gray-800 mb-4">
+            Thank You for Your Order!
+          </h1>
+          <p className="text-gray-600 mb-8">
+            Your order has been placed successfully. We've sent a confirmation email to you.
+          </p>
 
-        {/* The main heading */}
-        <h1 style={{
-          fontSize: '2.5rem',
-          fontWeight: 'bold',
-          color: '#1e293b', // Dark slate color, matching hero text context
-          marginBottom: '1rem',
-        }}>
-          Thank You!
-        </h1>
+          {/* This block will only display if an orderId is found in the URL */}
+          {orderId && (
+            <div className="bg-gray-100 p-4 rounded-lg mb-8">
+              <p className="text-sm text-gray-600">Your Order ID is:</p>
+              <p className="text-lg font-mono font-semibold text-gray-800">#{orderId}</p>
+            </div>
+          )}
 
-        {/* The descriptive sub-text */}
-        <p style={{
-          fontSize: '1.1rem',
-          color: '#475569', // A softer gray for the paragraph
-          marginBottom: '2.5rem',
-          lineHeight: '1.6',
-        }}>
-          Your enquiry has been submitted successfully. Our team will review it and get back to you within 24 hours.
-        </p>
-
-        {/* The "Go Home" button, styled like the form's submit button */}
-        <Link
-          href="/"
-          style={{
-            display: 'inline-block',
-            padding: '0.75rem 2rem',
-            backgroundColor: '#2563eb', // Blue from the form's submit button
-            color: 'white',
-            borderRadius: '8px',
-            textDecoration: 'none',
-            fontWeight: 'bold',
-            fontSize: '1rem',
-            transition: 'opacity 0.2s ease-in-out',
-            boxShadow: '0 2px 8px rgba(37, 99, 235, 0.2)',
-          }}
-          onMouseOver={e => e.currentTarget.style.opacity = '0.9'}
-          onMouseOut={e => e.currentTarget.style.opacity = '1'}
-        >
-          Return to Home
-        </Link>
-      </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* This button will only display if an orderId is found */}
+            {orderId && (
+              <Link href={`/track/${orderId}`}>
+                <Button className="w-full bg-green-600 hover:bg-green-700">Track Your Order</Button>
+              </Link>
+            )}
+            <Link href="/services">
+              <Button variant="outline" className="w-full">Continue Shopping</Button>
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
     </main>
   );
 }

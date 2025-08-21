@@ -4,7 +4,7 @@ import { CheckCircle2, Clock, CreditCard, Leaf, Phone } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import AnimatedParticles from "@/component/AnimatedParticles";
+//import AnimatedParticles from "@/component/AnimatedParticles";
 // import img01 from '../../../public/images/img01.jpg';
 
 
@@ -18,11 +18,11 @@ const TeamSection = dynamic(() => import("@/component/TeamSection"), { ssr: fals
 export default function AboutSection() {
   return (
     <>
-    {/* <AnimatedParticles  zIndex={5}/> */}
+    <AnimatedParticles  zIndex={5}/>
       <div
         className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center flex items-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/modern-office-laundry.png?height=400&width=1200&text=Laundry+Machines+Background')`,
+          backgroundImage: ` url('/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.JPG?height=400&width=1200&text=Laundry+Machines+Background')`,
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -44,7 +44,7 @@ export default function AboutSection() {
             <div className="relative order-2 lg:order-1">
               <div className="relative">
            <Image
-             src="/images/box02-img04.jpg" // Make sure to save your image in public/images/guarantee.png
+             src="/images/senior-washwoman-in-the-laundry-2025-03-14-14-22-50-utc.jpg" // Make sure to save your image in public/images/guarantee.png
              alt="Smiling woman with laundry"
              width={500}
              height={800}
