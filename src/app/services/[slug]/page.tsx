@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation"
 import ServicePageClient from "./service-page-client"
+import { servicesData } from "@/lib/services-data" // Use the named export
 
-// --- Type Definitions ---
-// These types define the shape of the data being fetched from your backend.
+// --- UPDATED: A more flexible Service type definition ---
 interface ServiceItem {
   id: string
   name: string
@@ -12,8 +12,9 @@ interface ServiceItem {
   image?: string
 }
 
+// This interface now correctly matches the structure of BOTH the API and local data
 interface Service {
-  id: string
+  id: string | number
   slug: string
   title: string
   description: string
@@ -22,64 +23,71 @@ interface Service {
   rating: number
   reviews: number
   duration: string
-  items: {
+  // The 'items' property is now optional to match the local data's structure
+  items?: {
     [category: string]: ServiceItem[]
   }
   gallery?: string[]
   features?: string[]
-  pricing?: Record<string, number>
-  process?: {
-    step: number
-    title: string
-    description: string
-  }[]
-  faq?: {
-    question: string
-    answer: string
-  }[]
+  pricing?: Record<string, any>
+  process?: any[]
+  faq?: any[]
 }
-
 // --- End of Type Definitions ---
 
-// This function calls your backend API to get the data for a specific service.
-async function fetchServiceBySlug(slug: string): Promise<Service | null> {
+// API fetch function remains the same
+async function fetchServiceFromAPI(slug: string): Promise<Service | null> {
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
     const response = await fetch(`https://freshora-2-backend-seven.vercel.app/api/services/${slug}`, {
       cache: "no-store",
-    })
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
-      return null
+      console.warn(`API fetch failed for slug "${slug}" with status: ${response.status}`);
+      return null;
     }
-
-    const result = await response.json()
-
-    if (result.success) {
-      return result.data
-    } else {
-      return null
-    }
+    const result = await response.json();
+    return result.success ? result.data : null;
   } catch (error) {
-    console.error("Failed to fetch service:", error)
-    return null
+    console.error(`API fetch error for slug "${slug}":`, error);
+    return null;
   }
 }
 
+// Local data fetch function
+function getServiceFromLocal(slug: string): Service | undefined {
+    return servicesData.find((service) => service.slug === slug);
+}
+
+
 type PageProps = {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
 }
 
 export default async function ServicePage({ params }: PageProps) {
-  const { slug } = await params
+  const { slug } = params
+  let service: Service | undefined | null = null;
 
-  // Here we call the function to fetch the data from the backend.
-  const service = await fetchServiceBySlug(slug)
+  // Try API first
+  service = await fetchServiceFromAPI(slug);
 
-  // If no service is found, show the 404 page.
+  // Fallback to local data if API fails
   if (!service) {
-    notFound()
+    console.log(`API failed or returned no data. Falling back to local data for "${slug}".`);
+    service = getServiceFromLocal(slug);
+  } else {
+    console.log(`Successfully fetched data from API for "${slug}".`);
   }
 
-  // If data is found, render the client component and pass the data to it.
+  // If still no service, then 404
+  if (!service) {
+    notFound();
+  }
+
   return <ServicePageClient slug={slug} service={service} />
 }
