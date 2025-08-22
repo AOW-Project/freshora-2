@@ -1,63 +1,63 @@
-"use client";
+"use client"
 
-import { useCart } from "@/app/context/cart-context";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, ShoppingCart, Star, X } from "lucide-react";
-import Link from "next/link";
-import { useCallback, useMemo, useState } from "react";
-import { toast } from "react-toastify";
+import { useCart } from "@/app/context/cart-context"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ShoppingCart, Star, X } from "lucide-react"
+import Link from "next/link"
+import { useCallback, useMemo, useState } from "react"
+import { toast } from "react-toastify"
 
 // --- Type Definitions ---
 // These types are self-contained and match the data from your live backend.
 interface ServiceItem {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-  unit?: string;
-  image?: string;
+  id: string
+  name: string
+  price: number
+  description: string
+  unit?: string
+  image?: string
 }
 
 interface OrderItem extends ServiceItem {
-  quantity: number;
-  category: string;
+  quantity: number
+  category: string
 }
 
 interface Service {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  fullDescription: string;
-  image?: string;
-  rating: number;
-  reviews: number;
-  duration: string;
+  id: string
+  slug: string
+  title: string
+  description: string
+  fullDescription: string
+  image?: string
+  rating: number
+  reviews: number
+  duration: string
   items: {
-    [category: string]: ServiceItem[];
-  };
+    [category: string]: ServiceItem[]
+  }
 }
 
 interface ServiceOrderClientProps {
-  slug: string;
-  service: Service;
+  slug: string
+  service: Service
 }
 
 interface ItemCardProps {
-  item: ServiceItem;
-  category: string;
-  quantities: { [key: string]: number };
-  onAddToOrder: (item: ServiceItem, category: string) => void;
-  onUpdateQuantity: (itemId: string, change: number) => void;
+  item: ServiceItem
+  category: string
+  quantities: { [key: string]: number }
+  onAddToOrder: (item: ServiceItem, category: string) => void
+  onUpdateQuantity: (itemId: string, change: number) => void
 }
 // --- End of Type Definitions ---
 
 const ItemCard = ({ item, category, quantities, onAddToOrder, onUpdateQuantity }: ItemCardProps) => {
-  const quantity = quantities[item.id] || 0;
-  const totalAmount = item.price * quantity;
+  const quantity = quantities[item.id] || 0
+  const totalAmount = item.price * quantity
 
   return (
     <Card className="p-4 flex flex-col">
@@ -67,18 +67,18 @@ const ItemCard = ({ item, category, quantities, onAddToOrder, onUpdateQuantity }
       </div>
       <div className="mt-auto">
         <div className="flex items-center gap-4 mb-4">
-            <p className="text-green-600 font-bold text-lg">
-              ${item.price.toFixed(2)}
-              {item.unit && <span className="text-sm font-normal"> {item.unit}</span>}
-            </p>
-            {quantity > 0 && (
-              <div className="flex items-center gap-2">
-                <span className="text-gray-400">×</span>
-                <span className="text-gray-600">{quantity}</span>
-                <span className="text-gray-400">=</span>
-                <p className="text-blue-600 font-bold text-lg">${totalAmount.toFixed(2)}</p>
-              </div>
-            )}
+          <p className="text-green-600 font-bold text-lg">
+            ${item.price.toFixed(2)}
+            {item.unit && <span className="text-sm font-normal"> {item.unit}</span>}
+          </p>
+          {quantity > 0 && (
+            <div className="flex items-center gap-2">
+              <span className="text-gray-400">×</span>
+              <span className="text-gray-600">{quantity}</span>
+              <span className="text-gray-400">=</span>
+              <p className="text-blue-600 font-bold text-lg">${totalAmount.toFixed(2)}</p>
+            </div>
+          )}
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -106,121 +106,121 @@ const ItemCard = ({ item, category, quantities, onAddToOrder, onUpdateQuantity }
         </div>
       </div>
     </Card>
-  );
-};
+  )
+}
 
-ItemCard.displayName = "ItemCard";
+ItemCard.displayName = "ItemCard"
 
 export default function ServiceOrderClient({ slug, service }: ServiceOrderClientProps) {
-  const { addToCart, getTotalItems } = useCart();
-  const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
-  const [tempOrder, setTempOrder] = useState<OrderItem[]>([]);
-  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const { addToCart, getTotalItems } = useCart()
+  const [quantities, setQuantities] = useState<{ [key: string]: number }>({})
+  const [tempOrder, setTempOrder] = useState<OrderItem[]>([])
+  const [isAddingToCart, setIsAddingToCart] = useState(false)
 
   const items = useMemo(() => {
-    const serviceData = service.items || {};
+    const serviceData = service.items || {}
     return {
-        men: serviceData.men || [],
-        women: serviceData.women || [],
-        children: serviceData.children || [],
-    };
-  }, [service.items]);
-  
+      men: serviceData.men || [],
+      women: serviceData.women || [],
+      children: serviceData.children || [],
+    }
+  }, [service.items])
+
   const hasItems = useMemo(() => {
-    return items.men.length > 0 || items.women.length > 0 || items.children.length > 0;
-  }, [items]);
+    return items.men.length > 0 || items.women.length > 0 || items.children.length > 0
+  }, [items])
 
   const orderTotal = useMemo(() => {
-    return tempOrder.reduce((total, item) => total + item.price * item.quantity, 0);
-  }, [tempOrder]);
+    return tempOrder.reduce((total, item) => total + item.price * item.quantity, 0)
+  }, [tempOrder])
 
   const breadcrumbNav = useMemo(
     () => (
       <nav className="flex items-center space-x-2 text-white mb-4">
-        <Link href="/" className="hover:text-green-400">Home</Link>
+        <Link href="/" className="hover:text-green-400">
+          Home
+        </Link>
         <span className="px-2">/</span>
-        <Link href="/services" className="hover:text-green-400">Services</Link>
+        <Link href="/services" className="hover:text-green-400">
+          Services
+        </Link>
         <span className="px-2">/</span>
         <span className="text-green-400">Order</span>
       </nav>
     ),
     [],
-  );
+  )
 
   const updateQuantity = useCallback(
     (itemId: string, change: number) => {
-      const newQuantity = Math.max(0, (quantities[itemId] || 0) + change);
-      setQuantities((prev) => ({ ...prev, [itemId]: newQuantity }));
+      const newQuantity = Math.max(0, (quantities[itemId] || 0) + change)
+      setQuantities((prev) => ({ ...prev, [itemId]: newQuantity }))
     },
     [quantities],
-  );
+  )
 
   const removeFromOrder = useCallback((itemId: string) => {
-    setTempOrder((prev) => prev.filter((item) => item.id !== itemId));
-  }, []);
+    setTempOrder((prev) => prev.filter((item) => item.id !== itemId))
+  }, [])
 
   const handleAddAllToCart = useCallback(async () => {
-    if (tempOrder.length === 0) return;
+    if (tempOrder.length === 0) return
 
-    setIsAddingToCart(true);
+    setIsAddingToCart(true)
 
     try {
-        for (const item of tempOrder) {
-            const cartItem = {
-              id: item.id,
-              name: item.name,
-              price: item.price,
-              quantity: item.quantity,
-              // Add missing properties to satisfy the type for addToCart
-              category: item.category,
-              serviceType: service.title,
-              description: item.description,
-            };
-            await addToCart(cartItem);
+      for (const item of tempOrder) {
+        const cartItem = {
+          id: `${service.id}-${item.id}`, // Combine service ID and item ID
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
         }
-        toast.success(`All items added to cart successfully!`);
-        setTempOrder([]);
+        await addToCart(cartItem)
+      }
+      toast.success(`All items added to cart successfully!`)
+      setTempOrder([])
     } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
-        console.error("Error adding items to cart:", errorMessage);
-        toast.error(`Failed to add items to cart: ${errorMessage}`);
+      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred"
+      console.error("Error adding items to cart:", errorMessage)
+      toast.error(`Failed to add items to cart: ${errorMessage}`)
     } finally {
-        setIsAddingToCart(false);
+      setIsAddingToCart(false)
     }
-  }, [tempOrder, addToCart, service.title]);
+  }, [tempOrder, addToCart, service.id])
 
   const handleAddToOrder = useCallback(
     (item: ServiceItem, category: string) => {
-      const quantity = quantities[item.id] || 0;
-      if (quantity === 0) return;
+      const quantity = quantities[item.id] || 0
+      if (quantity === 0) return
 
-      const orderItem: OrderItem = { ...item, quantity, category };
+      const orderItem: OrderItem = { ...item, quantity, category }
 
       setTempOrder((prev) => {
-        const existingIndex = prev.findIndex((i) => i.id === item.id);
+        const existingIndex = prev.findIndex((i) => i.id === item.id)
         if (existingIndex >= 0) {
-          const updated = [...prev];
-          updated[existingIndex].quantity += quantity;
-          return updated;
+          const updated = [...prev]
+          updated[existingIndex].quantity += quantity
+          return updated
         }
-        return [...prev, orderItem];
-      });
+        return [...prev, orderItem]
+      })
 
-      setQuantities((prev) => ({ ...prev, [item.id]: 0 }));
+      setQuantities((prev) => ({ ...prev, [item.id]: 0 }))
     },
     [quantities],
-  );
+  )
 
   if (!hasItems) {
     return (
-        <div className="text-center p-12">
-            <h2 className="text-2xl font-bold">No Items Available</h2>
-            <p className="text-gray-600 mt-2">There are currently no items listed for this service.</p>
-            <Link href="/services">
-                <Button className="mt-6 bg-green-600 hover:bg-green-700">Back to Services</Button>
-            </Link>
-        </div>
-    );
+      <div className="text-center p-12">
+        <h2 className="text-2xl font-bold">No Items Available</h2>
+        <p className="text-gray-600 mt-2">There are currently no items listed for this service.</p>
+        <Link href="/services">
+          <Button className="mt-6 bg-green-600 hover:bg-green-700">Back to Services</Button>
+        </Link>
+      </div>
+    )
   }
 
   return (
@@ -228,7 +228,9 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
       <div className="flex-1">
         <div
           className="relative h-64 bg-cover bg-center flex items-center"
-          style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/modern-office-laundry.png')`}}
+          style={{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/modern-office-laundry.png')`,
+          }}
         >
           <div className="max-w-7xl mx-auto px-4 w-full">
             {breadcrumbNav}
@@ -245,7 +247,10 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
                   <div className="flex items-center gap-4">
                     <div className="flex items-center">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className={`h-4 w-4 ${i < service.rating ? "text-yellow-400 fill-current" : "text-gray-300"}`} />
+                        <Star
+                          key={i}
+                          className={`h-4 w-4 ${i < service.rating ? "text-yellow-400 fill-current" : "text-gray-300"}`}
+                        />
                       ))}
                       <span className="ml-2 text-sm text-gray-600">
                         {service.rating.toFixed(1)} ({service.reviews} reviews)
@@ -279,17 +284,44 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
                   </TabsList>
                   <TabsContent value="men" className="mt-6">
                     <div className="grid md:grid-cols-2 gap-4">
-                      {items.men.map((item) => ( <ItemCard key={item.id} item={item} category="Men" quantities={quantities} onAddToOrder={handleAddToOrder} onUpdateQuantity={updateQuantity} /> ))}
+                      {items.men.map((item) => (
+                        <ItemCard
+                          key={item.id}
+                          item={item}
+                          category="Men"
+                          quantities={quantities}
+                          onAddToOrder={handleAddToOrder}
+                          onUpdateQuantity={updateQuantity}
+                        />
+                      ))}
                     </div>
                   </TabsContent>
                   <TabsContent value="women" className="mt-6">
                     <div className="grid md:grid-cols-2 gap-4">
-                      {items.women.map((item) => ( <ItemCard key={item.id} item={item} category="Women" quantities={quantities} onAddToOrder={handleAddToOrder} onUpdateQuantity={updateQuantity} /> ))}
+                      {items.women.map((item) => (
+                        <ItemCard
+                          key={item.id}
+                          item={item}
+                          category="Women"
+                          quantities={quantities}
+                          onAddToOrder={handleAddToOrder}
+                          onUpdateQuantity={updateQuantity}
+                        />
+                      ))}
                     </div>
                   </TabsContent>
                   <TabsContent value="children" className="mt-6">
                     <div className="grid md:grid-cols-2 gap-4">
-                      {items.children.map((item) => ( <ItemCard key={item.id} item={item} category="Children" quantities={quantities} onAddToOrder={handleAddToOrder} onUpdateQuantity={updateQuantity} /> ))}
+                      {items.children.map((item) => (
+                        <ItemCard
+                          key={item.id}
+                          item={item}
+                          category="Children"
+                          quantities={quantities}
+                          onAddToOrder={handleAddToOrder}
+                          onUpdateQuantity={updateQuantity}
+                        />
+                      ))}
                     </div>
                   </TabsContent>
                 </Tabs>
@@ -312,7 +344,12 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
                     ${item.price.toFixed(2)} × {item.quantity} = ${(item.price * item.quantity).toFixed(2)}
                   </p>
                 </div>
-                <Button variant="ghost" size="sm" onClick={() => removeFromOrder(item.id)} className="text-red-500 hover:text-red-700">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => removeFromOrder(item.id)}
+                  className="text-red-500 hover:text-red-700"
+                >
                   <X className="h-4 w-4" />
                 </Button>
               </div>
@@ -324,17 +361,17 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
               <span className="text-green-600">${orderTotal.toFixed(2)}</span>
             </div>
           </div>
-          <Button 
-            onClick={handleAddAllToCart} 
+          <Button
+            onClick={handleAddAllToCart}
             disabled={isAddingToCart}
-            className="w-full bg-green-600 hover:bg-green-700" 
+            className="w-full bg-green-600 hover:bg-green-700"
             size="lg"
           >
             <ShoppingCart className="h-4 w-4 mr-2" />
-            {isAddingToCart ? 'Adding...' : 'Add All to Cart'}
+            {isAddingToCart ? "Adding..." : "Add All to Cart"}
           </Button>
         </div>
       )}
     </div>
-  );
+  )
 }

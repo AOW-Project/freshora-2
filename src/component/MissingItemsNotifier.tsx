@@ -19,16 +19,15 @@ export default function MissingItemsNotifier({
   selectedQuantities = {},
   serviceItems,
 }: MissingItemsNotifierProps) {
-  const { cart } = useCart()
+  // FIX: use cartItems instead of cart
+  const { cartItems: cart } = useCart()
 
   useEffect(() => {
     if (!selectedQuantities || !serviceItems || !serviceSlug) return
 
-    // Get all items that have selected quantities > 0
     const selectedItems = Object.entries(selectedQuantities)
       .filter(([_, quantity]) => quantity > 0)
       .map(([itemId]) => {
-        // Find the item details from serviceItems
         const allItems = [
           ...serviceItems.men.map((item) => ({ ...item, category: "Men" })),
           ...serviceItems.women.map((item) => ({ ...item, category: "Women" })),
@@ -40,13 +39,11 @@ export default function MissingItemsNotifier({
 
     if (selectedItems.length === 0) return
 
-    // Check which selected items are NOT in the cart
     const missingItems = selectedItems.filter((selectedItem) => {
       const cartItemId = `${serviceSlug}-${selectedItem!.id}`
       return !cart.some((cartItem) => cartItem.id === cartItemId)
     })
 
-    // Show toast for missing items
     if (missingItems.length > 0) {
       const itemNames = missingItems.map((item) => item!.name).join(", ")
       toast.warn(`📋 You selected "${itemNames}" but haven't added to cart yet!`, {
@@ -58,5 +55,5 @@ export default function MissingItemsNotifier({
     }
   }, [cart, selectedQuantities, serviceItems, serviceSlug])
 
-  return null // nothing visible, just triggers toast
+  return null
 }

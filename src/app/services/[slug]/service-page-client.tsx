@@ -1,63 +1,61 @@
-"use client";
+"use client"
 
-import { useMemo } from "react";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Clock, Mail, Phone, CheckCircle } from "lucide-react";
+import { useMemo } from "react"
+import { notFound } from "next/navigation"
+import Link from "next/link"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { MapPin, Clock, Mail, Phone, CheckCircle } from "lucide-react"
 
 // --- We define the types directly inside this component's props ---
 // This ensures it uses the same structure as the data passed from the parent page.
 interface ServiceItem {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-  unit: string;
-  image?: string;
+  id: string
+  name: string
+  price: number
+  description: string
+  unit: string
+  image?: string
 }
 
 interface Service {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  fullDescription: string;
-  image?: string;
-  rating: number;
-  reviews: number;
-  duration: string;
+  id: string
+  slug: string
+  title: string
+  description: string
+  fullDescription: string
+  image?: string
+  rating: number
+  reviews: number
+  duration: string
   items: {
-    [category: string]: ServiceItem[];
-  };
-  gallery?: string[];
-  features?: string[];
-  pricing?: {
-    [key: string]: any;
-  };
+    [category: string]: ServiceItem[]
+  }
+  gallery?: string[]
+  features?: string[]
+  pricing?: Record<string, string | number | boolean>
   process?: {
-    step: number;
-    title: string;
-    description: string;
-  }[];
+    step: number
+    title: string
+    description: string
+  }[]
   faq?: {
-    question: string;
-    answer: string;
-  }[];
+    question: string
+    answer: string
+  }[]
 }
-// --- End of type definitions ---
 
+// --- End of type definitions ---
 
 export default function ServicePageClient({
   slug,
   service,
 }: {
-  slug: string;
-  service: Service; // This now uses the correct Service type defined above
+  slug: string
+  service: Service // This now uses the correct Service type defined above
 }) {
   const serviceCategories = useMemo(
     () => [
@@ -72,7 +70,7 @@ export default function ServicePageClient({
       { name: "Soft Toy Cleaning Service", slug: "soft-toy-cleaning-service", active: false },
     ],
     [],
-  );
+  )
 
   const serviceFeatures = useMemo(
     () => [
@@ -86,7 +84,7 @@ export default function ServicePageClient({
       "Athletic Facilities / Gyms",
     ],
     [],
-  );
+  )
 
   const breadcrumbNav = useMemo(
     () => (
@@ -103,7 +101,7 @@ export default function ServicePageClient({
       </nav>
     ),
     [],
-  );
+  )
 
   const contactInfo = useMemo(
     () => (
@@ -136,10 +134,10 @@ export default function ServicePageClient({
       </div>
     ),
     [],
-  );
+  )
 
   if (!service) {
-    notFound();
+    notFound()
   }
 
   return (
@@ -291,5 +289,5 @@ export default function ServicePageClient({
         </div>
       </div>
     </div>
-  );
+  )
 }

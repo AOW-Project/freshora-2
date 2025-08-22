@@ -76,9 +76,12 @@ export async function POST(req: Request) {
         const info = await transporter.sendMail(mailOptions)
         console.log("Order confirmation email sent:", nodemailer.getTestMessageUrl(info))
         return { success: true, messageId: info.messageId }
-      } catch (error: any) {
-        console.error("Error sending order confirmation email:", error)
-        return { success: false, error: error.message }
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.error("Error sending order confirmation email:", error.message)
+          return { success: false, error: error.message }
+        }
+        return { success: false, error: "Unknown error" }
       }
     }
 

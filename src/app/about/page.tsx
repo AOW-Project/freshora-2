@@ -18,7 +18,6 @@ const TeamSection = dynamic(() => import("@/component/TeamSection"), { ssr: fals
 export default function AboutSection() {
   return (
     <>
-    <AnimatedParticles  zIndex={5}/>
       <div
         className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center flex items-center"
         style={{
