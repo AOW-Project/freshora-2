@@ -172,7 +172,7 @@ const services: Service[] = [
     description: "Luxury cleaning for shoes and bags.",
     fullDescription:
       "Our premium shoe and bag spa service provides comprehensive care for your luxury footwear and handbags. Using specialized techniques and premium products, we restore, clean, and protect your valuable accessories. From leather conditioning to color restoration, we handle all types of materials with expert care.",
-    image: "/placeholder.svg?height=400&width=600&text=Shoe+Bag+Spa",
+    image: "/images/light-blue-sneakers-and-backpack-2025-01-09-09-02-14-utc.jpg?height=400&width=600&text=Shoe+Bag+Spa",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Luxury+Shoes",
       "/placeholder.svg?height=300&width=400&text=Designer+Bags",
@@ -313,7 +313,7 @@ const services: Service[] = [
     description: "Expert curtain cleaning at your doorstep.",
     fullDescription:
       "Professional curtain cleaning service that brings new life to your window treatments. We handle all types of curtains and drapes, from delicate sheers to heavy blackout curtains. Our specialized cleaning process removes dust, allergens, and stains while preserving fabric integrity and color.",
-    image: "/placeholder.svg?height=400&width=600&text=Curtain+Cleaning",
+    image: "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.jpg?height=400&width=600&text=Curtain+Cleaning",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Curtain+Takedown",
       "/placeholder.svg?height=300&width=400&text=Professional+Cleaning",
@@ -360,7 +360,7 @@ const services: Service[] = [
     description: "Deep cleaning for carpets and rugs.",
     fullDescription:
       "Professional carpet and rug cleaning service using advanced steam cleaning technology and eco-friendly solutions. We remove deep-seated dirt, stains, and allergens to restore your carpets to their original beauty and freshness. Our certified technicians handle all types of carpets and area rugs.",
-    image: "/placeholder.svg?height=400&width=600&text=Carpet+Cleaning",
+    image: "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.jpg?height=400&width=600&text=Carpet+Cleaning",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Steam+Cleaning",
       "/placeholder.svg?height=300&width=400&text=Stain+Removal",
@@ -407,7 +407,7 @@ const services: Service[] = [
     description: "Safe and hygienic cleaning for toys.",
     fullDescription:
       "Specialized soft toy cleaning service that ensures your children's beloved toys are clean, safe, and hygienic. We use child-safe, non-toxic cleaning products and gentle processes that preserve the toy's appearance while eliminating germs, dust mites, and allergens. Perfect for stuffed animals, plush toys, and fabric dolls.",
-    image: "/placeholder.svg?height=400&width=600&text=Soft+Toy+Cleaning",
+    image: "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.jpg?height=400&width=600&text=Soft+Toy+Cleaning",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Stuffed+Animals",
       "/placeholder.svg?height=300&width=400&text=Gentle+Cleaning",
