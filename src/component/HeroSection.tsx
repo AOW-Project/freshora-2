@@ -46,7 +46,7 @@ const slides = [
 
 
 // --- AnimatedParticles component ---
-const AnimatedParticles = () => {
+ {/*const AnimatedParticles = () => {
     const [isMounted, setIsMounted] = useState(false);
     useEffect(() => { setIsMounted(true); }, []);
     const particles = useMemo(() => {
@@ -67,7 +67,7 @@ const AnimatedParticles = () => {
             {particles.map(p => (<Image key={p.id} src={p.src} alt={p.alt} width={p.width} height={p.height} className="particle" style={p.style} />))}
         </div>
     );
-};
+};*/ }
 
 export default function HeroSection() {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -130,7 +130,7 @@ export default function HeroSection() {
                 </div>
                 
                 {/* Particles are now on a layer (z-10) above the background (z-0) */}
-                <AnimatedParticles />
+              {/*  <AnimatedParticles /> */}
                 
                 {/* Text content is on the top layer (z-20) */}
                 <div className="relative z-20 flex h-full items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
