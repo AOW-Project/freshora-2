@@ -2,8 +2,6 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode, useCallback } from "react"
 
-const API_URL = "https://freshora-2-backend-seven.vercel.app" // Declare API_URL here
-
 // --- Type Definitions ---
 interface CartItem {
   id: string
@@ -28,192 +26,86 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
-const getOrCreateSessionId = (): string => {
-  let sessionId = localStorage.getItem("cart_session_id")
-  if (!sessionId) {
-    sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-    localStorage.setItem("cart_session_id", sessionId)
-  }
-  return sessionId
-}
-
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
-  // Helper function for API calls with better error handling
-  const apiCall = async (url: string, options: RequestInit = {}) => {
-    const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
-
-    try {
-      console.log(`Making API call to: ${url}`)
-
-      const response = await fetch(url, {
-        ...options,
-        signal: controller.signal,
-        headers: {
-          "Content-Type": "application/json",
-          ...options.headers,
-        },
-      })
-
-      clearTimeout(timeoutId)
-
-      console.log(`API Response Status: ${response.status}`)
-
-      if (!response.ok) {
-        const errorText = await response.text()
-        console.error(`API Error: ${response.status} - ${errorText}`)
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-
-      const result = await response.json()
-      console.log("API Response:", result)
-      return result
-    } catch (error: unknown) {
-      clearTimeout(timeoutId)
-
-      if (error instanceof Error) {
-        if (error.name === "AbortError") {
-          console.error("Request timed out")
-          throw new Error("Request timed out - please check your internet connection")
-        }
-        console.error("API call failed:", error.message)
-        throw error
-      } else {
-        console.error("API call failed with unknown error:", error)
-        throw new Error("Unknown error occurred during API call")
-      }
-    }
-  }
-
-  const fetchCart = useCallback(async () => {
+  const loadCartFromStorage = useCallback(() => {
     try {
       setIsLoading(true)
-      const result = await apiCall(`${API_URL}/api/cart`)
-
-      if (result.success && result.data) {
-        setCartItems(result.data.items || [])
+      const localCart = localStorage.getItem("cart")
+      if (localCart) {
+        const parsedCart = JSON.parse(localCart)
+        setCartItems(parsedCart)
+        console.log("Loaded cart from localStorage:", parsedCart)
       } else {
-        console.warn("No cart data or unsuccessful response:", result)
         setCartItems([])
       }
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error("Error fetching cart:", error.message)
-      } else {
-        console.error("Unknown error fetching cart:", error)
-      }
-
-      // Fallback to localStorage
-      try {
-        const localCart = localStorage.getItem("cart")
-        if (localCart) {
-          const parsedCart = JSON.parse(localCart)
-          setCartItems(parsedCart)
-          console.log("Loaded cart from localStorage as fallback")
-        } else {
-          setCartItems([])
-        }
-      } catch (localError: unknown) {
-        console.error("Failed to load from localStorage:", localError)
-        setCartItems([])
-      }
+      console.error("Failed to load from localStorage:", error)
+      setCartItems([])
     } finally {
       setIsLoading(false)
     }
   }, [])
 
+  const saveCartToStorage = useCallback((items: CartItem[]) => {
+    try {
+      localStorage.setItem("cart", JSON.stringify(items))
+      console.log("Saved cart to localStorage:", items)
+    } catch (error: unknown) {
+      console.error("Failed to save to localStorage:", error)
+    }
+  }, [])
+
   useEffect(() => {
-    fetchCart()
-  }, [fetchCart])
+    loadCartFromStorage()
+  }, [loadCartFromStorage])
 
   const addToCart = async (item: Omit<CartItem, "category" | "serviceType">) => {
     try {
       console.log("Adding item to cart:", item)
 
-      const apiPayload = {
-        sessionId: getOrCreateSessionId(), // Generate or get existing session ID
-        serviceId: Number.parseInt(item.id.split("-")[0]) || 1, // Extract service ID from item ID
-        serviceItemId: Number.parseInt(item.id.split("-")[1]) || Number.parseInt(item.id), // Extract item ID
-        quantity: item.quantity,
+      const newItem: CartItem = {
+        ...item,
+        category: "Unknown",
+        serviceType: "Unknown",
       }
 
-      console.log("API Payload:", apiPayload)
-
-      const result = await apiCall(`${API_URL}/api/cart`, {
-        method: "POST",
-        body: JSON.stringify(apiPayload),
-      })
-
-      if (result.success) {
-        console.log("Item added successfully, refreshing cart...")
-        await fetchCart()
-      } else {
-        throw new Error(result.error || "Failed to add item to cart")
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error("Error adding item to cart:", error.message)
-      } else {
-        console.error("Unknown error adding item to cart:", error)
-      }
-
-      // Fallback to localStorage
-      try {
-        const localCart = JSON.parse(localStorage.getItem("cart") || "[]")
-        const existingIndex = localCart.findIndex((cartItem: CartItem) => cartItem.id === item.id)
+      setCartItems((prevItems) => {
+        const existingIndex = prevItems.findIndex((cartItem) => cartItem.id === item.id)
+        let updatedItems: CartItem[]
 
         if (existingIndex >= 0) {
-          localCart[existingIndex].quantity += item.quantity
+          // Update existing item quantity
+          updatedItems = [...prevItems]
+          updatedItems[existingIndex].quantity += item.quantity
         } else {
-          localCart.push({
-            ...item,
-            category: "Unknown",
-            serviceType: "Unknown",
-          })
+          // Add new item
+          updatedItems = [...prevItems, newItem]
         }
 
-        localStorage.setItem("cart", JSON.stringify(localCart))
-        setCartItems(localCart)
+        saveCartToStorage(updatedItems)
+        return updatedItems
+      })
 
-        console.log("Item saved to localStorage as fallback")
-      } catch (localError: unknown) {
-        console.error("Failed to save to localStorage:", localError)
-        throw localError
-      }
+      console.log("Item added to cart successfully")
+    } catch (error: unknown) {
+      console.error("Error adding item to cart:", error)
+      throw error
     }
   }
 
   const removeFromCart = async (itemId: string) => {
     try {
-      const result = await apiCall(`${API_URL}/api/cart/${itemId}`, {
-        method: "DELETE",
+      setCartItems((prevItems) => {
+        const updatedItems = prevItems.filter((item) => item.id !== itemId)
+        saveCartToStorage(updatedItems)
+        return updatedItems
       })
-
-      if (result.success) {
-        await fetchCart()
-      } else {
-        throw new Error(result.error || "Failed to remove item from cart")
-      }
+      console.log("Item removed from cart successfully")
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error("Error removing item from cart:", error.message)
-      } else {
-        console.error("Unknown error removing item from cart:", error)
-      }
-
-      // Fallback to localStorage
-      try {
-        const localCart = JSON.parse(localStorage.getItem("cart") || "[]")
-        const updatedCart = localCart.filter((item: CartItem) => item.id !== itemId)
-        localStorage.setItem("cart", JSON.stringify(updatedCart))
-        setCartItems(updatedCart)
-      } catch (localError: unknown) {
-        console.error("Failed to remove from localStorage:", localError)
-      }
-
+      console.error("Error removing item from cart:", error)
       throw error
     }
   }
@@ -225,60 +117,25 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
 
     try {
-      const result = await apiCall(`${API_URL}/api/cart/${itemId}`, {
-        method: "PUT",
-        body: JSON.stringify({ quantity }),
+      setCartItems((prevItems) => {
+        const updatedItems = prevItems.map((item) => (item.id === itemId ? { ...item, quantity } : item))
+        saveCartToStorage(updatedItems)
+        return updatedItems
       })
-
-      if (result.success) {
-        await fetchCart()
-      } else {
-        throw new Error(result.error || "Failed to update quantity")
-      }
+      console.log("Item quantity updated successfully")
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error("Error updating quantity:", error.message)
-      } else {
-        console.error("Unknown error updating quantity:", error)
-      }
-
-      // Fallback to localStorage
-      try {
-        const localCart = JSON.parse(localStorage.getItem("cart") || "[]")
-        const updatedCart = localCart.map((item: CartItem) => (item.id === itemId ? { ...item, quantity } : item))
-        localStorage.setItem("cart", JSON.stringify(updatedCart))
-        setCartItems(updatedCart)
-      } catch (localError: unknown) {
-        console.error("Failed to update in localStorage:", localError)
-      }
-
+      console.error("Error updating quantity:", error)
       throw error
     }
   }
 
   const clearCart = async () => {
     try {
-      const result = await apiCall(`${API_URL}/api/cart`, {
-        method: "DELETE",
-      })
-
-      if (result.success) {
-        setCartItems([])
-        localStorage.removeItem("cart")
-      } else {
-        throw new Error(result.error || "Failed to clear cart")
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error("Error clearing cart:", error.message)
-      } else {
-        console.error("Unknown error clearing cart:", error)
-      }
-
-      // Fallback to localStorage
-      localStorage.removeItem("cart")
       setCartItems([])
-
+      localStorage.removeItem("cart")
+      console.log("Cart cleared successfully")
+    } catch (error: unknown) {
+      console.error("Error clearing cart:", error)
       throw error
     }
   }
