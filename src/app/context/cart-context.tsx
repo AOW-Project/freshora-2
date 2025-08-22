@@ -1,13 +1,12 @@
 "use client"
 
-import { createContext, useContext, useState, useEffect, type ReactNode, useCallback } from "react"
+import { createContext, useContext, useState, useEffect, type ReactNode, useCallback, useMemo } from "react"
 
-// --- Type Definitions ---
 interface CartItem {
   id: string
   name: string
-  category?: string // Made optional
-  serviceType?: string // Made optional
+  category?: string
+  serviceType?: string
   price: number
   quantity: number
 }
@@ -18,11 +17,11 @@ interface CartContextType {
   removeFromCart: (itemId: string) => Promise<void>
   updateQuantity: (itemId: string, quantity: number) => Promise<void>
   clearCart: () => Promise<void>
+  replaceCart: (items: CartItem[]) => Promise<void> // <-- NEW FUNCTION
   getTotalItems: () => number
   getTotalPrice: () => number
   isLoading: boolean
 }
-// --- End of Type Definitions ---
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
@@ -30,16 +29,20 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
-  const loadCartFromStorage = useCallback(() => {
+  const saveCartToStorage = useCallback((items: CartItem[]) => {
+    try {
+      localStorage.setItem("cart", JSON.stringify(items))
+    } catch (error: unknown) {
+      console.error("Failed to save to localStorage:", error)
+    }
+  }, [])
+
+  useEffect(() => {
     try {
       setIsLoading(true)
       const localCart = localStorage.getItem("cart")
       if (localCart) {
-        const parsedCart = JSON.parse(localCart)
-        setCartItems(parsedCart)
-        console.log("Loaded cart from localStorage:", parsedCart)
-      } else {
-        setCartItems([])
+        setCartItems(JSON.parse(localCart))
       }
     } catch (error: unknown) {
       console.error("Failed to load from localStorage:", error)
@@ -49,115 +52,75 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [])
 
-  const saveCartToStorage = useCallback((items: CartItem[]) => {
-    try {
-      localStorage.setItem("cart", JSON.stringify(items))
-      console.log("Saved cart to localStorage:", items)
-    } catch (error: unknown) {
-      console.error("Failed to save to localStorage:", error)
-    }
-  }, [])
+  const addToCart = useCallback(async (item: Omit<CartItem, "category" | "serviceType">) => {
+    setCartItems((prevItems) => {
+      const existingIndex = prevItems.findIndex((cartItem) => cartItem.id === item.id)
+      let updatedItems: CartItem[]
 
-  useEffect(() => {
-    loadCartFromStorage()
-  }, [loadCartFromStorage])
+      const newItem: CartItem = { ...item, category: "Item", serviceType: "Service" }
 
-  const addToCart = async (item: Omit<CartItem, "category" | "serviceType">) => {
-    try {
-      console.log("Adding item to cart:", item)
-
-      const newItem: CartItem = {
-        ...item,
-        category: "Unknown",
-        serviceType: "Unknown",
+      if (existingIndex >= 0) {
+        updatedItems = [...prevItems]
+        updatedItems[existingIndex].quantity += item.quantity
+      } else {
+        updatedItems = [...prevItems, newItem]
       }
+      saveCartToStorage(updatedItems)
+      return updatedItems
+    })
+  }, [saveCartToStorage])
 
-      setCartItems((prevItems) => {
-        const existingIndex = prevItems.findIndex((cartItem) => cartItem.id === item.id)
-        let updatedItems: CartItem[]
+  const removeFromCart = useCallback(async (itemId: string) => {
+    setCartItems((prevItems) => {
+      const updatedItems = prevItems.filter((item) => item.id !== itemId)
+      saveCartToStorage(updatedItems)
+      return updatedItems
+    })
+  }, [saveCartToStorage])
 
-        if (existingIndex >= 0) {
-          // Update existing item quantity
-          updatedItems = [...prevItems]
-          updatedItems[existingIndex].quantity += item.quantity
-        } else {
-          // Add new item
-          updatedItems = [...prevItems, newItem]
-        }
-
-        saveCartToStorage(updatedItems)
-        return updatedItems
-      })
-
-      console.log("Item added to cart successfully")
-    } catch (error: unknown) {
-      console.error("Error adding item to cart:", error)
-      throw error
-    }
-  }
-
-  const removeFromCart = async (itemId: string) => {
-    try {
-      setCartItems((prevItems) => {
-        const updatedItems = prevItems.filter((item) => item.id !== itemId)
-        saveCartToStorage(updatedItems)
-        return updatedItems
-      })
-      console.log("Item removed from cart successfully")
-    } catch (error: unknown) {
-      console.error("Error removing item from cart:", error)
-      throw error
-    }
-  }
-
-  const updateQuantity = async (itemId: string, quantity: number) => {
+  const updateQuantity = useCallback(async (itemId: string, quantity: number) => {
     if (quantity <= 0) {
       await removeFromCart(itemId)
       return
     }
+    setCartItems((prevItems) => {
+      const updatedItems = prevItems.map((item) => (item.id === itemId ? { ...item, quantity } : item))
+      saveCartToStorage(updatedItems)
+      return updatedItems
+    })
+  }, [removeFromCart, saveCartToStorage])
 
-    try {
-      setCartItems((prevItems) => {
-        const updatedItems = prevItems.map((item) => (item.id === itemId ? { ...item, quantity } : item))
-        saveCartToStorage(updatedItems)
-        return updatedItems
-      })
-      console.log("Item quantity updated successfully")
-    } catch (error: unknown) {
-      console.error("Error updating quantity:", error)
-      throw error
-    }
-  }
+  const clearCart = useCallback(async () => {
+    setCartItems([])
+    localStorage.removeItem("cart")
+  }, [])
 
-  const clearCart = async () => {
-    try {
-      setCartItems([])
-      localStorage.removeItem("cart")
-      console.log("Cart cleared successfully")
-    } catch (error: unknown) {
-      console.error("Error clearing cart:", error)
-      throw error
-    }
-  }
+  // --- 1. NEW: A function to replace the entire cart at once ---
+  const replaceCart = useCallback(async (newItems: CartItem[]) => {
+      setCartItems(newItems);
+      saveCartToStorage(newItems);
+  }, [saveCartToStorage]);
 
-  const getTotalItems = () => {
+
+  const getTotalItems = useCallback(() => {
     return cartItems.reduce((total, item) => total + item.quantity, 0)
-  }
+  }, [cartItems])
 
-  const getTotalPrice = () => {
+  const getTotalPrice = useCallback(() => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
-  }
+  }, [cartItems])
 
-  const value = {
+  const value = useMemo(() => ({
     cartItems,
     addToCart,
     removeFromCart,
     updateQuantity,
     clearCart,
+    replaceCart, // <-- ADD THE NEW FUNCTION TO THE CONTEXT
     getTotalItems,
     getTotalPrice,
     isLoading,
-  }
+  }), [cartItems, isLoading, addToCart, removeFromCart, updateQuantity, clearCart, replaceCart, getTotalItems, getTotalPrice])
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }
