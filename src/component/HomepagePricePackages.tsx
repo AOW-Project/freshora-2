@@ -4,7 +4,7 @@ import type React from "react"
 import { useState } from "react"
 // --- 1. Import useRouter to handle navigation ---
 import { useRouter } from "next/navigation"
-import { FaTshirt, FaHandsWash } from "react-icons/fa"
+import { FaTshirt } from "react-icons/fa"
 import { MdIron } from "react-icons/md"
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle } from "lucide-react"

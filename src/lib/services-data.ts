@@ -266,7 +266,7 @@ const services: Service[] = [
     description: "Laundry solutions for businesses.",
     fullDescription:
       "Comprehensive commercial laundry solutions for businesses of all sizes. From restaurants and hotels to healthcare facilities and salons, we provide reliable, high-volume laundry services. Our commercial-grade equipment and processes ensure consistent quality while meeting strict hygiene and timing requirements.",
-    image: "/placeholder.svg?height=400&width=600&text=Commercial+Laundry",
+    image: "/images/man-doing-laundry-2024-11-26-05-48-17-utc.jpg?height=400&width=600&text=Commercial+Laundry",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Industrial+Machines",
       "/placeholder.svg?height=300&width=400&text=Bulk+Processing",

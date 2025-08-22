@@ -10,57 +10,27 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { MapPin, Clock, Mail, Phone, CheckCircle } from "lucide-react"
 
-// --- UPDATED: A more flexible Service type to accept data from either source ---
-interface ServiceItem {
-  id: string
-  name: string
-  price: number
-  description: string
-  unit: string
-  image?: string
-}
-
-interface Service {
-  // --- THIS IS THE KEY FIX: id can now be a string OR a number ---
-  id: string | number 
-  slug: string
-  title: string
-  description: string
-  fullDescription: string
-  image?: string
-  rating: number
-  reviews: number
-  duration: string
-  // Items is optional because the local data file might not have it
-  items?: {
-    [category: string]: ServiceItem[]
-  }
-  gallery?: string[]
-  features?: string[]
-  pricing?: Record<string, any>
-  process?: any[]
-  faq?: any[]
-}
-// --- End of type definitions ---
+// --- FIX: Import the 'Service' type correctly ---
+import type { Service } from "./page"
 
 export default function ServicePageClient({
   slug,
   service,
 }: {
   slug: string
-  service: Service
+  service: Service 
 }) {
   const serviceCategories = useMemo(
     () => [
-      { name: "Laundry Services", slug: "laundry-services", active: true },
-      { name: "Dry Cleaning Services", slug: "dry-cleaning-services", active: false },
-      { name: "Express Laundry Services", slug: "express-laundry-services", active: true },
-      { name: "Shoe & Bag Spa", slug: "shoe-bag-spa", active: false },
-      { name: "Luxury Shoe Cleaning", slug: "luxury-shoe-cleaning", active: false },
-      { name: "Commercial Laundry Service", slug: "commercial-laundry-service", active: false },
-      { name: "Curtain Cleaning Service", slug: "curtain-cleaning-service", active: false },
-      { name: "Carpet Cleaning Service", slug: "carpet-cleaning-service", active: false },
-      { name: "Soft Toy Cleaning Service", slug: "soft-toy-cleaning-service", active: false },
+        { name: "Laundry Services", slug: "laundry-services" },
+        { name: "Dry Cleaning Services", slug: "dry-cleaning-services" },
+        { name: "Express Laundry Services", slug: "express-laundry-services" },
+        { name: "Shoe & Bag Spa", slug: "shoe-bag-spa" },
+        { name: "Luxury Shoe Cleaning", slug: "luxury-shoe-cleaning" },
+        { name: "Commercial Laundry Service", slug: "commercial-laundry-service" },
+        { name: "Curtain Cleaning Service", slug: "curtain-cleaning-service" },
+        { name: "Carpet Cleaning Service", slug: "carpet-cleaning-service" },
+        { name: "Soft Toy Cleaning Service", slug: "soft-toy-cleaning-service" },
     ],
     [],
   )
@@ -81,10 +51,10 @@ export default function ServicePageClient({
         <span className="px-1 sm:px-2">/</span>
         <Link href="/services" className="hover:text-green-400 transition-colors">Services</Link>
         <span className="px-1 sm:px-2">/</span>
-        <span className="text-green-400">Single Service</span>
+        <span className="text-green-400 capitalize">{slug.replace(/-/g, ' ')}</span>
       </nav>
     ),
-    [],
+    [slug],
   )
 
   const contactInfo = useMemo(
@@ -129,7 +99,7 @@ export default function ServicePageClient({
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           {breadcrumbNav}
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white">Single Service</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white capitalize">{slug.replace(/-/g, ' ')}</h1>
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
@@ -211,7 +181,7 @@ export default function ServicePageClient({
                   <div>
                     <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800">How Wash and Fold Works</h3>
                     <p className="text-gray-600 leading-relaxed mb-4 text-sm sm:text-base">
-                     What is Wash and Fold? ...
+                      What is Wash and Fold? ...
                     </p>
                   </div>
                 </div>

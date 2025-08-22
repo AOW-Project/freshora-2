@@ -53,7 +53,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { getTotalItems } = useCart()
-  const [loginOpen, setLoginOpen] = useState(false)
+ // const [loginOpen, setLoginOpen] = useState(false)
 
   const handleDropdownEnter = (index: number) => {
     if (hoverTimeout) {

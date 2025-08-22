@@ -5,7 +5,7 @@ import type React from "react"
 // import { useMemo, useState, useEffect } from "react"
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa"
 import { MdLocationOn, MdAccessTime, MdEmail, MdPhone } from "react-icons/md"
-import AnimatedParticles from "./AnimatedParticles"
+//import AnimatedParticles from "./AnimatedParticles"
 
 
 

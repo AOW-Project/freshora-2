@@ -1,4 +1,4 @@
-'use client';
+{/*'use client';
 
 import React, { useState, useEffect, useMemo } from "react";
 import Image from 'next/image';
@@ -116,4 +116,4 @@ const AnimatedParticles: React.FC<AnimatedParticlesProps> = ({ zIndex = -10 }) =
   );
 };
 
-export default AnimatedParticles;
+export default AnimatedParticles; */}
