@@ -45,7 +45,6 @@ const navItems: NavItem[] = [
   { title: "FAQ", href: "/FAQs" },
   { title: "Contacts", href: "/contact" },
   // FIX: This line ensures the link points to the correct URL path "/track".
-  { title: "Track Order", href: "/track" },
 ]
 
 const Navbar = () => {
