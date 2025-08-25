@@ -1,4 +1,12 @@
+export interface ServiceItem {
+  id: string | number
+  name: string
+  price: number
+  description?: string
+}
+
 export interface Service {
+  items?: ServiceItem[]   // ✅ strongly typed, optional instead of `any`
   id: number
   slug: string
   title: string
@@ -18,14 +26,14 @@ export interface Service {
   faq: { question: string; answer: string }[]
 }
 
+
 const services: Service[] = [
   {
     id: 1,
     slug: "laundry-services",
     title: "Laundry Services",
     description: "Professional laundry for all clothes.",
-    fullDescription:
-      "Laundry's Wash and Fold, also called Fluff and Fold, or simply Drop Off Laundry, is the perfect solution to your laundry needs as a busy parent, professional, senior citizen or student. Use drop off laundry and free more of your time and energy to work, play, or just relax. Let wash, dry, and fold your clothes for you!",
+    fullDescription: "Laundry's Wash and Fold, also called Fluff and Fold, or simply Drop Off Laundry, is the perfect solution to your laundry needs as a busy parent, professional, senior citizen or student. Use drop off laundry and free more of your time and energy to work, play, or just relax. Let wash, dry, and fold your clothes for you!",
     image: "/placeholder.svg?height=400&width=600&text=Laundry+Services",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Washing+Machine",
@@ -58,22 +66,21 @@ const services: Service[] = [
     faq: [
       {
         question: "How is pricing calculated?",
-        answer:
-          "Pricing is calculated per item based on the type of clothing. You can see individual prices for each item in our catalog.",
+        answer: "Pricing is calculated per item based on the type of clothing. You can see individual prices for each item in our catalog.",
       },
       {
         question: "Can I mix different categories in one order?",
         answer: "Yes, you can add items from men's, women's, and children's categories in a single order.",
       },
     ],
+    items: undefined
   },
   {
     id: 2,
     slug: "dry-cleaning-services",
     title: "Dry Cleaning Services",
     description: "Gentle care for delicate garments.",
-    fullDescription:
-      "Professional dry cleaning service using advanced solvents and techniques to remove tough stains and preserve fabric quality. Perfect for suits, dresses, and delicate garments that require special care. Our experienced team handles luxury fabrics with the utmost care using eco-friendly dry cleaning methods.",
+    fullDescription: "Professional dry cleaning service using advanced solvents and techniques to remove tough stains and preserve fabric quality. Perfect for suits, dresses, and delicate garments that require special care. Our experienced team handles luxury fabrics with the utmost care using eco-friendly dry cleaning methods.",
     image: "/placeholder.svg?height=400&width=600&text=Dry+Cleaning",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Dry+Clean+Machine",
@@ -113,18 +120,17 @@ const services: Service[] = [
       },
       {
         question: "How do you calculate the total cost?",
-        answer:
-          "Each garment type has individual pricing. Your total is calculated based on the items and quantities you select.",
+        answer: "Each garment type has individual pricing. Your total is calculated based on the items and quantities you select.",
       },
     ],
+    items: undefined
   },
   {
     id: 3,
     slug: "express-laundry-services",
     title: "Express Laundry Services",
     description: "Same-day laundry services.",
-    fullDescription:
-      "Our express laundry service provides same-day turnaround for your urgent laundry needs. Perfect for business travelers, busy professionals, or anyone who needs their clothes cleaned quickly. We prioritize express orders to ensure you get your garments back within hours, not days.",
+    fullDescription: "Our express laundry service provides same-day turnaround for your urgent laundry needs. Perfect for business travelers, busy professionals, or anyone who needs their clothes cleaned quickly. We prioritize express orders to ensure you get your garments back within hours, not days.",
     image: "/placeholder.svg?height=400&width=600&text=Express+Laundry",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Fast+Service",
@@ -164,14 +170,14 @@ const services: Service[] = [
         answer: "Yes, we offer express service 7 days a week including weekends and holidays.",
       },
     ],
+    items: undefined
   },
   {
     id: 4,
     slug: "shoe-bag-spa",
     title: "Shoe & Bag Spa",
     description: "Luxury cleaning for shoes and bags.",
-    fullDescription:
-      "Our premium shoe and bag spa service provides comprehensive care for your luxury footwear and handbags. Using specialized techniques and premium products, we restore, clean, and protect your valuable accessories. From leather conditioning to color restoration, we handle all types of materials with expert care.",
+    fullDescription: "Our premium shoe and bag spa service provides comprehensive care for your luxury footwear and handbags. Using specialized techniques and premium products, we restore, clean, and protect your valuable accessories. From leather conditioning to color restoration, we handle all types of materials with expert care.",
     image: "/images/light-blue-sneakers-and-backpack-2025-01-09-09-02-14-utc.jpg?height=400&width=600&text=Shoe+Bag+Spa",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Luxury+Shoes",
@@ -211,14 +217,14 @@ const services: Service[] = [
         answer: "Yes, we offer professional color restoration services for leather goods.",
       },
     ],
+    items: undefined
   },
   {
     id: 5,
     slug: "luxury-shoe-cleaning",
     title: "Luxury Shoe Cleaning",
     description: "Premium shoe care services.",
-    fullDescription:
-      "Dedicated luxury shoe cleaning service for high-end footwear. Our certified shoe care specialists use premium products and techniques to maintain and restore your expensive shoes. From Italian leather dress shoes to designer sneakers, we provide meticulous care that preserves value and extends lifespan.",
+    fullDescription: "Dedicated luxury shoe cleaning service for high-end footwear. Our certified shoe care specialists use premium products and techniques to maintain and restore your expensive shoes. From Italian leather dress shoes to designer sneakers, we provide meticulous care that preserves value and extends lifespan.",
     image: "/placeholder.svg?height=400&width=600&text=Luxury+Shoe+Care",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Premium+Shoes",
@@ -258,14 +264,14 @@ const services: Service[] = [
         answer: "Yes, we include cedar shoe trees with our premium service to maintain shoe shape.",
       },
     ],
+    items: undefined
   },
   {
     id: 6,
     slug: "commercial-laundry-service",
     title: "Commercial Laundry Service",
     description: "Laundry solutions for businesses.",
-    fullDescription:
-      "Comprehensive commercial laundry solutions for businesses of all sizes. From restaurants and hotels to healthcare facilities and salons, we provide reliable, high-volume laundry services. Our commercial-grade equipment and processes ensure consistent quality while meeting strict hygiene and timing requirements.",
+    fullDescription: "Comprehensive commercial laundry solutions for businesses of all sizes. From restaurants and hotels to healthcare facilities and salons, we provide reliable, high-volume laundry services. Our commercial-grade equipment and processes ensure consistent quality while meeting strict hygiene and timing requirements.",
     image: "/images/man-doing-laundry-2024-11-26-05-48-17-utc.jpg?height=400&width=600&text=Commercial+Laundry",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Industrial+Machines",
@@ -305,14 +311,14 @@ const services: Service[] = [
         answer: "Yes, we offer complete inventory tracking and management services for commercial clients.",
       },
     ],
+    items: undefined
   },
   {
     id: 7,
     slug: "curtain-cleaning-service",
     title: "Curtain Cleaning Service",
     description: "Expert curtain cleaning at your doorstep.",
-    fullDescription:
-      "Professional curtain cleaning service that brings new life to your window treatments. We handle all types of curtains and drapes, from delicate sheers to heavy blackout curtains. Our specialized cleaning process removes dust, allergens, and stains while preserving fabric integrity and color.",
+    fullDescription: "Professional curtain cleaning service that brings new life to your window treatments. We handle all types of curtains and drapes, from delicate sheers to heavy blackout curtains. Our specialized cleaning process removes dust, allergens, and stains while preserving fabric integrity and color.",
     image: "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.jpg?height=400&width=600&text=Curtain+Cleaning",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Curtain+Takedown",
@@ -352,14 +358,14 @@ const services: Service[] = [
         answer: "We clean all types including silk, velvet, linen, cotton, and synthetic fabrics.",
       },
     ],
+    items: undefined
   },
   {
     id: 8,
     slug: "carpet-cleaning-service",
     title: "Carpet Cleaning Service",
     description: "Deep cleaning for carpets and rugs.",
-    fullDescription:
-      "Professional carpet and rug cleaning service using advanced steam cleaning technology and eco-friendly solutions. We remove deep-seated dirt, stains, and allergens to restore your carpets to their original beauty and freshness. Our certified technicians handle all types of carpets and area rugs.",
+    fullDescription: "Professional carpet and rug cleaning service using advanced steam cleaning technology and eco-friendly solutions. We remove deep-seated dirt, stains, and allergens to restore your carpets to their original beauty and freshness. Our certified technicians handle all types of carpets and area rugs.",
     image: "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.jpg?height=400&width=600&text=Carpet+Cleaning",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Steam+Cleaning",
@@ -399,14 +405,14 @@ const services: Service[] = [
         answer: "Yes, we clean all types of area rugs including Persian, Oriental, and contemporary rugs.",
       },
     ],
+    items: undefined
   },
   {
     id: 9,
     slug: "soft-toy-cleaning-service",
     title: "Soft Toy Cleaning Service",
     description: "Safe and hygienic cleaning for toys.",
-    fullDescription:
-      "Specialized soft toy cleaning service that ensures your children's beloved toys are clean, safe, and hygienic. We use child-safe, non-toxic cleaning products and gentle processes that preserve the toy's appearance while eliminating germs, dust mites, and allergens. Perfect for stuffed animals, plush toys, and fabric dolls.",
+    fullDescription: "Specialized soft toy cleaning service that ensures your children's beloved toys are clean, safe, and hygienic. We use child-safe, non-toxic cleaning products and gentle processes that preserve the toy's appearance while eliminating germs, dust mites, and allergens. Perfect for stuffed animals, plush toys, and fabric dolls.",
     image: "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.jpg?height=400&width=600&text=Soft+Toy+Cleaning",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Stuffed+Animals",
@@ -446,6 +452,7 @@ const services: Service[] = [
         answer: "We can clean the fabric parts of electronic toys, but electronic components must be removed first.",
       },
     ],
+    items: undefined
   },
 ]
 

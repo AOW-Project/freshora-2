@@ -39,7 +39,7 @@ async function fetchServiceFromAPI(slug: string): Promise<Service | null> {
     const timeoutId = setTimeout(() => controller.abort(), 5000)
 
     const response = await fetch(
-      `https://freshora-2-backend-seven.vercel.app/api/services/${slug}`,
+      `https://freshora-backend.onrender.com/api/services/${slug}`,
       {
         cache: "no-store",
         signal: controller.signal,

@@ -1,21 +1,21 @@
 "use client"
-import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Package } from "lucide-react"
 import Image from "next/image"
-import { useState, useEffect } from "react"
+import Link from "next/link"
+import { useEffect, useState } from "react"
 import {
+  FaBars,
+  FaChevronDown,
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
   FaPhoneAlt,
   FaShoppingCart,
-  FaChevronDown,
-  FaTwitter,
-  FaFacebookF,
-  FaLinkedinIn,
-  FaInstagram,
-  FaBars,
   FaTimes,
+  FaTwitter,
 } from "react-icons/fa"
 import { useCart } from "../app/context/cart-context"
-
-
 
 interface NavItem {
   title: string
@@ -44,7 +44,7 @@ const navItems: NavItem[] = [
   { title: "Prices", href: "/prices" },
   { title: "FAQ", href: "/FAQs" },
   { title: "Contacts", href: "/contact" },
-  // FIX: This line ensures the link points to the correct URL path "/track".
+  { title: "Track", href: "/tracking" }, // FIX: This line ensures the link points to the correct URL path "/track".
 ]
 
 const Navbar = () => {
@@ -53,7 +53,6 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { getTotalItems } = useCart()
- // const [loginOpen, setLoginOpen] = useState(false)
 
   const handleDropdownEnter = (index: number) => {
     if (hoverTimeout) {
@@ -188,7 +187,6 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-
           </nav>
 
           {/* Right Icons */}
@@ -205,6 +203,12 @@ const Navbar = () => {
               <button className="hidden sm:block bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded">
                 Schedule a Pickup
               </button>
+            </Link>
+            <Link href="/tracking">
+              <Button className="flex items-center gap-2" size="lg">
+                <Package className="h-5 w-5" />
+                Track Your Order
+              </Button>
             </Link>
             {/* Mobile Menu Button */}
             <button className="lg:hidden" onClick={() => setMobileOpen(!mobileOpen)}>

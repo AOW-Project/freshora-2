@@ -29,7 +29,7 @@ interface Service {
 // Fetch service from backend
 async function fetchServiceBySlug(slug: string): Promise<Service | null> {
   try {
-    const res = await fetch(`https://freshora-2-backend-seven.vercel.app/api/services/${slug}`, { cache: "no-store" })
+    const res = await fetch(`https://freshora-backend.onrender.com/api/services/${slug}`, { cache: "no-store" })
 
     if (!res.ok) return null
 

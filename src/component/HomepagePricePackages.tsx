@@ -1,54 +1,63 @@
 "use client"
 
+import { Card, CardContent } from "@/components/ui/card"
+import { useCart } from "@/app/context/cart-context"; // ✅ Import cart context
+import { CheckCircle } from "lucide-react"
+import { useRouter } from "next/navigation"
 import type React from "react"
 import { useState } from "react"
-// --- 1. Import useRouter to handle navigation ---
-import { useRouter } from "next/navigation"
 import { FaTshirt } from "react-icons/fa"
 import { MdIron } from "react-icons/md"
-import { Card, CardContent } from "@/components/ui/card"
-import { CheckCircle } from "lucide-react"
-// The PickupForm is no longer needed directly in the card
-// import PickupForm from "@/component/SchedulePickupModal"
 
-// --- 2. Define your package data in a structured array ---
-// This should be the same as the one on your prices page
+// --- Packages Data ---
 const packagesData = [
   {
-    id: 'standard_home', // Use a slightly different ID if needed, or keep it the same
+    id: "standard_home",
     icon: FaTshirt,
     title: "Standard Package",
     description: "50 Clothes Per Month",
     features: [
-      "4 T-Shirts", "1 Pairs of Jeans", "3 Button-Down Shirts", "1 Pair of Shorts",
-      "7 Pairs of Underwear", "6 Pairs of Socks", "1 Towel", "1 Set of Sheets",
+      "4 T-Shirts",
+      "1 Pairs of Jeans",
+      "3 Button-Down Shirts",
+      "1 Pair of Shorts",
+      "7 Pairs of Underwear",
+      "6 Pairs of Socks",
+      "1 Towel",
+      "1 Set of Sheets",
     ],
-    originalPrice: 349.00,
-    price: 349.00,
+    originalPrice: 349.0,
+    price: 349.0,
   },
   {
-    id: 'premium_home',
+    id: "premium_home",
     icon: MdIron,
     title: "Premium Package",
     description: "80 Clothes Per Month",
     features: [
-      "6 T-Shirts", "3 Pairs of Jeans", "4 Button-Down Shirts", "2 Pair of Shorts",
-      "9 Pairs of Underwear", "8 Pairs of Socks", "2 Towel", "2 Set of Sheets",
+      "6 T-Shirts",
+      "3 Pairs of Jeans",
+      "4 Button-Down Shirts",
+      "2 Pair of Shorts",
+      "9 Pairs of Underwear",
+      "8 Pairs of Socks",
+      "2 Towel",
+      "2 Set of Sheets",
     ],
-    originalPrice: 449.00,
-    price: 449.00,
-  }
-];
+    originalPrice: 449.0,
+    price: 449.0,
+  },
+]
 
-// --- 3. Update the PackageCard component to accept props ---
+// --- Package Card ---
 interface PackageCardProps {
-  packageInfo: typeof packagesData[0];
-  onOrderNow: (packageId: string) => void;
+  packageInfo: (typeof packagesData)[0]
+  onOrderNow: (packageId: string) => void
 }
 
 const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const { id, icon: Icon, title, features, price, originalPrice } = packageInfo;
+  const [isExpanded, setIsExpanded] = useState(false)
+  const { id, icon: Icon, title, features, price, originalPrice } = packageInfo
 
   return (
     <Card
@@ -88,8 +97,8 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
         >
           <button
             onClick={(e) => {
-              e.stopPropagation();
-              onOrderNow(id);
+              e.stopPropagation()
+              onOrderNow(id)
             }}
             className="mt-4 w-full bg-green-600 py-3 font-semibold text-white transition-colors duration-300 hover:bg-green-700"
           >
@@ -98,48 +107,39 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
         </div>
       </CardContent>
     </Card>
-  );
-};
+  )
+}
 
+// --- Main Pickup Packages Component ---
+const PickupPackages: React.FC = () => {
+  const router = useRouter()
+  const { replaceCart } = useCart() // ✅ Use cart context
 
-// --- 4. Update the main HomepagePricePackages component ---
-const HomepagePricePackages = () => {
-  const router = useRouter();
-
-  const handleOrderNow = (packageId: string) => {
-    const selectedPackage = packagesData.find(p => p.id === packageId);
+  const handleOrderNow = async (packageId: string) => {
+    const selectedPackage = packagesData.find((p) => p.id === packageId)
     if (selectedPackage) {
-      localStorage.setItem('cartPackage', JSON.stringify(selectedPackage));
-      router.push('/cart');
+      const packageItems = selectedPackage.features.map((feature, index) => ({
+        id: `${packageId}-${index}`,
+        name: feature,
+        category: "Package Item",
+        serviceType: selectedPackage.title,
+        price: selectedPackage.price / selectedPackage.features.length, // Distribute price
+        quantity: 1,
+        serviceSlug: "package-service",
+      }))
+
+      await replaceCart(packageItems) // ✅ Replace cart with new package
+      router.push("/cart") // Or `/pickup-form` if that's the next step
     }
-  };
+  }
 
   return (
-    <div className="relative overflow-hidden" style={{ backgroundColor: '#f3f6f4' }}>
-      <section className="relative z-10 py-16 bg-transparent">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h4 className="text-green-600 font-medium mb-2">[ What we offer ]</h4>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Price Packages</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Our prices are simple and affordable which are easy on pocket in comparison with the high street prices.
-            </p>
-          </div>
-          
-          {/* --- 5. Render the cards dynamically --- */}
-          <div className="flex justify-center gap-6 sm:gap-11 flex-wrap">
-            {packagesData.map((pkg) => (
-              <PackageCard 
-                key={pkg.id}
-                packageInfo={pkg}
-                onOrderNow={handleOrderNow}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+    <div className="flex flex-wrap justify-center gap-6 sm:gap-11">
+      {packagesData.map((pkg) => (
+        <PackageCard key={pkg.id} packageInfo={pkg} onOrderNow={handleOrderNow} />
+      ))}
     </div>
   )
 }
 
-export default HomepagePricePackages
+export default PickupPackages

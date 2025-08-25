@@ -1,15 +1,15 @@
 "use client"
 import type React from "react"
-import { useRouter } from "next/navigation" 
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Poppins } from "next/font/google"
 import { FaTshirt, FaHandsWash, FaBed } from "react-icons/fa"
 import { MdIron } from "react-icons/md"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CheckCircle, ShoppingCart,  Zap, ChevronLeft, ChevronRight } from "lucide-react"
+import { CheckCircle, ShoppingCart, Zap, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
-//import AnimatedParticles from "@/component/AnimatedParticles"
+import { useCart } from "../context/cart-context" // Import cart provider
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -102,7 +102,7 @@ const ServiceCarousel: React.FC = () => {
     { icon: FaBed, title: "Bedding", description: "Bed Set (Wash and Press)", price: "$10.50" },
   ]
   useEffect(() => {
-    if (width === 0) return 
+    if (width === 0) return
     if (width >= 1280) setCardsToShow(4)
     else if (width >= 1024) setCardsToShow(3)
     else if (width >= 768) setCardsToShow(2)
@@ -117,7 +117,10 @@ const ServiceCarousel: React.FC = () => {
       <div className="relative overflow-hidden">
         <div
           className="flex transition-transform duration-500 ease-in-out"
-          style={{ transform: `translateX(-${(currentSlide * 100) / cardsToShow}%)`, width: `${(services.length * 100) / cardsToShow}%` }}
+          style={{
+            transform: `translateX(-${(currentSlide * 100) / cardsToShow}%)`,
+            width: `${(services.length * 100) / cardsToShow}%`,
+          }}
         >
           {services.map((service, index) => (
             <div key={index} className="px-2 sm:px-4" style={{ width: `${100 / services.length}%` }}>
@@ -125,15 +128,27 @@ const ServiceCarousel: React.FC = () => {
             </div>
           ))}
         </div>
-        <button onClick={prevSlide} disabled={currentSlide === 0} className="absolute left-0 sm:left-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 sm:p-3 hover:bg-green-50 transition-colors z-10 disabled:opacity-50 disabled:cursor-not-allowed">
+        <button
+          onClick={prevSlide}
+          disabled={currentSlide === 0}
+          className="absolute left-0 sm:left-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 sm:p-3 hover:bg-green-50 transition-colors z-10 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
           <ChevronLeft className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
         </button>
-        <button onClick={nextSlide} disabled={currentSlide >= maxSlide} className="absolute right-0 sm:right-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 sm:p-3 hover:bg-green-50 transition-colors z-10 disabled:opacity-50 disabled:cursor-not-allowed">
+        <button
+          onClick={nextSlide}
+          disabled={currentSlide >= maxSlide}
+          className="absolute right-0 sm:right-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 sm:p-3 hover:bg-green-50 transition-colors z-10 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
           <ChevronRight className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
         </button>
         <div className="flex justify-center mt-6 sm:mt-8 space-x-2 sm:space-x-3">
           {Array.from({ length: maxSlide + 1 }).map((_, index) => (
-            <button key={index} onClick={() => setCurrentSlide(index)} className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors ${currentSlide === index ? "bg-green-600" : "bg-gray-300"}`} />
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors ${currentSlide === index ? "bg-green-600" : "bg-gray-300"}`}
+            />
           ))}
         </div>
       </div>
@@ -157,7 +172,7 @@ const forGentleman = [
   { item: "Inner Wear", washPress: "3.00", dryCleaning: "5.00", steamPressing: "2.00" },
   { item: "Socks/Handkerchief", washPress: "3.00", dryCleaning: "4.00", steamPressing: "2.00" },
   { item: "Sweater", washPress: "10.00", dryCleaning: "14.00", steamPressing: "5.00" },
-];
+]
 
 const forLadies = [
   { item: "T-Shirts/Shirts", washPress: "6.00", dryCleaning: "8.00", steamPressing: "3.00" },
@@ -174,14 +189,24 @@ const forLadies = [
   { item: "Suit (3pcs)", washPress: "-", dryCleaning: "35.00", steamPressing: "15.00" },
   { item: "Sweater", washPress: "10.00", dryCleaning: "14.00", steamPressing: "5.00" },
   { item: "Inner Wear", washPress: "3.00", dryCleaning: "5.00", steamPressing: "2.00" },
-];
+]
 
 const householdItems = [
   { item: "Police Dress/Safari Dress", washPress: "14.00", dryCleaning: "18.00", steamPressing: "8.00" },
-  { item: "Duvet Cover (Single/Double)", washPress: "10.00/12.00", dryCleaning: "12.00/14.00", steamPressing: "6.00/8.00" },
+  {
+    item: "Duvet Cover (Single/Double)",
+    washPress: "10.00/12.00",
+    dryCleaning: "12.00/14.00",
+    steamPressing: "6.00/8.00",
+  },
   { item: "Blanket (Single/Double)", washPress: "22.00/30.00", dryCleaning: "30.00/35.00", steamPressing: "-" },
   { item: "Bed Spread (Single/Double)", washPress: "20.00/25.00", dryCleaning: "25.00/30.00", steamPressing: "-" },
-  { item: "Bed Sheet (Single/Double)", washPress: "10.00/12.00", dryCleaning: "12.00/14.00", steamPressing: "6.00/8.00" },
+  {
+    item: "Bed Sheet (Single/Double)",
+    washPress: "10.00/12.00",
+    dryCleaning: "12.00/14.00",
+    steamPressing: "6.00/8.00",
+  },
   { item: "Pillow Case", washPress: "3.00", dryCleaning: "4.00", steamPressing: "2.00" },
   { item: "Cushion Cover", washPress: "4.00", dryCleaning: "5.00", steamPressing: "3.00" },
   { item: "Pillow/Cushion", washPress: "15.00", dryCleaning: "20.00", steamPressing: "-" },
@@ -192,51 +217,68 @@ const householdItems = [
   { item: "Table Cloth/Table Napkins", washPress: "8.00/3.00", dryCleaning: "10.00/4.00", steamPressing: "5.00/2.00" },
   { item: "Shoe", washPress: "40.00/50.00", dryCleaning: "45.00/55.00", steamPressing: "-" },
   { item: "Wedding Dress Normal", washPress: "50.00/80.00", dryCleaning: "80.00/100.00", steamPressing: "30.00/45.00" },
-  { item: "Curtains (Per Sq meter)", washPress: "10.00/20.00", dryCleaning: "15.00/25.00", steamPressing: "10.00/20.00" },
+  {
+    item: "Curtains (Per Sq meter)",
+    washPress: "10.00/20.00",
+    dryCleaning: "15.00/25.00",
+    steamPressing: "10.00/20.00",
+  },
   { item: "Normal Carpet (Per Sq meter)", washPress: "20.00", dryCleaning: "20.00", steamPressing: "-" },
   { item: "Hand woven Carpet (Per Sq meter)", washPress: "25.00", dryCleaning: "35.00", steamPressing: "-" },
-];
+]
 
 const packagesData = [
   {
-    id: 'standard',
+    id: "standard",
     icon: ShoppingCart,
     title: "Standard Package",
     description: "Clothes Per Month",
     features: [
-      "4 T-Shirts", "1 Pair of Jeans", "3 Button/Down Shirts", "1 Pair of Shorts",
-      "7 Pairs of Underwear", "6 Pairs of Socks", "1 Towel", "1 Set of Sheets",
+      "4 T-Shirts",
+      "1 Pair of Jeans",
+      "3 Button/Down Shirts",
+      "1 Pair of Shorts",
+      "7 Pairs of Underwear",
+      "6 Pairs of Socks",
+      "1 Towel",
+      "1 Set of Sheets",
     ],
-    originalPrice: 349.00,
-    price: 349.00,
+    originalPrice: 349.0,
+    price: 349.0,
   },
   {
-    id: 'premium',
+    id: "premium",
     icon: Zap,
     title: "Premium Package",
     description: "Clothes Per Month",
     features: [
-      "6 T-Shirts", "3 Pairs of Jeans", "6 Button/Down Shirts", "3 Pair of Shorts",
-      "9 Pairs of Underwear", "8 Pairs of Socks", "2 Towel", "3 Set of Sheets",
+      "6 T-Shirts",
+      "3 Pairs of Jeans",
+      "6 Button/Down Shirts",
+      "3 Pair of Shorts",
+      "9 Pairs of Underwear",
+      "8 Pairs of Socks",
+      "2 Towel",
+      "3 Set of Sheets",
     ],
-    originalPrice: 449.00,
-    price: 449.00,
+    originalPrice: 449.0,
+    price: 449.0,
     isFeatured: true,
-  }
-];
+  },
+]
 
 interface PackageCardProps {
-  packageInfo: typeof packagesData[0];
-  onOrderNow: (packageId: string) => void;
+  packageInfo: (typeof packagesData)[0]
+  onOrderNow: (packageId: string) => void
 }
 
 const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) => {
   const [isExpanded, setIsExpanded] = useState(false)
-  const { id, icon: Icon, title, features, price, originalPrice } = packageInfo;
+  const { id, icon: Icon, title, features, price, originalPrice } = packageInfo
 
   return (
     <>
-    { /* <AnimatedParticles zIndex={5} /> */  }
+      {/* <AnimatedParticles zIndex={5} /> */}
       <Card
         className="group relative flex w-full max-w-sm flex-col cursor-pointer border-none bg-white transition-all duration-300 hover:shadow-lg"
         onClick={() => setIsExpanded(!isExpanded)}
@@ -274,8 +316,8 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
           >
             <button
               onClick={(e) => {
-                e.stopPropagation();
-                onOrderNow(id);
+                e.stopPropagation()
+                onOrderNow(id)
               }}
               className="mt-4 w-full bg-green-600 py-3 font-semibold text-white transition-colors duration-300 hover:bg-green-700"
             >
@@ -290,15 +332,26 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
 
 const PricingSection = () => {
   const [activeTab, setActiveTab] = useState("popular")
-  const router = useRouter();
+  const router = useRouter()
+  const { replaceCart } = useCart() // Use cart context
 
-  const handleOrderNow = (packageId: string) => {
-    const selectedPackage = packagesData.find(p => p.id === packageId);
+  const handleOrderNow = async (packageId: string) => {
+    const selectedPackage = packagesData.find((p) => p.id === packageId)
     if (selectedPackage) {
-      localStorage.setItem('cartPackage', JSON.stringify(selectedPackage));
-      router.push('/cart');
+      const packageItems = selectedPackage.features.map((feature, index) => ({
+        id: `${packageId}-${index}`,
+        name: feature,
+        category: "Package Item",
+        serviceType: selectedPackage.title,
+        price: selectedPackage.price / selectedPackage.features.length, // Distribute price across items
+        quantity: 1,
+        serviceSlug: "package-service", // Add required serviceSlug field
+      }))
+
+      await replaceCart(packageItems)
+      router.push("/cart")
     }
-  };
+  }
 
   return (
     <>
@@ -306,7 +359,9 @@ const PricingSection = () => {
       <section className="bg-white py-8 sm:py-12 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h4 className={`text-green-600 font-medium mb-2 sm:mb-3 lg:mb-4 text-xs sm:text-sm lg:text-base ${poppins.className}`}>
+            <h4
+              className={`text-green-600 font-medium mb-2 sm:mb-3 lg:mb-4 text-xs sm:text-sm lg:text-base ${poppins.className}`}
+            >
               [ Affordable Prices ]
             </h4>
             <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 lg:mb-6 px-2">
@@ -358,9 +413,16 @@ const PricingSection = () => {
                       { item: "Coat/Jacket", price: "15.00" },
                       { item: "Suit (2pcs)", price: "25.00" },
                     ].map((item, index) => (
-                      <div key={index} className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation">
-                        <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">{item.item}</span>
-                        <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">{item.price}</span>
+                      <div
+                        key={index}
+                        className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation"
+                      >
+                        <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">
+                          {item.item}
+                        </span>
+                        <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">
+                          {item.price}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -369,17 +431,31 @@ const PricingSection = () => {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 lg:gap-x-12">
                     <div className="space-y-0">
                       {forGentleman.map((item, index) => (
-                        <div key={index} className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation">
-                          <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">{item.item}</span>
-                          <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">{item.washPress}</span>
+                        <div
+                          key={index}
+                          className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation"
+                        >
+                          <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">
+                            {item.item}
+                          </span>
+                          <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">
+                            {item.washPress}
+                          </span>
                         </div>
                       ))}
                     </div>
                     <div className="space-y-0 mt-6 lg:mt-0">
                       {forLadies.map((item, index) => (
-                        <div key={index} className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation">
-                          <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">{item.item}</span>
-                          <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">{item.washPress}</span>
+                        <div
+                          key={index}
+                          className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation"
+                        >
+                          <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">
+                            {item.item}
+                          </span>
+                          <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">
+                            {item.washPress}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -388,9 +464,16 @@ const PricingSection = () => {
                 <TabsContent value="other" className="mt-4 sm:mt-6">
                   <div className="space-y-0">
                     {householdItems.map((item, index) => (
-                      <div key={index} className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation">
-                        <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">{item.item}</span>
-                        <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">{item.washPress}</span>
+                      <div
+                        key={index}
+                        className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation"
+                      >
+                        <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">
+                          {item.item}
+                        </span>
+                        <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">
+                          {item.washPress}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -413,11 +496,7 @@ const PricingSection = () => {
           </div>
           <div className="flex flex-wrap justify-center gap-6 sm:gap-11">
             {packagesData.map((pkg) => (
-              <PackageCard 
-                key={pkg.id} 
-                packageInfo={pkg} 
-                onOrderNow={handleOrderNow}
-              />
+              <PackageCard key={pkg.id} packageInfo={pkg} onOrderNow={handleOrderNow} />
             ))}
           </div>
         </div>
