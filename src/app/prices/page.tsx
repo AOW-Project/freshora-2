@@ -497,6 +497,15 @@ const PricingSection = () => {
                   </div>
                 </TabsContent>
               </Tabs>
+              <div className="flex justify-center mt-6">
+  <Link
+    href="/services"
+    className="px-6 py-3 bg-green-600 text-white font-semibold  hover:bg-green-700 transition-colors duration-300"
+  >
+    View Services
+  </Link>
+</div>
+
             </CardContent>
           </Card>
           <div className="text-center mb-12 sm:mb-16">
