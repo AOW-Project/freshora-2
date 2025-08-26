@@ -179,20 +179,20 @@ const updateQuantity = useCallback(
         )
 
         // 🔴 Red "Forgot Reminder" after a short delay
-        setTimeout(() => {
-          const stillNotAdded = !tempOrder.some((orderItem) => orderItem.id === itemId)
-          if (stillNotAdded) {
-            toast.error(
-              `❌ Don't forget to add "${selectedItem.name}" to your order!`,
-              {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                theme: "colored",
-              }
-            )
-          }
-        }, 3000) // fires 3s after the first toast
+        // setTimeout(() => {
+        //   const stillNotAdded = !tempOrder.some((orderItem) => orderItem.id === itemId)
+        //   if (stillNotAdded) {
+        //     toast.error(
+        //       `❌ Don't forget to add "${selectedItem.name}" to your order!`,
+        //       {
+        //         position: "top-right",
+        //         autoClose: 3000,
+        //         hideProgressBar: false,
+        //         theme: "colored",
+        //       }
+        //     )
+        //   }
+        // }, 3000) // fires 3s after the first toast
       }
     }
   },
@@ -204,31 +204,65 @@ const updateQuantity = useCallback(
     setTempOrder((prev) => prev.filter((item) => item.id !== itemId))
   }, [])
 
-  const handleAddAllToCart = useCallback(async () => {
-    if (tempOrder.length === 0) return
+const handleAddAllToCart = useCallback(async () => {
+  if (tempOrder.length === 0) return
 
-    setIsAddingToCart(true)
+  // 🔥 Check for missing items before actually adding
+  const allItems = Object.entries(service.items).flatMap(([category, items]) =>
+    items.map((item) => ({ ...item, category }))
+  )
 
-    try {
-      for (const item of tempOrder) {
-        const cartItem = {
-          id: `${service.id}-${item.id}`, // unique across services
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-        }
-        await addToCart(cartItem)
-      }
-      toast.success(`All items added to cart successfully!`)
-      setTempOrder([])
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred"
-      console.error("Error adding items to cart:", errorMessage)
-      toast.error(`Failed to add items to cart: ${errorMessage}`)
-    } finally {
-      setIsAddingToCart(false)
+  allItems.forEach((item) => {
+    const quantitySelected = quantities[item.id] || 0
+    const alreadyInTemp = tempOrder.some((orderItem) => orderItem.id === item.id)
+
+    if (quantitySelected > 0 && !alreadyInTemp) {
+      // Yellow reminder
+      toast.warn(`📋 You selected "${item.name}" but haven't clicked "Add" yet!`, {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        theme: "colored",
+      })
+
+      // Red reminder after 3s
+      // setTimeout(() => {
+      //   const stillNotAdded = !tempOrder.some((orderItem) => orderItem.id === item.id)
+      //   if (stillNotAdded) {
+      //     toast.error(`❌ Don't forget to add "${item.name}" to your order!`, {
+      //       position: "top-right",
+      //       autoClose: 3000,
+      //       hideProgressBar: false,
+      //       theme: "colored",
+      //     })
+      //   }
+      // }, 3000)
     }
-  }, [tempOrder, addToCart, service.id])
+  })
+
+  // ✅ Now proceed to add items to cart
+  setIsAddingToCart(true)
+  try {
+    for (const item of tempOrder) {
+      const cartItem = {
+        id: `${service.id}-${item.id}`, // unique across services
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+      }
+      await addToCart(cartItem)
+    }
+    toast.success(`All items added to cart successfully!`)
+    setTempOrder([])
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : "An unknown error occurred"
+    console.error("Error adding items to cart:", errorMessage)
+    toast.error(`Failed to add items to cart: ${errorMessage}`)
+  } finally {
+    setIsAddingToCart(false)
+  }
+}, [tempOrder, addToCart, service.id, quantities, service.items])
+
 
   const handleAddToOrder = useCallback(
     (item: ServiceItem, category: string) => {
