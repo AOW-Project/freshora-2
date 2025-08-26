@@ -120,7 +120,7 @@ const buildOrderPayload = ({
 }
 
 /** Tiny formatter to keep money output consistent */
-const formatMoney = (n: number) => `$${n.toFixed(2)}`
+const formatMoney = (n: number) => `AED${n.toFixed(2)}`
 
 // —————————————————————————————————————————————————————————————————————
 // Component

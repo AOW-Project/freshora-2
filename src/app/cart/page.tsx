@@ -125,9 +125,9 @@ export default function CartPage() {
                 <CardHeader><CardTitle>Order Summary</CardTitle></CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="flex justify-between"><span>Subtotal:</span><span>${finalTotalPrice.toFixed(2)}</span></div>
+                    <div className="flex justify-between"><span>Subtotal:</span><span>AED{finalTotalPrice.toFixed(2)}</span></div>
                     <div className="flex justify-between"><span>Delivery:</span><span className="text-green-600">Free</span></div>
-                    <div className="border-t pt-4 mt-2"><div className="flex justify-between text-lg font-bold"><span>Total:</span><span className="text-green-600">${finalTotalPrice.toFixed(2)}</span></div></div>
+                    <div className="border-t pt-4 mt-2"><div className="flex justify-between text-lg font-bold"><span>Total:</span><span className="text-green-600">AED{finalTotalPrice.toFixed(2)}</span></div></div>
                     <Button onClick={() => setCheckoutOpen(true)} className="w-full bg-green-600 hover:bg-green-700 mt-4" size="lg">Proceed to Checkout</Button>
                   </div>
                 </CardContent>

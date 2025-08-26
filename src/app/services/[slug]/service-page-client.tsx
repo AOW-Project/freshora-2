@@ -80,7 +80,7 @@ export default function ServicePageClient({
         </div>
         <div className="flex items-center gap-3">
           <Phone className="h-4 w-4 text-green-600 flex-shrink-0" />
-          <p className="text-sm text-gray-600">1 (800) 765-43-21</p>
+          <p className="text-sm text-gray-600">+971 50 925 9667</p>
         </div>
       </div>
     ),
