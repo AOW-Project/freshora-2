@@ -83,7 +83,7 @@ const ServicePriceCard: React.FC<ServicePriceCardProps> = ({ icon: Icon, title, 
         </div>
       </div>
       <div className="absolute bottom-3 sm:bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-y-0 translate-y-4">
-        <button className="px-4 sm:px-6 py-2 bg-green-600 text-white text-xs sm:text-sm font-semibold rounded-lg hover:bg-green-700 transition-colors duration-300 shadow-md">
+        <button className="px-4 sm:px-6 py-2 bg-green-600 text-white text-xs sm:text-sm font-semibold hover:bg-green-700 transition-colors duration-300 shadow-md">
           Order Now
         </button>
       </div>
@@ -95,12 +95,14 @@ const ServiceCarousel: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [cardsToShow, setCardsToShow] = useState(1)
   const { width } = useWindowSize()
+
   const services = [
-    { icon: FaTshirt, title: "Shirts Service", description: "Washed and Pressed", price: "$2.00" },
-    { icon: FaHandsWash, title: "Day Dress Service", description: "Dry Clean", price: "$10.50" },
-    { icon: MdIron, title: "Dry Cleaning", description: "Wash, Dry and Fold", price: "$2.00" },
-    { icon: FaBed, title: "Bedding", description: "Bed Set (Wash and Press)", price: "$10.50" },
+    { icon: FaTshirt, title: "Shirts Service", description: "Washed and Pressed", price: "2.00" },
+    { icon: FaHandsWash, title: "Day Dress Service", description: "Dry Clean", price: "10.50" },
+    { icon: MdIron, title: "Dry Cleaning", description: "Wash, Dry and Fold", price: "2.00" },
+    { icon: FaBed, title: "Bedding", description: "Bed Set (Wash and Press)", price: "10.50" },
   ]
+
   useEffect(() => {
     if (width === 0) return
     if (width >= 1280) setCardsToShow(4)
@@ -108,8 +110,12 @@ const ServiceCarousel: React.FC = () => {
     else if (width >= 768) setCardsToShow(2)
     else setCardsToShow(1)
   }, [width])
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % services.length)
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + services.length) % services.length)
+
+  const nextSlide = () =>
+    setCurrentSlide((prev) => Math.min(prev + 1, services.length - cardsToShow))
+  const prevSlide = () =>
+    setCurrentSlide((prev) => Math.max(prev - 1, 0))
+
   const maxSlide = Math.max(0, services.length - cardsToShow)
 
   return (
@@ -123,31 +129,43 @@ const ServiceCarousel: React.FC = () => {
           }}
         >
           {services.map((service, index) => (
-            <div key={index} className="px-2 sm:px-4" style={{ width: `${100 / services.length}%` }}>
+            <div
+              key={index}
+              className="px-2 sm:px-4"
+              style={{ width: `${100 / cardsToShow}%` }}
+            >
               <ServicePriceCard {...service} />
             </div>
           ))}
         </div>
-        <button
-          onClick={prevSlide}
-          disabled={currentSlide === 0}
-          className="absolute left-0 sm:left-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 sm:p-3 hover:bg-green-50 transition-colors z-10 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <ChevronLeft className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
-        </button>
-        <button
-          onClick={nextSlide}
-          disabled={currentSlide >= maxSlide}
-          className="absolute right-0 sm:right-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 sm:p-3 hover:bg-green-50 transition-colors z-10 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <ChevronRight className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
-        </button>
+
+
+{/* Navigation Arrows */}
+<button
+  onClick={prevSlide}
+  disabled={currentSlide === 0}
+  className="absolute left-0 sm:left-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg  p-2 sm:p-3 hover:bg-green-50 transition-colors z-10 disabled:opacity-50 disabled:cursor-not-allowed"
+>
+  <ChevronLeft className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
+</button>
+<button
+  onClick={nextSlide}
+  disabled={currentSlide >= maxSlide}
+  className="absolute right-0 sm:right-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg  p-2 sm:p-3 hover:bg-green-50 transition-colors z-10 disabled:opacity-50 disabled:cursor-not-allowed"
+>
+  <ChevronRight className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
+</button>
+
+
+        {/* Dots Indicator */}
         <div className="flex justify-center mt-6 sm:mt-8 space-x-2 sm:space-x-3">
           {Array.from({ length: maxSlide + 1 }).map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors ${currentSlide === index ? "bg-green-600" : "bg-gray-300"}`}
+              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors ${
+                currentSlide === index ? "bg-green-600" : "bg-gray-300"
+              }`}
             />
           ))}
         </div>

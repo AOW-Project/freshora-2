@@ -4,14 +4,17 @@ import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { useCart } from "@/app/context/cart-context"
 
+interface ServiceItem {
+  id: string
+  name: string
+  price: number
+  description: string
+}
+
 interface MissingItemsNotifierProps {
   serviceSlug?: string
   selectedQuantities?: { [key: string]: number }
-  serviceItems?: {
-    men: Array<{ id: string; name: string; price: number; description: string }>
-    women: Array<{ id: string; name: string; price: number; description: string }>
-    children: Array<{ id: string; name: string; price: number; description: string }>
-  }
+  serviceItems?: Record<string, ServiceItem[]> // 🔥 dynamic categories
 }
 
 export default function MissingItemsNotifier({
@@ -19,40 +22,44 @@ export default function MissingItemsNotifier({
   selectedQuantities = {},
   serviceItems,
 }: MissingItemsNotifierProps) {
-  // FIX: use cartItems instead of cart
   const { cartItems: cart } = useCart()
 
-  useEffect(() => {
+  // 🔥 helper function
+  const checkMissingItems = () => {
     if (!selectedQuantities || !serviceItems || !serviceSlug) return
 
+    // flatten all categories into one array
+    const allItems = Object.entries(serviceItems).flatMap(([category, items]) =>
+      items.map((item) => ({ ...item, category }))
+    )
+
+    // items user increased quantity for
     const selectedItems = Object.entries(selectedQuantities)
       .filter(([_, quantity]) => quantity > 0)
-      .map(([itemId]) => {
-        const allItems = [
-          ...serviceItems.men.map((item) => ({ ...item, category: "Men" })),
-          ...serviceItems.women.map((item) => ({ ...item, category: "Women" })),
-          ...serviceItems.children.map((item) => ({ ...item, category: "Children" })),
-        ]
-        return allItems.find((item) => item.id === itemId)
-      })
+      .map(([itemId]) => allItems.find((item) => item.id === itemId))
       .filter(Boolean)
 
     if (selectedItems.length === 0) return
 
-    const missingItems = selectedItems.filter((selectedItem) => {
-      const cartItemId = `${serviceSlug}-${selectedItem!.id}`
-      return !cart.some((cartItem) => cartItem.id === cartItemId)
-    })
+    // check which are missing from cart
+    const missingItems = selectedItems.filter(
+      (selectedItem) => !cart.some((cartItem) => cartItem.id === selectedItem!.id)
+    )
 
     if (missingItems.length > 0) {
       const itemNames = missingItems.map((item) => item!.name).join(", ")
       toast.warn(`📋 You selected "${itemNames}" but haven't added to cart yet!`, {
         position: "top-right",
-        autoClose: 4000,
+        autoClose: 3000,
         hideProgressBar: false,
         theme: "colored",
       })
     }
+  }
+
+  // still run on cart/quantity changes
+  useEffect(() => {
+    checkMissingItems()
   }, [cart, selectedQuantities, serviceItems, serviceSlug])
 
   return null

@@ -4,17 +4,30 @@ import React, { useState } from "react"
 import { FaTshirt, FaHandsWash, FaTools } from "react-icons/fa"
 import { MdIron } from "react-icons/md"
 import { Card } from "@/components/ui/card"
-import SchedulePickupModal from "@/component/SchedulePickupModal" // ✅ import your modal form
+import { useRouter } from "next/navigation"
 
 interface ServicePriceCardProps {
   icon: React.ElementType
   title: string
   price: string
   description: string
-  onOrderClick: () => void
+  redirectPath: string
 }
 
-const ServicePriceCard: React.FC<ServicePriceCardProps> = ({ icon: Icon, title, price, description, onOrderClick }) => {
+const ServicePriceCard: React.FC<ServicePriceCardProps> = ({
+  icon: Icon,
+  title,
+  price,
+  description,
+  redirectPath,
+}) => {
+  const router = useRouter()
+
+  const handleOrderClick = () => {
+    // ✅ redirect to service detail page
+    router.push(redirectPath)
+  }
+
   return (
     <Card className="relative flex flex-col items-center justify-center p-4 sm:p-6 text-center overflow-hidden group h-[200px] lg:h-[220px] transition-all duration-300 hover:shadow-lg">
       <div className="flex flex-col items-center justify-center">
@@ -24,11 +37,11 @@ const ServicePriceCard: React.FC<ServicePriceCardProps> = ({ icon: Icon, title, 
         <p className="text-xl sm:text-2xl font-bold text-green-600">{price}</p>
       </div>
 
-      {/* Order Button → opens modal */}
+      {/* Order Button → redirects to services page */}
       <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 bg-white opacity-0 group-hover:opacity-100 translate-y-full group-hover:translate-y-0 transition-all duration-300">
         <button
-          onClick={onOrderClick}
-          className="w-full py-2 sm:py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors duration-300 text-sm sm:text-base"
+          onClick={handleOrderClick}
+          className="w-full py-2 sm:py-3 bg-green-600 text-white font-semibold  hover:bg-green-700 transition-colors duration-300 text-sm sm:text-base"
         >
           Order Now
         </button>
@@ -38,8 +51,6 @@ const ServicePriceCard: React.FC<ServicePriceCardProps> = ({ icon: Icon, title, 
 }
 
 const HomepagePricingCards = () => {
-  const [modalOpen, setModalOpen] = useState(false)
-
   return (
     <section className="py-12 sm:py-16 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,35 +70,32 @@ const HomepagePricingCards = () => {
             icon={FaTshirt}
             title="Blanket Service"
             description="Washed and Pressed"
-            price="$25.00"
-            onOrderClick={() => setModalOpen(true)}
+            price="25.00"
+            redirectPath="/services/laundry-services"
           />
           <ServicePriceCard
             icon={FaHandsWash}
             title="Curtains Service"
             description="Washed and Pressed"
-            price="$22.00"
-            onOrderClick={() => setModalOpen(true)}
+            price="22.00"
+            redirectPath="/services/laundry-services"
           />
           <ServicePriceCard
             icon={MdIron}
             title="Ironing Service"
             description="Iron and Fold"
-            price="$3.00"
-            onOrderClick={() => setModalOpen(true)}
+            price="3.00"
+            redirectPath="/services/laundry-services"
           />
           <ServicePriceCard
             icon={FaTools}
             title="Repairs & Alterations"
             description="Simple Sewing"
-            price="$12.00"
-            onOrderClick={() => setModalOpen(true)}
+            price="12.00"
+            redirectPath="/services/laundry-services"
           />
         </div>
       </div>
-
-      {/* ✅ Modal connected here */}
-      <SchedulePickupModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   )
 }

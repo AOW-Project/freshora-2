@@ -55,6 +55,11 @@ interface ItemCardProps {
 }
 // --- End of Type Definitions ---
 
+const formatCategory = (key: string) =>
+  key
+    .replace(/[-_]/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+
 const ItemCard = ({ item, category, quantities, onAddToOrder, onUpdateQuantity }: ItemCardProps) => {
   const quantity = quantities[item.id] || 0
   const totalAmount = item.price * quantity
@@ -68,7 +73,7 @@ const ItemCard = ({ item, category, quantities, onAddToOrder, onUpdateQuantity }
       <div className="mt-auto">
         <div className="flex items-center gap-4 mb-4">
           <p className="text-green-600 font-bold text-lg">
-            ${item.price.toFixed(2)}
+            {item.price.toFixed(2)}
             {item.unit && <span className="text-sm font-normal"> {item.unit}</span>}
           </p>
           {quantity > 0 && (
@@ -76,7 +81,7 @@ const ItemCard = ({ item, category, quantities, onAddToOrder, onUpdateQuantity }
               <span className="text-gray-400">×</span>
               <span className="text-gray-600">{quantity}</span>
               <span className="text-gray-400">=</span>
-              <p className="text-blue-600 font-bold text-lg">${totalAmount.toFixed(2)}</p>
+              <p className="text-blue-600 font-bold text-lg">{totalAmount.toFixed(2)}</p>
             </div>
           )}
         </div>
@@ -117,18 +122,13 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
   const [tempOrder, setTempOrder] = useState<OrderItem[]>([])
   const [isAddingToCart, setIsAddingToCart] = useState(false)
 
-  const items = useMemo(() => {
-    const serviceData = service.items || {}
-    return {
-      men: serviceData.men || [],
-      women: serviceData.women || [],
-      children: serviceData.children || [],
-    }
-  }, [service.items])
+  const categories = useMemo(() => Object.keys(service.items || {}), [service.items])
+  const firstCategory = categories[0]
 
   const hasItems = useMemo(() => {
-    return items.men.length > 0 || items.women.length > 0 || items.children.length > 0
-  }, [items])
+    if (!categories.length) return false
+    return categories.some((cat) => (service.items?.[cat] || []).length > 0)
+  }, [categories, service.items])
 
   const orderTotal = useMemo(() => {
     return tempOrder.reduce((total, item) => total + item.price * item.quantity, 0)
@@ -151,13 +151,54 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
     [],
   )
 
-  const updateQuantity = useCallback(
-    (itemId: string, change: number) => {
-      const newQuantity = Math.max(0, (quantities[itemId] || 0) + change)
-      setQuantities((prev) => ({ ...prev, [itemId]: newQuantity }))
-    },
-    [quantities],
-  )
+const updateQuantity = useCallback(
+  (itemId: string, change: number) => {
+    const newQuantity = Math.max(0, (quantities[itemId] || 0) + change)
+    const newQuantities = { ...quantities, [itemId]: newQuantity }
+    setQuantities(newQuantities)
+
+    // --- 🔥 Missing Items Notifier ---
+    const allItems = Object.entries(service.items).flatMap(([category, items]) =>
+      items.map((item) => ({ ...item, category }))
+    )
+    const selectedItem = allItems.find((item) => item.id === itemId)
+
+    if (selectedItem && newQuantity > 0) {
+      const alreadyInTemp = tempOrder.some((orderItem) => orderItem.id === itemId)
+
+      if (!alreadyInTemp) {
+        // Yellow reminder (soft warning)
+        toast.warn(
+          `📋 You selected "${selectedItem.name}" but haven't clicked "Add" yet!`,
+          {
+            position: "top-right",
+            autoClose: 2500,
+            hideProgressBar: false,
+            theme: "colored",
+          }
+        )
+
+        // 🔴 Red "Forgot Reminder" after a short delay
+        setTimeout(() => {
+          const stillNotAdded = !tempOrder.some((orderItem) => orderItem.id === itemId)
+          if (stillNotAdded) {
+            toast.error(
+              `❌ Don't forget to add "${selectedItem.name}" to your order!`,
+              {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                theme: "colored",
+              }
+            )
+          }
+        }, 3000) // fires 3s after the first toast
+      }
+    }
+  },
+  [quantities, service.items, tempOrder],
+)
+
 
   const removeFromOrder = useCallback((itemId: string) => {
     setTempOrder((prev) => prev.filter((item) => item.id !== itemId))
@@ -171,7 +212,7 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
     try {
       for (const item of tempOrder) {
         const cartItem = {
-          id: `${service.id}-${item.id}`, // Combine service ID and item ID
+          id: `${service.id}-${item.id}`, // unique across services
           name: item.name,
           price: item.price,
           quantity: item.quantity,
@@ -249,7 +290,7 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className={`h-4 w-4 ${i < service.rating ? "text-yellow-400 fill-current" : "text-gray-300"}`}
+                          className={`h-4 w-4 ${i < Math.round(service.rating) ? "text-yellow-400 fill-current" : "text-gray-300"}`}
                         />
                       ))}
                       <span className="ml-2 text-sm text-gray-600">
@@ -276,54 +317,39 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
           <div className="max-w-7xl mx-auto px-4 py-8">
             <Card>
               <CardContent className="p-6">
-                <Tabs defaultValue="men" className="w-full">
-                  <TabsList className="grid w-full grid-cols-3">
-                    <TabsTrigger value="men">Men&lsquo;s Items</TabsTrigger>
-                    <TabsTrigger value="women">Women&apos;s Items</TabsTrigger>
-                    <TabsTrigger value="children">Children&apos;s Items</TabsTrigger>
+                <Tabs defaultValue={firstCategory} className="w-full">
+                  {/* TabsList: flexible so it works with any number of categories */}
+                  <TabsList className="flex flex-wrap gap-2 overflow-x-auto">
+                    {categories.map((category) => (
+                      <TabsTrigger key={category} value={category} className="whitespace-nowrap">
+                        {formatCategory(category)}
+                      </TabsTrigger>
+                    ))}
                   </TabsList>
-                  <TabsContent value="men" className="mt-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {items.men.map((item) => (
-                        <ItemCard
-                          key={item.id}
-                          item={item}
-                          category="Men"
-                          quantities={quantities}
-                          onAddToOrder={handleAddToOrder}
-                          onUpdateQuantity={updateQuantity}
-                        />
-                      ))}
-                    </div>
-                  </TabsContent>
-                  <TabsContent value="women" className="mt-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {items.women.map((item) => (
-                        <ItemCard
-                          key={item.id}
-                          item={item}
-                          category="Women"
-                          quantities={quantities}
-                          onAddToOrder={handleAddToOrder}
-                          onUpdateQuantity={updateQuantity}
-                        />
-                      ))}
-                    </div>
-                  </TabsContent>
-                  <TabsContent value="children" className="mt-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {items.children.map((item) => (
-                        <ItemCard
-                          key={item.id}
-                          item={item}
-                          category="Children"
-                          quantities={quantities}
-                          onAddToOrder={handleAddToOrder}
-                          onUpdateQuantity={updateQuantity}
-                        />
-                      ))}
-                    </div>
-                  </TabsContent>
+
+                  {categories.map((category) => {
+                    const itemsInCategory = service.items?.[category] || []
+                    return (
+                      <TabsContent key={category} value={category} className="mt-6">
+                        <div className="grid md:grid-cols-2 gap-4">
+                          {itemsInCategory.length > 0 ? (
+                            itemsInCategory.map((item) => (
+                              <ItemCard
+                                key={item.id}
+                                item={item}
+                                category={formatCategory(category)}
+                                quantities={quantities}
+                                onAddToOrder={handleAddToOrder}
+                                onUpdateQuantity={updateQuantity}
+                              />
+                            ))
+                          ) : (
+                            <p className="text-gray-500 text-sm">No items in this category.</p>
+                          )}
+                        </div>
+                      </TabsContent>
+                    )
+                  })}
                 </Tabs>
               </CardContent>
             </Card>
@@ -358,7 +384,7 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
           <div className="border-t pt-4 mb-6">
             <div className="flex justify-between items-center text-lg font-bold">
               <span>Total:</span>
-              <span className="text-green-600">${orderTotal.toFixed(2)}</span>
+              <span className="text-green-600">{orderTotal.toFixed(2)}</span>
             </div>
           </div>
           <Button
