@@ -89,20 +89,55 @@ const faqData = [
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState<string | null>(null)
 
+  // --- Form state
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  })
+
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+
   const toggleAccordion = (index: string) => {
     setOpenIndex(openIndex === index ? null : index)
   }
 
+  // --- Handle form submit
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    try {
+      const res = await fetch("/api/send-question", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      })
+
+      if (res.ok) {
+        setForm({ name: "", email: "", phone: "", message: "" })
+        setSuccess(true)
+        setTimeout(() => setSuccess(false), 1500) // hide popup after 1.5s
+      } else {
+        alert("Something went wrong. Please try again.")
+      }
+    } catch (err) {
+      console.error(err)
+      alert("Error sending message")
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
-    <> {/*<AnimatedParticles zIndex={5} /> */}
     <div>
       {/* Header Section */}
       <div
         className="relative h-64 bg-cover bg-center flex items-center"
         style={{
-         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.JPG?height=400&width=1200&text=Laundry+Machines+Background')`,
-           }}
-        
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.JPG?height=400&width=1200')`,
+        }}
       >
         <div className="max-w-7xl mx-auto px-4 w-full">
           {/* Breadcrumb */}
@@ -124,10 +159,9 @@ export default function FAQPage() {
           <p className={`text-green-600 font-medium mb-2 text-center ${poppins.className}`}>
             [ Frequently Asked Questions ]
           </p>
-          <h2 className="text-2xl md:text-3xl font-bold">Reliable Answers to Our Most Common Questions</h2>
-          <p className="text-gray-500 max-w-xl mx-auto mt-2">
-            We can answer as many as we can, save you time, water, heating and electricity.
-          </p>
+          <h2 className="text-2xl md:text-3xl font-bold">
+            Reliable Answers to Our Most Common Questions
+          </h2>
         </div>
 
         {/* Accordion */}
@@ -154,7 +188,9 @@ export default function FAQPage() {
                           openIndex === uniqueIndex ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                         }`}
                       >
-                        <div className="px-4 pb-4 text-gray-600 text-sm leading-relaxed">{item.a}</div>
+                        <div className="px-4 pb-4 text-gray-600 text-sm leading-relaxed">
+                          {item.a}
+                        </div>
                       </div>
                     </div>
                   )
@@ -174,37 +210,55 @@ export default function FAQPage() {
               We look forward to helping you enjoy and maintain a clean, healthy environment.
             </p>
           </div>
-          <form className="grid md:grid-cols-2 gap-4">
+
+          <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4 relative">
+            {success && (
+              <div className="absolute inset-0 flex items-center justify-center bg-white/80 rounded-md z-10 animate-fade">
+                <p className="text-green-600 font-semibold text-lg">✅ Thank you for your question!</p>
+              </div>
+            )}
+
             <input
               type="text"
               placeholder="Your name"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              required
               className="border border-gray-300 rounded-md p-3 w-full focus:ring-2 focus:ring-green-500 focus:border-transparent"
             />
             <input
               type="email"
               placeholder="Email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              required
               className="border border-gray-300 rounded-md p-3 w-full focus:ring-2 focus:ring-green-500 focus:border-transparent"
             />
             <input
               type="tel"
               placeholder="Phone"
+              value={form.phone}
+              onChange={(e) => setForm({ ...form, phone: e.target.value })}
               className="border border-gray-300 rounded-md p-3 w-full focus:ring-2 focus:ring-green-500 focus:border-transparent"
             />
             <textarea
               placeholder="Your question"
               rows={4}
+              value={form.message}
+              onChange={(e) => setForm({ ...form, message: e.target.value })}
+              required
               className="border border-gray-300 rounded-md p-3 w-full md:col-span-2 focus:ring-2 focus:ring-green-500 focus:border-transparent resize-vertical"
             ></textarea>
             <button
               type="submit"
-              className="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-md md:col-span-2 transition-colors font-medium"
+              disabled={loading}
+              className="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-md md:col-span-2 transition-colors font-medium disabled:opacity-50"
             >
-              Submit Question
+              {loading ? "Sending..." : "Submit Question"}
             </button>
           </form>
         </div>
       </section>
-    </div></>
-   
+    </div>
   )
 }

@@ -11,7 +11,6 @@ import { useCallback, useMemo, useState } from "react"
 import { toast } from "react-toastify"
 
 // --- Type Definitions ---
-// These types are self-contained and match the data from your live backend.
 interface ServiceItem {
   id: string
   name: string
@@ -97,7 +96,12 @@ const ItemCard = ({ item, category, quantities, onAddToOrder, onUpdateQuantity }
               -
             </Button>
             <span className="font-medium min-w-[2rem] text-center">{quantity}</span>
-            <Button variant="outline" size="sm" onClick={() => onUpdateQuantity(item.id, 1)} className="h-8 w-8 p-0">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => onUpdateQuantity(item.id, 1)}
+              className="h-8 w-8 p-0"
+            >
               +
             </Button>
           </div>
@@ -151,118 +155,62 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
     [],
   )
 
-const updateQuantity = useCallback(
-  (itemId: string, change: number) => {
-    const newQuantity = Math.max(0, (quantities[itemId] || 0) + change)
-    const newQuantities = { ...quantities, [itemId]: newQuantity }
-    setQuantities(newQuantities)
-
-    // --- 🔥 Missing Items Notifier ---
-    const allItems = Object.entries(service.items).flatMap(([category, items]) =>
-      items.map((item) => ({ ...item, category }))
-    )
-    const selectedItem = allItems.find((item) => item.id === itemId)
-
-    if (selectedItem && newQuantity > 0) {
-      const alreadyInTemp = tempOrder.some((orderItem) => orderItem.id === itemId)
-
-      if (!alreadyInTemp) {
-        // Yellow reminder (soft warning)
-        toast.warn(
-          `📋 You selected "${selectedItem.name}" but haven't clicked "Add" yet!`,
-          {
-            position: "top-right",
-            autoClose: 2500,
-            hideProgressBar: false,
-            theme: "colored",
-          }
-        )
-
-        // 🔴 Red "Forgot Reminder" after a short delay
-        // setTimeout(() => {
-        //   const stillNotAdded = !tempOrder.some((orderItem) => orderItem.id === itemId)
-        //   if (stillNotAdded) {
-        //     toast.error(
-        //       `❌ Don't forget to add "${selectedItem.name}" to your order!`,
-        //       {
-        //         position: "top-right",
-        //         autoClose: 3000,
-        //         hideProgressBar: false,
-        //         theme: "colored",
-        //       }
-        //     )
-        //   }
-        // }, 3000) // fires 3s after the first toast
-      }
-    }
-  },
-  [quantities, service.items, tempOrder],
-)
-
+  const updateQuantity = useCallback(
+    (itemId: string, change: number) => {
+      const newQuantity = Math.max(0, (quantities[itemId] || 0) + change)
+      setQuantities((prev) => ({ ...prev, [itemId]: newQuantity }))
+    },
+    [quantities],
+  )
 
   const removeFromOrder = useCallback((itemId: string) => {
     setTempOrder((prev) => prev.filter((item) => item.id !== itemId))
   }, [])
 
-const handleAddAllToCart = useCallback(async () => {
-  if (tempOrder.length === 0) return
+  const handleAddAllToCart = useCallback(async () => {
+    if (tempOrder.length === 0) return
 
-  // 🔥 Check for missing items before actually adding
-  const allItems = Object.entries(service.items).flatMap(([category, items]) =>
-    items.map((item) => ({ ...item, category }))
-  )
+    const allItems = Object.entries(service.items).flatMap(([category, items]) =>
+      items.map((item) => ({ ...item, category }))
+    )
 
-  allItems.forEach((item) => {
-    const quantitySelected = quantities[item.id] || 0
-    const alreadyInTemp = tempOrder.some((orderItem) => orderItem.id === item.id)
+    const missedItems = allItems.filter((item) => {
+      const quantitySelected = quantities[item.id] || 0
+      const alreadyInTemp = tempOrder.some((orderItem) => orderItem.id === item.id)
+      return quantitySelected > 0 && !alreadyInTemp
+    })
 
-    if (quantitySelected > 0 && !alreadyInTemp) {
-      // Yellow reminder
-      toast.warn(`📋 You selected "${item.name}" but haven't clicked "Add" yet!`, {
+    if (missedItems.length > 0) {
+      toast.error("⚠️ Some selected items have not been added. Please add them before proceeding.", {
         position: "top-right",
-        autoClose: 2500,
+        autoClose: 3000,
         hideProgressBar: false,
         theme: "colored",
       })
-
-      // Red reminder after 3s
-      // setTimeout(() => {
-      //   const stillNotAdded = !tempOrder.some((orderItem) => orderItem.id === item.id)
-      //   if (stillNotAdded) {
-      //     toast.error(`❌ Don't forget to add "${item.name}" to your order!`, {
-      //       position: "top-right",
-      //       autoClose: 3000,
-      //       hideProgressBar: false,
-      //       theme: "colored",
-      //     })
-      //   }
-      // }, 3000)
+      return
     }
-  })
 
-  // ✅ Now proceed to add items to cart
-  setIsAddingToCart(true)
-  try {
-    for (const item of tempOrder) {
-      const cartItem = {
-        id: `${service.id}-${item.id}`, // unique across services
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
+    setIsAddingToCart(true)
+    try {
+      for (const item of tempOrder) {
+        const cartItem = {
+          id: `${service.id}-${item.id}`,
+          title: item.name,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        }
+        await addToCart(cartItem)
       }
-      await addToCart(cartItem)
+      setTempOrder([])
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred"
+      console.error("Error adding items to cart:", errorMessage)
+      toast.error(`Failed to add items to cart: ${errorMessage}`)
+    } finally {
+      setIsAddingToCart(false)
     }
-    toast.success(`All items added to cart successfully!`)
-    setTempOrder([])
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "An unknown error occurred"
-    console.error("Error adding items to cart:", errorMessage)
-    toast.error(`Failed to add items to cart: ${errorMessage}`)
-  } finally {
-    setIsAddingToCart(false)
-  }
-}, [tempOrder, addToCart, service.id, quantities, service.items])
-
+  }, [tempOrder, addToCart, service.id, quantities, service.items])
 
   const handleAddToOrder = useCallback(
     (item: ServiceItem, category: string) => {
@@ -301,6 +249,7 @@ const handleAddAllToCart = useCallback(async () => {
   return (
     <div className="flex">
       <div className="flex-1">
+        {/* Header Section */}
         <div
           className="relative h-64 bg-cover bg-center flex items-center"
           style={{
@@ -313,6 +262,7 @@ const handleAddAllToCart = useCallback(async () => {
           </div>
         </div>
 
+        {/* Service Info + Tabs */}
         <div className="min-h-screen bg-gray-50">
           <div className="bg-white shadow-sm">
             <div className="max-w-7xl mx-auto px-4 py-6">
@@ -324,7 +274,9 @@ const handleAddAllToCart = useCallback(async () => {
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className={`h-4 w-4 ${i < Math.round(service.rating) ? "text-yellow-400 fill-current" : "text-gray-300"}`}
+                          className={`h-4 w-4 ${
+                            i < Math.round(service.rating) ? "text-yellow-400 fill-current" : "text-gray-300"
+                          }`}
                         />
                       ))}
                       <span className="ml-2 text-sm text-gray-600">
@@ -336,23 +288,46 @@ const handleAddAllToCart = useCallback(async () => {
                     </Badge>
                   </div>
                 </div>
+
+                {/* View Cart button (blocked if missed items exist) */}
                 {getTotalItems() > 0 && (
-                  <Link href="/cart">
-                    <Button className="bg-green-600 hover:bg-green-700">
-                      <ShoppingCart className="h-4 w-4 mr-2" />
-                      View Cart ({getTotalItems()})
-                    </Button>
-                  </Link>
+                  <Button
+                    className="bg-green-600 hover:bg-green-700"
+                    onClick={() => {
+                      const allItems = Object.entries(service.items).flatMap(([category, items]) =>
+                        items.map((item) => ({ ...item, category }))
+                      )
+                      const missedItems = allItems.filter((item) => {
+                        const quantitySelected = quantities[item.id] || 0
+                        const alreadyInTemp = tempOrder.some((orderItem) => orderItem.id === item.id)
+                        return quantitySelected > 0 && !alreadyInTemp
+                      })
+
+                      if (missedItems.length > 0) {
+                        toast.error("⚠️ Please add all selected items before going to cart.", {
+                          position: "top-right",
+                          autoClose: 3000,
+                          hideProgressBar: false,
+                          theme: "colored",
+                        })
+                      } else {
+                        window.location.href = "/cart"
+                      }
+                    }}
+                  >
+                    <ShoppingCart className="h-4 w-4 mr-2" />
+                    View Cart ({getTotalItems()})
+                  </Button>
                 )}
               </div>
             </div>
           </div>
 
+          {/* Items Tabs */}
           <div className="max-w-7xl mx-auto px-4 py-8">
             <Card>
               <CardContent className="p-6">
                 <Tabs defaultValue={firstCategory} className="w-full">
-                  {/* TabsList: flexible so it works with any number of categories */}
                   <TabsList className="flex flex-wrap gap-2 overflow-x-auto">
                     {categories.map((category) => (
                       <TabsTrigger key={category} value={category} className="whitespace-nowrap">
@@ -391,6 +366,7 @@ const handleAddAllToCart = useCallback(async () => {
         </div>
       </div>
 
+      {/* Order Summary */}
       {tempOrder.length > 0 && (
         <div className="w-80 bg-white border-l border-gray-200 p-6 sticky top-0 h-screen overflow-y-auto">
           <h3 className="text-xl font-bold mb-4">Order Summary</h3>

@@ -32,7 +32,7 @@ export default function ContactPage() {
     setSubmitStatus({ type: null, message: "" })
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/send-question", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +45,7 @@ export default function ContactPage() {
       if (response.ok) {
         setSubmitStatus({
           type: "success",
-          message: data.message,
+          message: "Your message has been sent successfully!",
         })
         // Reset form
         setFormData({
@@ -76,8 +76,7 @@ export default function ContactPage() {
         className="relative h-32 sm:h-40 bg-cover bg-center flex items-center"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.JPG?height=400&width=1200&text=Laundry+Machines+Background')`,
-           }}
-        
+        }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <nav className="flex items-center space-x-1 sm:space-x-2 text-white mb-2 text-sm">
@@ -103,9 +102,9 @@ export default function ContactPage() {
               </div>
               <h3 className="font-semibold text-base mb-2 text-gray-800">Post Address</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                6494 Signal Hill Road Manassas,
+                Shop no 4, Azizi riviera 42 Meydan 
                 <br />
-                VA, 20110
+                 Al Merkadh , Dubai UAE
               </p>
             </div>
 
@@ -114,7 +113,7 @@ export default function ContactPage() {
                 <Phone className="w-6 h-6 text-green-600" />
               </div>
               <h3 className="font-semibold text-base mb-2 text-gray-800">Contact Phone</h3>
-              <p className="text-gray-600 text-sm">1 (800) 765-43-21</p>
+              <p className="text-gray-600 text-sm">+971 50 925 9667</p>
             </div>
 
             <div className="text-center">
@@ -122,7 +121,7 @@ export default function ContactPage() {
                 <Mail className="w-6 h-6 text-green-600" />
               </div>
               <h3 className="font-semibold text-base mb-2 text-gray-800">E-mail Address</h3>
-              <p className="text-gray-600 text-sm">info@yourlaundrysite.com</p>
+              <p className="text-gray-600 text-sm">freshorappc@gmail.com</p>
             </div>
 
             <div className="text-center">
@@ -133,7 +132,7 @@ export default function ContactPage() {
               <p className="text-gray-600 text-sm leading-relaxed">
                 Mon-Fri 08:00 AM - 05:00 PM
                 <br />
-                Sat-Sun 10:00 AM - 5:00 PM
+                Sat-Sun: 10am - 5pm
               </p>
             </div>
           </div>
@@ -143,7 +142,7 @@ export default function ContactPage() {
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-0">
         <div className="bg-white p-6 sm:p-8 lg:p-10 flex flex-col justify-center order-2 lg:order-1">
           <h3 className="text-2xl sm:text-3xl font-bold mb-2 text-gray-800">Get in Touch.</h3>
-          <h4 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800">We&apos;re to Help.</h4>
+          <h4 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800">We&apos;re Here to Help.</h4>
           <p className="text-gray-600 mb-6 text-sm leading-relaxed">
             We look forward to helping you create and maintain a clean, healthy environment that&apos;s enjoyable as it
             is functional.

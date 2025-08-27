@@ -308,7 +308,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
 
         console.log("[v0] Sending order payload:", orderPayload)
 
-        const res = await fetch("https://freshora-backend.onrender.com/api/orders", {
+        const res = await fetch("https://freshora-backend-u9xy.onrender.com/api/orders", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(orderPayload),
