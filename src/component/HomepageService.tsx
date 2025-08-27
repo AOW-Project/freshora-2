@@ -40,9 +40,9 @@ export default function ServicesSlider() {
         {/* Heading */}
         <div className="text-center mb-12">
           <h4 className="text-green-600 font-medium mb-3 text-sm sm:text-base">[ Our Services ]</h4>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 leading-snug">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 leading-snug">
             Dry Cleaning & Laundry, <br /> Free Delivery
-          </h1>
+          </h2>
         </div>
 
         {/* Slider */}

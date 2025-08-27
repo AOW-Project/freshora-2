@@ -62,10 +62,10 @@ export default function LaundryStats() {
               <p className="text-green-600 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
                 More than 25 Years of Experience
               </p>
-              <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-6 leading-tight">
+              <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-6 leading-tight">
                 The Best Laundry Service in Dubai, Perfected Over Time
 
-              </h2>
+              </h1>
               <p className="text-gray-600 mb-5 sm:mb-8 leading-relaxed text-sm sm:text-base lg:text-lg max-w-2xl mx-auto lg:mx-0">
                 At Freshora, laundry is more than a service - it is a craft. Our team is committed to your peace of mind and emboldened by years of stain removal expertise to ensure the promise is delivered promptly and without hassle. 
 
