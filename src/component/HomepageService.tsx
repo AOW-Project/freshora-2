@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
-import { FaTshirt, FaHandsWash,  FaBroom, FaShoePrints, FaBusinessTime, FaChild } from "react-icons/fa";
+import { FaTshirt, FaHandsWash, FaBroom, FaShoePrints, FaBusinessTime, FaChild } from "react-icons/fa";
 import { MdIron } from "react-icons/md";
 import { FaRug, FaWindowMaximize } from "react-icons/fa6";
 import { useState, useEffect } from "react";
@@ -16,7 +16,7 @@ const services = [
   { title: "Dry Cleaning", description: "Gentle dry cleaning for delicate fabrics, ensuring they maintain their quality and shape.", image: "/images/iron-and-stack-of-shirts-on-ironing-board-space-f-2025-03-25-22-33-47-utc.jpg", icon: <FaTshirt /> },
   { title: "Express Laundry Service", description: "Quick turnaround laundry service with the same premium care.", image: "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.jpg", icon: <FaHandsWash /> },
   { title: "Bag & Shoe Spa", description: "Professional cleaning and restoration for handbags and shoes.", image: "/images/light-blue-sneakers-and-backpack-2025-01-09-09-02-14-utc.jpg", icon: <MdIron /> },
-  { title: "Luxury Shoe Cleaning Service", description: "Specialized treatment to clean and restore luxury shoes.", image: "/images/soak-shoes-before-washing-cleaning-dirty-sneakers-2025-03-09-07-54-41-utc.jpg", icon: <FaShoePrints /> },
+  { title: "Luxury Shoe Cleaning Service", description: "Specialized treatment to clean and restore luxury shoes for batter footware.", image: "/images/soak-shoes-before-washing-cleaning-dirty-sneakers-2025-03-09-07-54-41-utc.jpg", icon: <FaShoePrints /> },
   { title: "Commercial Laundry Service", description: "Large-scale laundry solutions for hotels, restaurants, and offices.", image: "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.jpg", icon: <FaBusinessTime /> },
   { title: "Carpet Cleaning Service", description: "Deep cleaning for carpets, removing dirt, dust, and allergens.", image: "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc.jpg", icon: <FaRug /> },
   { title: "Curtain Cleaning Service", description: "Gentle cleaning for curtains to remove dust and stains while preserving fabric quality.", image: "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.jpg", icon: <FaWindowMaximize /> },
@@ -66,7 +66,7 @@ export default function ServicesSlider() {
             {services.map((service, i) => (
               <SwiperSlide key={i}>
                 <div
-                  className="relative h-[450px]  overflow-hidden group"
+                  className="relative h-[450px] overflow-hidden group shadow-lg"
                   style={{
                     backgroundImage: `url(${service.image})`,
                     backgroundSize: "cover",
@@ -74,15 +74,11 @@ export default function ServicesSlider() {
                   }}
                 >
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition"></div>
-
-                  {/* Bottom text */}
-                  <div className="absolute bottom-6 left-6 right-6 text-white">
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition flex flex-col justify-end p-6">
                     <div className="flex items-center gap-3 mb-3">
                       <div
                         className={clsx(
-                          // ⬇️ unified icon circle + force svg size + block to remove baseline shift
-                          "bg-green-600 w-14 h-14 rounded-full flex items-center justify-center shrink-0 leading-none",
+                          "bg-green-600 w-14 h-14 rounded-full flex items-center justify-center shrink-0",
                           "[&>svg]:w-8 [&>svg]:h-8 [&>svg]:block",
                           "transition-transform duration-500",
                           shake && "animate-shake"
@@ -90,9 +86,9 @@ export default function ServicesSlider() {
                       >
                         {service.icon}
                       </div>
-                      <h3 className="text-lg font-bold">{service.title}</h3>
+                      <h3 className="text-lg font-bold text-white">{service.title}</h3>
                     </div>
-                    <p className="text-sm leading-relaxed opacity-90">{service.description}</p>
+                    <p className="text-sm text-white opacity-90">{service.description}</p>
                   </div>
                 </div>
               </SwiperSlide>

@@ -14,28 +14,28 @@ const poppins = Poppins({
 const coupons = [
   {
     id: 1,
-    title: '$5 OFF',
-    subtitle: 'Wash & Fold $25 Order',
-    address: '8494 Signal Hill Road\nManassas, VA, 20110',
-    email: 'info@yourlaundrysitename.com',
+    title: '5% OFF',
+    subtitle: 'Laundry Services with 25 AED Order',
+    address: 'Shop no 4, Azizi Riviera 42, Meydan, Al Merkadh, Dubai UAE',
+    email: 'freshorappc@gmail.com',
     expires: '5/31/2020',
     note: "Don't Spend ALL DAY. Doing Laundry!",
   },
   {
     id: 2,
     title: 'FREE DRY',
-    subtitle: 'with Self Serve Wash',
-    address: '8494 Signal Hill Road\nManassas, VA, 20110',
-    email: 'info@yourlaundrysitename.com',
+    subtitle: 'With Dry Cleaning Services',
+    address: 'Shop no 4, Azizi Riviera 42, Meydan, Al Merkadh, Dubai UAE',
+    email: 'freshorappc@gmail.com',
     expires: '5/31/2020',
     note: "Don't Spend ALL DAY. Doing Laundry!",
   },
   {
     id: 3,
-    title: '$10 OFF',
-    subtitle: 'On orders above $50',
-    address: '8494 Signal Hill Road\nManassas, VA, 20110',
-    email: 'info@yourlaundrysitename.com',
+    title: '10% OFF',
+    subtitle: 'On orders above 50 AED',
+    address: 'Shop no 4, Azizi Riviera 42, Meydan, Al Merkadh, Dubai UAE',
+    email: 'freshorappc@gmail.com',
     expires: '6/30/2020',
     note: 'Grab your discount now!',
   },
@@ -43,8 +43,8 @@ const coupons = [
     id: 4,
     title: '20% OFF',
     subtitle: 'First-time Customer',
-    address: '8494 Signal Hill Road\nManassas, VA, 20110',
-    email: 'info@yourlaundrysitename.com',
+    address: 'Shop no 4, Azizi Riviera 42, Meydan, Al Merkadh, Dubai UAE',
+    email: 'freshorappc@gmail.com',
     expires: '7/31/2020',
     note: 'Welcome offer!',
   },
@@ -95,8 +95,8 @@ export default function CouponCarousel() {
                         {/* Header */}
                         <div className="flex justify-between items-center px-6 py-4 border-b">
                           <div className="flex items-center gap-2">
-                            <Image src="/logo.svg" alt="logo" width={24} height={24} />
-                            <span className="text-xl font-bold text-gray-700">ProLaundry</span>
+                            <Image src="/images/F.png" alt="logo" width={24} height={24} />
+                            <span className="text-xl font-bold text-gray-700">Freshora Laundry</span>
                           </div>
                           <span className="text-sm text-gray-500">
                             Expires: {coupon.expires}

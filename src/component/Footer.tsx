@@ -25,9 +25,9 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               {[
-                { Icon: FaTwitter, label: "Twitter" },
+                
                 { Icon: FaFacebookF, label: "Facebook" },
-                { Icon: FaLinkedinIn, label: "LinkedIn" },
+                
                 { Icon: FaInstagram, label: "Instagram" },
               ].map(({ Icon, label }, idx) => (
                 <button
@@ -52,8 +52,8 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MdAccessTime className="text-green-500 mt-1" size={18} />
                 <div>
-                  <p>Mon-Fri: 8am - 5pm</p>
-                  <p>Sat-Sun: 10am - 5pm</p>
+                  <p>Monday-Friday: 8 am to 8pm</p>
+                  <p> Saturday-Sunday: 10am to 8pm</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">

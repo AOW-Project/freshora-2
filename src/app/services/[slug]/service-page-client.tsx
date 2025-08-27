@@ -128,7 +128,7 @@ export default function ServicePageClient({
         <div className="flex items-start gap-3">
           <Clock className="h-4 w-4 text-green-600 mt-1 flex-shrink-0" />
           <div className="text-sm">
-            <p className="text-gray-600">Mon-Fri 08:00 AM - 05:00 PM</p>
+            <p className="text-gray-600">Mon-Fri  8am - 8pm</p>
             <p className="text-gray-600">Sat-Sun 10am - 5pm</p>
 
           </div>

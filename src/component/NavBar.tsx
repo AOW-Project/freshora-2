@@ -82,8 +82,7 @@ const Navbar = () => {
               Address: Shop no 4, Azizi Riviera 42, Meydan, Al Merkadh, Dubai UAE
             </span>
             <div className="flex gap-4 flex-wrap">
-              <span> Timing: Mon to Friday - 8 am to 8pm  
-sat-sun - 10am to 8pm
+              <span> Timing: Mon to Friday - 8 am to 8pm  Sat-Sun - 10am to 8pm
  </span>
               <span className="truncate">freshorappc@gmail.com</span>
             </div>
@@ -93,7 +92,7 @@ sat-sun - 10am to 8pm
                 <span>+971 50 925 9667</span>
               </span>
               <div className="flex gap-2">
-                {[FaTwitter, FaFacebookF, FaLinkedinIn, FaInstagram].map((Icon, i) => (
+                {[FaFacebookF, FaInstagram].map((Icon, i) => (
                   <Icon
                     key={i}
                     className="hover:text-green-500 cursor-pointer"

@@ -83,9 +83,12 @@ const ServicePriceCard: React.FC<ServicePriceCardProps> = ({ icon: Icon, title, 
         </div>
       </div>
       <div className="absolute bottom-3 sm:bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-y-0 translate-y-4">
-        <button className="px-4 sm:px-6 py-2 bg-green-600 text-white text-xs sm:text-sm font-semibold hover:bg-green-700 transition-colors duration-300 shadow-md">
+        <Link href="/services">
+                <button className="px-4 sm:px-6 py-2 bg-green-600 text-white text-xs sm:text-sm font-semibold hover:bg-green-700 transition-colors duration-300 shadow-md">
           Order Now
         </button>
+        </Link>
+
       </div>
     </Card>
   )

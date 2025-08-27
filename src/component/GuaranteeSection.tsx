@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const GuaranteeSection: React.FC = () => {
@@ -19,9 +20,12 @@ const GuaranteeSection: React.FC = () => {
             In the rare instance that an item goes missing or is damaged during the cleaning process, we’ll reimburse you up to the full
             value of the item with a $1,000 maximum per order.
           </p>
-          <button className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300">
+          <Link href='/services'>
+                    <button className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300">
             Get Service Now
           </button>
+          </Link>
+
         </div>
 
         {/* Image */}
