@@ -41,7 +41,7 @@ export default function LaundryStats() {
             <div className="relative w-full max-w-sm sm:max-w-md lg:w-5/12">
               <div className="relative aspect-square">
                 <Image
-                  src="/images/about.jpg"
+                  src="/images/about.webp"
                   alt="Laundry Experience"
                   fill
                   className="shadow-lg object-cover rounded-lg"

@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const slides = [
   {
-    image: "/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.JPG",
+    image: "/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.webp",
     alt: "A woman smiling while holding a basket of fresh laundry",
     subtitle: "Free Pickup & Delivery",
     title: "Professional Laundry & Dry Cleaning",
@@ -16,7 +16,7 @@ const slides = [
     buttonLink: "/services",
   },
   {
-    image: "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc.jpg",
+    image: "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc (1).webp",
     alt: "A laundry professional handing clean clothes to a customer",
     subtitle: "25+ Years of Experience",
     title: "Quality Care For Your Clothes",
@@ -26,7 +26,7 @@ const slides = [
     buttonLink: "/services",
   },
   {
-    image: "/images/cleaning-lady-using-a-canister-vacuum-cleaner-2024-10-20-21-05-25-utc.jpg",
+    image: "/images/cleaning-lady-using-a-canister-vacuum-cleaner-2024-10-20-21-05-25-utc.webp",
     alt: "A woman professionally steaming a blue shirt",
     subtitle: "Perfectly Pressed, Every Time",
     title: "Expert Ironing Services",
@@ -36,7 +36,7 @@ const slides = [
     buttonLink: "/prices",
   },
   {
-    image: "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.jpg",
+    image: "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.webp",
     alt: "A happy customer receiving their clean clothes",
     subtitle: "Your Happiness, Guaranteed",
     title: "100% Customer Satisfaction",
