@@ -7,7 +7,7 @@ import { ArrowLeft, Minus, Plus, Trash2 } from "lucide-react";
 import { useCart } from "../context/cart-context";
 import PickupForm from "@/component/SchedulePickupModal";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; // ✅ Correct import for App Router
+import { useRouter } from "next/navigation"; // App Router
 
 const parseFeatureString = (feature: string) => {
   const match = feature.match(/^(\d+)\s+(.*)/);
@@ -22,8 +22,9 @@ export default function CartPage() {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [packagePrice, setPackagePrice] = useState<number | null>(null);
 
-  const router = useRouter(); // ✅ useRouter defined here
+  const router = useRouter();
 
+  // Process package items from localStorage
   useEffect(() => {
     const processPackage = async () => {
       const storedPackage = localStorage.getItem("cartPackage");
@@ -58,6 +59,7 @@ export default function CartPage() {
 
   const finalTotalPrice = packagePrice !== null ? packagePrice : getTotalPrice();
 
+  // Loading state
   if (isLoading && cartItems.length === 0 && packagePrice === null) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -66,20 +68,19 @@ export default function CartPage() {
     );
   }
 
+  // Empty cart view
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50">
         <div
           className="relative h-64 bg-cover bg-center flex items-center"
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/modern-office-laundry.png')`,
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/modern-office-laundry.png')`,
           }}
         >
           <div className="max-w-7xl mx-auto px-4 w-full">
             <nav className="flex items-center space-x-2 text-white mb-4">
-              <Link href="/" className="hover:text-green-400">
-                Home
-              </Link>
+              <Link href="/" className="hover:text-green-400">Home</Link>
               <span className="px-2">/</span>
               <span className="text-green-400">Cart</span>
             </nav>
@@ -107,28 +108,32 @@ export default function CartPage() {
         <div
           className="relative h-64 bg-cover bg-center flex items-center"
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/modern-office-laundry.png')`,
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/modern-office-laundry.png')`,
           }}
         >
           <div className="max-w-7xl mx-auto px-4 w-full">
             <nav className="flex items-center space-x-2 text-white mb-4">
-              <Link href="/" className="hover:text-green-400">
-                Home
-              </Link>
+              <Link href="/" className="hover:text-green-400">Home</Link>
               <span className="px-2">/</span>
               <span className="text-green-400">Cart</span>
             </nav>
             <h1 className="text-4xl md:text-5xl font-bold text-white">Shopping Cart</h1>
           </div>
         </div>
+
         <div className="max-w-7xl mx-auto px-4 py-8">
-          {/* ✅ Back Button */}
+          {/* Back Button with source-aware routing */}
           <button
             onClick={() => {
-              if (document.referrer) {
-                router.back();
+              const cartSource = localStorage.getItem("cartSourcePage");
+
+              if (packagePrice !== null) {
+                router.push("/services"); // Package items → go to Services
+              } else if (cartSource) {
+                router.push(cartSource); // Service items → go to their source page
+                localStorage.removeItem("cartSourcePage"); // cleanup
               } else {
-                router.push("/services"); // fallback
+                router.push("/"); // fallback
               }
             }}
             className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 mb-6"
@@ -181,12 +186,7 @@ export default function CartPage() {
                           </Button>
                         </div>
                         <div className="text-right self-stretch flex flex-col justify-between">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="text-red-500 hover:text-red-700"
-                            disabled
-                          >
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-700" disabled>
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
@@ -196,6 +196,7 @@ export default function CartPage() {
                 </CardContent>
               </Card>
             </div>
+
             <div className="sticky top-24">
               <Card>
                 <CardHeader>
@@ -231,6 +232,7 @@ export default function CartPage() {
           </div>
         </div>
       </div>
+
       <PickupForm open={checkoutOpen} onClose={() => setCheckoutOpen(false)} />
     </>
   );
