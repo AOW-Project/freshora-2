@@ -193,7 +193,7 @@ export default function AboutSection() {
       <GuaranteeSection />
       <AdvantagesSection />
       <HistorySection />
-      <TeamSection />
+     {/* <TeamSection /> */}
     </>
   );
 }

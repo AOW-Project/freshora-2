@@ -15,7 +15,7 @@ const packagesData = [
     id: "standard_home",
     icon: FaTshirt,
     title: "Standard Package",
-    description: "50 Clothes Per Month",
+    description: "",
     features: [
       "4 T-Shirts",
       "1 Pairs of Jeans",
@@ -33,7 +33,7 @@ const packagesData = [
     id: "premium_home",
     icon: MdIron,
     title: "Premium Package",
-    description: "80 Clothes Per Month",
+    description: "",
     features: [
       "6 T-Shirts",
       "3 Pairs of Jeans",
@@ -74,7 +74,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
             <Icon size={28} />
           </div>
           <h3 className="text-lg font-bold text-gray-800">{title}</h3>
-          <p className="text-sm font-medium text-green-600">Clothes Per Month</p>
+        { /* <p className="text-sm font-medium text-green-600">Clothes Per Month</p> */}
         </div>
         <ul className="mb-4 space-y-2 text-sm text-gray-700">
           {features.map((feature, index) => (

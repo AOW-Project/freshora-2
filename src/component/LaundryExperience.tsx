@@ -8,9 +8,9 @@ import { Phone, Clock, CreditCard, Leaf, CheckCircle2 } from "lucide-react"
 //import img01 from "../../public/images/img01.jpg"
 
 const statsData = [
-  { icon: <FaTshirt className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 50000, suffix: "+", label: "Shirts Washed" },
-  { icon: <FaWater className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 50, suffix: "", label: "Washing Machines" },
-  { icon: <GiClothes className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 10000, suffix: "+", label: "Dry Cleaned Items" },
+  { icon: <FaTshirt className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 50000, suffix: "+", label: "Fast & Secure" },
+  { icon: <FaWater className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 50, suffix: "", label: "Pickup & Delivery" },
+  { icon: <GiClothes className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 10000, suffix: "+", label: "Experienced Team" },
   { icon: <FaUserCheck className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 100, suffix: "%", label: "Happy Customers" },
 ]
 
@@ -49,9 +49,9 @@ export default function LaundryStats() {
                 />
                 {/* Floating Circle */}
                 <div className="absolute bottom-[-20px] right-[-20px] sm:bottom-6 sm:right-[-40px] bg-green-500 text-white rounded-full w-24 h-24 sm:w-32 sm:h-32 flex flex-col items-center justify-center text-center shadow-2xl">
-                  <span className="text-2xl sm:text-4xl font-extrabold">25</span>
+                  <span className="text-2xl sm:text-4xl font-extrabold">100%</span>
                   <span className="text-[10px] sm:text-sm font-semibold leading-tight px-1">
-                    years of experience
+                    Customer Satisfaction
                   </span>
                 </div>
               </div>
@@ -125,7 +125,7 @@ Every garment is treated with great care, following strict  standards to protect
       </section>
 
       {/* Stats Section */}
-    {/*  <section className="bg-white py-10 sm:py-14 lg:py-20">
+    {  <section className="bg-white py-10 sm:py-14 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
             {statsData.map((stat, i) => (
@@ -141,7 +141,7 @@ Every garment is treated with great care, following strict  standards to protect
             ))}
           </div>
         </div>
-      </section> */}
+      </section> }
     </>
   )
 }

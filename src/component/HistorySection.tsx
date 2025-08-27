@@ -21,9 +21,9 @@ const HistorySection: React.FC = () => {
 
         {/* Text Content */}
         <div className="md:w-1/2 md:pl-12">
-          <p className="text-green-600 font-semibold mb-2">[ Our History ]</p>
+         {/* <p className="text-green-600 font-semibold mb-2">[ Our History ]</p>*/ }
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            A Tradition of Care <br /> Since 1990
+            A Tradition of Care 
           </h2>
           <p className="text-gray-600 mb-4">
            Freshora was founded on a vision to redefine everyday laundry with exceptional service and craftsmanship. We recognized that modern lifestyles demand more than ordinary solutions. Our approach combines expertise with innovation, ensuring flawless results with every order.
