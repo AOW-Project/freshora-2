@@ -17,6 +17,7 @@ interface CartItem {
   serviceType?: string
   price: number
   quantity: number
+  title?: string
 }
 
 interface CartContextType {

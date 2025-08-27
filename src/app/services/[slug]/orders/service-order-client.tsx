@@ -1,5 +1,6 @@
 "use client"
 
+import React, { useState, useMemo, useCallback } from "react"
 import { useCart } from "@/app/context/cart-context"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -7,17 +8,15 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ShoppingCart, Star, X } from "lucide-react"
 import Link from "next/link"
-import { useCallback, useMemo, useState } from "react"
 import { toast } from "react-toastify"
 
-// --- Type Definitions ---
+// --- Types ---
 interface ServiceItem {
   id: string
   name: string
   price: number
   description: string
   unit?: string
-  image?: string
 }
 
 interface OrderItem extends ServiceItem {
@@ -35,9 +34,7 @@ interface Service {
   rating: number
   reviews: number
   duration: string
-  items: {
-    [category: string]: ServiceItem[]
-  }
+  items: Record<string, ServiceItem[]>
 }
 
 interface ServiceOrderClientProps {
@@ -48,19 +45,17 @@ interface ServiceOrderClientProps {
 interface ItemCardProps {
   item: ServiceItem
   category: string
-  quantities: { [key: string]: number }
-  onAddToOrder: (item: ServiceItem, category: string) => void
+  quantity: number
   onUpdateQuantity: (itemId: string, change: number) => void
+  onAddToOrder: (item: ServiceItem, category: string) => void
 }
-// --- End of Type Definitions ---
 
+// --- Utils ---
 const formatCategory = (key: string) =>
-  key
-    .replace(/[-_]/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase())
+  key.replace(/[-_]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
 
-const ItemCard = ({ item, category, quantities, onAddToOrder, onUpdateQuantity }: ItemCardProps) => {
-  const quantity = quantities[item.id] || 0
+// --- Item Card ---
+const ItemCard = React.memo(({ item, category, quantity, onUpdateQuantity, onAddToOrder }: ItemCardProps) => {
   const totalAmount = item.price * quantity
 
   return (
@@ -69,11 +64,11 @@ const ItemCard = ({ item, category, quantities, onAddToOrder, onUpdateQuantity }
         <h4 className="font-semibold text-lg">{item.name}</h4>
         <p className="text-sm text-gray-600 mb-2">{item.description}</p>
       </div>
+
       <div className="mt-auto">
         <div className="flex items-center gap-4 mb-4">
           <p className="text-green-600 font-bold text-lg">
-            {item.price.toFixed(2)}
-            {item.unit && <span className="text-sm font-normal"> {item.unit}</span>}
+            {item.price.toFixed(2)} {item.unit && <span className="text-sm font-normal">{item.unit}</span>}
           </p>
           {quantity > 0 && (
             <div className="flex items-center gap-2">
@@ -84,6 +79,7 @@ const ItemCard = ({ item, category, quantities, onAddToOrder, onUpdateQuantity }
             </div>
           )}
         </div>
+
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Button
@@ -105,6 +101,7 @@ const ItemCard = ({ item, category, quantities, onAddToOrder, onUpdateQuantity }
               +
             </Button>
           </div>
+
           <Button
             onClick={() => onAddToOrder(item, category)}
             disabled={quantity === 0}
@@ -116,108 +113,46 @@ const ItemCard = ({ item, category, quantities, onAddToOrder, onUpdateQuantity }
       </div>
     </Card>
   )
-}
-
+})
 ItemCard.displayName = "ItemCard"
 
+// --- Main Component ---
 export default function ServiceOrderClient({ slug, service }: ServiceOrderClientProps) {
   const { addToCart, getTotalItems } = useCart()
-  const [quantities, setQuantities] = useState<{ [key: string]: number }>({})
+  const [quantities, setQuantities] = useState<Record<string, number>>({})
   const [tempOrder, setTempOrder] = useState<OrderItem[]>([])
   const [isAddingToCart, setIsAddingToCart] = useState(false)
 
   const categories = useMemo(() => Object.keys(service.items || {}), [service.items])
   const firstCategory = categories[0]
 
-  const hasItems = useMemo(() => {
-    if (!categories.length) return false
-    return categories.some((cat) => (service.items?.[cat] || []).length > 0)
-  }, [categories, service.items])
+  const hasItems = categories.some((cat) => (service.items?.[cat] || []).length > 0)
 
-  const orderTotal = useMemo(() => {
-    return tempOrder.reduce((total, item) => total + item.price * item.quantity, 0)
-  }, [tempOrder])
-
-  const breadcrumbNav = useMemo(
-    () => (
-      <nav className="flex items-center space-x-2 text-white mb-4">
-        <Link href="/" className="hover:text-green-400">
-          Home
-        </Link>
-        <span className="px-2">/</span>
-        <Link href="/services" className="hover:text-green-400">
-          Services
-        </Link>
-        <span className="px-2">/</span>
-        <span className="text-green-400">Order</span>
-      </nav>
-    ),
-    [],
+  const orderTotal = useMemo(
+    () => tempOrder.reduce((total, item) => total + item.price * item.quantity, 0),
+    [tempOrder]
   )
 
-  const updateQuantity = useCallback(
-    (itemId: string, change: number) => {
-      const newQuantity = Math.max(0, (quantities[itemId] || 0) + change)
-      setQuantities((prev) => ({ ...prev, [itemId]: newQuantity }))
-    },
-    [quantities],
+  const allItems = useMemo(
+    () => Object.entries(service.items).flatMap(([category, items]) => items.map((i) => ({ ...i, category }))),
+    [service.items]
   )
+
+  const updateQuantity = useCallback((itemId: string, change: number) => {
+    setQuantities((prev) => {
+      const newQuantity = Math.max(0, (prev[itemId] || 0) + change)
+      return { ...prev, [itemId]: newQuantity }
+    })
+  }, [])
 
   const removeFromOrder = useCallback((itemId: string) => {
     setTempOrder((prev) => prev.filter((item) => item.id !== itemId))
   }, [])
 
-  const handleAddAllToCart = useCallback(async () => {
-    if (tempOrder.length === 0) return
-
-    const allItems = Object.entries(service.items).flatMap(([category, items]) =>
-      items.map((item) => ({ ...item, category }))
-    )
-
-    const missedItems = allItems.filter((item) => {
-      const quantitySelected = quantities[item.id] || 0
-      const alreadyInTemp = tempOrder.some((orderItem) => orderItem.id === item.id)
-      return quantitySelected > 0 && !alreadyInTemp
-    })
-
-    if (missedItems.length > 0) {
-      toast.error("⚠️ Some selected items have not been added. Please add them before proceeding.", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        theme: "colored",
-      })
-      return
-    }
-
-    setIsAddingToCart(true)
-    try {
-      for (const item of tempOrder) {
-        const cartItem = {
-          id: `${service.id}-${item.id}`,
-          title: item.name,
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-        }
-        await addToCart(cartItem)
-      }
-      setTempOrder([])
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred"
-      console.error("Error adding items to cart:", errorMessage)
-      toast.error(`Failed to add items to cart: ${errorMessage}`)
-    } finally {
-      setIsAddingToCart(false)
-    }
-  }, [tempOrder, addToCart, service.id, quantities, service.items])
-
   const handleAddToOrder = useCallback(
     (item: ServiceItem, category: string) => {
       const quantity = quantities[item.id] || 0
       if (quantity === 0) return
-
-      const orderItem: OrderItem = { ...item, quantity, category }
 
       setTempOrder((prev) => {
         const existingIndex = prev.findIndex((i) => i.id === item.id)
@@ -226,13 +161,49 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
           updated[existingIndex].quantity += quantity
           return updated
         }
-        return [...prev, orderItem]
+        return [...prev, { ...item, quantity, category }]
       })
-
       setQuantities((prev) => ({ ...prev, [item.id]: 0 }))
     },
-    [quantities],
+    [quantities]
   )
+
+  const handleAddAllToCart = useCallback(async () => {
+    if (tempOrder.length === 0) return
+
+    // ensure no missed items
+    const missedItems = allItems.filter((item) => {
+      const qty = quantities[item.id] || 0
+      const alreadyInTemp = tempOrder.some((orderItem) => orderItem.id === item.id)
+      return qty > 0 && !alreadyInTemp
+    })
+
+    if (missedItems.length > 0) {
+      toast.error("⚠️ Some selected items have not been added. Please add them first.", { theme: "colored" })
+      return
+    }
+
+    setIsAddingToCart(true)
+    try {
+      await Promise.all(
+        tempOrder.map((item) =>
+          addToCart({
+            id: `${service.id}-${item.id}`,
+            title: item.name,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+          })
+        )
+      )
+      setTempOrder([])
+    } catch (error) {
+      console.error("Error adding to cart:", error)
+      toast.error("Failed to add items to cart.")
+    } finally {
+      setIsAddingToCart(false)
+    }
+  }, [tempOrder, allItems, addToCart, quantities, service.id])
 
   if (!hasItems) {
     return (
@@ -249,7 +220,7 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
   return (
     <div className="flex">
       <div className="flex-1">
-        {/* Header Section */}
+        {/* Header */}
         <div
           className="relative h-64 bg-cover bg-center flex items-center"
           style={{
@@ -257,69 +228,61 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
           }}
         >
           <div className="max-w-7xl mx-auto px-4 w-full">
-            {breadcrumbNav}
+            <nav className="flex items-center space-x-2 text-white mb-4">
+              <Link href="/" className="hover:text-green-400">Home</Link>
+              <span className="px-2">/</span>
+              <Link href="/services" className="hover:text-green-400">Services</Link>
+              <span className="px-2">/</span>
+              <span className="text-green-400">Order</span>
+            </nav>
             <h1 className="text-4xl md:text-5xl font-bold text-white">Select Your Items</h1>
           </div>
         </div>
 
-        {/* Service Info + Tabs */}
+        {/* Service Info */}
         <div className="min-h-screen bg-gray-50">
           <div className="bg-white shadow-sm">
-            <div className="max-w-7xl mx-auto px-4 py-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{service.title}</h1>
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-4 w-4 ${
-                            i < Math.round(service.rating) ? "text-yellow-400 fill-current" : "text-gray-300"
-                          }`}
-                        />
-                      ))}
-                      <span className="ml-2 text-sm text-gray-600">
-                        {service.rating.toFixed(1)} ({service.reviews} reviews)
-                      </span>
-                    </div>
-                    <Badge variant="secondary" className="bg-green-100 text-green-800">
-                      {service.duration}
-                    </Badge>
+            <div className="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{service.title}</h1>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`h-4 w-4 ${i < Math.round(service.rating) ? "text-yellow-400 fill-current" : "text-gray-300"}`}
+                      />
+                    ))}
+                    <span className="ml-2 text-sm text-gray-600">
+                      {service.rating.toFixed(1)} ({service.reviews} reviews)
+                    </span>
                   </div>
+                  <Badge variant="secondary" className="bg-green-100 text-green-800">
+                    {service.duration}
+                  </Badge>
                 </div>
-
-                {/* View Cart button (blocked if missed items exist) */}
-                {getTotalItems() > 0 && (
-                  <Button
-                    className="bg-green-600 hover:bg-green-700"
-                    onClick={() => {
-                      const allItems = Object.entries(service.items).flatMap(([category, items]) =>
-                        items.map((item) => ({ ...item, category }))
-                      )
-                      const missedItems = allItems.filter((item) => {
-                        const quantitySelected = quantities[item.id] || 0
-                        const alreadyInTemp = tempOrder.some((orderItem) => orderItem.id === item.id)
-                        return quantitySelected > 0 && !alreadyInTemp
-                      })
-
-                      if (missedItems.length > 0) {
-                        toast.error("⚠️ Please add all selected items before going to cart.", {
-                          position: "top-right",
-                          autoClose: 3000,
-                          hideProgressBar: false,
-                          theme: "colored",
-                        })
-                      } else {
-                        window.location.href = "/cart"
-                      }
-                    }}
-                  >
-                    <ShoppingCart className="h-4 w-4 mr-2" />
-                    View Cart ({getTotalItems()})
-                  </Button>
-                )}
               </div>
+
+              {getTotalItems() > 0 && (
+                <Button
+                  className="bg-green-600 hover:bg-green-700"
+                  onClick={() => {
+                    const missedItems = allItems.filter((item) => {
+                      const qty = quantities[item.id] || 0
+                      const alreadyInTemp = tempOrder.some((orderItem) => orderItem.id === item.id)
+                      return qty > 0 && !alreadyInTemp
+                    })
+                    if (missedItems.length > 0) {
+                      toast.error("⚠️ Add all selected items before going to cart.", { theme: "colored" })
+                    } else {
+                      window.location.href = "/cart"
+                    }
+                  }}
+                >
+                  <ShoppingCart className="h-4 w-4 mr-2" />
+                  View Cart ({getTotalItems()})
+                </Button>
+              )}
             </div>
           </div>
 
@@ -330,35 +293,28 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
                 <Tabs defaultValue={firstCategory} className="w-full">
                   <TabsList className="flex flex-wrap gap-2 overflow-x-auto">
                     {categories.map((category) => (
-                      <TabsTrigger key={category} value={category} className="whitespace-nowrap">
+                      <TabsTrigger key={category} value={category}>
                         {formatCategory(category)}
                       </TabsTrigger>
                     ))}
                   </TabsList>
 
-                  {categories.map((category) => {
-                    const itemsInCategory = service.items?.[category] || []
-                    return (
-                      <TabsContent key={category} value={category} className="mt-6">
-                        <div className="grid md:grid-cols-2 gap-4">
-                          {itemsInCategory.length > 0 ? (
-                            itemsInCategory.map((item) => (
-                              <ItemCard
-                                key={item.id}
-                                item={item}
-                                category={formatCategory(category)}
-                                quantities={quantities}
-                                onAddToOrder={handleAddToOrder}
-                                onUpdateQuantity={updateQuantity}
-                              />
-                            ))
-                          ) : (
-                            <p className="text-gray-500 text-sm">No items in this category.</p>
-                          )}
-                        </div>
-                      </TabsContent>
-                    )
-                  })}
+                  {categories.map((category) => (
+                    <TabsContent key={category} value={category} className="mt-6">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        {(service.items?.[category] || []).map((item) => (
+                          <ItemCard
+                            key={item.id}
+                            item={item}
+                            category={formatCategory(category)}
+                            quantity={quantities[item.id] || 0}
+                            onUpdateQuantity={updateQuantity}
+                            onAddToOrder={handleAddToOrder}
+                          />
+                        ))}
+                      </div>
+                    </TabsContent>
+                  ))}
                 </Tabs>
               </CardContent>
             </Card>
@@ -368,45 +324,35 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
 
       {/* Order Summary */}
       {tempOrder.length > 0 && (
-        <div className="w-80 bg-white border-l border-gray-200 p-6 sticky top-0 h-screen overflow-y-auto">
+        <aside className="w-80 bg-white border-l border-gray-200 p-6 sticky top-0 h-screen overflow-y-auto">
           <h3 className="text-xl font-bold mb-4">Order Summary</h3>
           <div className="space-y-3 mb-6">
             {tempOrder.map((item) => (
               <div key={item.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex-1">
+                <div>
                   <h4 className="font-medium text-sm">{item.name}</h4>
                   <p className="text-xs text-gray-600">{item.category}</p>
                   <p className="text-sm font-semibold text-green-600">
                     ${item.price.toFixed(2)} × {item.quantity} = ${(item.price * item.quantity).toFixed(2)}
                   </p>
                 </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => removeFromOrder(item.id)}
-                  className="text-red-500 hover:text-red-700"
-                >
+                <Button variant="ghost" size="sm" onClick={() => removeFromOrder(item.id)} className="text-red-500 hover:text-red-700">
                   <X className="h-4 w-4" />
                 </Button>
               </div>
             ))}
           </div>
-          <div className="border-t pt-4 mb-6">
-            <div className="flex justify-between items-center text-lg font-bold">
-              <span>Total:</span>
-              <span className="text-green-600">{orderTotal.toFixed(2)}</span>
-            </div>
+
+          <div className="border-t pt-4 mb-6 flex justify-between text-lg font-bold">
+            <span>Total:</span>
+            <span className="text-green-600">{orderTotal.toFixed(2)}</span>
           </div>
-          <Button
-            onClick={handleAddAllToCart}
-            disabled={isAddingToCart}
-            className="w-full bg-green-600 hover:bg-green-700"
-            size="lg"
-          >
+
+          <Button onClick={handleAddAllToCart} disabled={isAddingToCart} className="w-full bg-green-600 hover:bg-green-700" size="lg">
             <ShoppingCart className="h-4 w-4 mr-2" />
             {isAddingToCart ? "Adding..." : "Add All to Cart"}
           </Button>
-        </div>
+        </aside>
       )}
     </div>
   )

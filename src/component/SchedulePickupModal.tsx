@@ -317,25 +317,22 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
         const data = await res.json()
         console.log("[v0] Order response:", data)
 
-        if (data.success) {
-          // ✅ Clear via CartContext (removes React state + localStorage)
-          await clearCart()
+      if (data.success) {
+  // Show success message
+  setMessage(`✅ Order placed successfully! Order Number: ${data.data.orderNumber}`)
 
-          // (Optional) extra safety: ensure local copy cleared too
-          try {
-            localStorage.removeItem("cart")
-          } catch {}
+  // Redirect to thank you page immediately
+  router.push("/thankYou")
 
-          setMessage(`✅ Order placed successfully! Order Number: ${data.data.orderNumber}`)
-
-          // Optional: close the modal immediately
-          // onClose?.()
-
-          // Redirect to thank you page after 2 seconds
-          setTimeout(() => {
-            router.push("/thankYou")
-          }, 2000)
-        } else {
+  // Clear cart after redirect (small delay so it doesn’t flash empty cart)
+  setTimeout(() => {
+    clearCart()
+    try {
+      localStorage.removeItem("cart")
+    } catch {}
+  }, 500)
+}
+else {
           setMessage("❌ Failed to place order: " + (data.message || data.errors?.join(", ") || "Unknown error"))
         }
       } catch (error) {
