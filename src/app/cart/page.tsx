@@ -103,16 +103,15 @@ export default function CartPage() {
   }
 
   // --- BACK BUTTON LOGIC ---
-  const handleBack = () => {
-    const cartSource = localStorage.getItem("cartSourcePage");
-    if (packagePrice !== null) {
-      router.push("/services");
-    } else if (cartSource) {
-      router.push(cartSource);
-    } else {
-      router.back();
-    }
-  };
+const handleBack = () => {
+  const prevPage = sessionStorage.getItem("prevPage");
+
+  if (prevPage) {
+    router.push(prevPage); // e.g., /services/:slug/order
+  } else {
+    router.push("/services"); // fallback if no history
+  }
+};
 
   return (
     <>
