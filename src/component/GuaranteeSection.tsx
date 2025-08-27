@@ -13,12 +13,10 @@ const GuaranteeSection: React.FC = () => {
         <div className="md:w-1/2 mb-10 md:mb-0">
           <p className="text-green-600 font-semibold mb-2">[ Our Guarantee ]</p>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            The Best Guarantee <br className="hidden md:block" /> in the Business
+            Excellence  <br className="hidden md:block" /> Without Exception
           </h2>
           <p className="text-gray-600 mb-6">
-            The most trusted brand in clothing care since 2011. We will do everything we can to return your clothes to you in great shape.
-            In the rare instance that an item goes missing or is damaged during the cleaning process, we’ll reimburse you up to the full
-            value of the item with a $1,000 maximum per order.
+            Since 2011, Freshora has been the trusted name in garment care. We are committed to returning every piece in immaculate condition. In the rare instance of loss or damage, we provide reimbursement up to the full value of the item, with a $1,000 maximum per order.
           </p>
           <Link href='/services'>
                     <button className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300">

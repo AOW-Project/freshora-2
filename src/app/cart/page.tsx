@@ -102,6 +102,17 @@ export default function CartPage() {
     );
   }
 
+  // --- BACK BUTTON LOGIC ---
+const handleBack = () => {
+  const prevPage = sessionStorage.getItem("prevPage");
+
+  if (prevPage) {
+    router.push(prevPage); // e.g., /services/:slug/order
+  } else {
+    router.push("/services"); // fallback if no history
+  }
+};
+
   return (
     <>
       <div className="min-h-screen bg-gray-50">
@@ -122,20 +133,8 @@ export default function CartPage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 py-8">
-          {/* Back Button with source-aware routing */}
           <button
-            onClick={() => {
-              const cartSource = localStorage.getItem("cartSourcePage");
-
-              if (packagePrice !== null) {
-                router.push("/services"); // Package items → go to Services
-              } else if (cartSource) {
-                router.push(cartSource); // Service items → go to their source page
-                localStorage.removeItem("cartSourcePage"); // cleanup
-              } else {
-                router.push("/"); // fallback
-              }
-            }}
+            onClick={handleBack}
             className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 mb-6"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -172,7 +171,7 @@ export default function CartPage() {
                       >
                         <div className="flex-1">
                           <h3 className="font-semibold">{item.name}</h3>
-                          <p className="text-sm text-gray-600">Package Item</p>
+                          <p className="text-sm text-gray-600">{item.category}</p>
                         </div>
                         <div className="flex items-center gap-2">
                           <Button variant="outline" size="sm" className="h-8 w-8 p-0" disabled>

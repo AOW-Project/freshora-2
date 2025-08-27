@@ -23,17 +23,13 @@ const HistorySection: React.FC = () => {
         <div className="md:w-1/2 md:pl-12">
           <p className="text-green-600 font-semibold mb-2">[ Our History ]</p>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Laundry & Dry Cleaning <br /> Foundation
+            A Tradition of Care <br /> Since 1990
           </h2>
           <p className="text-gray-600 mb-4">
-            Founded in 1990, we follow a dream and an aim to serve our customers in a way that far exceeds expectation.
-            Being one of the leading laundry service providers, we know our customers’ mindset.
-            It is not easy to come home from a hectic day at the office and rush to the nearest laundry service with your clothes.
-            So, we have an array of services to make things easy for you.
+           Freshora was founded on a vision to redefine everyday laundry with exceptional service and craftsmanship. We recognized that modern lifestyles demand more than ordinary solutions. Our approach combines expertise with innovation, ensuring flawless results with every order.
           </p>
           <p className="text-gray-600">
-            You need not tolerate late deliveries, low standard of work merged with high prices.
-            Our services cater to all your laundering and ironing, dry cleaning, shoe repairs, upholstery cleaning, etc.
+            From laundry and dry cleaning to luxury shoe care, upholstery, and curtain cleaning, Freshora has grown into a symbol of reliability and refinement. We reject compromise  no delays, no shortcuts, only consistent excellence
           </p>
         </div>
       </div>
