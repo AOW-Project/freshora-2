@@ -82,7 +82,9 @@ const Navbar = () => {
               Address: Shop no 4, Azizi Riviera 42, Meydan, Al Merkadh, Dubai UAE
             </span>
             <div className="flex gap-4 flex-wrap">
-              <span>Mon-Fri 08:00 AM - 05:00 PM</span>
+              <span> Timing: Mon to Friday - 8 am to 8pm  
+sat-sun - 10am to 8pm
+ </span>
               <span className="truncate">freshorappc@gmail.com</span>
             </div>
             <div className="flex gap-3 items-center">
