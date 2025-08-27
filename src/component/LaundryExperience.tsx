@@ -110,9 +110,9 @@ Every garment is treated with great care, following strict  standards to protect
           {/* 3 Feature Boxes */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-16 sm:mt-20 lg:mt-28">
             {[
-              { icon: <Clock className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Save Time & Money", desc: "We pick up and deliver for free—no more wasted trips to the laundromat." },
-              { icon: <CreditCard className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Pay Online in Seconds", desc: "Manage your billing and account online easily from any device." },
-              { icon: <Leaf className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Eco-Friendly", desc: "We use safe, clean, perc-free solvents so you and the Earth stay safe." },
+              { icon: <Clock className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Save Time & Money", desc: "Skip the traffic and waiting. We collect, clean, and return your clothes with no extra cost." },
+              { icon: <CreditCard className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Pay in Seconds", desc: "Book and pay online from any device - fast, secure, and effortless" },
+              { icon: <Leaf className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Eco-Friendly Care", desc: "We use gentle, non-toxic solutions that care for fabrics, skin, and the environment." },
             ].map((card, i) => (
               <div key={i} className="bg-white p-5 sm:p-6 lg:p-8 rounded-lg shadow-md hover:shadow-lg transition">
                 <div className="mb-3 sm:mb-4">{card.icon}</div>
