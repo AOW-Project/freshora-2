@@ -3,7 +3,6 @@ import { CartProvider } from "@/app/context/cart-context";
 import "./globals.css";
 import Navbar from "@/component/NavBar";
 import Footer from "@/component/Footer";
-import MissingItemsNotifier from "@/component/MissingItemsNotifier";
 import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
@@ -16,7 +15,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <CartProvider>
-          <MissingItemsNotifier />  {/* ✅ No props needed */}
           <div className="relative z-10 min-h-screen">
             <Navbar />
             <main className="relative z-20">{children}</main>

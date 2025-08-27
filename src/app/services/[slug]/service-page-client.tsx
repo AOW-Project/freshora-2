@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { ChangeEvent, useCallback, useMemo, useState } from "react"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
@@ -9,52 +9,110 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { MapPin, Clock, Mail, Phone, CheckCircle } from "lucide-react"
-
-// --- FIX: Import the 'Service' type correctly ---
 import type { Service } from "./page"
+
+type FormState = {
+  name: string
+  email: string
+  phone: string
+  question: string
+}
 
 export default function ServicePageClient({
   slug,
   service,
 }: {
   slug: string
-  service: Service 
+  service: Service
 }) {
+  const [form, setForm] = useState<FormState>({
+    name: "",
+    email: "",
+    phone: "",
+    question: "",
+  })
+  const [loading, setLoading] = useState(false)
+  const [thankYou, setThankYou] = useState(false)
+
+  // 🔹 handleChange supports both Input & Textarea
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = event.target
+      setForm((prev) => ({ ...prev, [name]: value }))
+    },
+    []
+  )
+
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault()
+      setLoading(true)
+      try {
+        const res = await fetch("/api/send-question", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        })
+        if (res.ok) {
+          setForm({ name: "", email: "", phone: "", question: "" })
+          setThankYou(true)
+          setTimeout(() => setThankYou(false), 1000) // hide after 1 sec
+        }
+      } catch (err) {
+        console.error("Error sending question", err)
+      } finally {
+        setLoading(false)
+      }
+    },
+    [form]
+  )
+
   const serviceCategories = useMemo(
     () => [
-        { name: "Laundry Services", slug: "laundry-services" },
-        { name: "Dry Cleaning Services", slug: "dry-cleaning-services" },
-        { name: "Express Laundry Services", slug: "express-laundry-services" },
-        { name: "Shoe & Bag Spa", slug: "shoe-bag-spa" },
-        { name: "Luxury Shoe Cleaning", slug: "luxury-shoe-cleaning" },
-        { name: "Commercial Laundry Service", slug: "commercial-laundry-service" },
-        { name: "Curtain Cleaning Service", slug: "curtain-cleaning-service" },
-        { name: "Carpet Cleaning Service", slug: "carpet-cleaning-service" },
-        { name: "Soft Toy Cleaning Service", slug: "soft-toy-cleaning-service" },
+      { name: "Laundry Services", slug: "laundry-services" },
+      { name: "Dry Cleaning Services", slug: "dry-cleaning-services" },
+      { name: "Express Laundry Services", slug: "express-laundry-services" },
+      { name: "Shoe & Bag Spa", slug: "shoe-bag-spa" },
+      { name: "Luxury Shoe Cleaning", slug: "luxury-shoe-cleaning" },
+      { name: "Commercial Laundry Service", slug: "commercial-laundry-service" },
+      { name: "Curtain Cleaning Service", slug: "curtain-cleaning-service" },
+      { name: "Carpet Cleaning Service", slug: "carpet-cleaning-service" },
+      { name: "Soft Toy Cleaning Service", slug: "soft-toy-cleaning-service" },
     ],
-    [],
+    []
   )
 
   const serviceFeatures = useMemo(
     () => [
-      "Salons & Spas", "Restaurants and Caterers", "Religious Organizations",
-      "Daycare centers", "Assisted Living / Nursing Homes", "Hotels & Motels",
-      "Nail Salons", "Athletic Facilities / Gyms",
+      "Salons & Spas",
+      "Restaurants and Caterers",
+      "Religious Organizations",
+      "Daycare centers",
+      "Assisted Living / Nursing Homes",
+      "Hotels & Motels",
+      "Nail Salons",
+      "Athletic Facilities / Gyms",
     ],
-    [],
+    []
   )
 
   const breadcrumbNav = useMemo(
     () => (
       <nav className="flex items-center space-x-1 sm:space-x-2 text-white mb-3 sm:mb-4 text-sm">
-        <Link href="/" className="hover:text-green-400 transition-colors">Home</Link>
+        <Link href="/" className="hover:text-green-400 transition-colors">
+          Home
+        </Link>
         <span className="px-1 sm:px-2">/</span>
-        <Link href="/services" className="hover:text-green-400 transition-colors">Services</Link>
+        <Link href="/services" className="hover:text-green-400 transition-colors">
+          Services
+        </Link>
         <span className="px-1 sm:px-2">/</span>
-        <span className="text-green-400 capitalize">{slug.replace(/-/g, ' ')}</span>
+        <span className="text-green-400 capitalize">
+          {slug.replace(/-/g, " ")}
+        </span>
       </nav>
     ),
-    [slug],
+    [slug]
   )
 
   const contactInfo = useMemo(
@@ -63,20 +121,23 @@ export default function ServicePageClient({
         <div className="flex items-start gap-3">
           <MapPin className="h-4 w-4 text-green-600 mt-1 flex-shrink-0" />
           <div className="text-sm">
-            <p className="text-gray-600">8494 Signal Hill Road</p>
-            <p className="text-gray-600">Manassas, VA, 20110</p>
+            <p className="text-gray-600">Shop no 4, Azizi riviera 42</p>
+            <p className="text-gray-600">Meydan , Al Merkadh , Dubai UAE</p>
           </div>
         </div>
         <div className="flex items-start gap-3">
           <Clock className="h-4 w-4 text-green-600 mt-1 flex-shrink-0" />
           <div className="text-sm">
             <p className="text-gray-600">Mon-Fri 08:00 AM - 05:00 PM</p>
-            <p className="text-gray-600">Sat-Sun 10:00 AM - 4:00 PM</p>
+            <p className="text-gray-600">Sat-Sun 10am - 5pm</p>
+
           </div>
         </div>
         <div className="flex items-center gap-3">
           <Mail className="h-4 w-4 text-green-600 flex-shrink-0" />
-          <p className="text-sm text-gray-600 break-all">info@prolaundrysite.com</p>
+          <p className="text-sm text-gray-600 break-all">
+            freshorappc@gmail.com
+          </p>
         </div>
         <div className="flex items-center gap-3">
           <Phone className="h-4 w-4 text-green-600 flex-shrink-0" />
@@ -84,7 +145,7 @@ export default function ServicePageClient({
         </div>
       </div>
     ),
-    [],
+    []
   )
 
   if (!service) {
@@ -93,18 +154,26 @@ export default function ServicePageClient({
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Header Banner */}
       <div
         className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center flex items-center"
-        style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/modern-office-laundry.png')` }}
+        style={{
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/modern-office-laundry.png')`,
+        }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           {breadcrumbNav}
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white capitalize">{slug.replace(/-/g, ' ')}</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white capitalize">
+            {slug.replace(/-/g, " ")}
+          </h1>
         </div>
       </div>
+
+      {/* Main Layout */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
-          <div className="lg:col-span-1 order-2 lg:order-1">
+          {/* Sidebar Categories */}
+          <aside className="lg:col-span-1 order-2 lg:order-1">
             <Card className="sticky top-24">
               <CardContent className="p-0">
                 <div className="lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
@@ -113,7 +182,9 @@ export default function ServicePageClient({
                       key={category.slug}
                       href={`/services/${category.slug}`}
                       className={`block px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 last:border-b-0 transition-colors text-sm sm:text-base ${
-                        category.slug === slug ? "bg-green-600 text-white" : "hover:bg-gray-50 text-gray-700"
+                        category.slug === slug
+                          ? "bg-green-600 text-white"
+                          : "hover:bg-gray-50 text-gray-700"
                       }`}
                     >
                       {category.name}
@@ -122,22 +193,35 @@ export default function ServicePageClient({
                 </div>
               </CardContent>
             </Card>
-          </div>
-          <div className="lg:col-span-3 order-1 lg:order-2">
+          </aside>
+
+          {/* Main Content */}
+          <main className="lg:col-span-3 order-1 lg:order-2">
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
+              {/* Service Image */}
               <div className="xl:col-span-2 relative w-full h-48 sm:h-56 md:h-64 lg:h-80 rounded-lg shadow-lg overflow-hidden">
-                <Image src={service.image || "/images/layout01-img01.jpg"} alt={service.title} fill className="object-cover" />
+                <Image
+                  src={service.image || "/images/layout01-img01.jpg"}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
+
+              {/* Contact Info */}
               <div className="xl:col-span-1">
                 <Card className="h-fit">
                   <CardContent className="p-4 sm:p-6">
-                    <h3 className="text-lg font-semibold mb-4 text-gray-800">Our Contacts</h3>
+                    <h3 className="text-lg font-semibold mb-4 text-gray-800">
+                      Our Contacts
+                    </h3>
                     {contactInfo}
                     <div className="space-y-3">
                       <Link href={`/services/${slug}/orders`}>
                         <Button
                           variant="outline"
-                          className="w-full border-green-600 text-green-600 hover:bg-green-50 bg-transparent text-sm sm:text-base"
+                          className="w-full border-green-600 text-green-600 hover:bg-green-50 text-sm sm:text-base"
                         >
                           Get the Service
                         </Button>
@@ -147,63 +231,123 @@ export default function ServicePageClient({
                 </Card>
               </div>
             </div>
+
+            {/* Service Details + Ask Form */}
             <div className="mt-6 sm:mt-8 grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
+              {/* Service Content */}
               <div className="xl:col-span-2">
                 <div className="mb-6 sm:mb-8">
                   <div className="border-l-4 border-green-600 pl-4 mb-6">
-                    <h4 className="text-green-600 font-medium mb-2 text-sm sm:text-base">What we offer</h4>
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">{service.title}</h2>
-                    <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{service.fullDescription}</p>
+                    <h4 className="text-green-600 font-medium mb-2 text-sm sm:text-base">
+                      What we offer
+                    </h4>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
+                      {service.title}
+                    </h2>
+                    <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                      {service.fullDescription}
+                    </p>
                   </div>
+
+                  {/* Features */}
                   <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800">
                     Wash and Fold Laundry Service Delivered to Your Home
                   </h3>
                   <p className="text-gray-600 leading-relaxed mb-6 text-sm sm:text-base">
-                    Get the very best in wash and fold or fluff and fold laundry service from the dry cleaning and
-                    laundry experts...
+                    Get the very best in wash and fold or fluff and fold laundry
+                    service from the dry cleaning and laundry experts...
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
                     {serviceFeatures.map((feature, index) => (
                       <div key={index} className="flex items-center gap-2">
                         <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                        <span className="text-sm sm:text-base text-gray-700">{feature}</span>
+                        <span className="text-sm sm:text-base text-gray-700">
+                          {feature}
+                        </span>
                       </div>
                     ))}
                   </div>
+
+                  {/* Extra Images */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 sm:mb-8">
                     <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden">
-                      <Image src="/images/img09.jpg" alt="Ironing Service" fill className="object-cover" />
+                      <Image
+                        src="/images/img09.jpg"
+                        alt="Ironing Service"
+                        fill
+                        className="object-cover"
+                      />
                     </div>
                     <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden">
-                      <Image src="/images/img11.jpg" alt="Hanging Clothes" fill className="object-cover" />
+                      <Image
+                        src="/images/img11.jpg"
+                        alt="Hanging Clothes"
+                        fill
+                        className="object-cover"
+                      />
                     </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800">How Wash and Fold Works</h3>
-                    <p className="text-gray-600 leading-relaxed mb-4 text-sm sm:text-base">
-                      What is Wash and Fold? ...
-                    </p>
                   </div>
                 </div>
               </div>
-              <div className="xl:col-span-1">
+
+              {/* Ask Question Form */}
+              <aside className="xl:col-span-1">
                 <Card className="sticky top-24">
                   <CardContent className="p-4 sm:p-6">
-                    <h3 className="text-lg font-semibold mb-4 text-gray-800">Ask Your Question</h3>
-                    <form className="space-y-4">
-                      <Input placeholder="Your name" className="text-sm sm:text-base" />
-                      <Input type="email" placeholder="E-mail" className="text-sm sm:text-base" />
-                      <Input placeholder="Phone" className="text-sm sm:text-base" />
-                      <Textarea placeholder="Your question" className="min-h-[100px] text-sm sm:text-base" />
-                      <Button className="w-full bg-green-600 hover:bg-green-700 text-sm sm:text-base">
-                        Ask Question
-                      </Button>
-                    </form>
+                    {thankYou ? (
+                      <div className="flex items-center justify-center h-40 text-green-600 font-semibold text-lg">
+                        ✅ Thank you for your question!
+                      </div>
+                    ) : (
+                      <>
+                        <h3 className="text-lg font-semibold mb-4 text-gray-800">
+                          Ask Your Question
+                        </h3>
+                        <form className="space-y-4" onSubmit={handleSubmit}>
+                          <Input
+                            name="name"
+                            value={form.name}
+                            onChange={handleChange}
+                            placeholder="Your name"
+                            required
+                          />
+                          <Input
+                            type="email"
+                            name="email"
+                            value={form.email}
+                            onChange={handleChange}
+                            placeholder="E-mail"
+                            required
+                          />
+                          <Input
+                            name="phone"
+                            value={form.phone}
+                            onChange={handleChange}
+                            placeholder="Phone"
+                          />
+                          <Textarea
+                            name="question"
+                            value={form.question}
+                            onChange={handleChange}
+                            placeholder="Your question"
+                            className="min-h-[100px]"
+                            required
+                          />
+                          <Button
+                            type="submit"
+                            className="w-full bg-green-600 hover:bg-green-700"
+                            disabled={loading}
+                          >
+                            {loading ? "Sending..." : "Ask Question"}
+                          </Button>
+                        </form>
+                      </>
+                    )}
                   </CardContent>
                 </Card>
-              </div>
+              </aside>
             </div>
-          </div>
+          </main>
         </div>
       </div>
     </div>
