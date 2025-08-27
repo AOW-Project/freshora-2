@@ -58,7 +58,7 @@ export default function OrderTracker() {
     console.log("[v0] Tracking order:", orderNumber)
 
     try {
-      const apiUrl = `https://freshora-backend.onrender.com/api/tracking/${orderNumber}`
+      const apiUrl = `https://freshora-backend-u9xy.onrender.com/api/tracking/${orderNumber}`
       console.log("[v0] Making request to:", apiUrl)
 
       const response = await fetch(apiUrl)
