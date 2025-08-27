@@ -59,9 +59,9 @@ export default function LaundryStats() {
 
             {/* Text Section */}
             <div className="flex-1 w-full text-center lg:text-left lg:pl-8">
-              <p className="text-green-600 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
+              {/*<p className="text-green-600 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
                 More than 25 Years of Experience
-              </p>
+              </p> */ }
               <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-6 leading-tight">
                 The Best Laundry Service in Dubai, Perfected Over Time
 
@@ -125,7 +125,7 @@ Every garment is treated with great care, following strict  standards to protect
       </section>
 
       {/* Stats Section */}
-      <section className="bg-white py-10 sm:py-14 lg:py-20">
+    {/*  <section className="bg-white py-10 sm:py-14 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
             {statsData.map((stat, i) => (
@@ -141,7 +141,7 @@ Every garment is treated with great care, following strict  standards to protect
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   )
 }

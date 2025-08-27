@@ -56,10 +56,11 @@ const TeamSection: React.FC = () => {
   return (
     <section className="bg-white py-16 lg:py-24">
       <div className="max-w-7xl mx-auto text-center">
-        <p className="text-green-600 font-semibold mb-2">[ Our Team ]</p>
+        <p className="text-green-600 font-semibold mb-2">[Our People]</p>
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Laundry Specialists</h2>
         <p className="text-gray-600 max-w-3xl mx-auto mb-12">
-          Our team’s goal each day is to earn your business with each visit and to make your experience with us the absolute best.
+         Behind Freshora is a team united by passion and precision. Our professionals are dedicated to delivering care that extends beyond clothing - ensuring your peace of mind, time saved, and an elevated standard of living.
+
         </p>
 
         {/* Carousel container with a subtle fade-out effect on the edges */}

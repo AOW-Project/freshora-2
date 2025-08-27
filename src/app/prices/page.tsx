@@ -253,7 +253,7 @@ const packagesData = [
     id: "standard",
     icon: ShoppingCart,
     title: "Standard Package",
-    description: "Clothes Per Month",
+    description: "For clients who prefer consistent care, our packages offer exclusive value and effortless convenience.",
     features: [
       "4 T-Shirts",
       "1 Pair of Jeans",
@@ -386,11 +386,12 @@ const PricingSection = () => {
               [ Affordable Prices ]
             </h4>
             <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 lg:mb-6 px-2">
-              Our Dry Cleaning & Laundry Prices
+             Freshora – Accessible Luxury, Transparent Pricing
+
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base px-2">
-              Our prices are simple and affordable which are easy on pocket in comparison with the high street prices
-            </p>
+             At Freshora, premium garment care doesn’t have to come with excessive cost. Our pricing is designed to be straightforward, competitive, and transparent — offering you the highest standards of service at exceptional value.
+         </p>
           </div>
           <div className="mb-12 sm:mb-16 lg:mb-20">
             <ServiceCarousel />
@@ -516,12 +517,11 @@ const PricingSection = () => {
               [ What we offer ]
             </h4>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 px-4">
-              Price Packages
+              Subscription Packages
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base px-4">
-              Our prices are simple and affordable which are easy on pocket
-              <br className="hidden sm:block" />
-              in comparison with the high street prices
+              For clients who prefer consistent care, our packages offer exclusive value and effortless convenience
+              
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-6 sm:gap-11">
