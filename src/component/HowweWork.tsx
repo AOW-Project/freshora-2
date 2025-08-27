@@ -41,15 +41,16 @@ export default function HowWeWorkSection() {
             <p className="text-green-600 font-semibold mb-2 text-sm sm:text-base">
               [ Get Your Clothes Collected & Delivered ]
             </p>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">How We Work</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 sm:mb-6"> Why Choose Freshora for Laundry Service in Dubai
+</h2>
             <p className="text-gray-600 leading-relaxed mb-6 text-sm sm:text-base">
-              Our Service is dedicated to making your life easier by providing pick up laundry service. Give yourself
-              one less thing to worry about and try our residential wash and fold service that includes pick up and
-              delivery.
+             Laundry should work around your lifestyle, not the other way around. With Freshora, it’s simple: schedule a pickup, hand over your clothes, and receive them back fresh, spotless, and neatly packed.
+
+
+
             </p>
             <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-              We have been in the laundry business for more than 12 years and would love to earn your business. Try us
-              today and save $10 Off your first laundry service of 20 pounds or more.
+              With trusted experience, Freshora is one of the best laundry services in Dubai. Our blend of modern cleaning methods and eco-safe solutions makes us a go-to choice for families, professionals, and businesses.
             </p>
           </div>
 

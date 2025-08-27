@@ -1,13 +1,13 @@
 import { Check } from "lucide-react"
 import Image from "next/image"
 
-const featuresLeft = ["Salons & Spas", "Restaurants and Caterers", "Religious Organizations", "Daycare centers"]
+const featuresLeft = ["Everyday Laundry and Wash-Fold", "Dry Cleaning for Delicates", "Ironing and Finishing", "Express Laundry Service"]
 
 const featuresRight = [
-  "Assisted Living / Nursing Homes",
-  "Hotels & Motels",
-  "Nail Salons",
-  "Athletic Facilities / Gyms",
+  "Curtain and Carpet Cleaning",
+  "Shoe and Bag Care",
+  "Soft Toy Cleaning",
+  "Luxury Fabric Care",
 ]
 
 export default function LaundryService() {
@@ -28,13 +28,14 @@ export default function LaundryService() {
       <div className="w-full md:w-1/2 text-center md:text-left">
         <p className="text-green-600 font-medium mb-2 text-sm sm:text-base">[ Laundry service for your business! ]</p>
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
-          Commercial Laundry <br className="hidden sm:block" /> Service
+         Personal Laundry <br className="hidden sm:block" /> Service
         </h2>
         <p className="text-gray-600 mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">
-          Large corporations have determined that there is a financial benefit to outsourcing back office work because
-          it saves money. Allowing us to do your laundry is cost effective and will allow you and your employees to
-          focus on your core business. We offer smart solutions to meet your commercial laundry needs. Our Commercial
-          Laundry Clients include:
+          Your Everyday Laundry, Done Professionally
+Life in Dubai is busy, but laundry should not take away your time. Freshora provides expert care for daily clothing, formal wear, and delicate fabrics, ensuring they are always clean and ready to wear.
+
+Our eco-friendly detergents and professional laundry methods keep clothes fresher for longer. Families and professionals across the city trust us for reliability and quality.
+
         </p>
 
         {/* Feature List */}

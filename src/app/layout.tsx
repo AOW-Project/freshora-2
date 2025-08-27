@@ -6,8 +6,8 @@ import Footer from "@/component/Footer";
 import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
-  title: "Freshora Laundry",
-  description: "Your one-stop solution for all laundry needs",
+  title: "Laundry Service in Dubai | Freshora – Quality and Convenience",
+  description: "Freshora offers top-notch Laundry Service in Dubai with doorstep pickup and delivery. Fast, eco-friendly, and reliable care for all your garments.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
