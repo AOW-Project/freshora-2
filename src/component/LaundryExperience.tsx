@@ -93,7 +93,12 @@ export default function LaundryStats() {
                 </div>
                 <div className="text-center sm:text-left">
                   <p className="text-gray-500 text-xs sm:text-sm">Call for Quality Services</p>
-                  <p className="text-base sm:text-lg lg:text-xl font-bold text-green-700">+971 50 925 9667</p>
+                  <p className="text-base sm:text-lg lg:text-xl font-bold text-green-700">
+  <a href="tel:+971509259667" className="hover:text-green-600 transition-colors">
+    +971 50 925 9667
+  </a>
+</p>
+
                 </div>
               </div>
             </div>

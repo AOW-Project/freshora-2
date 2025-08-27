@@ -113,7 +113,11 @@ export default function ContactPage() {
                 <Phone className="w-6 h-6 text-green-600" />
               </div>
               <h3 className="font-semibold text-base mb-2 text-gray-800">Contact Phone</h3>
-              <p className="text-gray-600 text-sm">+971 50 925 9667</p>
+              <p className="text-gray-600 text-sm">
+  <a href="tel:+971509259667" className="hover:text-green-600 transition-colors">
+    +971 50 925 9667
+  </a>
+</p>
             </div>
 
             <div className="text-center">
@@ -130,7 +134,7 @@ export default function ContactPage() {
               </div>
               <h3 className="font-semibold text-base mb-2 text-gray-800">Opening Hours</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Mon-Fri 08:00 AM - 05:00 PM
+                Mon-Fri 08:00 AM - 08:00 PM
                 <br />
                 Sat-Sun: 10am - 5pm
               </p>

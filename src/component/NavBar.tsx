@@ -89,7 +89,12 @@ const Navbar = () => {
             <div className="flex gap-3 items-center">
               <span className="flex items-center gap-1">
                 <FaPhoneAlt className="text-green-500" />
-                <span>+971 50 925 9667</span>
+                <a href="tel:+971509259667" >
+  <span className="text-base">
+    +971 50 925 9667
+  </span>
+</a>
+
               </span>
               <div className="flex gap-2">
                 {[FaFacebookF, FaInstagram].map((Icon, i) => (

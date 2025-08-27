@@ -9,13 +9,13 @@ const statsData = [
     icon: <FaTshirt className="text-green-600 text-2xl sm:text-3xl" />,
     value: 50000,
     suffix: "+",
-    label: "Shirts Washed",
+    label: "Shirts Professionally Washed",
   },
   {
     icon: <FaWater className="text-green-600 text-2xl sm:text-3xl" />,
     value: 50,
     suffix: "",
-    label: "Washing Machines",
+    label: "Advanced Machines in Operation",
   },
   {
     icon: <GiClothes className="text-green-600 text-2xl sm:text-3xl" />,
@@ -27,7 +27,7 @@ const statsData = [
     icon: <FaUserCheck className="text-green-600 text-2xl sm:text-3xl" />,
     value: 100,
     suffix: "%",
-    label: "Happy Customers",
+    label: "Loyal and Satisfied Clients",
   },
 ]
 

@@ -23,33 +23,33 @@ type Advantage = {
 const advantages: Advantage[] = [
   {
     icon: UserCheck,
-    title: 'Personalized Experience',
-    description: 'We take utmost care of your clothes, segregating based on the cloth type and giving you instant clothes to make a statement.',
+    title: 'Personalized Care',
+    description: 'Every fabric type treated with precision.',
   },
   {
     icon: Tag,
-    title: 'Affordable Pricing',
-    description: 'Prices that suit your pocket is one of our USP. An option of choosing between 2 types of pricing is available.',
+    title: 'Flexible Pricing',
+    description: 'Options designed to suit your needs.',
   },
   {
     icon: Smartphone,
-    title: 'Convenience',
-    description: 'With just a tap of a button, your laundry gets done, giving your leisure time to spend with family and friends.',
+    title: 'Effortless Convenience',
+    description: 'Your laundry, completed with a single request.',
   },
   {
     icon: ShieldCheck,
-    title: 'Quality',
-    description: 'We use the best in class products, to assure that your favorite clothes are always there for you to wear.',
+    title: 'Premium Products',
+    description: 'Only the finest detergents and cleaning solutions.',
   },
   {
     icon: Truck,
-    title: 'Express Delivery',
-    description: 'With our super express delivery, we would get your laundry done in less than 8 hours.',
+    title: 'Express Service',
+    description: 'Delivery in as little as eight hours.',
   },
   {
     icon: BellRing,
-    title: 'Instant Order Update',
-    description: 'Regular updates of your order, to help you keep a track of your laundry and plan accordingly.',
+    title: 'Real-Time Updates',
+    description: 'Complete transparency throughout the process.',
   },
 ];
 

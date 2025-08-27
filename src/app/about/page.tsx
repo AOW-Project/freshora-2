@@ -57,9 +57,10 @@ export default function AboutSection() {
   className="absolute -top-3 -right-6 sm:-top-5 sm:-right-10 w-16 sm:w-20 lg:w-24 h-auto opacity-80 hidden sm:block"
 />
                 <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 lg:-bottom-8 lg:-left-8 bg-white rounded-lg p-3 sm:p-4 lg:p-6 shadow-2xl text-center">
+                  <div className="text-xs sm:text-sm text-gray-700 leading-tight">More Than</div>
                   <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-600">25</div>
                   <div className="text-xs sm:text-sm text-gray-700 leading-tight">
-                    years of <br /> experience
+                    Years of <br /> Excellence
                   </div>
                 </div>
               </div>
@@ -68,7 +69,7 @@ export default function AboutSection() {
             <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
               <div>
                 <div className="text-green-600 font-semibold text-base sm:text-lg mb-2">
-                  More than 25 Years of Experience
+                  More Than 25 Years of Excellence
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">
                   We are Passionate About Laundry
@@ -76,29 +77,29 @@ export default function AboutSection() {
               </div>
 
               <p className="text-base sm:text-lg leading-relaxed text-gray-600">
-                We are professionals in the laundry and dry cleaning business, which means we always stay up to date on
-                the latest technologies, cleaning methods, and solutions for dealing with stains or delicate fabrics.
-                Plus, we maintain the highest standards of business integrity by following local and national
-                regulations and environmental safety rules. We are passionate about the way you think about laundry!
+               At Freshora, laundry is more than a necessity - it is a craft. With over two decades of expertise, we have perfected the balance of advanced technology and meticulous care. From delicate silks to everyday essentials, every garment is handled with precision and respect.
+              </p>
+                 <p className="text-base sm:text-lg leading-relaxed text-gray-600">
+              Our promise is simple: to deliver uncompromising quality, eco-conscious practices, and seamless convenience. With free collection and delivery, we ensure that laundry no longer disrupts your lifestyle - it enhances it.
               </p>
 
               <div className="grid grid-cols-1 gap-6 pt-2">
                 <ul className="space-y-3 sm:space-y-4">
                   <li className="flex items-center text-gray-700">
                     <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">100% Customer Satisfaction</span>
+                    <span className="text-sm sm:text-base">100% Customer Satisfaction – Every item receives our highest attention to detail.</span>
                   </li>
                   <li className="flex items-center text-gray-700">
                     <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">Free Collection & Delivery</span>
+                    <span className="text-sm sm:text-base">Free Collection and Delivery – Effortless convenience, directly to your door.</span>
                   </li>
                   <li className="flex items-center text-gray-700">
                     <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">Affordable Prices</span>
+                    <span className="text-sm sm:text-base">Affordable Luxury – Exceptional care without compromise.</span>
                   </li>
                   <li className="flex items-center text-gray-700">
                     <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">Best Quality</span>
+                    <span className="text-sm sm:text-base">Unmatched Quality – Only premium products and processes for lasting results.</span>
                   </li>
                 </ul>
 
@@ -133,10 +134,10 @@ export default function AboutSection() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-lg sm:text-xl text-gray-800 mb-2">
-                    <span className="group-hover:text-green-600 transition-colors">Save Time & Money</span>
+                    <span className="group-hover:text-green-600 transition-colors">Save Time and Money</span>
                   </h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                    No more wasted time driving to the laundromats, we pickup and deliver for free!
+                    No unnecessary trips; we come to you!
                   </p>
                 </div>
               </div>
@@ -152,10 +153,10 @@ export default function AboutSection() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-lg sm:text-xl text-gray-800 mb-2">
-                    <span className="group-hover:text-green-600 transition-colors">Pay Online in Seconds</span>
+                    <span className="group-hover:text-green-600 transition-colors">Secure Online Payments</span>
                   </h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                    Manage your ProLaundry account and billing online from your smartphone or computer.
+                    Manage orders and billing instantly.
                   </p>
                 </div>
               </div>
@@ -171,10 +172,10 @@ export default function AboutSection() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-lg sm:text-xl text-gray-800 mb-2">
-                    <span className="group-hover:text-green-600 transition-colors">Eco-Friendly</span>
+                    <span className="group-hover:text-green-600 transition-colors">Eco-Responsible Cleaning</span>
                   </h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                    We use safe and clean perc-free solvents, so you, and the Earth, can look good.
+                    Perc-free solutions that respect your wardrobe and the planet.
                   </p>
                 </div>
               </div>
