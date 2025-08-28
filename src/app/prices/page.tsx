@@ -43,7 +43,7 @@ const ServiceBanner: React.FC = () => {
     <div
       className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center flex items-center"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.JPG?height=400&width=1200&text=Laundry+Machines+Background')`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.webp?height=400&width=1200&text=Laundry+Machines+Background')`,
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -253,7 +253,7 @@ const packagesData = [
     id: "standard",
     icon: ShoppingCart,
     title: "Standard Package",
-    description: "For clients who prefer consistent care, our packages offer exclusive value and effortless convenience.",
+   
     features: [
       "4 T-Shirts",
       "1 Pair of Jeans",
@@ -271,7 +271,7 @@ const packagesData = [
     id: "premium",
     icon: Zap,
     title: "Premium Package",
-    description: "Clothes Per Month",
+   
     features: [
       "6 T-Shirts",
       "3 Pairs of Jeans",
@@ -314,7 +314,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
               <Icon size={28} />
             </div>
             <h3 className="text-lg font-bold text-gray-800">{title}</h3>
-            <p className="text-sm font-medium text-green-600">Clothes Per Month</p>
+            
           </div>
           <ul className="mb-4 space-y-2 text-sm text-gray-700">
             {features.map((feature, index) => (

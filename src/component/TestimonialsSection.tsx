@@ -36,7 +36,7 @@ const TestimonialsSection = () => {
         {
             label: "[ Our Testimonials ]",
             title: "Very Pleased. Will Definitely be Back.",
-            quote: "I’ve been going here for 5 years and they have never once been late, the customer service is always great, and I’ve never had a quality concern.",
+            quote: "the customer service is always great, and I’ve never had a quality concern.",
             author: "- Alice Munguia",
             imageSrc: "/images/blog-slider-img02.jpg"
         },

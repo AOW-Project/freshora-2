@@ -18,7 +18,7 @@ const slides = [
   {
     image: "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc (1).webp",
     alt: "A laundry professional handing clean clothes to a customer",
-    subtitle: "25+ Years of Experience",
+    subtitle: "100% happy customers",
     title: " Premium Laundry Service in Dubai, Made Easy",
     description:
       "Enjoy free pickup and delivery anywhere in Dubai. While you focus on life, we handle your laundry with precision and care.",
