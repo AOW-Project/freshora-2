@@ -1,65 +1,39 @@
-import { notFound } from "next/navigation"
-import ServicePageClient from "./service-page-client"
-// ✅ We will now ONLY use this local data file
-import { servicesData, Service as LocalService } from "@/lib/services-data"
+import { notFound } from "next/navigation";
+import ServicePageClient from "./service-page-client";
 
-// --- Type Definitions (kept for the client component) ---
-export interface ServiceItem {
-  id: string
-  name: string
-  price: number
-  description: string
-  unit: string
-  image?: string
-}
+// ✅ Import the MASTER Service type and data functions from your data file
+import { servicesData, getServiceBySlug, Service } from "@/lib/services-data";
 
-export interface Service {
-  id: string | number
-  slug: string
-  title: string
-  description: string
-  fullDescription: string
-  image?: string
-  rating: number
-  reviews: number
-  duration: string
-  items?: {
-    [category: string]: ServiceItem[]
-  }
-  gallery?: string[]
-  features?: string[]
-  pricing?: { [key: string]: { price: string; description: string } }
-  process?: string[] | { step: number; title: string; description: string }[]
-  faq?: { question: string; answer: string }[]
-}
+// ⛔️ All local interface definitions for Service and ServiceItem have been REMOVED from this file.
 
-// ✅ This function now gets the service directly from your local file
-function getServiceFromLocal(slug: string): LocalService | undefined {
-  return servicesData.find((service) => service.slug === slug)
-}
+// Re-export the correct Service type for the client component to use
+export type { Service } from "@/lib/services-data";
 
 // --- Page Props ---
+// ✅ In Next.js 15, params is a Promise that must be awaited
 type PageProps = {
-  params: Promise<{ slug:string }>
-}
+  params: Promise<{ slug: string }>;
+};
 
+// ✅ The function is NOW async and must await params
 export default async function ServicePage({ params }: PageProps) {
-  const { slug } = await params
+  // ✅ Await the params Promise to get the slug
+  const { slug } = await params;
 
-  // ✅ Simplified Logic: We directly get the service from the local file.
-  // The API call has been removed.
-  const service = getServiceFromLocal(slug)
+  // Use the imported helper function to get the service data
+  const service = getServiceBySlug(slug);
 
   if (!service) {
-    notFound()
+    notFound();
   }
 
-  return <ServicePageClient slug={slug} service={service as Service} />
+  // Pass the correctly typed service object to the client component
+  return <ServicePageClient slug={slug} service={service} />;
 }
 
-// Optional: For better performance, generate static pages for each service
+// Generate static pages for each service at build time
 export async function generateStaticParams() {
-    return servicesData.map((service) => ({
-        slug: service.slug,
-    }));
+  return servicesData.map((service) => ({
+    slug: service.slug,
+  }));
 }

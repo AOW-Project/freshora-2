@@ -102,7 +102,7 @@ const ServiceCarousel: React.FC = () => {
   const services = [
     { icon: FaTshirt, title: "Shirts Service", description: "Washed and Pressed", price: "6.00" },
     { icon: FaHandsWash, title: "Day Dress Service", description: "Dry Clean", price: "10.50" },
-    { icon: MdIron, title: "Dry Cleaning", description: "Wash, Dry and Fold", price: "2.00" },
+    { icon: MdIron, title: "Dry Cleaning", description: "Press", price: "3.00" },
     { icon: FaBed, title: "Bedding", description: "Bed Set (Wash and Press)", price: "10.50" },
   ]
 

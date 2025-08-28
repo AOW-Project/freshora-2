@@ -34,7 +34,6 @@ export default function ServicePageClient({
   const [loading, setLoading] = useState(false)
   const [thankYou, setThankYou] = useState(false)
 
-  // 🔹 handleChange supports both Input & Textarea
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = event.target
@@ -56,7 +55,7 @@ export default function ServicePageClient({
         if (res.ok) {
           setForm({ name: "", email: "", phone: "", question: "" })
           setThankYou(true)
-          setTimeout(() => setThankYou(false), 1000) // hide after 1 sec
+          setTimeout(() => setThankYou(false), 2000)
         }
       } catch (err) {
         console.error("Error sending question", err)
@@ -82,19 +81,7 @@ export default function ServicePageClient({
     []
   )
 
-  const serviceFeatures = useMemo(
-    () => [
-      "Salons & Spas",
-      "Restaurants and Caterers",
-      "Households",
-      "Daycare centers",
-      "Assisted Living / Nursing Homes",
-      "Hotels & Motels",
-      "Nail Salons",
-      "Athletic Facilities / Gyms",
-    ],
-    []
-  )
+  // ⛔️ REMOVED the hardcoded serviceFeatures array. We will use service.features from props.
 
   const breadcrumbNav = useMemo(
     () => (
@@ -108,11 +95,12 @@ export default function ServicePageClient({
         </Link>
         <span className="px-1 sm:px-2">/</span>
         <span className="text-green-400 capitalize">
-          {slug.replace(/-/g, " ")}
+          {/* ✅ Use the dynamic service title for accuracy */}
+          {service.title}
         </span>
       </nav>
     ),
-    [slug]
+    [service.title]
   )
 
   const contactInfo = useMemo(
@@ -130,7 +118,6 @@ export default function ServicePageClient({
           <div className="text-sm">
             <p className="text-gray-600">Mon-Fri  8am - 8pm</p>
             <p className="text-gray-600">Sat-Sun 10am - 5pm</p>
-
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -141,9 +128,9 @@ export default function ServicePageClient({
         </div>
         <div className="flex items-center gap-3">
            <Phone className="h-4 w-4 text-green-600 flex-shrink-0" />
-  <a href="tel:+971509259667" className="text-sm text-gray-600 hover:text-green-600 transition-colors">
-    +971 50 925 9667
-  </a>
+          <a href="tel:+971509259667" className="text-sm text-gray-600 hover:text-green-600 transition-colors">
+            +971 50 925 9667
+          </a>
         </div>
       </div>
     ),
@@ -166,7 +153,8 @@ export default function ServicePageClient({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           {breadcrumbNav}
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white capitalize">
-            {slug.replace(/-/g, " ")}
+            {/* ✅ Use the dynamic service title */}
+            {service.title}
           </h1>
         </div>
       </div>
@@ -223,7 +211,8 @@ export default function ServicePageClient({
                       <Link href={`/services/${slug}/orders`}>
                         <Button
                           variant="outline"
-                          className="w-full border-green-600 text-green-600 hover:bg-green-50 text-sm sm:text-base"
+                          // ✅ Updated button style for better visibility
+                          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold"
                         >
                           Get the Service
                         </Button>
@@ -253,14 +242,16 @@ export default function ServicePageClient({
 
                   {/* Features */}
                   <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800">
-                    Wash and Fold Laundry Service Delivered to Your Home
+                    {/* ✅ Use dynamic secondary title */}
+                    {service.secondaryTitle}
                   </h3>
                   <p className="text-gray-600 leading-relaxed mb-6 text-sm sm:text-base">
-                    Get the very best in wash and fold or fluff and fold laundry
-                    service from the dry cleaning and laundry experts...
+                    {/* ✅ Use dynamic secondary description */}
+                    {service.secondaryDescription}
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-                    {serviceFeatures.map((feature, index) => (
+                    {/* ✅ Map over dynamic features from the 'service' prop */}
+                    {service.features.map((feature, index) => (
                       <div key={index} className="flex items-center gap-2">
                         <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
                         <span className="text-sm sm:text-base text-gray-700">
@@ -272,22 +263,17 @@ export default function ServicePageClient({
 
                   {/* Extra Images */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 sm:mb-8">
-                    <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden">
-                      <Image
-                        src="/images/img09.jpg"
-                        alt="Ironing Service"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden">
-                      <Image
-                        src="/images/img11.jpg"
-                        alt="Hanging Clothes"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
+                    {/* ✅ Create a dynamic gallery from the 'service' prop */}
+                    {service.gallery.slice(0, 2).map((imgSrc, index) => (
+                       <div key={index} className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden">
+                         <Image
+                           src={imgSrc}
+                           alt={`${service.title} gallery image ${index + 1}`}
+                           fill
+                           className="object-cover"
+                         />
+                       </div>
+                    ))}
                   </div>
                 </div>
               </div>

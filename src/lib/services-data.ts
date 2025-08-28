@@ -12,6 +12,9 @@ export interface Service {
   title: string
   description: string
   fullDescription: string
+  // ✅ Added secondary title and description fields
+  secondaryTitle: string
+  secondaryDescription: string
   image: string
   gallery: string[]
   features: string[]
@@ -33,7 +36,9 @@ const services: Service[] = [
     title: "Laundry Services",
     description: "Professional laundry for all clothes.",
     fullDescription: "Professional Laundry services designed for your lifestyle. Fresh clothes, more free time, zero stress – that’s our promise. From wash and fold service to laundry pickup and delivery, we make cleaning effortless. Enjoy doorstep laundry service with in Dubai with fabric-friendly care, expert stain removal, and spotless results.",
-    // ✅ Corrected Image Path
+    // ✅ Added secondary title and description
+    secondaryTitle: "Wash and Fold Laundry Service Delivered to Your Home",
+    secondaryDescription: "Book reliable laundry pickup and delivery today and enjoy wrinkle-free, spotless results with our wash and fold service right at your doorstep.",
     image: "/images/women-sorting-clothes-in-the-laundry-2025-03-14-03-27-51-utc.jpg",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Washing+Machine",
@@ -75,7 +80,8 @@ const services: Service[] = [
     title: "Dry Cleaning Services",
     description: "Gentle care for delicate garments.",
     fullDescription: "Stay sharp and save time with our premium Dry Clean service in Dubai. From stain removal to delicate fabrics, our professional dry cleaners deliver spotless results. Ideal for suits, dresses, coats, and luxury garments, our eco-friendly process ensures long-lasting freshness and premium garment care every time.",
-    // ✅ Corrected Image Path
+    secondaryTitle: "Best Dry Cleaning Service in Dubai Delivered to Your Doorstep",
+    secondaryDescription: "Enjoy convenience with dry cleaning pickup and delivery. Whether you need affordable dry cleaners in Dubai or luxury dry cleaning in Dubai, we guarantee wrinkle-free results and expert fabric care-right at your doorstep.",
     image: "/images/iron-and-stack-of-shirts-on-ironing-board-space-f-2025-03-25-22-33-47-utc.jpg",
     gallery: [
       "/placeholder.svg?height=300&width=400&text=Dry+Clean+Machine",
@@ -103,7 +109,8 @@ const services: Service[] = [
     title: "Express Laundry Services",
     description: "Same-day laundry services.",
     fullDescription: "Get a fresh look in hours, not days, with Dubai’s trusted Express Laundry. Perfect for business travelers, busy professionals, and urgent laundry needs, our express laundry service ensures spotless results. From suit cleaning service to express laundry and dry cleaning, enjoy same-day turnaround with premium care.",
-    // ✅ Corrected Image Path
+    secondaryTitle: "Best Express Laundry Services in Dubai at Your Doorstep",
+    secondaryDescription: "Book hassle-free express laundry services in Dubai today. With fast pickup, express laundry and dry cleaning, and wrinkle-free results, we deliver fresh clothes the very same day.",
     image: "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.jpg",
     gallery: ["/placeholder.svg?height=300&width=400&text=Fast+Service", "/placeholder.svg?height=300&width=400&text=Quick+Turnaround", "/placeholder.svg?height=300&width=400&text=Express+Delivery"],
     features: ["Same-day service guarantee", "Priority processing for urgent orders", "Express pickup and delivery", "Professional quality maintained", "Available 7 days a week", "Real-time order tracking"],
@@ -127,7 +134,8 @@ const services: Service[] = [
     title: "Shoe & Bag Spa",
     description: "Luxury cleaning for shoes and bags.",
     fullDescription: "Give your accessories new life with our premium shoe and bag spa service in Dubai. From leather shoe cleaning to delicate handbags, our experts restore, clean, and protect every material with care, offering specialized treatments like color restoration and conditioning for long-lasting beauty.",
-    // ✅ Corrected Image Path
+    secondaryTitle: "Shoe and Bag Spa Delivered to Your Door",
+    secondaryDescription: "Book our expert shoe cleaning service or sneaker cleaning service today. Enjoy premium care for shoes and handbags-all restored with precision and delivered fresh to your doorstep.",
     image: "/images/light-blue-sneakers-and-backpack-2025-01-09-09-02-14-utc.jpg",
     gallery: ["/placeholder.svg?height=300&width=400&text=Luxury+Shoes", "/placeholder.svg?height=300&width=400&text=Designer+Bags", "/placeholder.svg?height=300&width=400&text=Restoration+Process"],
     features: ["Luxury leather conditioning", "Color restoration and touch-ups", "Suede and fabric cleaning", "Hardware polishing and repair", "Waterproofing treatment", "Storage and care advice"],
@@ -151,7 +159,8 @@ const services: Service[] = [
     title: "Luxury Shoe Cleaning",
     description: "Premium shoe care services.",
     fullDescription: "Experience premium Luxury Shoe Cleaning in Dubai with our certified specialists. From professional shoe cleaning for Italian leather to sneaker cleaning service for designer pairs, we restore shine, protect materials, and extend your footwear’s lifespan with expert techniques and eco-friendly care.",
-    // ✅ Corrected Image Path
+    secondaryTitle: "Luxury Shoe Care at Your Doorstep",
+    secondaryDescription: "Book trusted shoe cleaning service Dubai today. From luxury dress shoes to sneakers, enjoy meticulous cleaning, restoration, and care-all delivered to your doorstep. ",
     image: "/images/soak-shoes-before-washing-cleaning-dirty-sneakers-2025-03-09-07-54-41-utc.jpg",
     gallery: ["/placeholder.svg?height=300&width=400&text=Premium+Shoes", "/placeholder.svg?height=300&width=400&text=Hand+Polishing", "/placeholder.svg?height=300&width=400&text=Luxury+Care"],
     features: ["Hand-crafted shoe care", "Premium leather conditioning", "Mirror shine polishing", "Sole cleaning and conditioning", "Cedar shoe tree service", "Luxury packaging and delivery"],
@@ -175,7 +184,8 @@ const services: Service[] = [
     title: "Commercial Laundry Service",
     description: "Laundry solutions for businesses.",
     fullDescription: "When businesses demand spotless laundry, we deliver unmatched quality and care.Our commercial laundry service in Dubai provides reliable, high-volume solutions for hotels, restaurants, salons, and healthcare facilities. From laundry service for hotels to laundry service for restaurants, we ensure consistent hygiene, efficiency, and timely delivery every time.",
-    // ✅ Corrected Image Path
+    secondaryTitle: "Commercial Laundry at Your Doorstep",
+    secondaryDescription: "Trusted commercial laundry service with pickup and delivery-perfect for hotels, restaurants, and businesses needing professional, large-scale care at affordable rates. ",
     image: "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.jpg",
     gallery: ["/placeholder.svg?height=300&width=400&text=Industrial+Machines", "/placeholder.svg?height=300&width=400&text=Bulk+Processing", "/placeholder.svg?height=300&width=400&text=Commercial+Delivery"],
     features: ["High-volume processing capacity", "Scheduled pickup and delivery", "Industry-specific cleaning protocols", "Inventory management systems", "Emergency rush service available", "Compliance with health regulations"],
@@ -199,7 +209,8 @@ const services: Service[] = [
     title: "Curtain Cleaning Service",
     description: "Expert curtain cleaning at your doorstep.",
     fullDescription: "Transform dusty drapes into fresh, vibrant curtains with expert cleaning service.Our curtain cleaning service in Dubai restores everything from delicate sheers to blackout drapes. With professional curtain cleaning, drapery cleaning service, and curtain dry cleaning, we remove dust, allergens, and stains while preserving fabric strength, color, and elegance for a healthier home.",
-    // ✅ Corrected Image Path
+    secondaryTitle: "Curtain Cleaning at Your Doorstep",
+    secondaryDescription: "Book trusted curtain washing service in Dubai-fresh, spotless curtains delivered back to your home",
     image: "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.jpg",
     gallery: ["/placeholder.svg?height=300&width=400&text=Curtain+Takedown", "/placeholder.svg?height=300&width=400&text=Professional+Cleaning", "/placeholder.svg?height=300&width=400&text=Curtain+Installation"],
     features: ["Free takedown and rehang service", "Specialized fabric care", "Dust and allergen removal", "Stain treatment and removal", "Fabric protection treatment", "Minor repair services included"],
@@ -223,7 +234,8 @@ const services: Service[] = [
     title: "Carpet Cleaning Service",
     description: "Deep cleaning for carpets and rugs.",
     fullDescription: "Revive your carpets with expert cleaning for a healthier, fresher home.Our carpet cleaning services in Dubai use advanced steam technology and eco-friendly methods to eliminate dirt, stains, and allergens. From professional carpet cleaning Dubai to delicate wool rug cleaning service, our certified technicians restore beauty, freshness, and long-lasting comfort to every carpet and rug.  ",
-    // ✅ Corrected Image Path
+    secondaryTitle: "Deep Clean for a Healthier Home",
+    secondaryDescription: "Our advanced cleaning process removes embedded dirt, allergens, and tough stains, leaving your carpets looking and feeling fresh and new.",
     image: "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc.jpg",
     gallery: ["/placeholder.svg?height=300&width=400&text=Steam+Cleaning", "/placeholder.svg?height=300&width=400&text=Stain+Removal", "/placeholder.svg?height=300&width=400&text=Carpet+Restoration"],
     features: ["Deep steam cleaning technology", "Eco-friendly cleaning solutions", "Pet odor and stain removal", "Allergen elimination", "Fast drying process", "Carpet protection treatment"],
@@ -247,7 +259,8 @@ const services: Service[] = [
     title: "Soft Toy Cleaning Service",
     description: "Safe and hygienic cleaning for toys.",
     fullDescription: "Keep childhood memories safe with expert cleaning for toys you treasure most.Our Soft Toy Cleaning Service in Dubai makes plush toys, teddies, and dolls safe, clean, and germ-free. Using non-toxic, child-safe methods, we provide teddy bear cleaning service, kids toy cleaning service, and soft toy sanitization service that preserve softness while removing dust mites, allergens, and stains",
-    // ✅ Corrected Image Path
+    secondaryTitle: "Gentle & Hygienic Care for Cherished Friends",
+    secondaryDescription: "Using non-toxic, child-safe methods, we remove dust mites, allergens, and stains while preserving the softness and shape of your child's favorite toys.",
     image: "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.jpg",
     gallery: ["/placeholder.svg?height=300&width=400&text=Stuffed+Animals", "/placeholder.svg?height=300&width=400&text=Gentle+Cleaning", "/placeholder.svg?height=300&width=400&text=Safe+Products"],
     features: ["Child-safe, non-toxic cleaning products", "Gentle cleaning process", "Dust mite and allergen removal", "Odor elimination", "Shape and texture preservation", "Hygienic packaging and delivery"],
