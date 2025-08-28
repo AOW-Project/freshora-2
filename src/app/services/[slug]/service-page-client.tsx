@@ -86,7 +86,7 @@ export default function ServicePageClient({
     () => [
       "Salons & Spas",
       "Restaurants and Caterers",
-      "Religious Organizations",
+      "Households",
       "Daycare centers",
       "Assisted Living / Nursing Homes",
       "Hotels & Motels",

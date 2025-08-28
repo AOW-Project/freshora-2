@@ -8,9 +8,9 @@ import { Phone, Clock, CreditCard, Leaf, CheckCircle2 } from "lucide-react"
 //import img01 from "../../public/images/img01.jpg"
 
 const statsData = [
-  { icon: <FaTshirt className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 50000, suffix: "+", label: "Shirts Washed" },
-  { icon: <FaWater className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 50, suffix: "", label: "Washing Machines" },
-  { icon: <GiClothes className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 10000, suffix: "+", label: "Dry Cleaned Items" },
+  { icon: <FaTshirt className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 50000, suffix: "+", label: "Fast & Secure" },
+  { icon: <FaWater className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 50, suffix: "", label: "Pickup & Delivery" },
+  { icon: <GiClothes className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 10000, suffix: "+", label: "Experienced Team" },
   { icon: <FaUserCheck className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 100, suffix: "%", label: "Happy Customers" },
 ]
 
@@ -49,9 +49,9 @@ export default function LaundryStats() {
                 />
                 {/* Floating Circle */}
                 <div className="absolute bottom-[-20px] right-[-20px] sm:bottom-6 sm:right-[-40px] bg-green-500 text-white rounded-full w-24 h-24 sm:w-32 sm:h-32 flex flex-col items-center justify-center text-center shadow-2xl">
-                  <span className="text-2xl sm:text-4xl font-extrabold">25</span>
+                  <span className="text-2xl sm:text-4xl font-extrabold">100%</span>
                   <span className="text-[10px] sm:text-sm font-semibold leading-tight px-1">
-                    years of experience
+                    Customer Satisfaction
                   </span>
                 </div>
               </div>
@@ -59,13 +59,13 @@ export default function LaundryStats() {
 
             {/* Text Section */}
             <div className="flex-1 w-full text-center lg:text-left lg:pl-8">
-              <p className="text-green-600 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
+              {/*<p className="text-green-600 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
                 More than 25 Years of Experience
-              </p>
-              <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-6 leading-tight">
+              </p> */ }
+              <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-6 leading-tight">
                 The Best Laundry Service in Dubai, Perfected Over Time
 
-              </h2>
+              </h1>
               <p className="text-gray-600 mb-5 sm:mb-8 leading-relaxed text-sm sm:text-base lg:text-lg max-w-2xl mx-auto lg:mx-0">
                 At Freshora, laundry is more than a service - it is a craft. Our team is committed to your peace of mind and emboldened by years of stain removal expertise to ensure the promise is delivered promptly and without hassle. 
 
@@ -110,9 +110,9 @@ Every garment is treated with great care, following strict  standards to protect
           {/* 3 Feature Boxes */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-16 sm:mt-20 lg:mt-28">
             {[
-              { icon: <Clock className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Save Time & Money", desc: "We pick up and deliver for free—no more wasted trips to the laundromat." },
-              { icon: <CreditCard className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Pay Online in Seconds", desc: "Manage your billing and account online easily from any device." },
-              { icon: <Leaf className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Eco-Friendly", desc: "We use safe, clean, perc-free solvents so you and the Earth stay safe." },
+              { icon: <Clock className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Save Time & Money", desc: "Skip the traffic and waiting. We collect, clean, and return your clothes with no extra cost." },
+              { icon: <CreditCard className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Pay in Seconds", desc: "Book and pay online from any device - fast, secure, and effortless" },
+              { icon: <Leaf className="text-green-600 w-6 h-6 sm:w-8 sm:h-8" />, title: "Eco-Friendly Care", desc: "We use gentle, non-toxic solutions that care for fabrics, skin, and the environment." },
             ].map((card, i) => (
               <div key={i} className="bg-white p-5 sm:p-6 lg:p-8 rounded-lg shadow-md hover:shadow-lg transition">
                 <div className="mb-3 sm:mb-4">{card.icon}</div>
@@ -125,7 +125,7 @@ Every garment is treated with great care, following strict  standards to protect
       </section>
 
       {/* Stats Section */}
-      <section className="bg-white py-10 sm:py-14 lg:py-20">
+    {  <section className="bg-white py-10 sm:py-14 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
             {statsData.map((stat, i) => (
@@ -141,7 +141,7 @@ Every garment is treated with great care, following strict  standards to protect
             ))}
           </div>
         </div>
-      </section>
+      </section> }
     </>
   )
 }

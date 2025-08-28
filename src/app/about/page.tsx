@@ -56,23 +56,24 @@ export default function AboutSection() {
   height={100} // specify intrinsic height
   className="absolute -top-3 -right-6 sm:-top-5 sm:-right-10 w-16 sm:w-20 lg:w-24 h-auto opacity-80 hidden sm:block"
 />
-                <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 lg:-bottom-8 lg:-left-8 bg-white rounded-lg p-3 sm:p-4 lg:p-6 shadow-2xl text-center">
+              { /* <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 lg:-bottom-8 lg:-left-8 bg-white rounded-lg p-3 sm:p-4 lg:p-6 shadow-2xl text-center">
                   <div className="text-xs sm:text-sm text-gray-700 leading-tight">More Than</div>
                   <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-600">25</div>
                   <div className="text-xs sm:text-sm text-gray-700 leading-tight">
                     Years of <br /> Excellence
                   </div>
-                </div>
+                </div> */}
               </div>
-            </div>
+            </div> 
 
             <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
               <div>
-                <div className="text-green-600 font-semibold text-base sm:text-lg mb-2">
+              { /* <div className="text-green-600 font-semibold text-base sm:text-lg mb-2">
                   More Than 25 Years of Excellence
-                </div>
+                </div> */ }
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">
-                  We are Passionate About Laundry
+                 Freshora – Redefining the Art of Laundry
+
                 </h2>
               </div>
 
@@ -84,6 +85,7 @@ export default function AboutSection() {
               </p>
 
               <div className="grid grid-cols-1 gap-6 pt-2">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">Why Freshora</h2>
                 <ul className="space-y-3 sm:space-y-4">
                   <li className="flex items-center text-gray-700">
                     <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 mr-3 flex-shrink-0" />
@@ -122,17 +124,19 @@ export default function AboutSection() {
               </div>
             </div>
           </div>
-
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10 text-center mt-20">Effortless Care, Elevated Service </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-16 sm:mt-20 lg:mt-24">
             <a
               href="/contact"
               className="group bg-white rounded-lg p-4 sm:p-6 lg:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 block"
             >
+              
               <div className="flex items-start space-x-3 sm:space-x-4">
                 <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-green-100 rounded-full flex items-center justify-center group-hover:bg-green-600 transition-colors duration-300 flex-shrink-0">
                   <Clock className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-green-600 group-hover:text-white transition-colors duration-300" />
                 </div>
                 <div className="flex-1 min-w-0">
+                 
                   <h3 className="font-bold text-lg sm:text-xl text-gray-800 mb-2">
                     <span className="group-hover:text-green-600 transition-colors">Save Time and Money</span>
                   </h3>
@@ -185,11 +189,11 @@ export default function AboutSection() {
       </div>
 
       {/* Dynamically loaded components */}
-      <LaundryStats />
+     {/*<LaundryStats /> */ }
       <GuaranteeSection />
       <AdvantagesSection />
       <HistorySection />
-      <TeamSection />
+     {/* <TeamSection /> */}
     </>
   );
 }
