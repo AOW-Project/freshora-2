@@ -4,6 +4,7 @@ import { CheckCircle2, Clock, CreditCard, Leaf, Phone } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
+
 //import AnimatedParticles from "@/component/AnimatedParticles";
 // import img01 from '../../../public/images/img01.jpg';
 

@@ -7,8 +7,25 @@ import { ToastContainer } from "react-toastify";
 import LastPageTracker from "@/component/LastPageTracker";
 
 export const metadata: Metadata = {
+  // Your existing title - it's great!
   title: "Laundry Service in Dubai | Freshora – Quality and Convenience",
+
+  // Your existing description - also great!
   description: "Freshora offers top-notch Laundry Service in Dubai with doorstep pickup and delivery. Fast, eco-friendly, and reliable care for all your garments.",
+
+  // Adding the meta keywords
+  keywords: [
+    "Laundry Service",
+    "Laundry Service in Dubai",
+    "Best Laundry Service in Dubai",
+    "best laundry services",
+    "detergents and professional laundry",
+  ],
+
+  // Adding the canonical URL
+  alternates: {
+    canonical: 'https://freshoralaundry.com/',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
