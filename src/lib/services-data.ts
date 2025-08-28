@@ -41,8 +41,8 @@ const services: Service[] = [
     secondaryDescription: "Book reliable laundry pickup and delivery today and enjoy wrinkle-free, spotless results with our wash and fold service right at your doorstep.",
     image: "/images/women-sorting-clothes-in-the-laundry-2025-03-14-03-27-51-utc.jpg",
     gallery: [
-      "/placeholder.svg?height=300&width=400&text=Washing+Machine",
-      "/placeholder.svg?height=300&width=400&text=Folded+Clothes",
+      "/images/unidentified-woman-chooses-clothes-in-a-store-2025-01-16-11-48-15-utc.jpg?height=300&width=400&text=Washing+Machine",
+      "/images/work-in-laundry-2025-03-17-04-27-23-utc.jpg?height=300&width=400&text=Folded+Clothes",
       "/placeholder.svg?height=300&width=400&text=Delivery+Van",
     ],
     features: [
@@ -84,8 +84,8 @@ const services: Service[] = [
     secondaryDescription: "Enjoy convenience with dry cleaning pickup and delivery. Whether you need affordable dry cleaners in Dubai or luxury dry cleaning in Dubai, we guarantee wrinkle-free results and expert fabric care-right at your doorstep.",
     image: "/images/iron-and-stack-of-shirts-on-ironing-board-space-f-2025-03-25-22-33-47-utc.jpg",
     gallery: [
-      "/placeholder.svg?height=300&width=400&text=Dry+Clean+Machine",
-      "/placeholder.svg?height=300&width=400&text=Pressed+Suits",
+      "/images/clothing-garment-rack-with-hanging-polos-2025-03-15-07-54-07-utc.jpeg?height=300&width=400&text=Dry+Clean+Machine",
+      "/images/ironing-board-with-iron-and-linen-2024-10-17-04-27-08-utc.jpg?height=300&width=400&text=Pressed+Suits",
       "/placeholder.svg?height=300&width=400&text=Stain+Removal",
     ],
     features: ["Professional stain removal for all fabric types", "Garment pressing and steaming included", "Fabric protection treatment available", "Minor repairs and alterations included", "Eco-friendly dry cleaning solvents", "Quality guarantee on all services"],
@@ -112,7 +112,7 @@ const services: Service[] = [
     secondaryTitle: "Best Express Laundry Services in Dubai at Your Doorstep",
     secondaryDescription: "Book hassle-free express laundry services in Dubai today. With fast pickup, express laundry and dry cleaning, and wrinkle-free results, we deliver fresh clothes the very same day.",
     image: "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.jpg",
-    gallery: ["/placeholder.svg?height=300&width=400&text=Fast+Service", "/placeholder.svg?height=300&width=400&text=Quick+Turnaround", "/placeholder.svg?height=300&width=400&text=Express+Delivery"],
+    gallery: ["/images/shot-of-an-unrecognizable-woman-doing-her-laundry-2025-04-06-08-43-19-utc.jpg?height=300&width=400&text=Fast+Service", "/images/close-up-view-of-stacked-clean-towels-and-plastic-2024-11-19-14-08-01-utc.jpg?height=300&width=400&text=Quick+Turnaround", "/placeholder.svg?height=300&width=400&text=Express+Delivery"],
     features: ["Same-day service guarantee", "Priority processing for urgent orders", "Express pickup and delivery", "Professional quality maintained", "Available 7 days a week", "Real-time order tracking"],
     pricing: {
       basic: { price: "Per Item + 50%", description: "Regular pricing plus express surcharge" },
@@ -137,7 +137,7 @@ const services: Service[] = [
     secondaryTitle: "Shoe and Bag Spa Delivered to Your Door",
     secondaryDescription: "Book our expert shoe cleaning service or sneaker cleaning service today. Enjoy premium care for shoes and handbags-all restored with precision and delivered fresh to your doorstep.",
     image: "/images/light-blue-sneakers-and-backpack-2025-01-09-09-02-14-utc.jpg",
-    gallery: ["/placeholder.svg?height=300&width=400&text=Luxury+Shoes", "/placeholder.svg?height=300&width=400&text=Designer+Bags", "/placeholder.svg?height=300&width=400&text=Restoration+Process"],
+    gallery: ["/images/shoe-polisher-2024-10-23-08-39-38-utc.jpg?height=300&width=400&text=Luxury+Shoes", "/images/shoes-and-bags-displayed-at-store-2024-10-11-10-45-42-utc.jpg?height=300&width=400&text=Designer+Bags", "/placeholder.svg?height=300&width=400&text=Restoration+Process"],
     features: ["Luxury leather conditioning", "Color restoration and touch-ups", "Suede and fabric cleaning", "Hardware polishing and repair", "Waterproofing treatment", "Storage and care advice"],
     pricing: {
       basic: { price: "$25-50", description: "Standard cleaning and conditioning" },
@@ -162,7 +162,7 @@ const services: Service[] = [
     secondaryTitle: "Luxury Shoe Care at Your Doorstep",
     secondaryDescription: "Book trusted shoe cleaning service Dubai today. From luxury dress shoes to sneakers, enjoy meticulous cleaning, restoration, and care-all delivered to your doorstep. ",
     image: "/images/soak-shoes-before-washing-cleaning-dirty-sneakers-2025-03-09-07-54-41-utc.jpg",
-    gallery: ["/placeholder.svg?height=300&width=400&text=Premium+Shoes", "/placeholder.svg?height=300&width=400&text=Hand+Polishing", "/placeholder.svg?height=300&width=400&text=Luxury+Care"],
+    gallery: ["/images/shoemaker-sharpens-the-shoe-sole-footwear-repair-2024-12-02-20-55-16-utc.jpg?height=300&width=400&text=Premium+Shoes", "/images/shoemaker-wipes-black-shoe-polish-footwear-repair-2024-11-26-15-14-47-utc.jpg?height=300&width=400&text=Hand+Polishing", "/placeholder.svg?height=300&width=400&text=Luxury+Care"],
     features: ["Hand-crafted shoe care", "Premium leather conditioning", "Mirror shine polishing", "Sole cleaning and conditioning", "Cedar shoe tree service", "Luxury packaging and delivery"],
     pricing: {
       basic: { price: "$30-60", description: "Premium cleaning and conditioning" },
@@ -187,7 +187,7 @@ const services: Service[] = [
     secondaryTitle: "Commercial Laundry at Your Doorstep",
     secondaryDescription: "Trusted commercial laundry service with pickup and delivery-perfect for hotels, restaurants, and businesses needing professional, large-scale care at affordable rates. ",
     image: "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.jpg",
-    gallery: ["/placeholder.svg?height=300&width=400&text=Industrial+Machines", "/placeholder.svg?height=300&width=400&text=Bulk+Processing", "/placeholder.svg?height=300&width=400&text=Commercial+Delivery"],
+    gallery: ["/images/woman-working-in-laundry-2025-04-03-06-15-04-utc.jpg?height=300&width=400&text=Industrial+Machines", "/images/clothes-in-basket-2025-04-01-05-55-39-utc.jpg?height=300&width=400&text=Bulk+Processing", "/placeholder.svg?height=300&width=400&text=Commercial+Delivery"],
     features: ["High-volume processing capacity", "Scheduled pickup and delivery", "Industry-specific cleaning protocols", "Inventory management systems", "Emergency rush service available", "Compliance with health regulations"],
     pricing: {
       basic: { price: "Volume Based", description: "Competitive rates for bulk orders" },
@@ -212,7 +212,7 @@ const services: Service[] = [
     secondaryTitle: "Curtain Cleaning at Your Doorstep",
     secondaryDescription: "Book trusted curtain washing service in Dubai-fresh, spotless curtains delivered back to your home",
     image: "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.jpg",
-    gallery: ["/placeholder.svg?height=300&width=400&text=Curtain+Takedown", "/placeholder.svg?height=300&width=400&text=Professional+Cleaning", "/placeholder.svg?height=300&width=400&text=Curtain+Installation"],
+    gallery: ["/images/house-cleaning-woman-in-gloves-with-a-rag-cleanin-2024-12-08-01-28-27-utc.jpg?height=300&width=400&text=Curtain+Takedown", "/images/asian-cleaning-service-woman-worker-cleaning-in-li-2025-03-24-14-55-20-utc.jpg?height=300&width=400&text=Professional+Cleaning", "/placeholder.svg?height=300&width=400&text=Curtain+Installation"],
     features: ["Free takedown and rehang service", "Specialized fabric care", "Dust and allergen removal", "Stain treatment and removal", "Fabric protection treatment", "Minor repair services included"],
     pricing: {
       basic: { price: "$15-30/panel", description: "Standard curtain cleaning" },
@@ -237,7 +237,7 @@ const services: Service[] = [
     secondaryTitle: "Deep Clean for a Healthier Home",
     secondaryDescription: "Our advanced cleaning process removes embedded dirt, allergens, and tough stains, leaving your carpets looking and feeling fresh and new.",
     image: "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc.jpg",
-    gallery: ["/placeholder.svg?height=300&width=400&text=Steam+Cleaning", "/placeholder.svg?height=300&width=400&text=Stain+Removal", "/placeholder.svg?height=300&width=400&text=Carpet+Restoration"],
+    gallery: ["/images/housekeeper-is-using-cordless-vacuum-cleaner-with-2024-10-12-16-32-25-utc.jpg?height=300&width=400&text=Steam+Cleaning", "/images/close-up-of-professional-cleaner-using-brush-while-2024-12-13-22-35-19-utc.jpg?height=300&width=400&text=Stain+Removal", "/placeholder.svg?height=300&width=400&text=Carpet+Restoration"],
     features: ["Deep steam cleaning technology", "Eco-friendly cleaning solutions", "Pet odor and stain removal", "Allergen elimination", "Fast drying process", "Carpet protection treatment"],
     pricing: {
       basic: { price: "$0.50-0.75/sq ft", description: "Standard carpet cleaning" },
@@ -262,7 +262,7 @@ const services: Service[] = [
     secondaryTitle: "Gentle & Hygienic Care for Cherished Friends",
     secondaryDescription: "Using non-toxic, child-safe methods, we remove dust mites, allergens, and stains while preserving the softness and shape of your child's favorite toys.",
     image: "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.jpg",
-    gallery: ["/placeholder.svg?height=300&width=400&text=Stuffed+Animals", "/placeholder.svg?height=300&width=400&text=Gentle+Cleaning", "/placeholder.svg?height=300&width=400&text=Safe+Products"],
+    gallery: ["/images/rabbit-toy-in-the-laundry-2025-01-07-04-47-31-utc.jpg?height=300&width=400&text=Stuffed+Animals", "/images/plush-toys-bunny-and-teddy-bear-are-dried-on-a-clo-2024-12-02-22-58-13-utc.jpg?height=300&width=400&text=Gentle+Cleaning", "/placeholder.svg?height=300&width=400&text=Safe+Products"],
     features: ["Child-safe, non-toxic cleaning products", "Gentle cleaning process", "Dust mite and allergen removal", "Odor elimination", "Shape and texture preservation", "Hygienic packaging and delivery"],
     pricing: {
       basic: { price: "$8-15/toy", description: "Standard soft toy cleaning" },
