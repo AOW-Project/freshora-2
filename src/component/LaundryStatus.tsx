@@ -7,19 +7,19 @@ import { GiClothes } from "react-icons/gi"
 const statsData = [
   {
     icon: <FaTshirt className="text-green-600 text-2xl sm:text-3xl" />,
-    value: 50000,
+   // value: 50000,
     suffix: "+",
     label: "Shirts Professionally Washed",
   },
   {
     icon: <FaWater className="text-green-600 text-2xl sm:text-3xl" />,
-    value: 50,
+   // value: 50,
     suffix: "",
     label: "Advanced Machines in Operation",
   },
   {
     icon: <GiClothes className="text-green-600 text-2xl sm:text-3xl" />,
-    value: 10000,
+   // value: 10000,
     suffix: "+",
     label: "Dry Cleaned Items",
   },
@@ -35,7 +35,7 @@ export default function LaundryStats() {
   const [counts, setCounts] = useState(statsData.map(() => 0))
 
   // Simple counter animation
-  useEffect(() => {
+{ /* useEffect(() => {
     const interval = setInterval(() => {
       setCounts((prev) =>
         prev.map((count, i) =>
@@ -44,7 +44,7 @@ export default function LaundryStats() {
       )
     }, 30)
     return () => clearInterval(interval)
-  }, [])
+  }, [])*/ }
 
   return (
     <section className="bg-gray-50 py-8 sm:py-12 lg:py-16 relative px-4 sm:px-6 lg:px-8">

@@ -1,34 +1,19 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { FaTshirt, FaWater, FaUserCheck } from "react-icons/fa"
-import { GiClothes } from "react-icons/gi"
 import Image from "next/image"
-import { Phone, Clock, CreditCard, Leaf, CheckCircle2 } from "lucide-react"
-//import img01 from "../../public/images/img01.jpg"
+// ✅ Updated imports for new icons
+import { Phone, Clock, CreditCard, Leaf, CheckCircle2, ShieldCheck, Truck, Users, Smile } from "lucide-react"
 
+// ✅ Updated statsData: values removed, icons changed to match labels
 const statsData = [
-  { icon: <FaTshirt className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 50000, suffix: "+", label: "Fast & Secure" },
-  { icon: <FaWater className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 50, suffix: "", label: "Pickup & Delivery" },
-  { icon: <GiClothes className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 10000, suffix: "+", label: "Experienced Team" },
-  { icon: <FaUserCheck className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, value: 100, suffix: "%", label: "Happy Customers" },
+  { icon: <ShieldCheck className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, label: "Fast & Secure" },
+  { icon: <Truck className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, label: "Pickup & Delivery" },
+  { icon: <Users className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, label: "Experienced Team" },
+  { icon: <Smile className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, label: "Happy Customers" },
 ]
 
 export default function LaundryStats() {
-  const [counts, setCounts] = useState(statsData.map(() => 0))
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCounts((prev) =>
-        prev.map((count, i) =>
-          count < statsData[i].value
-            ? Math.min(count + Math.ceil(statsData[i].value / 50), statsData[i].value)
-            : count,
-        ),
-      )
-    }, 30)
-    return () => clearInterval(interval)
-  }, [])
+  // ⛔️ Removed useState and useEffect for counting animation as they are no longer needed
 
   return (
     <>
@@ -59,19 +44,12 @@ export default function LaundryStats() {
 
             {/* Text Section */}
             <div className="flex-1 w-full text-center lg:text-left lg:pl-8">
-              {/*<p className="text-green-600 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
-                More than 25 Years of Experience
-              </p> */ }
               <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-6 leading-tight">
                 The Best Laundry Service in Dubai, Perfected Over Time
-
               </h1>
               <p className="text-gray-600 mb-5 sm:mb-8 leading-relaxed text-sm sm:text-base lg:text-lg max-w-2xl mx-auto lg:mx-0">
                 At Freshora, laundry is more than a service - it is a craft. Our team is committed to your peace of mind and emboldened by years of stain removal expertise to ensure the promise is delivered promptly and without hassle. 
-
-
-Every garment is treated with great care, following strict  standards to protect your clothes, your skin, and our planet.
-
+                Every garment is treated with great care, following strict standards to protect your clothes, your skin, and our planet.
               </p>
 
               {/* Features List */}
@@ -97,11 +75,10 @@ Every garment is treated with great care, following strict  standards to protect
                 <div className="text-center sm:text-left">
                   <p className="text-gray-500 text-xs sm:text-sm">Call for Quality Services</p>
                   <p className="text-base sm:text-lg lg:text-xl font-bold text-green-700">
-  <a href="tel:+971509259667" className="hover:text-green-600 transition-colors">
-    +971 50 925 9667
-  </a>
-</p>
-
+                    <a href="tel:+971509259667" className="hover:text-green-600 transition-colors">
+                      +971 50 925 9667
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -125,7 +102,7 @@ Every garment is treated with great care, following strict  standards to protect
       </section>
 
       {/* Stats Section */}
-    {  <section className="bg-white py-10 sm:py-14 lg:py-20">
+      <section className="bg-white py-10 sm:py-14 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
             {statsData.map((stat, i) => (
@@ -133,15 +110,14 @@ Every garment is treated with great care, following strict  standards to protect
                 <div className="bg-white rounded-full shadow-md p-3 sm:p-5 mb-3 sm:mb-5 border border-gray-100">
                   {stat.icon}
                 </div>
-                <h3 className="text-lg sm:text-2xl font-bold text-gray-900">
-                  {counts[i]}{stat.suffix}
-                </h3>
-                <p className="text-gray-500 text-xs sm:text-sm">{stat.label}</p>
+                {/* ⛔️ Removed the h3 for the count */}
+                {/* ✅ Bolded the label and adjusted styling */}
+                <p className="font-bold text-gray-800 text-base sm:text-lg text-center">{stat.label}</p>
               </div>
             ))}
           </div>
         </div>
-      </section> }
+      </section>
     </>
   )
 }
