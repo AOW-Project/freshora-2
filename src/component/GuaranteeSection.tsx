@@ -16,7 +16,7 @@ const GuaranteeSection: React.FC = () => {
             Excellence  <br className="hidden md:block" /> Without Exception
           </h2>
           <p className="text-gray-600 mb-6">
-            Since 2011, Freshora has been the trusted name in garment care. We are committed to returning every piece in immaculate condition. In the rare instance of loss or damage, we provide reimbursement up to the full value of the item, with a $1,000 maximum per order.
+             Freshora has been the trusted name in garment care. We are committed to returning every piece in immaculate condition. In the rare instance of loss or damage, we provide reimbursement up to the full value of the item, with a  1,000 maximum per order.
           </p>
           <Link href='/services'>
                     <button className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300">
