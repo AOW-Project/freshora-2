@@ -1,5 +1,5 @@
 "use client"
-
+ 
 /**
  * Schedule Pickup Modal (PickupForm)
  * - Uses your OTP verify flow
@@ -7,29 +7,29 @@
  * - On success: clears cart via useCart().clearCart() + keeps your thankYou redirect
  * - Strong comments so future you can tweak fast
  */
-
+ 
 import { useState, useEffect, useMemo, useCallback } from "react"
 import { useRouter } from "next/navigation"
-
+ 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { X, CheckCircle } from "lucide-react"
-
+ 
 // ✅ Import your cart context (same path you used elsewhere)
 import { useCart } from "../app/context/cart-context"
-
+ 
 // —————————————————————————————————————————————————————————————————————
 // Types
 // —————————————————————————————————————————————————————————————————————
-
+ 
 interface PickupFormProps {
   open: boolean
   onClose: () => void
 }
-
+ 
 interface CartItem {
   id: string
   name: string
@@ -38,9 +38,9 @@ interface CartItem {
   category: string
   serviceSlug?: string
 }
-
+ 
 type EmailVerificationState = "unverified" | "pending" | "verified"
-
+ 
 interface FormDataShape {
   name: string
   email: string
@@ -55,11 +55,11 @@ interface FormDataShape {
   service: "laundry-services" | "dry-cleaning-services" | "express-laundry-services"
   specialInstructions: string
 }
-
+ 
 // —————————————————————————————————————————————————————————————————————
 // Helpers
 // —————————————————————————————————————————————————————————————————————
-
+ 
 /** Clamp a date string (yyyy-mm-dd) to today or later */
 const clampToToday = (value: string) => {
   const today = new Date()
@@ -70,10 +70,10 @@ const clampToToday = (value: string) => {
   if (incoming < today) return today.toISOString().split("T")[0]
   return value
 }
-
+ 
 /** Very light email check; your OTP API is the real validation */
 const looksLikeEmail = (email: string) => /\S+@\S+\.\S+/.test(email)
-
+ 
 /** Build order payload with minimal mutation to your current structure */
 const buildOrderPayload = ({
   formData,
@@ -92,7 +92,7 @@ const buildOrderPayload = ({
     category: item.category,
     serviceSlug: item.serviceSlug || formData.service,
   }))
-
+ 
   return {
     name: formData.name,
     customerInfo: {
@@ -118,20 +118,20 @@ const buildOrderPayload = ({
     paymentMethod: "cash_on_delivery",
   }
 }
-
+ 
 /** Tiny formatter to keep money output consistent */
 const formatMoney = (n: number) => `AED${n.toFixed(2)}`
-
+ 
 // —————————————————————————————————————————————————————————————————————
 // Component
 // —————————————————————————————————————————————————————————————————————
-
+ 
 export default function PickupForm({ open, onClose }: PickupFormProps) {
   const router = useRouter()
-
+ 
   // ✅ Access your CartContext so we can clear it after success
   const { clearCart } = useCart()
-
+ 
   const [formData, setFormData] = useState<FormDataShape>({
     name: "",
     email: "",
@@ -146,25 +146,25 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
     service: "laundry-services",
     specialInstructions: "",
   })
-
+ 
   const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [totalAmount, setTotalAmount] = useState(0)
-
+ 
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState("")
-
+ 
   const [emailVerificationState, setEmailVerificationState] = useState<EmailVerificationState>("unverified")
   const [otp, setOtp] = useState("")
   const [otpLoading, setOtpLoading] = useState(false)
   const [otpMessage, setOtpMessage] = useState("")
-
+ 
   // —————————————————————————————————————————————————————————————————————
   // Effects: load cart from localStorage when modal opens or service changes
   // —————————————————————————————————————————————————————————————————————
-
+ 
   useEffect(() => {
     if (!open) return
-
+ 
     try {
       const savedCart = typeof window !== "undefined" ? localStorage.getItem("cart") : null
       if (savedCart) {
@@ -186,35 +186,35 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
       setTotalAmount(0)
     }
   }, [open, formData.service])
-
+ 
   // —————————————————————————————————————————————————————————————————————
   // Handlers
   // —————————————————————————————————————————————————————————————————————
-
+ 
   const handleInputChange = useCallback((field: keyof FormDataShape, value: string) => {
     setFormData((prev) => {
       const next = { ...prev, [field]: value }
-
+ 
       // Clamp pickup/delivery dates to today (basic guard so user can’t select yesterday)
       if (field === "pickupDate") next.pickupDate = clampToToday(value)
       if (field === "deliveryDate") next.deliveryDate = value // let delivery be anything; your server can validate
-
+ 
       return next
     })
-
+ 
     // Reset email verification if email changes
     if (field === "email") {
       setEmailVerificationState("unverified")
       setOtp("")
       setOtpMessage("")
     }
-
+ 
     // Keep serviceSlug synced on items if service changes
     if (field === "service") {
       setCartItems((prev) => prev.map((item) => ({ ...item, serviceSlug: value })))
     }
   }, [])
-
+ 
   const handleSendOTP = useCallback(async () => {
     if (!formData.email) {
       setOtpMessage("Please enter your email address first")
@@ -224,17 +224,17 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
       setOtpMessage("Please enter a valid email address")
       return
     }
-
+ 
     setOtpLoading(true)
     setOtpMessage("")
-
+ 
     try {
       const res = await fetch("/api/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: formData.email }),
       })
-
+ 
       const data = await res.json()
       if (data.success) {
         setEmailVerificationState("pending")
@@ -248,7 +248,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
       setOtpLoading(false)
     }
   }, [formData.email])
-
+ 
   const handleVerifyOTP = useCallback(async () => {
     if (!otp) {
       setOtpMessage("Please enter the OTP")
@@ -256,7 +256,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
     }
     setOtpLoading(true)
     setOtpMessage("")
-
+ 
     try {
       const res = await fetch("/api/verify-otp", {
         method: "POST",
@@ -276,7 +276,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
       setOtpLoading(false)
     }
   }, [formData.email, otp])
-
+ 
   const isSubmitDisabled = useMemo(() => {
     if (loading) return true
     if (emailVerificationState !== "verified") return true
@@ -285,45 +285,45 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
     if (cartItems.length === 0) return true
     return false
   }, [loading, emailVerificationState, formData, cartItems.length])
-
+ 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault()
-
+ 
       if (emailVerificationState !== "verified") {
         setMessage("❌ Please verify your email address before submitting")
         return
       }
-
+ 
       if (cartItems.length === 0) {
         setMessage("❌ Your cart is empty. Please add items before placing an order.")
         return
       }
-
+ 
       setLoading(true)
       setMessage("")
-
+ 
       try {
         const orderPayload = buildOrderPayload({ formData, cartItems, totalAmount })
-
+ 
         console.log("[v0] Sending order payload:", orderPayload)
-
+ 
         const res = await fetch("https://freshora-backend-u9xy.onrender.com/api/orders", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(orderPayload),
         })
-
+ 
         const data = await res.json()
         console.log("[v0] Order response:", data)
-
+ 
       if (data.success) {
   // Show success message
   setMessage(`✅ Order placed successfully! Order Number: ${data.data.orderNumber}`)
-
+ 
   // Redirect to thank you page immediately
   router.push("/thankYou")
-
+ 
   // Clear cart after redirect (small delay so it doesn’t flash empty cart)
   setTimeout(() => {
     clearCart()
@@ -344,17 +344,17 @@ else {
     },
     [emailVerificationState, cartItems, formData, totalAmount, clearCart, router]
   )
-
+ 
   // —————————————————————————————————————————————————————————————————————
   // Early return if modal is closed
   // —————————————————————————————————————————————————————————————————————
-
+ 
   if (!open) return null
-
+ 
   // —————————————————————————————————————————————————————————————————————
   // JSX
   // —————————————————————————————————————————————————————————————————————
-
+ 
   return (
     <div className="fixed inset-0 backdrop-blur-custom bg-black/30 flex items-center justify-center z-[99999] p-4 animate-in fade-in-0 duration-300">
       <Card className="w-full max-w-sm rounded-lg shadow-xl border-0 bg-white overflow-hidden animate-in slide-in-from-bottom-4 duration-500">
@@ -365,7 +365,7 @@ else {
             <X className="h-4 w-4" />
           </button>
         </CardHeader>
-
+ 
         <CardContent className="p-3 pt-0">
           {/* Order Summary */}
           {cartItems.length > 0 && (
@@ -390,7 +390,7 @@ else {
               </div>
             </div>
           )}
-
+ 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-2">
             {/* Name */}
@@ -402,7 +402,7 @@ else {
               className="h-8 text-sm"
               autoComplete="name"
             />
-
+ 
             {/* Email + Verify */}
             <div className="space-y-1">
               <div className="flex gap-1">
@@ -430,7 +430,7 @@ else {
                   )}
                 </Button>
               </div>
-
+ 
               {/* OTP */}
               {emailVerificationState === "pending" && (
                 <div className="flex gap-1">
@@ -455,12 +455,12 @@ else {
                   </Button>
                 </div>
               )}
-
+ 
               {otpMessage && (
                 <p className={`text-xs ${otpMessage.includes("✅") ? "text-green-600" : "text-red-600"}`}>{otpMessage}</p>
               )}
             </div>
-
+ 
             {/* Phone + Service */}
             <div className="grid grid-cols-2 gap-2">
               <Input
@@ -482,7 +482,7 @@ else {
                 </SelectContent>
               </Select>
             </div>
-
+ 
             {/* Address */}
   <Input
   placeholder="Address * (at least 5 words)"
@@ -492,8 +492,8 @@ else {
   className="h-8 text-sm"
   autoComplete="street-address"
 />
-
-
+ 
+ 
             {/* City + Zip */}
             <div className="grid grid-cols-2 gap-2">
               <Input
@@ -511,12 +511,13 @@ else {
   className="h-8 text-sm"
   autoComplete="postal-code"
 />
-
+ 
             </div>
-
+ 
             {/* Pickup + Delivery */}
             <div className="grid grid-cols-2 gap-2">
               <div className="space-y-1">
+               <p className="text-xs font-medium text-gray-500">Pickup</p>
                 <Input
                   type="date"
                   value={formData.pickupDate}
@@ -539,8 +540,10 @@ else {
                   </SelectContent>
                 </Select>
               </div>
-
+ 
               <div className="space-y-1">
+                <p className="text-xs font-medium text-gray-500">Delivery</p>
+ 
                 <Input
                   type="date"
                   value={formData.deliveryDate}
@@ -563,7 +566,7 @@ else {
                 </Select>
               </div>
             </div>
-
+ 
             {/* Special Instructions */}
             <Textarea
               placeholder="Special instructions"
@@ -571,7 +574,7 @@ else {
               onChange={(e) => handleInputChange("specialInstructions", e.target.value)}
               className="min-h-[50px] resize-none text-sm"
             />
-
+ 
             {/* Submit */}
             <Button
               type="submit"
@@ -580,7 +583,7 @@ else {
             >
               {loading ? "Processing..." : `Place Order (${formatMoney(totalAmount)})`}
             </Button>
-
+ 
             {message && (
               <p className={`text-center text-xs ${message.includes("❌") ? "text-red-600" : "text-green-600"}`}>
                 {message}
