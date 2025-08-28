@@ -280,7 +280,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
   const isSubmitDisabled = useMemo(() => {
     if (loading) return true
     if (emailVerificationState !== "verified") return true
-    if (!formData.name || !formData.email || !formData.address || !formData.city || !formData.zipCode) return true
+    if (!formData.name || !formData.email || !formData.address || !formData.city) return true
     if (!formData.pickupDate || !formData.deliveryDate) return true
     if (cartItems.length === 0) return true
     return false
@@ -484,14 +484,15 @@ else {
             </div>
 
             {/* Address */}
-            <Input
-              placeholder="Address *"
-              value={formData.address}
-              onChange={(e) => handleInputChange("address", e.target.value)}
-              required
-              className="h-8 text-sm"
-              autoComplete="street-address"
-            />
+  <Input
+  placeholder="Address * (at least 5 words)"
+  value={formData.address}
+  onChange={(e) => handleInputChange("address", e.target.value)}
+  required
+  className="h-8 text-sm"
+  autoComplete="street-address"
+/>
+
 
             {/* City + Zip */}
             <div className="grid grid-cols-2 gap-2">
@@ -503,14 +504,14 @@ else {
                 className="h-8 text-sm"
                 autoComplete="address-level2"
               />
-              <Input
-                placeholder="Zip Code *"
-                value={formData.zipCode}
-                onChange={(e) => handleInputChange("zipCode", e.target.value)}
-                required
-                className="h-8 text-sm"
-                autoComplete="postal-code"
-              />
+   <Input
+  placeholder="Zip Code"
+  value={formData.zipCode}
+  onChange={(e) => handleInputChange("zipCode", e.target.value)}
+  className="h-8 text-sm"
+  autoComplete="postal-code"
+/>
+
             </div>
 
             {/* Pickup + Delivery */}
