@@ -9,7 +9,7 @@ const statsData = [
   { icon: <ShieldCheck className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, label: "Fast & Secure" },
   { icon: <Truck className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, label: "Pickup & Delivery" },
   { icon: <Users className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, label: "Experienced Team" },
-  { icon: <Smile className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, label: "Happy Customers" },
+  { icon: <Smile className="text-green-600 text-lg sm:text-xl lg:text-3xl" />, label: " 100% Happy Customers" },
 ]
 
 export default function LaundryStats() {
