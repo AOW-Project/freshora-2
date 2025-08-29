@@ -6,6 +6,7 @@ import Navbar from "@/component/NavBar";
 import Footer from "@/component/Footer";
 import { ToastContainer } from "react-toastify";
 import LastPageTracker from "@/component/LastPageTracker";
+import WhatsAppFloatingButton from "@/component/WhatsAppFloatingButton";
 
 export const metadata: Metadata = {
   // Your existing title - it's great!
@@ -43,7 +44,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="relative z-10 min-h-screen">
             <Navbar />
             <LastPageTracker />
-            <main className="relative z-20">{children}</main>
+            <main className="relative z-20">{children}
+              <WhatsAppFloatingButton />
+            </main>
             <Footer />
           </div>
           <ToastContainer />

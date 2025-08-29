@@ -1,4 +1,4 @@
-"use client";
+
 //import { Metadata } from "next";
 import { CheckCircle2, Clock, CreditCard, Leaf, Phone } from "lucide-react";
 import dynamic from "next/dynamic";
@@ -7,29 +7,31 @@ import Link from "next/link";
 import type { Metadata } from "next";
 //import AnimatedParticles from "@/component/AnimatedParticles";
 // import img01 from '../../../public/images/img01.jpg';
-
+import GuaranteeSection from "@/component/GuaranteeSection";
+import AdvantagesSection from "@/component/AdvantagesSection";
+import HistorySection from "@/component/HistorySection";
 
 // Dynamically import components with SSR disabled
 //const LaundryStats = dynamic(() => import("@/component/LaundryStatus"), { ssr: false });
-const GuaranteeSection = dynamic(() => import("@/component/GuaranteeSection"), { ssr: false });
-const AdvantagesSection = dynamic(() => import("@/component/AdvantagesSection"), { ssr: false });
-const HistorySection = dynamic(() => import("@/component/HistorySection"), { ssr: false });
+//const GuaranteeSection = dynamic(() => import("@/component/GuaranteeSection"), { ssr: false });
+//const AdvantagesSection = dynamic(() => import("@/component/AdvantagesSection"), { ssr: false });
+//const HistorySection = dynamic(() => import("@/component/HistorySection"), { ssr: false });
 //const TeamSection = dynamic(() => import("@/component/TeamSection"), { ssr: false });
  /* export const metadata: Metadata = {
   title: "Best Laundry Service in Dubai | Freshora Laundry Experts",
   description: " Experience the best laundry service in Dubai with Freshora. Trusted care, high-quality cleaning, and hassle-free pickup & delivery for every garment. ",
   keywords: ["Best Laundry Service in Dubai", " Affordable laundry service", "Free Laundry Pickup and Delivery"],
   alternates: {
-    canonical: "https://freshoralaundry.com/about",
+    canonical: "https://freshoralaundry.com/about",npm run dev
   },
 }; */
- async function generateMetadata(): Promise<Metadata> {
+export  async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Best Laundry Service in Dubai | Freshora Laundry Experts",
     description:
       " Experience the best laundry service in Dubai with Freshora. Trusted care, high-quality cleaning, and hassle-free pickup & delivery for every garment. ",
     keywords: [
-      " Affordable laundry service",
+      " Affordable- laundry service",
       "Best Laundry Service in Dubai",
       "Dry Cleaning Dubai",
       " Free Laundry Pickup and Delivery",

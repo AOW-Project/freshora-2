@@ -152,14 +152,14 @@ const services: Service[] = [
       { question: "Is express service available on weekends?", answer: "Yes, we offer express service 7 days a week including weekends and holidays." },
     ],
     items: undefined,
-     metaTitle: "Express Laundry Service in Dubai | Freshora Same-Day Care",
-    metaDescription: "Get your clothes cleaned in hours, not days, with Freshora’s Express Laundry Service in Dubai. Perfect for urgent needs, business travelers, and busy professionals.",
+     metaTitle: "Express Laundry in Dubai | Freshora Laundry Experts",
+    metaDescription: " Freshora provides professional express laundry in Dubai with quick pickup, timely delivery, and expert garment care for a hassle-free experience.",
     keywords: [
       "Express Laundry",
-      "Same day laundry Dubai",
-      "urgent laundry service",
-      "quick laundry pickup and delivery",
-      "fresh clothes same day"
+      "express laundry service",
+      " express laundry and dry cleaning",
+      
+      "express laundry services in Dubai "
     ],
     canonical: "https://freshoralaundry.com/services/express-laundry-services",
   },
@@ -227,7 +227,7 @@ const services: Service[] = [
     keywords: [
       "Luxury Shoe Cleaning",
       "professional shoe cleaning",
-      "Italian leather shoe care",
+      
       "sneaker cleaning service",
       "shoe cleaning service Dubai"
     ],    
@@ -262,9 +262,9 @@ const services: Service[] = [
     keywords: [
       "Commercial Laundry Service",
       "Laundry Service for Hotels",
-      "Laundry Service for Restaurants",
-      "high-volume laundry solutions",
-      "professional commercial laundry"
+      "Laundry Service for Restaurants"
+      
+     
     ],
     canonical: "https://freshoralaundry.com/services/commercial-laundry-service",
   },
@@ -298,8 +298,8 @@ const services: Service[] = [
       "Curtain Cleaning Service",
       "professional curtain cleaning",
       "drapery cleaning service",
-      "curtain dry cleaning",
-      "curtain washing service"
+      "curtain dry cleaning"
+      
     ],
     canonical: "https://freshoralaundry.com/services/curtain-cleaning-service",
   },
@@ -332,9 +332,8 @@ const services: Service[] = [
     keywords: [
       "Carpet Cleaning Service",
       "professional carpet cleaning Dubai",
-      "delicate wool rug cleaning service",
-      "deep carpet cleaning",
-      "carpet steam cleaning"
+      "delicate wool rug cleaning service"
+      
     ],
     canonical: "https://freshoralaundry.com/services/carpet-cleaning-service",
   },
