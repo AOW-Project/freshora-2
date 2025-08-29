@@ -77,14 +77,14 @@ const services: Service[] = [
       { question: "Can I mix different categories in one order?", answer: "Yes, you can add items from men's, women's, and children's categories in a single order." },
     ],
     items: undefined,
-    metaTitle: "Laundry Service in Dubai | Freshora – Quality and Convenience",
-    metaDescription: "Freshora offers top-notch Laundry Service in Dubai with doorstep pickup and delivery. Fast, eco-friendly, and reliable care for all your garments.",
+    metaTitle: "Professional Laundry  in Dubai | Freshora Laundry Experts",
+    metaDescription: "Get spotless clothes with Freshora’s professional laundry service in Dubai. Free pickup & delivery, eco-friendly cleaning, and expert care for your garments.",
     keywords: [
-      "Laundry Service",
-      "Laundry Service in Dubai",
-      "Best Laundry Service in Dubai",
+      "Professional Laundry",
+      "wash and fold service",
+      " laundry pickup and delivery",
       "best laundry services",
-      "detergents and professional laundry"
+      "doorstep laundry service with in Dubai"
     ],
     canonical: "https://freshoralaundry.com/services/laundry-services",
   },
@@ -206,8 +206,8 @@ const services: Service[] = [
     fullDescription: "Experience premium Luxury Shoe Cleaning in Dubai with our certified specialists. From professional shoe cleaning for Italian leather to sneaker cleaning service for designer pairs, we restore shine, protect materials, and extend your footwear’s lifespan with expert techniques and eco-friendly care.",
     secondaryTitle: "Luxury Shoe Care at Your Doorstep",
     secondaryDescription: "Book trusted shoe cleaning service Dubai today. From luxury dress shoes to sneakers, enjoy meticulous cleaning, restoration, and care-all delivered to your doorstep. ",
-    image: "/images/soak-shoes-before-washing-cleaning-dirty-sneakers-2025-03-09-07-54-41-utc.jpg",
-    gallery: ["/images/shoemaker-sharpens-the-shoe-sole-footwear-repair-2024-12-02-20-55-16-utc.jpg", "/images/shoemaker-wipes-black-shoe-polish-footwear-repair-2024-11-26-15-14-47-utc.jpg"],
+    image: "/images/erik-mclean-AnRxcupEQT0-unsplash.webp",
+    gallery: ["/images/83b6f078-38db-4b2d-88c3-123a4ac7e796.jfif", "/images/pexels-ashis-sarker-706183433-18155790.jpg"],
     features: ["Hand-crafted shoe care", "Premium leather conditioning", "Mirror shine polishing", "Sole cleaning and conditioning", "Cedar shoe tree service", "Luxury packaging and delivery"],
     pricing: {
       basic: { price: "$30-60", description: "Premium cleaning and conditioning" },

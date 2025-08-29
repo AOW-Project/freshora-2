@@ -4,7 +4,7 @@ import { CheckCircle2, Clock, CreditCard, Leaf, Phone } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-
+import type { Metadata } from "next";
 //import AnimatedParticles from "@/component/AnimatedParticles";
 // import img01 from '../../../public/images/img01.jpg';
 
@@ -15,7 +15,7 @@ const GuaranteeSection = dynamic(() => import("@/component/GuaranteeSection"), {
 const AdvantagesSection = dynamic(() => import("@/component/AdvantagesSection"), { ssr: false });
 const HistorySection = dynamic(() => import("@/component/HistorySection"), { ssr: false });
 //const TeamSection = dynamic(() => import("@/component/TeamSection"), { ssr: false });
- {/* export const metadata: Metadata = {
+ /* export const metadata: Metadata = {
   title: "Best Laundry Service in Dubai | Freshora Laundry Experts",
   description: " Experience the best laundry service in Dubai with Freshora. Trusted care, high-quality cleaning, and hassle-free pickup & delivery for every garment. ",
   keywords: ["Best Laundry Service in Dubai", " Affordable laundry service", "Free Laundry Pickup and Delivery"],
@@ -23,6 +23,32 @@ const HistorySection = dynamic(() => import("@/component/HistorySection"), { ssr
     canonical: "https://freshoralaundry.com/about",
   },
 }; */
+ async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Best Laundry Service in Dubai | Freshora Laundry Experts",
+    description:
+      " Experience the best laundry service in Dubai with Freshora. Trusted care, high-quality cleaning, and hassle-free pickup & delivery for every garment. ",
+    keywords: [
+      " Affordable laundry service",
+      "Best Laundry Service in Dubai",
+      "Dry Cleaning Dubai",
+      " Free Laundry Pickup and Delivery",
+      "Best laundry company in Dubai"
+    ],
+    alternates: {
+      canonical: "https://freshoralaundry.com/about",
+    },
+    openGraph: {
+      title: "About Freshora Laundry",
+      description: "Trusted laundry and dry cleaning in Dubai. Learn about our story, process, and promise of quality.",
+      url: "https://freshoralaundry.com/about",
+    },
+    twitter: {
+      card: "summary",
+      title: "About Freshora Laundry",
+      description: "Dubai’s trusted laundry and dry cleaning service provider.",
+    },
+  };
 }
 export default function AboutSection() {
   return (
