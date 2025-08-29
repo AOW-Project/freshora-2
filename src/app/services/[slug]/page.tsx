@@ -9,8 +9,10 @@ import { servicesData, getServiceBySlug, Service } from "@/lib/services-data";
 export type { Service } from "@/lib/services-data";
 
 // --- Dynamic Metadata for SEO ---
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const { slug } = params;
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const { slug } = await params; // ✅ await is required in Next.js 15
   const service = getServiceBySlug(slug);
 
   if (!service) {
@@ -48,14 +50,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 // --- Page Props ---
-// ✅ In Next.js 15, params is a Promise that must be awaited
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
 // ✅ Main Page Component
 export default async function ServicePage({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug } = await params; // ✅ await params
   const service = getServiceBySlug(slug);
 
   if (!service) {
