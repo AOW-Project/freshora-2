@@ -87,8 +87,34 @@ const faqData = [
         q: "",
         a: "Yes, you can request express dry cleaning for urgent garment care. ",
       },
+
     ],
+
   },
+  {
+    category: "4. Shoe & Bag Spa ",
+    questions: [
+      {
+        q: "Q1: What items can be cleaned in the Shoe & Bag Spa?",
+        a: " We clean and restore all types of shoes and bags, including leather, suede, fabric, and luxury brands. ",
+      },
+      {
+        q: "Q2: Will cleaning damage my leather shoes or handbags? ",
+        a: "We handle various materials including leather, suede, canvas, and synthetic fabrics. ",
+      },
+      {
+        q: "Q3: How long does the shoe and bag cleaning take?",
+        a: "Typically, it takes 2–3 days depending on the item’s condition and required treatments. ",
+      },
+      {
+        q: "Q4: Is it safe to clean luxury shoes and bags?",
+        a: "Absolutely. Our experts are trained to handle high-end items with utmost care. ",
+      },
+      {
+        q: "Q5: What is the cost of shoe and bag cleaning in Dubai?",
+        a: "Prices vary based on item type and condition. Contact us for a personalized quote. ",
+      },
+    ], }
 ]
 
 export default function FAQPage() {
