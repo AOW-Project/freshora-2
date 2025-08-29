@@ -8,8 +8,11 @@ import { MdIron } from "react-icons/md"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CheckCircle, ShoppingCart, Zap, ChevronLeft, ChevronRight } from "lucide-react"
+//import { Metadata } from "next"
 import Link from "next/link"
 import { useCart } from "../context/cart-context" // Import cart provider
+
+
 
 const poppins = Poppins({
   subsets: ["latin"],
