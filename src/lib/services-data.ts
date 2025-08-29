@@ -27,6 +27,10 @@ export interface Service {
   reviews: number
   process: string[]
   faq: { question: string; answer: string }[]
+  metaTitle?: string
+  metaDescription?: string
+  keywords?: string[]
+  canonical?: string
 }
 
 const services: Service[] = [
@@ -72,7 +76,17 @@ const services: Service[] = [
       { question: "How is pricing calculated?", answer: "Pricing is calculated per item based on the type of clothing. You can see individual prices for each item in our catalog." },
       { question: "Can I mix different categories in one order?", answer: "Yes, you can add items from men's, women's, and children's categories in a single order." },
     ],
-    items: undefined
+    items: undefined,
+    metaTitle: "Laundry Service in Dubai | Freshora – Quality and Convenience",
+    metaDescription: "Freshora offers top-notch Laundry Service in Dubai with doorstep pickup and delivery. Fast, eco-friendly, and reliable care for all your garments.",
+    keywords: [
+      "Laundry Service",
+      "Laundry Service in Dubai",
+      "Best Laundry Service in Dubai",
+      "best laundry services",
+      "detergents and professional laundry"
+    ],
+    canonical: "https://freshoralaundry.com/services/laundry-services",
   },
   {
     id: 2,
@@ -100,7 +114,19 @@ const services: Service[] = [
         { question: "What items require dry cleaning?", answer: 'Suits, dresses, silk items, wool garments, and items with "Dry Clean Only" labels.' },
         { question: "How do you calculate the total cost?", answer: "Each garment type has individual pricing. Your total is calculated based on the items and quantities you select." },
     ],
-    items: undefined
+    items: undefined,
+     metaTitle: "Dubai’s Trusted Dry Clean Service | Freshora Laundry",
+    metaDescription: "Refresh your wardrobe with Freshora’s trusted dry clean service in Dubai. From delicate fabrics to daily wear, we ensure care with a perfect finish.",
+    keywords: [
+      "Dry Clean",
+      "professional dry cleaners",
+      "premium garment care",
+      "dry cleaning pickup and delivery",
+      "affordable dry cleaners in Dubai",
+      "luxury dry cleaning in Dubai"
+    ],
+    canonical: "https://freshoralaundry.com/services/dry-clean-service",
+    
   },
   {
     id: 3,
@@ -125,7 +151,17 @@ const services: Service[] = [
       { question: "What is the cutoff time for same-day service?", answer: "Orders placed before 10 AM can be delivered the same day by 6 PM." },
       { question: "Is express service available on weekends?", answer: "Yes, we offer express service 7 days a week including weekends and holidays." },
     ],
-    items: undefined
+    items: undefined,
+     metaTitle: "Express Laundry Service in Dubai | Freshora Same-Day Care",
+    metaDescription: "Get your clothes cleaned in hours, not days, with Freshora’s Express Laundry Service in Dubai. Perfect for urgent needs, business travelers, and busy professionals.",
+    keywords: [
+      "Express Laundry",
+      "Same day laundry Dubai",
+      "urgent laundry service",
+      "quick laundry pickup and delivery",
+      "fresh clothes same day"
+    ],
+    canonical: "https://freshoralaundry.com/services/express-laundry-services",
   },
   {
     id: 4,
@@ -150,7 +186,17 @@ const services: Service[] = [
       { question: "Do you work on designer brands?", answer: "Yes, we specialize in luxury brands including Louis Vuitton, Gucci, Prada, and more." },
       { question: "Can you restore faded colors?", answer: "Yes, we offer professional color restoration services for leather goods." },
     ],
-    items: undefined
+    items: undefined,
+    metaTitle: "Shoe & Bag Spa in Dubai | Freshora Premium Care",
+    metaDescription: "  Restore the beauty of your shoes and bags with Freshora’s premium shoe and bag spa service in Dubai. Expert cleaning, care, and long-lasting freshness.",
+    keywords: [
+      "Shoe and Bag Spa Service",
+      "leather shoe cleaning",
+      " shoe cleaning service",
+      "sneaker cleaning service",
+      
+    ],
+    canonical: "https://freshoralaundry.com/services/shoe-bag-spa",
   },
   {
     id: 5,
@@ -175,7 +221,17 @@ const services: Service[] = [
       { question: "What brands do you specialize in?", answer: "We work with all luxury brands including Louboutin, Jimmy Choo, Manolo Blahnik, and Italian makers." },
       { question: "Do you provide shoe trees?", answer: "Yes, we include cedar shoe trees with our premium service to maintain shoe shape." },
     ],
-    items: undefined
+    items: undefined,
+    metaTitle: "Dubai Luxury Shoe Cleaning Service | Freshora Exclusive Care",
+    metaDescription: "  Freshora offers expert luxury shoe cleaning service  in Dubai. Gentle care, deep cleaning, and premium restoration to keep your footwear looking flawless.",
+    keywords: [
+      "Luxury Shoe Cleaning",
+      "professional shoe cleaning",
+      "Italian leather shoe care",
+      "sneaker cleaning service",
+      "shoe cleaning service Dubai"
+    ],    
+    canonical: "https://freshoralaundry.com/services/luxury-shoe-cleaning",
   },
   {
     id: 6,
@@ -200,7 +256,17 @@ const services: Service[] = [
       { question: "What industries do you serve?", answer: "We serve restaurants, hotels, healthcare, salons, gyms, and many other commercial sectors." },
       { question: "Do you provide inventory management?", answer: "Yes, we offer complete inventory tracking and management services for commercial clients." },
     ],
-    items: undefined
+    items: undefined,
+    metaTitle: "Commercial Laundry Service in Dubai | Freshora Business Care",
+    metaDescription: " Freshora offers reliable commercial laundry service in Dubai for hotels, gyms, and businesses with expert care and timely delivery.",
+    keywords: [
+      "Commercial Laundry Service",
+      "Laundry Service for Hotels",
+      "Laundry Service for Restaurants",
+      "high-volume laundry solutions",
+      "professional commercial laundry"
+    ],
+    canonical: "https://freshoralaundry.com/services/commercial-laundry-service",
   },
   {
     id: 7,
@@ -225,7 +291,17 @@ const services: Service[] = [
       { question: "Do you take down and rehang curtains?", answer: "Yes, our service includes professional takedown and rehang at no additional cost." },
       { question: "What types of curtains can you clean?", answer: "We clean all types including silk, velvet, linen, cotton, and synthetic fabrics." },
     ],
-    items: undefined
+    items: undefined,
+    metaTitle: "Curtain Cleaning Service in Dubai | Freshora Professional Care",
+    metaDescription: "  Revive your curtains with Freshora’s curtain cleaning service in Dubai. Gentle fabric care, expert cleaning, and hassle-free pickup & delivery.",
+    keywords: [
+      "Curtain Cleaning Service",
+      "professional curtain cleaning",
+      "drapery cleaning service",
+      "curtain dry cleaning",
+      "curtain washing service"
+    ],
+    canonical: "https://freshoralaundry.com/services/curtain-cleaning-service",
   },
   {
     id: 8,
@@ -250,7 +326,17 @@ const services: Service[] = [
       { question: "How long does it take for carpets to dry?", answer: "Typically 4-6 hours depending on humidity, air circulation, and carpet thickness." },
       { question: "Do you clean area rugs?", answer: "Yes, we clean all types of area rugs including Persian, Oriental, and contemporary rugs." },
     ],
-    items: undefined
+    items: undefined,
+    metaTitle: " Professional Carpet Cleaning Service in Dubai | Freshora touch  ",
+    metaDescription: "  Freshora offers expert carpet cleaning service in Dubai. Restore freshness, remove dirt, and enjoy spotless carpets with our trusted care.",
+    keywords: [
+      "Carpet Cleaning Service",
+      "professional carpet cleaning Dubai",
+      "delicate wool rug cleaning service",
+      "deep carpet cleaning",
+      "carpet steam cleaning"
+    ],
+    canonical: "https://freshoralaundry.com/services/carpet-cleaning-service",
   },
   {
     id: 9,
@@ -275,8 +361,19 @@ const services: Service[] = [
       { question: "Are your cleaning products safe for children?", answer: "Yes, we use only child-safe, non-toxic, hypoallergenic cleaning products." },
       { question: "Can you clean electronic toys?", answer: "We can clean the fabric parts of electronic toys, but electronic components must be removed first." },
     ],
-    items: undefined
-  },
+    items: undefined,
+    metaTitle: "Soft Toy Cleaning Service in Dubai | Freshora Gentle Care",
+    metaDescription: " Keep your kids’ favorite toys fresh, safe, and spotless. Freshora offers expert soft toy cleaning service in Dubai with gentle, hygienic care.",
+
+    keywords: [
+      "Soft Toy Cleaning Service",
+      "teddy bear cleaning service",
+      "kids toy cleaning service",
+      "plush toy cleaning",
+      "soft toy sanitization service"
+    ],
+    canonical: "https://freshoralaundry.com/services/soft-toy-cleaning-service",
+  },  
 ]
 
 export function getServiceBySlug(slug: string): Service | undefined {

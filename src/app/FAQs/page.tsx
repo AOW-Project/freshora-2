@@ -14,73 +14,78 @@ const poppins = Poppins({
 
 const faqData = [
   {
-    category: "Your First Order",
+    category: "1. Laundry Service ",
     questions: [
       {
-        q: "What should I prepare for the first pickup?",
-        a: "We aim to collect your clothes, clean them to a professional standard, and get them back to you within 48 hours.",
+        q: "Q1: How does Freshora’s laundry service work?",
+        a: " We collect your clothes from your doorstep, sort them by fabric and color, wash with care, dry, fold, and deliver them back neatly packed. ",
       },
       {
-        q: "Can I add extra items to my order when you collect?",
-        a: "Yes, just let us know when we arrive.",
+        q: "Q2: Do you offer stain removal as part of the laundry service?",
+        a: "Yes, our team uses safe and effective methods to remove stains while protecting fabric quality. ",
       },
       {
-        q: "Can I order by phone or email?",
-        a: "Yes, you can place your order by phone or email.",
+        q: "Q3: How long does the laundry process take?",
+        a: "Standard laundry orders are usually completed within 24–48 hours, depending on the load size.",
       },
       {
-        q: "Where are my clothes cleaned?",
-        a: "We clean your clothes to a professional standard in our own facility.",
+        q: "Q4: Do you also offer dry cleaning for delicate clothes?",
+        a: "Yes, we provide Dry Cleaning Services for fabrics that require special care like silk, wool, and designer wear. ",
       },
       {
-        q: "Why do women's blouses cost more than men's shirts?",
-        a: "Women's blouses may require different handling and pressing compared to men's shirts.",
+        q: "Q5: How much does laundry service cost in Dubai? ",
+        a: "Prices depend on the weight of laundry and type of clothing. We offer affordable per-kg rates — contact us for a custom quote. ",
       },
-      {
-        q: "Are there any fabrics you don't clean?",
-        a: "We clean most fabrics, but delicate items may require special care.",
-      },
-      {
-        q: "Are my clothes ever handled by other clients?",
-        a: "No, your clothes are handled separately from others.",
-      },
-      {
-        q: "How can I pay for the services?",
-        a: "We accept all major payment methods.",
-      },
+      
     ],
   },
   {
-    category: "Dry Cleaning",
+    category: "2. Dry Cleaning Service",
     questions: [
       {
-        q: "What if my clothes are damaged?",
-        a: "We take utmost care, but if damage occurs, we'll contact you immediately.",
+        q: "Q1: What types of clothes need dry cleaning? ",
+        a: " Yes, we use eco-friendly solvents and advanced techniques to protect fabric texture and color. ",
       },
       {
-        q: "What is included in your service?",
+        q: "Q2: Is your dry cleaning safe for sensitive fabrics?",
         a: "Our dry cleaning includes cleaning, pressing, and packaging.",
       },
       {
-        q: "Do you provide the cleaning supplies?",
-        a: "Yes, we provide all necessary supplies.",
+        q: "Q3: How quickly can I get my dry-cleaned clothes back?",
+        a: "Most dry-cleaning orders are ready within 24–48 hours. Express options are available. ",
+      },
+      {
+        q: "Q4: Can I get urgent laundry done instead of dry cleaning?",
+        a: "Yes, our Express Laundry Service is ideal if you need same-day or next-day delivery. ",
+      },
+      {
+        q: "Q5: What is the price for dry cleaning in Dubai?",
+        a: "Prices vary by garment type — for example, suits, gowns, and abayas have different rates. Contact us for a detailed price list. ",
       },
     ],
   },
   {
-    category: "Wash, Tumble Dry & Fold",
+    category: "3. Express Laundry Service ",
     questions: [
       {
-        q: "Do I need to weigh my Wash, Tumble Dry & Fold bags?",
-        a: "No, we weigh and record your laundry upon collection.",
+        q: "Q1: What is express laundry service? ",
+        a: "It’s our urgent laundry option for customers who need clothes cleaned and returned within hours or on the same day.",
       },
       {
-        q: "What temperature do you wash the clothes at?",
-        a: "We wash clothes at the recommended temperature for each fabric.",
+        q: "Q2: Is quality compromised in express service?",
+        a: "Not at all. We maintain the same premium quality while speeding up the process. ",
       },
       {
-        q: "Do I get to keep the bag?",
-        a: "Yes, you keep the bag.",
+        q: "Q3: When should I use express laundry? ",
+        a: "If you have last-minute events, business meetings, or travel plans, express service ensures fresh clothes on time. ",
+      },
+      {
+        q: "Q4: Do you also clean shoes and bags quickly?",
+        a: "Yes, our Shoe & Bag Spa can refresh your footwear and accessories with professional care. ",
+      },
+      {
+        q: "",
+        a: "Yes, you can request express dry cleaning for urgent garment care. ",
       },
     ],
   },
