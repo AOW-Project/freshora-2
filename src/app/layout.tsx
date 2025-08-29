@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from 'next/script'; // Import the Next.js Script component
 import { CartProvider } from "@/app/context/cart-context";
 import "./globals.css";
 import Navbar from "@/component/NavBar";
@@ -26,11 +27,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://freshoralaundry.com/',
   },
+
+  // This is the recommended way to add Google Site Verification
+  verification: {
+    google: 'rA4Z54HNZDzcvU8-4_PtJfHLlncS2jKC6m92KXo7nA0',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      {/* The <head> tag is managed by Next.js, so you don't need to add it here */}
       <body>
         <CartProvider>
           <div className="relative z-10 min-h-screen">
@@ -41,6 +48,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
           <ToastContainer />
         </CartProvider>
+
+        {/* Use the Next.js Script component for Google Analytics */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-RNHPFY4CMF"
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-RNHPFY4CMF');
+            `,
+          }}
+        />
       </body>
     </html>
   );
