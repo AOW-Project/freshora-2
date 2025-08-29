@@ -268,8 +268,10 @@ export default function ServicePageClient({
                        <div key={index} className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden">
                          <Image
                            src={imgSrc}
+                           height={300}
+                           width={400}
                            alt={`${service.title} gallery image ${index + 1}`}
-                           fill
+                           
                            className="object-cover"
                          />
                        </div>
