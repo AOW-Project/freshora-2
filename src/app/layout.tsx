@@ -7,6 +7,7 @@ import Footer from "@/component/Footer";
 import { ToastContainer } from "react-toastify";
 import LastPageTracker from "@/component/LastPageTracker";
 import WhatsAppFloatingButton from "@/component/WhatsAppFloatingButton";
+import AnalyticsLoader from "@/component/AnalyticsLoader";
 
 export const metadata: Metadata = {
   // Your existing title - it's great!
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
   // This is the recommended way to add Google Site Verification
   verification: {
     google: 'rA4Z54HNZDzcvU8-4_PtJfHLlncS2jKC6m92KXo7nA0',
+    
   },
 };
 
@@ -46,14 +48,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <LastPageTracker />
             <main className="relative z-20">{children}
               <WhatsAppFloatingButton />
+
             </main>
             <Footer />
           </div>
           <ToastContainer />
+          <AnalyticsLoader />
         </CartProvider>
 
         {/* Use the Next.js Script component for Google Analytics */}
-        <Script
+    {  /* <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-RNHPFY4CMF"
         />
@@ -68,7 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               gtag('config', 'G-RNHPFY4CMF');
             `,
           }}
-        />
+        /> */ }
       </body>
     </html>
   );
