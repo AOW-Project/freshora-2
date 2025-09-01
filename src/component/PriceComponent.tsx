@@ -8,11 +8,8 @@ import { MdIron } from "react-icons/md"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CheckCircle, ShoppingCart, Zap, ChevronLeft, ChevronRight } from "lucide-react"
-//import { Metadata } from "next"
 import Link from "next/link"
 import { useCart } from "@/app/context/cart-context" // Import cart provider
-
-
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -87,11 +84,10 @@ const ServicePriceCard: React.FC<ServicePriceCardProps> = ({ icon: Icon, title, 
       </div>
       <div className="absolute bottom-3 sm:bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-y-0 translate-y-4">
         <Link href="/services">
-                <button className="px-4 sm:px-6 py-2 bg-green-600 text-white text-xs sm:text-sm font-semibold hover:bg-green-700 transition-colors duration-300 shadow-md">
-          Order Now
-        </button>
+          <button className="px-4 sm:px-6 py-2 bg-green-600 text-white text-xs sm:text-sm font-semibold hover:bg-green-700 transition-colors duration-300 shadow-md">
+            Order Now
+          </button>
         </Link>
-
       </div>
     </Card>
   )
@@ -105,7 +101,7 @@ const ServiceCarousel: React.FC = () => {
   const services = [
     { icon: FaTshirt, title: "Shirts Service", description: "Washed and Pressed", price: "6.00" },
     { icon: FaHandsWash, title: "Day Dress Service", description: "price of Day dress service", price: "8.00" },
-    { icon: MdIron, title: "Dry Cleaning", description: "Press", price: "3.00" },
+    { icon: MdIron, title: "Press", description: "Press", price: "3.00" },
     { icon: FaBed, title: "Bedding", description: "Bed Set (Wash and Press)", price: "10.50" },
   ]
 
@@ -117,10 +113,8 @@ const ServiceCarousel: React.FC = () => {
     else setCardsToShow(1)
   }, [width])
 
-  const nextSlide = () =>
-    setCurrentSlide((prev) => Math.min(prev + 1, services.length - cardsToShow))
-  const prevSlide = () =>
-    setCurrentSlide((prev) => Math.max(prev - 1, 0))
+  const nextSlide = () => setCurrentSlide((prev) => Math.min(prev + 1, services.length - cardsToShow))
+  const prevSlide = () => setCurrentSlide((prev) => Math.max(prev - 1, 0))
 
   const maxSlide = Math.max(0, services.length - cardsToShow)
 
@@ -135,33 +129,27 @@ const ServiceCarousel: React.FC = () => {
           }}
         >
           {services.map((service, index) => (
-            <div
-              key={index}
-              className="px-2 sm:px-4"
-              style={{ width: `${100 / cardsToShow}%` }}
-            >
+            <div key={index} className="px-2 sm:px-4" style={{ width: `${100 / cardsToShow}%` }}>
               <ServicePriceCard {...service} />
             </div>
           ))}
         </div>
 
-
-{/* Navigation Arrows */}
-<button
-  onClick={prevSlide}
-  disabled={currentSlide === 0}
-  className="absolute left-0 sm:left-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg  p-2 sm:p-3 hover:bg-green-50 transition-colors z-10 disabled:opacity-50 disabled:cursor-not-allowed"
->
-  <ChevronLeft className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
-</button>
-<button
-  onClick={nextSlide}
-  disabled={currentSlide >= maxSlide}
-  className="absolute right-0 sm:right-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg  p-2 sm:p-3 hover:bg-green-50 transition-colors z-10 disabled:opacity-50 disabled:cursor-not-allowed"
->
-  <ChevronRight className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
-</button>
-
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          disabled={currentSlide === 0}
+          className="absolute left-0 sm:left-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg p-2 sm:p-3 hover:bg-green-50 transition-colors z-10 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <ChevronLeft className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
+        </button>
+        <button
+          onClick={nextSlide}
+          disabled={currentSlide >= maxSlide}
+          className="absolute right-0 sm:right-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg p-2 sm:p-3 hover:bg-green-50 transition-colors z-10 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <ChevronRight className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
+        </button>
 
         {/* Dots Indicator */}
         <div className="flex justify-center mt-6 sm:mt-8 space-x-2 sm:space-x-3">
@@ -256,7 +244,6 @@ const packagesData = [
     id: "standard",
     icon: ShoppingCart,
     title: "Standard Package",
-   
     features: [
       "4 T-Shirts",
       "1 Pair of Jeans",
@@ -274,7 +261,6 @@ const packagesData = [
     id: "premium",
     icon: Zap,
     title: "Premium Package",
-   
     features: [
       "6 T-Shirts",
       "3 Pairs of Jeans",
@@ -302,7 +288,6 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
 
   return (
     <>
-      {/* <AnimatedParticles zIndex={5} /> */}
       <Card
         className="group relative flex w-full max-w-sm flex-col cursor-pointer border-none bg-white transition-all duration-300 hover:shadow-lg"
         onClick={() => setIsExpanded(!isExpanded)}
@@ -317,7 +302,6 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
               <Icon size={28} />
             </div>
             <h3 className="text-lg font-bold text-gray-800">{title}</h3>
-            
           </div>
           <ul className="mb-4 space-y-2 text-sm text-gray-700">
             {features.map((feature, index) => (
@@ -389,12 +373,13 @@ const PricingSection = () => {
               [ Affordable Prices ]
             </h4>
             <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 lg:mb-6 px-2">
-             Freshora – Accessible Luxury, Transparent Pricing
-
+              Freshora – Accessible Luxury, Transparent Pricing
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base px-2">
-             At Freshora, premium garment care doesn’t have to come with excessive cost. Our pricing is designed to be straightforward, competitive, and transparent — offering you the highest standards of service at exceptional value.
-         </p>
+              At Freshora, premium garment care doesn’t have to come with excessive cost. Our pricing is designed to be
+              straightforward, competitive, and transparent — offering you the highest standards of service at
+              exceptional value.
+            </p>
           </div>
           <div className="mb-12 sm:mb-16 lg:mb-20">
             <ServiceCarousel />
@@ -454,35 +439,44 @@ const PricingSection = () => {
                 </TabsContent>
                 <TabsContent value="full" className="mt-4 sm:mt-6">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 lg:gap-x-12">
-                    <div className="space-y-0">
-                      {forGentleman.map((item, index) => (
-                        <div
-                          key={index}
-                          className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation"
-                        >
-                          <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">
-                            {item.item}
-                          </span>
-                          <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">
-                            {item.washPress}
-                          </span>
-                        </div>
-                      ))}
+                    {/* Gentlemen's List Section */}
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-2">For Gentlemen</h3>
+                      <div className="space-y-0">
+                        {forGentleman.map((item, index) => (
+                          <div
+                            key={index}
+                            className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation"
+                          >
+                            <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">
+                              {item.item}
+                            </span>
+                            <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">
+                              {item.washPress}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <div className="space-y-0 mt-6 lg:mt-0">
-                      {forLadies.map((item, index) => (
-                        <div
-                          key={index}
-                          className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation"
-                        >
-                          <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">
-                            {item.item}
-                          </span>
-                          <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">
-                            {item.washPress}
-                          </span>
-                        </div>
-                      ))}
+
+                    {/* Ladies' List Section */}
+                    <div className="mt-6 lg:mt-0">
+                      <h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-2">For Ladies</h3>
+                      <div className="space-y-0">
+                        {forLadies.map((item, index) => (
+                          <div
+                            key={index}
+                            className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation"
+                          >
+                            <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">
+                              {item.item}
+                            </span>
+                            <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">
+                              {item.washPress}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </TabsContent>
@@ -505,14 +499,13 @@ const PricingSection = () => {
                 </TabsContent>
               </Tabs>
               <div className="flex justify-center mt-6">
-  <Link
-    href="/services"
-    className="px-6 py-3 bg-green-600 text-white font-semibold  hover:bg-green-700 transition-colors duration-300"
-  >
-    View Services
-  </Link>
-</div>
-
+                <Link
+                  href="/services"
+                  className="px-6 py-3 bg-green-600 text-white font-semibold hover:bg-green-700 transition-colors duration-300"
+                >
+                  View Services
+                </Link>
+              </div>
             </CardContent>
           </Card>
           <div className="text-center mb-12 sm:mb-16">
@@ -524,7 +517,6 @@ const PricingSection = () => {
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base px-4">
               For clients who prefer consistent care, our packages offer exclusive value and effortless convenience
-              
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-6 sm:gap-11">
@@ -538,4 +530,4 @@ const PricingSection = () => {
   )
 }
 
-export default PricingSection;
+export default PricingSection
