@@ -103,18 +103,147 @@ const faqData = [
         a: "We handle various materials including leather, suede, canvas, and synthetic fabrics. ",
       },
       {
-        q: "Q3: How long does the shoe and bag cleaning take?",
-        a: "Typically, it takes 2–3 days depending on the item’s condition and required treatments. ",
+        q: "Q3:How long does it take to clean shoes or bags? ",
+        a: "Typically 2–4 days, depending on the condition and material of the item.  ",
       },
       {
-        q: "Q4: Is it safe to clean luxury shoes and bags?",
-        a: "Absolutely. Our experts are trained to handle high-end items with utmost care. ",
+        q: "Q4: Do you also provide luxury shoe cleaning for branded footwear?",
+        a: "Yes, our Luxury Shoe Cleaning Service is designed for high-end and designer shoes that need special care. ",
       },
       {
-        q: "Q5: What is the cost of shoe and bag cleaning in Dubai?",
-        a: "Prices vary based on item type and condition. Contact us for a personalized quote. ",
+        q: "Q5: What are the charges for shoe and bag cleaning in Dubai? ",
+        a: " Pricing depends on the brand, material, and condition. Standard cleaning is reasonably priced, while luxury care may cost slightly more. ",
       },
-    ], }
+    ], },
+    {
+    category: "5. Luxury Shoe Cleaning Service ",
+    questions: [
+      {
+        q: "Q1: What makes luxury shoe cleaning different? ",
+        a: " We use advanced cleaning, conditioning, and restoration techniques to maintain the integrity of premium footwear.  ",
+      },
+      {
+        q: "Q2: Do you clean all luxury brands? ",
+        a: " Yes, we specialize in luxury shoes including Gucci, Prada, Louboutin, Chanel, and other designer brands. ",
+      },
+      {
+        q: "Q3: Can you restore old or worn-out luxury shoes? ",
+        a: " Yes, our service includes deep cleaning, polishing, and color restoration where possible.",
+      },
+      {
+        q: "Q4: Do you also provide cleaning for handbags and accessories? ",
+        a: " Yes, our Shoe & Bag Spa service covers both shoes and handbags for complete care.  ",
+      },
+      {
+        q: "Q5: How much does luxury shoe cleaning cost in Dubai? ",
+        a: " Pricing depends on the brand and material. High-end shoes usually start at a premium rate for specialized care.  ",
+      },
+    ], },
+     {
+    category: "6. Commercial Laundry Service  ",
+    questions: [
+      {
+        q: "Q1: What businesses can benefit from your commercial laundry? ",
+        a: " Hotels, restaurants, gyms, salons, and corporate offices trust us for consistent, professional laundry services.  ",
+      },
+      {
+        q: "Q2: Do you handle bulk laundry orders?  ",
+        a: "  Yes, we specialize in bulk orders and ensure timely pickup and delivery ",
+      },
+      {
+        q: "Q3: How do you maintain hygiene in commercial laundry? ",
+ 
+        a: " We follow strict cleaning protocols, high-temperature washing, and fabric-safe disinfectants.",
+      },
+      {
+        q: "Q4: Do you also clean curtains for hotels and restaurants? ",
+        a: "Yes, our Curtain Cleaning Service is available for both residential and commercial clients. ",
+      },
+      {
+        q: "Q5: What are the commercial laundry charges in Dubai?  ",
+        a: "  Prices are customized based on volume and service frequency. We offer affordable packages for businesses. ",
+      },
+    ], },
+
+    {
+    category: "7. Curtain Cleaning Service  ",
+    questions: [
+      {
+        q: "Q1: Why is professional curtain cleaning important?  ",
+        a: "  Curtains accumulate dust, dirt, and allergens, which can affect air quality. Professional cleaning keeps them fresh and vibrant.   ",
+      },
+      {
+        q: "Q2: Can you clean all types of curtains? ",
+        a: "  Yes, we handle all fabrics including cotton, silk, velvet, and blackout curtains.",
+      },
+      {
+        q: "Q3: Do you remove and reinstall the curtains? ",
+ 
+        a: " Yes, our team can take down, clean, and reinstall your curtains for total convenience. ",
+      },
+      {
+        q: "Q4: Do you also clean carpets and rugs?  ",
+        a: "Yes, our Carpet Cleaning Service ensures deep cleaning and restoration for home and office carpets.  ",
+      },
+      {
+        q: "Q5: How much does curtain cleaning cost in Dubai?  ",
+        a: "  Pricing depends on curtain size, fabric, and cleaning method. We provide competitive per-piece rates.  ",
+      },
+    ], },
+     {
+    category: "8. Carpet Cleaning Service   ",
+    questions: [
+      {
+        q: "Q1: How often should carpets be professionally cleaned?   ",
+        a: "  Ideally every 12–18 months, depending on foot traffic, pets, or spills.   ",
+      },
+      {
+        q: "Q2: Do you remove tough stains and odors?  ",
+        a: "  Yes, we use professional-grade stain removal and deodorizing treatments for long-lasting freshness.",
+      },
+      {
+        q: "Q3: Is your carpet cleaning safe for kids and pets? ",
+ 
+        a: "  Absolutely. We use eco-friendly and non-toxic cleaning solutions. ",
+      },
+      {
+        q: "Q4: Do you also clean soft toys and plush items?  ",
+        a: " Yes, our Soft Toy Cleaning Service is perfect for keeping kids’ toys clean and hygienic. ",
+      },
+      {
+        q: "Q5: What is the cost of carpet cleaning in Dubai?   ",
+        a: " Pricing depends on carpet size and condition. We offer per-square-meter rates for transparency. ",
+      },
+    ], },
+      {
+    category: "9. Soft Toy Cleaning Service    ",
+    questions: [
+      {
+        q: "Q1: Why should soft toys be professionally cleaned?   ",
+        a: "  Soft toys collect dust, bacteria, and allergens. Professional cleaning keeps them safe and hygienic for children.  ",
+      },
+      {
+        q: " Q2: Do you guarantee that toys remain soft after cleaning? "  ,
+        a: "   Yes, our gentle process ensures toys stay soft, cuddly, and safe. ",
+      },
+      {
+        q: "Q3: How often should soft toys be cleaned? ",
+ 
+        a: "   Every 3–6 months, depending on use and exposure to dust or spills.  ",
+      },
+      {
+        q: "Q4: Do you also offer curtain and carpet cleaning for a healthier home?   ",
+        a: "  Yes, our Curtain Cleaning and Carpet Cleaning services are ideal for a complete home refresh.  ",
+      },
+      {
+        q: "Q5: What are the charges for soft toy cleaning in Dubai?",
+        a: " Prices depend on toy size and fabric. We offer affordable rates with discounts for multiple toys.  ",
+      },
+    ], },
+    
+    
+
+    
 ]
 
 export default function FAQPage() {
