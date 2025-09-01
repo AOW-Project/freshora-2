@@ -9,8 +9,11 @@ export async function generateMetadata(): Promise<Metadata> {
       "Check Freshora’s transparent laundry and dry cleaning prices in Dubai. From everyday wear to carpets, curtains, shoes, and bags — get premium care at clear rates with no hidden charges.",
    
     keywords: [
-      "Laundry prices Dubai",
-      "Dry cleaning rates Dubai",]}
+      "laundry prices Dubai",
+      "dry cleaning prices Dubai",
+    "shirts laundry price Dubai",
+    "trouser laundry price Dubai"
+  ]}
 }
 
 // ✅ Page Component

@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Contact Freshora Laundry in Dubai | Pickup & Delivery Support",
     description:
       "Get in touch with FreshoraLaundry for dry cleaning and laundry service in Dubai. Enjoy free pickup, on-time delivery, and quick customer support.",
-    keywords: [ "Contact Freshora Laundry", "Laundry support Dubai", "Dry cleaning help Dubai"],
+    keywords: [ "laundry pickup request Dubai", "book laundry service Dubai", "schedule laundry pickup Dubai "],
     }
 }
 
