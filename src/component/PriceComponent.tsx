@@ -240,11 +240,14 @@ const householdItems = [
   { item: "Hand woven Carpet (Per Sq meter)", washPress: "25.00", dryCleaning: "35.00", steamPressing: "-" },
 ]
 const shoesItems = [
-  { item: "Sneakers / Sports Shoes", price: "40.00" },
-  { item: "Leather Shoes", price: "50.00" },
-  { item: "Suede Shoes", price: "50.00" },
-  { item: "Boots", price: "60.00" },
-  { item: "Sandals / Slippers", price: "30.00" },
+  { item: "Sneakers / Sports Shoes", price: "65.00" },
+  { item: "Leather Shoes", price: "90.00" },
+  { item: "Formal Shoes", price: "90.00" },
+  { item: "Designer Sneakers", price: "120.00" },
+  { item: "Sandals / Slippers", price: "60.00" },
+  {item: "Designer Sandals", price: "100.00" },
+  { item: "Designer Formal Shoes", price: "110.00" },
+  { item: "Kids Shoe Care", price: "50.00" },
 ]
 
 const luxuryShoes = [
