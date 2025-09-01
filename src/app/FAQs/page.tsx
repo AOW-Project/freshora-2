@@ -4,10 +4,10 @@ import FaqSection from "@/component/FaqComponent"
 // ✅ Metadata for SEO
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "  Laundry & Dry Cleaning Prices in Dubai | Freshora",
+    title: "   Laundry Service FAQs in Dubai | Freshora",
     description:
     
-    "  Check Freshora’s transparent laundry and dry cleaning prices in Dubai. From everyday wear to carpets, curtains, shoes, and bags — get premium care at clear rates with no hidden charges.",
+    "  Find answers to common questions about Freshora’s laundry & dry cleaning in Dubai — services, prices, pickup & delivery, and more.",
    keywords: [
       "how Freshora laundry works",
       "same day laundry service Dubai FAQ",

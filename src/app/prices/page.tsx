@@ -6,7 +6,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Laundry & Dry Cleaning Prices in Dubai | Freshora Laundry",
     description:
-      "Check Freshora’s transparent laundry and dry cleaning prices in Dubai. From everyday wear to carpets, curtains, shoes, and bags — get premium care at clear rates with no hidden charges.",
+      "Explore Freshora’s transparent laundry & dry cleaning prices in Dubai — from clothes to carpets, shoes & bags, with no hidden charges.",
    
     keywords: [
       "laundry prices Dubai",

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-const whatsappNumber = "+971 50 925 9667"; // e.g. 919999999999
+const whatsappNumber = "+971509259667"; // e.g. 919999999999
 
 export default function WhatsAppFloatingButton() {
   const [visible, setVisible] = useState(false);
