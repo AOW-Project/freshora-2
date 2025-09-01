@@ -129,7 +129,7 @@ const ServiceCarousel: React.FC = () => {
           }}
         >
           {services.map((service, index) => (
-            <div key={index} className="px-2 sm:px-4" style={{ width: `${100 / cardsToShow}%` }}>
+            <div key={index} className="px-2 sm:px-4" style={{ width: `${100 / services.length}%` }}>
               <ServicePriceCard {...service} />
             </div>
           ))}
@@ -168,6 +168,7 @@ const ServiceCarousel: React.FC = () => {
   )
 }
 
+// Data for Pricing Tables
 const forGentleman = [
   { item: "Shirts/T-Shirts", washPress: "6.00", dryCleaning: "8.00", steamPressing: "3.00" },
   { item: "Trouser", washPress: "6.00", dryCleaning: "8.00", steamPressing: "3.00" },
@@ -238,40 +239,36 @@ const householdItems = [
   { item: "Normal Carpet (Per Sq meter)", washPress: "20.00", dryCleaning: "20.00", steamPressing: "-" },
   { item: "Hand woven Carpet (Per Sq meter)", washPress: "25.00", dryCleaning: "35.00", steamPressing: "-" },
 ]
+const shoesItems = [
+  { item: "Sneakers / Sports Shoes", price: "40.00" },
+  { item: "Leather Shoes", price: "50.00" },
+  { item: "Suede Shoes", price: "50.00" },
+  { item: "Boots", price: "60.00" },
+  { item: "Sandals / Slippers", price: "30.00" },
+]
+
+const luxuryShoes = [
+  { item: "Formal Shoes", price: "120" },
+  { item: "Sports Sneakers", price: "100" },
+  { item: "Designer Sneakers", price: "150" },
+  { item: "Sandals & Flip Flops", price: "100" },
+  { item: "Designer Sandals", price: "120" },
+  { item: "Designer Formal Shoes", price: "140" },
+]
 
 const packagesData = [
   {
     id: "standard",
     icon: ShoppingCart,
     title: "Standard Package",
-    features: [
-      "4 T-Shirts",
-      "1 Pair of Jeans",
-      "3 Button/Down Shirts",
-      "1 Pair of Shorts",
-      "7 Pairs of Underwear",
-      "6 Pairs of Socks",
-      "1 Towel",
-      "1 Set of Sheets",
-    ],
-    originalPrice: 349.0,
+    features: ["4 T-Shirts", "1 Pair of Jeans", "3 Button/Down Shirts", "1 Pair of Shorts", "7 Pairs of Underwear"],
     price: 349.0,
   },
   {
     id: "premium",
     icon: Zap,
     title: "Premium Package",
-    features: [
-      "6 T-Shirts",
-      "3 Pairs of Jeans",
-      "6 Button/Down Shirts",
-      "3 Pair of Shorts",
-      "9 Pairs of Underwear",
-      "8 Pairs of Socks",
-      "2 Towel",
-      "3 Set of Sheets",
-    ],
-    originalPrice: 449.0,
+    features: ["6 T-Shirts", "3 Pairs of Jeans", "6 Button/Down Shirts", "3 Pair of Shorts", "9 Pairs of Underwear"],
     price: 449.0,
     isFeatured: true,
   },
@@ -284,62 +281,55 @@ interface PackageCardProps {
 
 const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) => {
   const [isExpanded, setIsExpanded] = useState(false)
-  const { id, icon: Icon, title, features, price, originalPrice } = packageInfo
+  const { id, icon: Icon, title, features, price } = packageInfo
 
   return (
-    <>
-      <Card
-        className="group relative flex w-full max-w-sm flex-col cursor-pointer border-none bg-white transition-all duration-300 hover:shadow-lg"
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
-        <CardContent
-          className={`flex h-full flex-col p-6 transition-all duration-300 ${
-            isExpanded ? "pt-4 pb-4" : "group-hover:pt-4 group-hover:pb-4"
+    <Card
+      className="group relative flex w-full max-w-sm flex-col cursor-pointer border-none bg-white transition-all duration-300 hover:shadow-lg"
+      onClick={() => setIsExpanded(!isExpanded)}
+    >
+      <CardContent className="flex h-full flex-col p-6">
+        <div className="mb-4 flex flex-col items-center text-center">
+          <div className="mb-3 rounded-full bg-green-100 p-4 text-green-600">
+            <Icon size={28} />
+          </div>
+          <h3 className="text-lg font-bold text-gray-800">{title}</h3>
+        </div>
+        <ul className="mb-4 space-y-2 text-sm text-gray-700">
+          {features.map((feature, index) => (
+            <li key={index} className="flex items-start gap-2">
+              <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-500" />
+              {feature}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-auto border-t border-gray-100 pt-4 text-center">
+          <p className="text-2xl font-bold text-gray-900">{price.toFixed(2)}</p>
+        </div>
+        <div
+          className={`overflow-hidden transition-all duration-300 ${
+            isExpanded
+              ? "translate-y-0 opacity-100"
+              : "translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
           }`}
         >
-          <div className="mb-4 flex flex-col items-center text-center">
-            <div className="mb-3 rounded-full bg-green-100 p-4 text-green-600">
-              <Icon size={28} />
-            </div>
-            <h3 className="text-lg font-bold text-gray-800">{title}</h3>
-          </div>
-          <ul className="mb-4 space-y-2 text-sm text-gray-700">
-            {features.map((feature, index) => (
-              <li key={index} className="flex items-start gap-2">
-                <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-500" />
-                {feature}
-              </li>
-            ))}
-          </ul>
-          <div className="border-t border-gray-100 pt-4 text-center">
-            {originalPrice && <p className="mb-1 text-sm text-gray-500 line-through">{originalPrice.toFixed(2)}</p>}
-            <p className="text-2xl font-bold text-gray-900">{price.toFixed(2)}</p>
-          </div>
-          <div
-            className={`overflow-hidden transition-all duration-300 ${
-              isExpanded
-                ? "translate-y-0 opacity-100"
-                : "translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
-            }`}
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              onOrderNow(id)
+            }}
+            className="mt-4 w-full bg-green-600 py-3 font-semibold text-white transition-colors duration-300 hover:bg-green-700"
           >
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                onOrderNow(id)
-              }}
-              className="mt-4 w-full bg-green-600 py-3 font-semibold text-white transition-colors duration-300 hover:bg-green-700"
-            >
-              Order Now
-            </button>
-          </div>
-        </CardContent>
-      </Card>
-    </>
+            Order Now
+          </button>
+        </div>
+      </CardContent>
+    </Card>
   )
 }
 
 const PricingSection = () => {
-  const [activeTab, setActiveTab] = useState("popular")
+  const [activeTab, setActiveTab] = useState("shoes") // Default to shoes tab
   const router = useRouter()
   const { replaceCart } = useCart() // Use cart context
 
@@ -351,9 +341,9 @@ const PricingSection = () => {
         name: feature,
         category: "Package Item",
         serviceType: selectedPackage.title,
-        price: selectedPackage.price / selectedPackage.features.length, // Distribute price across items
+        price: selectedPackage.price / selectedPackage.features.length,
         quantity: 1,
-        serviceSlug: "package-service", // Add required serviceSlug field
+        serviceSlug: "package-service",
       }))
 
       await replaceCart(packageItems)
@@ -366,6 +356,7 @@ const PricingSection = () => {
       <ServiceBanner />
       <section className="bg-white py-8 sm:py-12 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Service Carousel Section */}
           <div className="text-center mb-8 sm:mb-12 lg:mb-16">
             <h4
               className={`text-green-600 font-medium mb-2 sm:mb-3 lg:mb-4 text-xs sm:text-sm lg:text-base ${poppins.className}`}
@@ -375,46 +366,42 @@ const PricingSection = () => {
             <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 lg:mb-6 px-2">
               Freshora – Accessible Luxury, Transparent Pricing
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base px-2">
-              At Freshora, premium garment care doesn’t have to come with excessive cost. Our pricing is designed to be
-              straightforward, competitive, and transparent — offering you the highest standards of service at
-              exceptional value.
-            </p>
           </div>
           <div className="mb-12 sm:mb-16 lg:mb-20">
             <ServiceCarousel />
           </div>
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+
+          {/* Full Price Table Section */}
+          <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 lg:mb-6 px-2">
               Full Price Table
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base px-2">
-              Laundry service pricing is volume based. Dry cleaning is priced by item type.
-              <br className="hidden sm:block" />
-              Give us a call to review pricing and services today!
-            </p>
           </div>
-          <Card className="mb-12 sm:mb-16 lg:mb-20 shadow-lg border-none min-h-[600px]">
+          <Card className="mb-12 sm:mb-16 lg:mb-20 shadow-lg border-none min-h-[400px]">
             <CardContent className="p-3 sm:p-6 lg:p-8">
               <Tabs value={activeTab} onValueChange={(val) => setActiveTab(val)} className="w-full">
-                <div className="flex justify-center mb-4 sm:mb-6 lg:mb-8">
-                  <TabsList className="flex flex-col sm:grid sm:grid-cols-3 bg-gray-50 gap-2 sm:gap-0 p-2 w-full max-w-4xl">
+                <div className="flex justify-center mb-6 sm:mb-8">
+                  <TabsList className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 p-1 bg-gray-100 rounded-lg">
                     {[
-                      { value: "popular", label: "Most Popular Items" },
-                      { value: "full", label: "Full Apparel List" },
-                      { value: "other", label: "Household Items" },
+                      { value: "popular", label: "Most Popular" },
+                      { value: "apparel", label: "Apparel" },
+                      { value: "household", label: "Household" },
+                      { value: "shoes", label: "Shoes" },
+                      { value: "luxury_shoes", label: "Luxury Shoes" },
                     ].map((tab) => (
                       <TabsTrigger
                         key={tab.value}
                         value={tab.value}
-                        className={`w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-3 lg:py-4 text-sm sm:text-sm lg:text-base font-semibold min-h-[48px] sm:min-h-[50px] lg:min-h-[60px] bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-green-700 touch-manipulation cursor-pointer rounded-none data-[state=active]:bg-green-700 data-[state=active]:text-white data-[state=active]:border-green-700`}
+                        className="w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-3 lg:py-4 text-sm sm:text-sm lg:text-base font-semibold min-h-[48px] sm:min-h-[50px] lg:min-h-[60px] bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-green-700 touch-manipulation cursor-pointer rounded-none data-[state=active]:bg-green-700 data-[state=active]:text-white data-[state=active]:border-green-700"
                       >
-                        <span className="text-center leading-tight">{tab.label}</span>
+                        {tab.label}
                       </TabsTrigger>
                     ))}
                   </TabsList>
                 </div>
-                <TabsContent value="popular" className="mt-4 sm:mt-6">
+
+                {/* Most Popular Tab */}
+                <TabsContent value="popular">
                   <div className="space-y-0">
                     {[
                       { item: "Shirts/T-Shirts", price: "6.00" },
@@ -425,89 +412,97 @@ const PricingSection = () => {
                     ].map((item, index) => (
                       <div
                         key={index}
-                        className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation"
+                        className="flex justify-between items-center border-b border-gray-200 py-4 hover:bg-gray-50 transition-colors"
                       >
-                        <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">
-                          {item.item}
-                        </span>
-                        <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">
-                          {item.price}
-                        </span>
+                        <span className="text-gray-700 text-base pr-4 flex-1">{item.item}</span>
+                        <span className="font-bold text-green-600 text-lg whitespace-nowrap">{item.price}</span>
                       </div>
                     ))}
                   </div>
                 </TabsContent>
-                <TabsContent value="full" className="mt-4 sm:mt-6">
+
+                {/* Apparel Tab */}
+                <TabsContent value="apparel">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 lg:gap-x-12">
-                    {/* Gentlemen's List Section */}
                     <div>
                       <h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-2">For Gentlemen</h3>
-                      <div className="space-y-0">
-                        {forGentleman.map((item, index) => (
-                          <div
-                            key={index}
-                            className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation"
-                          >
-                            <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">
-                              {item.item}
-                            </span>
-                            <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">
-                              {item.washPress}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
+                      {forGentleman.map((item, index) => (
+                        <div
+                          key={index}
+                          className="flex justify-between items-center border-b border-gray-200 py-4 hover:bg-gray-50"
+                        >
+                          <span className="text-gray-700 text-base pr-4">{item.item}</span>
+                          <span className="font-bold text-green-600 text-lg">{item.washPress}</span>
+                        </div>
+                      ))}
                     </div>
-
-                    {/* Ladies' List Section */}
                     <div className="mt-6 lg:mt-0">
                       <h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-2">For Ladies</h3>
-                      <div className="space-y-0">
-                        {forLadies.map((item, index) => (
-                          <div
-                            key={index}
-                            className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation"
-                          >
-                            <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">
-                              {item.item}
-                            </span>
-                            <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">
-                              {item.washPress}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
+                      {forLadies.map((item, index) => (
+                        <div
+                          key={index}
+                          className="flex justify-between items-center border-b border-gray-200 py-4 hover:bg-gray-50"
+                        >
+                          <span className="text-gray-700 text-base pr-4">{item.item}</span>
+                          <span className="font-bold text-green-600 text-lg">{item.washPress}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </TabsContent>
-                <TabsContent value="other" className="mt-4 sm:mt-6">
-                  <div className="space-y-0">
-                    {householdItems.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex justify-between items-center border-b border-gray-200 py-4 sm:py-4 hover:bg-gray-50 transition-colors touch-manipulation"
-                      >
-                        <span className="text-gray-700 text-base sm:text-base pr-4 flex-1 leading-relaxed">
-                          {item.item}
-                        </span>
-                        <span className="font-bold text-green-600 text-lg sm:text-lg whitespace-nowrap">
-                          {item.washPress}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+
+                {/* Household Tab */}
+                <TabsContent value="household">
+                  {householdItems.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex justify-between items-center border-b border-gray-200 py-4 hover:bg-gray-50"
+                    >
+                      <span className="text-gray-700 text-base pr-4">{item.item}</span>
+                      <span className="font-bold text-green-600 text-lg">{item.washPress}</span>
+                    </div>
+                  ))}
+                </TabsContent>
+
+                {/* Shoes Tab */}
+                <TabsContent value="shoes">
+                  {shoesItems.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex justify-between items-center border-b border-gray-200 py-4 hover:bg-gray-50"
+                    >
+                      <span className="text-gray-700 text-base pr-4">{item.item}</span>
+                      <span className="font-bold text-green-600 text-lg">{item.price}</span>
+                    </div>
+                  ))}
+                </TabsContent>
+
+                {/* Luxury Shoes Tab */}
+                <TabsContent value="luxury_shoes">
+                  {luxuryShoes.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex justify-between items-center border-b border-gray-200 py-4 hover:bg-gray-50"
+                    >
+                      <span className="text-gray-700 text-base pr-4">{item.item}</span>
+                      <span className="font-bold text-green-600 text-lg">{item.price}</span>
+                    </div>
+                  ))}
                 </TabsContent>
               </Tabs>
-              <div className="flex justify-center mt-6">
+
+              <div className="flex justify-center mt-8">
                 <Link
                   href="/services"
-                  className="px-6 py-3 bg-green-600 text-white font-semibold hover:bg-green-700 transition-colors duration-300"
+                  className="px-8 py-3 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition-colors duration-300 shadow-md"
                 >
                   View Services
                 </Link>
               </div>
             </CardContent>
           </Card>
+
+          {/* Subscription Packages Section */}
           <div className="text-center mb-12 sm:mb-16">
             <h4 className={`text-green-600 font-medium mb-3 sm:mb-4 text-sm sm:text-base ${poppins.className}`}>
               [ What we offer ]
