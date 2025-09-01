@@ -84,8 +84,8 @@ const faqData = [
         a: "Yes, our Shoe & Bag Spa can refresh your footwear and accessories with professional care. ",
       },
       {
-        q: "",
-        a: "Yes, you can request express dry cleaning for urgent garment care. ",
+        q: "Q5: How much does express laundry cost in Dubai? ",
+        a: ": Express services carry a small additional charge compared to regular laundry. Exact pricing depends on order size and urgency.  ",
       },
 
     ],
