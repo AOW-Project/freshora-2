@@ -10,11 +10,9 @@ import {
   FaChevronDown,
   FaFacebookF,
   FaInstagram,
- 
   FaPhoneAlt,
   FaShoppingCart,
   FaTimes,
-
 } from "react-icons/fa"
 import { useCart } from "../app/context/cart-context"
 
@@ -46,6 +44,20 @@ const navItems: NavItem[] = [
   { title: "FAQ", href: "/FAQs" },
   { title: "Contacts", href: "/contact" },
 ]
+
+// ✅ Moved social links outside the component for better practice
+const socialLinks = [
+    { 
+        Icon: FaFacebookF, 
+        href: "https://www.facebook.com/profile.php?id=61579978694620", 
+        label: "Facebook" 
+    },
+    { 
+        Icon: FaInstagram, 
+        href: "#", // Add your Instagram link here
+        label: "Instagram" 
+    },
+];
 
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState<number | null>(null)
@@ -82,27 +94,31 @@ const Navbar = () => {
               Address: Shop no 4, Azizi Riviera 42, Meydan, Al Merkadh, Dubai UAE
             </span>
             <div className="flex gap-4 flex-wrap">
-              <span> Timing: Mon to Friday - 8 am to 8pm  Sat-Sun - 10am to 8pm
- </span>
+              <span> Timing: Mon to Friday - 8 am to 8pm  Sat-Sun - 10am to 8pm </span>
               <span className="truncate">freshorappc@gmail.com</span>
             </div>
             <div className="flex gap-3 items-center">
               <span className="flex items-center gap-1">
                 <FaPhoneAlt className="text-green-500" />
                 <a href="tel:+971509259667" >
-  <span className="text-base">
-    +971 50 925 9667
-  </span>
-</a>
-
+                  <span className="text-base">
+                    +971 50 925 9667
+                  </span>
+                </a>
               </span>
               <div className="flex gap-2">
-                {[FaFacebookF, FaInstagram].map((Icon, i) => (
-                  <Icon
-                    key={i}
-                    className="hover:text-green-500 cursor-pointer"
-                    aria-label="social-link"
-                  />
+                {/* ✅ Corrected and placed the social links mapping here */}
+                {socialLinks.map((social, i) => (
+                    <a
+                        key={i}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={social.label}
+                        className="hover:text-green-500 cursor-pointer"
+                    >
+                        <social.Icon />
+                    </a>
                 ))}
               </div>
             </div>
@@ -221,70 +237,69 @@ const Navbar = () => {
 
       {/* Mobile Sidebar */}
      <aside
-  className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 z-50 ${
-    mobileOpen ? "translate-x-0" : "-translate-x-full"
-  }`}
->
-  <div className="flex justify-between items-center p-4 border-b shrink-0">
-    <span className="font-bold text-lg">Menu</span>
-    <button onClick={() => setMobileOpen(false)} aria-label="Close menu">
-      <FaTimes size={22} />
-    </button>
-  </div>
-
-  {/* Scrollable content */}
-  <div className="flex flex-col h-[calc(100%-64px)] overflow-y-auto">
-    <nav className="flex flex-col">
-      {navItems.map((item, index) => (
-        <div key={index} className="border-b border-gray-100">
-          <Link
-            href={item.href}
-            className="block px-4 py-3 font-medium text-gray-700"
-            onClick={() => setMobileOpen(false)}
-          >
-            {item.title}
-          </Link>
-          {item.subItems && (
-            <div className="pl-6 pb-2">
-              {item.subItems.map((sub, subIndex) => (
-                <Link
-                  key={subIndex}
-                  href={sub.href}
-                  className="block py-1 text-sm text-gray-600 hover:text-green-600"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {sub.title}
-                </Link>
-              ))}
-            </div>
-          )}
+        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 z-50 ${
+        mobileOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+    >
+        <div className="flex justify-between items-center p-4 border-b shrink-0">
+            <span className="font-bold text-lg">Menu</span>
+            <button onClick={() => setMobileOpen(false)} aria-label="Close menu">
+                <FaTimes size={22} />
+            </button>
         </div>
-      ))}
-    </nav>
 
-    {/* Bottom CTA buttons */}
-    <div className="mt-auto px-4 py-3 space-y-2">
-      <Link href="/services">
-        <button
-          onClick={() => setMobileOpen(false)}
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-3 rounded"
-        >
-          Schedule a Pickup
-        </button>
-      </Link>
+        {/* Scrollable content */}
+        <div className="flex flex-col h-[calc(100%-64px)] overflow-y-auto">
+            <nav className="flex flex-col">
+                {navItems.map((item, index) => (
+                <div key={index} className="border-b border-gray-100">
+                    <Link
+                        href={item.href}
+                        className="block px-4 py-3 font-medium text-gray-700"
+                        onClick={() => setMobileOpen(false)}
+                    >
+                        {item.title}
+                    </Link>
+                    {item.subItems && (
+                    <div className="pl-6 pb-2">
+                        {item.subItems.map((sub, subIndex) => (
+                            <Link
+                                key={subIndex}
+                                href={sub.href}
+                                className="block py-1 text-sm text-gray-600 hover:text-green-600"
+                                onClick={() => setMobileOpen(false)}
+                            >
+                                {sub.title}
+                            </Link>
+                        ))}
+                    </div>
+                    )}
+                </div>
+                ))}
+            </nav>
 
-      <Link href="/tracking">
-        <button
-          onClick={() => setMobileOpen(false)}
-          className="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold px-4 py-3 rounded flex items-center justify-center gap-2"
-        >
-          <Package className="h-5 w-5" /> Track
-        </button>
-      </Link>
-    </div>
-  </div>
-</aside>
+            {/* Bottom CTA buttons */}
+            <div className="mt-auto px-4 py-3 space-y-2">
+                <Link href="/services">
+                    <button
+                        onClick={() => setMobileOpen(false)}
+                        className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-3 rounded"
+                    >
+                        Schedule a Pickup
+                    </button>
+                </Link>
 
+                <Link href="/tracking">
+                    <button
+                        onClick={() => setMobileOpen(false)}
+                        className="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold px-4 py-3 rounded flex items-center justify-center gap-2"
+                    >
+                        <Package className="h-5 w-5" /> Track
+                    </button>
+                </Link>
+            </div>
+        </div>
+    </aside>
     </>
   )
 }
