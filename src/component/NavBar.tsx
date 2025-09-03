@@ -10,11 +10,11 @@ import {
   FaChevronDown,
   FaFacebookF,
   FaInstagram,
-  FaLinkedinIn,
+ 
   FaPhoneAlt,
   FaShoppingCart,
   FaTimes,
-  FaTwitter,
+
 } from "react-icons/fa"
 import { useCart } from "../app/context/cart-context"
 

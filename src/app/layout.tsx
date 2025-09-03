@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Script from 'next/script'; // Import the Next.js Script component
+//import Script from 'next/script'; // Import the Next.js Script component
 import { CartProvider } from "@/app/context/cart-context";
 import "./globals.css";
 import Navbar from "@/component/NavBar";

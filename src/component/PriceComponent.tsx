@@ -179,8 +179,8 @@ const forGentleman = [
   { item: "Cap/Tie", washPress: "5.00", dryCleaning: "7.00", steamPressing: "3.00" },
   { item: "Jacket/Coat", washPress: "15.00", dryCleaning: "20.00", steamPressing: "8.00" },
   { item: "Waist Coat", washPress: "10.00", dryCleaning: "14.00", steamPressing: "5.00" },
-  { item: "Suit (2pcs)", washPress: "-", dryCleaning: "25.00", steamPressing: "12.00" },
-  { item: "Suit (3pcs)", washPress: "-", dryCleaning: "35.00", steamPressing: "15.00" },
+  { item: "Suit (2pcs)", washPress: "20.00", dryCleaning: "25.00", steamPressing: "12.00" },
+  { item: "Suit (3pcs)", washPress: "30.00", dryCleaning: "35.00", steamPressing: "15.00" },
   { item: "Salwar Kameez", washPress: "12.00", dryCleaning: "16.00", steamPressing: "8.00" },
   { item: "Inner Wear", washPress: "3.00", dryCleaning: "5.00", steamPressing: "2.00" },
   { item: "Socks/Handkerchief", washPress: "3.00", dryCleaning: "4.00", steamPressing: "2.00" },
@@ -198,8 +198,8 @@ const forLadies = [
   { item: "Saree", washPress: "15.00", dryCleaning: "20.00", steamPressing: "10.00" },
   { item: "Blouse", washPress: "8.00", dryCleaning: "10.00", steamPressing: "4.00" },
   { item: "Coat/Jacket", washPress: "15.00", dryCleaning: "20.00", steamPressing: "8.00" },
-  { item: "Suit (2pcs)", washPress: "-", dryCleaning: "25.00", steamPressing: "12.00" },
-  { item: "Suit (3pcs)", washPress: "-", dryCleaning: "35.00", steamPressing: "15.00" },
+  { item: "Suit (2pcs)", washPress: "20.00", dryCleaning: "25.00", steamPressing: "12.00" },
+  { item: "Suit (3pcs)", washPress: "30.00", dryCleaning: "35.00", steamPressing: "15.00" },
   { item: "Sweater", washPress: "10.00", dryCleaning: "14.00", steamPressing: "5.00" },
   { item: "Inner Wear", washPress: "3.00", dryCleaning: "5.00", steamPressing: "2.00" },
 ]
@@ -265,14 +265,14 @@ const packagesData = [
     icon: ShoppingCart,
     title: "Standard Package",
     features: [ "4 T-Shirts",
-      "1 Pairs of Jeans",
+      "2 Pairs of Jeans",
       "3 Button-Down Shirts",
-      "1 Pair of Shorts",
-      "7 Pairs of Underwear",
+      "2 Pair of Shorts",
+      "14 Pairs of Underwear",
       "6 Pairs of Socks",
       "1 Towel",
-      "1 Set of Sheets",],
-    price: 349.0,
+      "1 Set of Bedsheets single",],
+    price: 149.0,
   },
   {
     id: "premium",
@@ -346,7 +346,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
 }
 
 const PricingSection = () => {
-  const [activeTab, setActiveTab] = useState("shoes") // Default to shoes tab
+  const [activeTab, setActiveTab] = useState("popular") // Changed back to popular as default
   const router = useRouter()
   const { replaceCart } = useCart() // Use cart context
 
@@ -397,28 +397,44 @@ const PricingSection = () => {
           <Card className="mb-12 sm:mb-16 lg:mb-20 shadow-lg border-none min-h-[400px]">
             <CardContent className="p-3 sm:p-6 lg:p-8">
               <Tabs value={activeTab} onValueChange={(val) => setActiveTab(val)} className="w-full">
-                <div className="flex justify-center mb-6 sm:mb-8">
-                  <TabsList className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 p-1 bg-gray-100 rounded-lg">
-                    {[
-                      { value: "popular", label: "Most Popular" },
-                      { value: "apparel", label: "Apparel" },
-                      { value: "household", label: "Household" },
-                      { value: "shoes", label: "Shoes" },
-                      { value: "luxury_shoes", label: "Luxury Shoes" },
-                    ].map((tab) => (
-                      <TabsTrigger
-                        key={tab.value}
-                        value={tab.value}
-                        className="w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-3 lg:py-4 text-sm sm:text-sm lg:text-base font-semibold min-h-[48px] sm:min-h-[50px] lg:min-h-[60px] bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-green-700 touch-manipulation cursor-pointer rounded-none data-[state=active]:bg-green-700 data-[state=active]:text-white data-[state=active]:border-green-700"
-                      >
-                        {tab.label}
-                      </TabsTrigger>
-                    ))}
+                {/* Mobile-optimized tabs */}
+                <div className="mb-6 sm:mb-8">
+                  <TabsList className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 w-full gap-1 sm:gap-2 p-1 bg-gray-100 rounded-lg h-auto">
+                    <TabsTrigger
+                      value="popular"
+                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-green-700 data-[state=active]:bg-green-700 data-[state=active]:text-white data-[state=active]:border-green-700 rounded-md whitespace-nowrap"
+                    >
+                      Most Popular
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="apparel"
+                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-green-700 data-[state=active]:bg-green-700 data-[state=active]:text-white data-[state=active]:border-green-700 rounded-md"
+                    >
+                      Apparel
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="household"
+                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-green-700 data-[state=active]:bg-green-700 data-[state=active]:text-white data-[state=active]:border-green-700 rounded-md"
+                    >
+                      Household
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="shoes"
+                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-green-700 data-[state=active]:bg-green-700 data-[state=active]:text-white data-[state=active]:border-green-700 rounded-md"
+                    >
+                      Shoes
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="luxury_shoes"
+                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-green-700 data-[state=active]:bg-green-700 data-[state=active]:text-white data-[state=active]:border-green-700 rounded-md whitespace-nowrap col-span-2 sm:col-span-1"
+                    >
+                      Luxury Shoes
+                    </TabsTrigger>
                   </TabsList>
                 </div>
 
                 {/* Most Popular Tab */}
-                <TabsContent value="popular">
+                <TabsContent value="popular" className="mt-6">
                   <div className="space-y-0">
                     {[
                       { item: "Shirts/T-Shirts", price: "6.00" },
@@ -429,89 +445,99 @@ const PricingSection = () => {
                     ].map((item, index) => (
                       <div
                         key={index}
-                        className="flex justify-between items-center border-b border-gray-200 py-4 hover:bg-gray-50 transition-colors"
+                        className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50 transition-colors"
                       >
-                        <span className="text-gray-700 text-base pr-4 flex-1">{item.item}</span>
-                        <span className="font-bold text-green-600 text-lg whitespace-nowrap">{item.price}</span>
+                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">{item.item}</span>
+                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">{item.price}</span>
                       </div>
                     ))}
                   </div>
                 </TabsContent>
 
                 {/* Apparel Tab */}
-                <TabsContent value="apparel">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 lg:gap-x-12">
+                <TabsContent value="apparel" className="mt-6">
+                  <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-8">
                     <div>
-                      <h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-2">For Gentlemen</h3>
-                      {forGentleman.map((item, index) => (
-                        <div
-                          key={index}
-                          className="flex justify-between items-center border-b border-gray-200 py-4 hover:bg-gray-50"
-                        >
-                          <span className="text-gray-700 text-base pr-4">{item.item}</span>
-                          <span className="font-bold text-green-600 text-lg">{item.washPress}</span>
-                        </div>
-                      ))}
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 border-b pb-2">For Gentlemen</h3>
+                      <div className="space-y-0">
+                        {forGentleman.map((item, index) => (
+                          <div
+                            key={index}
+                            className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
+                          >
+                            <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">{item.item}</span>
+                            <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">{item.washPress}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <div className="mt-6 lg:mt-0">
-                      <h3 className="text-xl font-bold text-gray-800 mb-4 border-b pb-2">For Ladies</h3>
-                      {forLadies.map((item, index) => (
-                        <div
-                          key={index}
-                          className="flex justify-between items-center border-b border-gray-200 py-4 hover:bg-gray-50"
-                        >
-                          <span className="text-gray-700 text-base pr-4">{item.item}</span>
-                          <span className="font-bold text-green-600 text-lg">{item.washPress}</span>
-                        </div>
-                      ))}
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 border-b pb-2">For Ladies</h3>
+                      <div className="space-y-0">
+                        {forLadies.map((item, index) => (
+                          <div
+                            key={index}
+                            className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
+                          >
+                            <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">{item.item}</span>
+                            <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">{item.washPress}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </TabsContent>
 
                 {/* Household Tab */}
-                <TabsContent value="household">
-                  {householdItems.map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-between items-center border-b border-gray-200 py-4 hover:bg-gray-50"
-                    >
-                      <span className="text-gray-700 text-base pr-4">{item.item}</span>
-                      <span className="font-bold text-green-600 text-lg">{item.washPress}</span>
-                    </div>
-                  ))}
+                <TabsContent value="household" className="mt-6">
+                  <div className="space-y-0">
+                    {householdItems.map((item, index) => (
+                      <div
+                        key={index}
+                        className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
+                      >
+                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">{item.item}</span>
+                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">{item.washPress}</span>
+                      </div>
+                    ))}
+                  </div>
                 </TabsContent>
 
                 {/* Shoes Tab */}
-                <TabsContent value="shoes">
-                  {shoesItems.map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-between items-center border-b border-gray-200 py-4 hover:bg-gray-50"
-                    >
-                      <span className="text-gray-700 text-base pr-4">{item.item}</span>
-                      <span className="font-bold text-green-600 text-lg">{item.price}</span>
-                    </div>
-                  ))}
+                <TabsContent value="shoes" className="mt-6">
+                  <div className="space-y-0">
+                    {shoesItems.map((item, index) => (
+                      <div
+                        key={index}
+                        className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
+                      >
+                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">{item.item}</span>
+                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">{item.price}</span>
+                      </div>
+                    ))}
+                  </div>
                 </TabsContent>
 
                 {/* Luxury Shoes Tab */}
-                <TabsContent value="luxury_shoes">
-                  {luxuryShoes.map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-between items-center border-b border-gray-200 py-4 hover:bg-gray-50"
-                    >
-                      <span className="text-gray-700 text-base pr-4">{item.item}</span>
-                      <span className="font-bold text-green-600 text-lg">{item.price}</span>
-                    </div>
-                  ))}
+                <TabsContent value="luxury_shoes" className="mt-6">
+                  <div className="space-y-0">
+                    {luxuryShoes.map((item, index) => (
+                      <div
+                        key={index}
+                        className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
+                      >
+                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">{item.item}</span>
+                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">{item.price}</span>
+                      </div>
+                    ))}
+                  </div>
                 </TabsContent>
               </Tabs>
 
-              <div className="flex justify-center mt-8">
+              <div className="flex justify-center mt-6 sm:mt-8">
                 <Link
                   href="/services"
-                  className="px-8 py-3 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition-colors duration-300 shadow-md"
+                  className="px-6 sm:px-8 py-3 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition-colors duration-300 shadow-md text-sm sm:text-base"
                 >
                   View Services
                 </Link>
@@ -520,18 +546,18 @@ const PricingSection = () => {
           </Card>
 
           {/* Subscription Packages Section */}
-          <div className="text-center mb-12 sm:mb-16">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
             <h4 className={`text-green-600 font-medium mb-3 sm:mb-4 text-sm sm:text-base ${poppins.className}`}>
               [ What we offer ]
             </h4>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 px-4">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 lg:mb-6 px-4">
               Subscription Packages
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base px-4">
               For clients who prefer consistent care, our packages offer exclusive value and effortless convenience
             </p>
           </div>
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-11">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 lg:gap-12">
             {packagesData.map((pkg) => (
               <PackageCard key={pkg.id} packageInfo={pkg} onOrderNow={handleOrderNow} />
             ))}
