@@ -251,12 +251,12 @@ const shoesItems = [
 ]
 
 const luxuryShoes = [
-  { item: "Formal Shoes", price: "120" },
-  { item: "Sports Sneakers", price: "100" },
-  { item: "Designer Sneakers", price: "150" },
-  { item: "Sandals & Flip Flops", price: "100" },
-  { item: "Designer Sandals", price: "120" },
-  { item: "Designer Formal Shoes", price: "140" },
+  { item: "Formal Shoes", price: "120.00" },
+  { item: "Sports Sneakers", price: "100.00" },
+  { item: "Designer Sneakers", price: "150.00" },
+  { item: "Sandals & Flip Flops", price: "100.00" },
+  { item: "Designer Sandals", price: "120.00" },
+  { item: "Designer Formal Shoes", price: "140.00" },
 ]
 
 const packagesData = [
