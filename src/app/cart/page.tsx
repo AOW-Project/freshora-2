@@ -103,10 +103,10 @@ export default function CartPage() {
             <ArrowLeft className="h-4 w-4" />
             Back to Services
           </button>
-            
+
           {/* --- RESPONSIVE LAYOUT FIX --- */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            
+
             {/* Cart Items */}
             <div className="lg:col-span-2 space-y-4">
               <Card>
@@ -121,13 +121,13 @@ export default function CartPage() {
                     {cartItems.map((item) => (
                       <div key={item.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 border rounded-lg">
                         
-                        {/* --- Item Details --- */}
+                        {/* Item Details */}
                         <div className="flex-1">
                           <h3 className="font-semibold">{item.name}</h3>
                           <p className="text-sm text-gray-600">{item.category}</p>
                         </div>
                         
-                        {/* --- Wrapper for controls on mobile --- */}
+                        {/* Wrapper for controls on mobile */}
                         <div className="w-full sm:w-auto flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <Button variant="outline" size="sm" className="h-8 w-8 p-0" onClick={() => updateQuantity(item.id, item.quantity - 1)}><Minus className="h-4 w-4" /></Button>

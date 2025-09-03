@@ -116,7 +116,6 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
   const [tempOrder, setTempOrder] = useState<OrderItem[]>([])
   const [isAddingToCart, setIsAddingToCart] = useState(false)
 
-  // --- DYNAMIC CATEGORY LOGIC ---
   const categories = useMemo(() => {
     return service.items ? Object.keys(service.items) : []
   }, [service.items])
@@ -124,7 +123,6 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
   const hasItems = useMemo(() => {
     return categories.length > 0 && categories.some(cat => service.items[cat].length > 0)
   }, [categories, service.items])
-  // --- END DYNAMIC LOGIC ---
 
   const orderTotal = useMemo(() => {
     return tempOrder.reduce((total, item) => total + item.price * item.quantity, 0)
@@ -133,13 +131,9 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
   const breadcrumbNav = useMemo(
     () => (
       <nav className="flex items-center space-x-2 text-white mb-4">
-        <Link href="/" className="hover:text-green-400">
-          Home
-        </Link>
+        <Link href="/" className="hover:text-green-400">Home</Link>
         <span className="px-2">/</span>
-        <Link href="/services" className="hover:text-green-400">
-          Services
-        </Link>
+        <Link href="/services" className="hover:text-green-400">Services</Link>
         <span className="px-2">/</span>
         <span className="text-green-400">Order</span>
       </nav>
@@ -161,17 +155,10 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
 
   const handleAddAllToCart = useCallback(async () => {
     if (tempOrder.length === 0) return
-
     setIsAddingToCart(true)
-
     try {
       for (const item of tempOrder) {
-        const cartItem = {
-          id: `${service.id}-${item.id}`, // Combine service ID and item ID
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-        }
+        const cartItem = { id: `${service.id}-${item.id}`, name: item.name, price: item.price, quantity: item.quantity }
         await addToCart(cartItem)
       }
       toast.success(`All items added to cart successfully!`)
@@ -189,9 +176,7 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
     (item: ServiceItem, category: string) => {
       const quantity = quantities[item.id] || 0
       if (quantity === 0) return
-
       const orderItem: OrderItem = { ...item, quantity, category }
-
       setTempOrder((prev) => {
         const existingIndex = prev.findIndex((i) => i.id === item.id)
         if (existingIndex >= 0) {
@@ -201,149 +186,117 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
         }
         return [...prev, orderItem]
       })
-
       setQuantities((prev) => ({ ...prev, [item.id]: 0 }))
     },
     [quantities],
   )
+
+  const OrderSummary = () => (
+    <div className="w-full bg-white border border-gray-200 rounded-lg p-6">
+        <h3 className="text-xl font-bold mb-4">Order Summary</h3>
+        <div className="space-y-3 mb-6 max-h-60 overflow-y-auto">
+            {tempOrder.map((item) => (
+                <div key={item.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div className="flex-1">
+                    <h4 className="font-medium text-sm">{item.name}</h4>
+                    <p className="text-xs text-gray-600">{item.category}</p>
+                    <p className="text-sm font-semibold text-green-600">
+                    {item.price.toFixed(2)} x {item.quantity} = {(item.price * item.quantity).toFixed(2)} AED
+                    </p>
+                </div>
+                <Button variant="ghost" size="sm" onClick={() => removeFromOrder(item.id)} className="text-red-500 hover:text-red-700">
+                    <X className="h-4 w-4" />
+                </Button>
+                </div>
+            ))}
+        </div>
+        <div className="border-t pt-4 mb-6">
+        <div className="flex justify-between items-center text-lg font-bold">
+            <span>Total:</span>
+            <span className="text-green-600">{orderTotal.toFixed(2)} AED</span>
+        </div>
+        </div>
+        <Button onClick={handleAddAllToCart} disabled={isAddingToCart} className="w-full bg-green-600 hover:bg-green-700" size="lg">
+        <ShoppingCart className="h-4 w-4 mr-2" />
+        {isAddingToCart ? "Adding..." : "Add All to Cart"}
+        </Button>
+    </div>
+  );
 
   if (!hasItems) {
     return (
       <div className="text-center p-12">
         <h2 className="text-2xl font-bold">No Items Available</h2>
         <p className="text-gray-600 mt-2">There are currently no items listed for this service.</p>
-        <Link href="/services">
-          <Button className="mt-6 bg-green-600 hover:bg-green-700">Back to Services</Button>
-        </Link>
+        <Link href="/services"><Button className="mt-6 bg-green-600 hover:bg-green-700">Back to Services</Button></Link>
       </div>
     )
   }
 
   return (
-    <div className="flex">
-      <div className="flex-1">
-        <div
-          className="relative h-64 bg-cover bg-center flex items-center"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/modern-office-laundry.png')`,
-          }}
-        >
-          <div className="max-w-7xl mx-auto px-4 w-full">
-            {breadcrumbNav}
-            <h1 className="text-4xl md:text-5xl font-bold text-white">Select Your Items</h1>
-          </div>
-        </div>
-
-        <div className="min-h-screen bg-gray-50">
-          <div className="bg-white shadow-sm">
-            <div className="max-w-7xl mx-auto px-4 py-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{service.title}</h1>
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-4 w-4 ${i < service.rating ? "text-yellow-400 fill-current" : "text-gray-300"}`}
-                        />
-                      ))}
-                      <span className="ml-2 text-sm text-gray-600">
-                        {service.rating.toFixed(1)} ({service.reviews} reviews)
-                      </span>
-                    </div>
-                    <Badge variant="secondary" className="bg-green-100 text-green-800">
-                      {service.duration}
-                    </Badge>
-                  </div>
-                </div>
-                {getTotalItems() > 0 && (
-                  <Link href="/cart">
-                    <Button className="bg-green-600 hover:bg-green-700">
-                      <ShoppingCart className="h-4 w-4 mr-2" />
-                      View Cart ({getTotalItems()})
-                    </Button>
-                  </Link>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div className="max-w-7xl mx-auto px-4 py-8">
-            <Card>
-              <CardContent className="p-6">
-                <Tabs defaultValue={categories[0]} className="w-full">
-                  <TabsList className="grid w-full" style={{ gridTemplateColumns: `repeat(${categories.length}, minmax(0, 1fr))` }}>
-                    {categories.map(category => (
-                      <TabsTrigger key={category} value={category}>
-                        {category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                      </TabsTrigger>
-                    ))}
-                  </TabsList>
-                  {categories.map(category => (
-                    <TabsContent key={category} value={category} className="mt-6">
-                      <div className="grid md:grid-cols-2 gap-4">
-                        {service.items[category].map((item) => (
-                          <ItemCard
-                            key={item.id}
-                            item={item}
-                            category={category}
-                            quantities={quantities}
-                            onAddToOrder={handleAddToOrder}
-                            onUpdateQuantity={updateQuantity}
-                          />
-                        ))}
-                      </div>
-                    </TabsContent>
-                  ))}
-                </Tabs>
-              </CardContent>
-            </Card>
-          </div>
+    <div>
+      <div className="relative h-64 bg-cover bg-center flex items-center" style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/modern-office-laundry.png')`}}>
+        <div className="max-w-7xl mx-auto px-4 w-full">
+          {breadcrumbNav}
+          <h1 className="text-4xl md:text-5xl font-bold text-white">Select Your Items</h1>
         </div>
       </div>
 
-      {tempOrder.length > 0 && (
-        <div className="w-80 bg-white border-l border-gray-200 p-6 sticky top-0 h-screen overflow-y-auto">
-          <h3 className="text-xl font-bold mb-4">Order Summary</h3>
-          <div className="space-y-3 mb-6">
-            {tempOrder.map((item) => (
-              <div key={item.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex-1">
-                  <h4 className="font-medium text-sm">{item.name}</h4>
-                  <p className="text-xs text-gray-600">{item.category}</p>
-                  <p className="text-sm font-semibold text-green-600">
-                    {item.price.toFixed(2)} x {item.quantity} = {(item.price * item.quantity).toFixed(2)} AED
-                  </p>
+      <div className="min-h-screen bg-gray-50">
+        <div className="bg-white shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 py-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{service.title}</h1>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className={`h-4 w-4 ${i < service.rating ? "text-yellow-400 fill-current" : "text-gray-300"}`} />
+                    ))}
+                    <span className="ml-2 text-sm text-gray-600">{service.rating.toFixed(1)} ({service.reviews} reviews)</span>
+                  </div>
+                  <Badge variant="secondary" className="bg-green-100 text-green-800">{service.duration}</Badge>
                 </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => removeFromOrder(item.id)}
-                  className="text-red-500 hover:text-red-700"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
               </div>
-            ))}
-          </div>
-          <div className="border-t pt-4 mb-6">
-            <div className="flex justify-between items-center text-lg font-bold">
-              <span>Total:</span>
-              <span className="text-green-600">{orderTotal.toFixed(2)} AED</span>
+              {getTotalItems() > 0 && (
+                <Link href="/cart"><Button className="bg-green-600 hover:bg-green-700"><ShoppingCart className="h-4 w-4 mr-2" />View Cart ({getTotalItems()})</Button></Link>
+              )}
             </div>
           </div>
-          <Button
-            onClick={handleAddAllToCart}
-            disabled={isAddingToCart}
-            className="w-full bg-green-600 hover:bg-green-700"
-            size="lg"
-          >
-            <ShoppingCart className="h-4 w-4 mr-2" />
-            {isAddingToCart ? "Adding..." : "Add All to Cart"}
-          </Button>
         </div>
-      )}
+          
+        {/* --- RESPONSIVE LAYOUT FIX --- */}
+        <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main Content */}
+            <div className="lg:col-span-2">
+                <Card>
+                    <CardContent className="p-6">
+                        <Tabs defaultValue={categories[0]} className="w-full">
+                        <TabsList className="grid w-full" style={{ gridTemplateColumns: `repeat(${categories.length}, minmax(0, 1fr))` }}>
+                            {categories.map(category => (
+                            <TabsTrigger key={category} value={category}>{category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</TabsTrigger>
+                            ))}
+                        </TabsList>
+                        {categories.map(category => (
+                            <TabsContent key={category} value={category} className="mt-6">
+                            <div className="grid md:grid-cols-2 gap-4">
+                                {service.items[category].map((item) => (
+                                <ItemCard key={item.id} item={item} category={category} quantities={quantities} onAddToOrder={handleAddToOrder} onUpdateQuantity={updateQuantity}/>
+                                ))}
+                            </div>
+                            </TabsContent>
+                        ))}
+                        </Tabs>
+                    </CardContent>
+                </Card>
+            </div>
+
+            {/* Sidebar / Stacked Summary */}
+            <div className="lg:sticky lg:top-24 h-fit">
+                {tempOrder.length > 0 && <OrderSummary />}
+            </div>
+        </div>
+      </div>
     </div>
   )
 }
