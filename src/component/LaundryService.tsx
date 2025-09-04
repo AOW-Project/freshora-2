@@ -5,7 +5,7 @@ const featuresLeft = ["Everyday Laundry and Wash-Fold", "Dry Cleaning for Delica
 
 const featuresRight = [
   "Curtain and Carpet Cleaning",
-  "Shoe and Bag Care",
+  "Shoe  Care",
   "Soft Toy Cleaning",
   "Luxury Fabric Care",
 ]

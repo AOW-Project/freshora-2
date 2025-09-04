@@ -73,7 +73,7 @@ export default function ServicePageClient({
       { name: "Laundry Services", slug: "laundry-services" },
       { name: "Dry Cleaning Services", slug: "dry-cleaning-services" },
       { name: "Express Laundry Services", slug: "express-laundry-services" },
-      { name: "Shoe & Bag Spa", slug: "shoe-bag-spa" },
+      { name: "Shoe Cleaning", slug: "shoe-bag-spa" },
       { name: "Luxury Shoe Cleaning", slug: "luxury-shoe-cleaning" },
       { name: "Commercial Laundry Service", slug: "commercial-laundry-service" },
       { name: "Curtain Cleaning Service", slug: "curtain-cleaning-service" },

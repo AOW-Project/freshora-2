@@ -32,7 +32,7 @@ const navItems: NavItem[] = [
       { title: "Laundry", href: "/services/laundry-services" },
       { title: "Dry Cleaning", href: "/services/dry-cleaning-services" },
       { title: "Express Laundry Services", href: "/services/express-laundry-services" },
-      { title: "Bag & Shoe Spa", href: "/services/shoe-bag-spa" },
+      { title: "Shoe Cleaning", href: "/services/shoe-bag-spa" },
       { title: "Luxury Shoe Cleaning Service", href: "/services/luxury-shoe-cleaning" },
       { title: "Commercial Laundry Service", href: "/services/commercial-laundry-service" },
       { title: "Carpet Cleaning Service", href: "/services/carpet-cleaning-services" },
