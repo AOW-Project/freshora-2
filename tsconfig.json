@@ -23,6 +23,6 @@
     }
   },
   
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/verify-otp"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/verify-otp", "next.config.mjs"],
   "exclude": ["node_modules"]
 }
