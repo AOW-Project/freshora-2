@@ -93,6 +93,7 @@ export default function HeroSection() {
               alt={s.alt}
               fill
               priority={index === 0}
+              fetchPriority={index === 0 ? "high" : "auto"}
               loading={index === 0 ? "eager" : "lazy"}
               sizes="100vw"
               className="object-cover will-change-transform"

@@ -46,6 +46,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="relative z-10 min-h-screen">
             <Navbar />
             <LastPageTracker />
+            <link
+          rel="preload"
+          href="/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.webp"
+          as="image"
+          fetchPriority="high"
+        />
             <main className="relative z-20">{children}
               <WhatsAppFloatingButton />
 
