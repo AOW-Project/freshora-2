@@ -16,7 +16,7 @@ const services = [
   { id: 5, slug: "luxury-shoe-cleaning", image:"/images/erik-mclean-AnRxcupEQT0-unsplash.webp", title: "Luxury Shoe Cleaning", description: "Premium shoe care services." },
   { id: 6, slug: "commercial-laundry-service", image:"/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.webp", title: "Commercial Laundry Service", description: "Laundry solutions for businesses." },
   { id: 7, slug: "curtain-cleaning-service", image:"/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.webp", title: "Curtain Cleaning Service", description: "Expert curtain cleaning at your doorstep." },
-  { id: 8, slug: "carpet-cleaning-service", image:"/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc (1).webp", title: "Carpet Cleaning Service", description: "Deep cleaning for carpets and rugs." },
+  { id: 8, slug: "carpet-cleaning-services", image:"/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc (1).webp", title: "Carpet Cleaning Service", description: "Deep cleaning for carpets and rugs." },
   { id: 9, slug: "soft-toy-cleaning-service", image:"/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.webp", title: "Soft Toy Cleaning Service", description: "Safe and hygienic cleaning for toys." },
 ]
 

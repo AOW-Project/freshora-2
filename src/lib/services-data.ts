@@ -305,7 +305,7 @@ const services: Service[] = [
   },
   {
     id: 8,
-    slug: "carpet-cleaning-service",
+    slug: "carpet-cleaning-services",
     title: "Carpet Cleaning Service",
     description: "Deep cleaning for carpets and rugs.",
     fullDescription: "Revive your carpets with expert cleaning for a healthier, fresher home.Our carpet cleaning services in Dubai use advanced steam technology and eco-friendly methods to eliminate dirt, stains, and allergens. From professional carpet cleaning Dubai to delicate wool rug cleaning service, our certified technicians restore beauty, freshness, and long-lasting comfort to every carpet and rug.  ",

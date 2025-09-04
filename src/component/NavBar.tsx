@@ -35,7 +35,7 @@ const navItems: NavItem[] = [
       { title: "Bag & Shoe Spa", href: "/services/shoe-bag-spa" },
       { title: "Luxury Shoe Cleaning Service", href: "/services/luxury-shoe-cleaning" },
       { title: "Commercial Laundry Service", href: "/services/commercial-laundry-service" },
-      { title: "Carpet Cleaning Service", href: "/services/carpet-cleaning-service" },
+      { title: "Carpet Cleaning Service", href: "/services/carpet-cleaning-services" },
       { title: "Curtain Cleaning Service", href: "/services/curtain-cleaning-service" },
       { title: "Soft Toy Cleaning Service", href: "/services/soft-toy-cleaning-service" },
     ],
