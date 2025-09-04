@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
-import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa"
+import { FaFacebookF, FaInstagram } from "react-icons/fa"
 import { MdLocationOn, MdAccessTime, MdEmail, MdPhone } from "react-icons/md"
 
 export default function Footer() {
@@ -25,18 +25,19 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               {[
-                
-                { Icon: FaFacebookF, label: "Facebook" },
-                
-                { Icon: FaInstagram, label: "Instagram" },
-              ].map(({ Icon, label }, idx) => (
-                <button
+                { Icon: FaFacebookF, label: "Facebook", href: "https://www.facebook.com/profile.php?id=61579978694620" },
+                { Icon: FaInstagram, label: "Instagram", href: "#" }, // Add your Instagram link here
+              ].map(({ Icon, label, href }, idx) => (
+                <a
                   key={idx}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="bg-white text-black p-2.5 rounded-full hover:bg-green-500 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-green-400"
                 >
                   <Icon size={16} />
-                </button>
+                </a>
               ))}
             </div>
           </div>

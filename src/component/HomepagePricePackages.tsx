@@ -24,7 +24,7 @@ const packagesData = [
       "14 Pairs of Underwear",
       "6 Pairs of Socks",
       "1 Towel",
-      "1 Set of Sheets",
+      "1 Set of Bedsheets single",
     ],
     originalPrice: 349.0,
     price: 149.0,
