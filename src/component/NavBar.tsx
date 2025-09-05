@@ -54,7 +54,7 @@ const socialLinks = [
     },
     { 
         Icon: FaInstagram, 
-        href: "#", // Add your Instagram link here
+        href: "https://www.instagram.com/freshoralaundry?igsh=MWs2bWF4bXV3bjV5dQ==", // Add your Instagram link here
         label: "Instagram" 
     },
 ];
