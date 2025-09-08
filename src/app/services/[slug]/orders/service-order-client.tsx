@@ -18,6 +18,7 @@ interface ServiceItem {
   description: string
   unit?: string
   image?: string
+  sortOrder?: number   // ✅ added sortOrder
 }
 
 interface OrderItem extends ServiceItem {
@@ -280,8 +281,18 @@ export default function ServiceOrderClient({ slug, service }: ServiceOrderClient
                         {categories.map(category => (
                             <TabsContent key={category} value={category} className="mt-6">
                             <div className="grid md:grid-cols-2 gap-4">
-                                {service.items[category].map((item) => (
-                                <ItemCard key={item.id} item={item} category={category} quantities={quantities} onAddToOrder={handleAddToOrder} onUpdateQuantity={updateQuantity}/>
+                                {service.items[category]
+                                  .slice()
+                                  .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0)) // ✅ enforce order
+                                  .map((item) => (
+                                    <ItemCard
+                                      key={item.id}
+                                      item={item}
+                                      category={category}
+                                      quantities={quantities}
+                                      onAddToOrder={handleAddToOrder}
+                                      onUpdateQuantity={updateQuantity}
+                                    />
                                 ))}
                             </div>
                             </TabsContent>
