@@ -26,7 +26,7 @@ export default function Footer() {
             <div className="flex gap-3">
               {[
                 { Icon: FaFacebookF, label: "Facebook", href: "https://www.facebook.com/profile.php?id=61579978694620" },
-                { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/freshoralaundry?igsh=MWs2bWF4bXV3bjV5dQ==" }, // Add your Instagram link here
+                { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/freshoralaundry/" }, // Add your Instagram link here
               ].map(({ Icon, label, href }, idx) => (
                 <a
                   key={idx}

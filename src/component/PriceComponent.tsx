@@ -274,21 +274,21 @@ const packagesData = [
       "1 Set of Bedsheets single",],
     price: 149.0,
   },
-  {
-    id: "premium",
-    icon: Zap,
-    title: "Premium Package",
-    features: ["6 T-Shirts",
-      "3 Pairs of Jeans",
-      "4 Button-Down Shirts",
-      "2 Pair of Shorts",
-      "9 Pairs of Underwear",
-      "8 Pairs of Socks",
-      "2 Towel",
-      "2 Set of Sheets"],
-    price: 449.0,
-    isFeatured: true,
-  },
+  // {
+  //   id: "premium",
+  //   icon: Zap,
+  //   title: "Premium Package",
+  //   features: ["6 T-Shirts",
+  //     "3 Pairs of Jeans",
+  //     "4 Button-Down Shirts",
+  //     "2 Pair of Shorts",
+  //     "9 Pairs of Underwear",
+  //     "8 Pairs of Socks",
+  //     "2 Towel",
+  //     "2 Set of Sheets"],
+  //   price: 449.0,
+  //   isFeatured: true,
+  // },
 ]
 
 interface PackageCardProps {
@@ -546,22 +546,42 @@ const PricingSection = () => {
           </Card>
 
           {/* Subscription Packages Section */}
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h4 className={`text-green-600 font-medium mb-3 sm:mb-4 text-sm sm:text-base ${poppins.className}`}>
-              [ What we offer ]
-            </h4>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 lg:mb-6 px-4">
-              Subscription Packages
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base px-4">
-              For clients who prefer consistent care, our packages offer exclusive value and effortless convenience
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 lg:gap-12">
-            {packagesData.map((pkg) => (
-              <PackageCard key={pkg.id} packageInfo={pkg} onOrderNow={handleOrderNow} />
-            ))}
-          </div>
+        <div className="flex flex-col lg:flex-row gap-12">
+        {/* Left: Subscription */}
+        <div className="flex-1">
+      <div className="text-left mb-8 sm:mb-12 lg:mb-16">
+        <h4 className={`text-green-600 font-medium mb-3 sm:mb-4 text-sm sm:text-base pl-5 ${poppins.className}`}>
+          [ What we offer ]
+        </h4>
+        <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 lg:mb-6 px-4">
+          Subscription Packages
+        </h2>
+        <p className="text-gray-600 max-w-2xl leading-relaxed text-sm sm:text-base px-4">
+          For clients who prefer consistent care, our packages offer exclusive value and effortless convenience
+        </p>
+      </div>
+
+     <div className="flex flex-col sm:flex-row justify-start items-start gap-6 sm:gap-8 lg:gap-12 pl-6 sm:pl-12 lg:pl-10">
+      {packagesData.map((pkg) => (
+        <PackageCard key={pkg.id} packageInfo={pkg} onOrderNow={handleOrderNow} />
+      ))}
+    </div>
+
+    </div>
+
+        {/* Right: Map */}
+        <div className="flex-[2]">
+        <iframe
+          title="Business Location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3103.009160312709!2d-77.455!3d38.752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b65cf1dff9f1b1%3A0x5d812!2s6494%20Signal%20Hill%20Rd%2C%20Manassas%2C%20VA%2020110!5e0!3m2!1sen!2sus!4v1234567890"
+          className="w-full h-full min-h-[400px]"
+          style={{ border: 0 }}
+          loading="lazy"
+          allowFullScreen
+        ></iframe>
+      </div>
+      </div>
+
         </div>
       </section>
     </>
