@@ -402,10 +402,11 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                              "Unknown error occurred"
           setMessage("Failed to place order: " + errorMessage)
         }
-      } catch (error: any) {
+      } catch (error:unknown ) {
         console.error("[DEBUG] Order submission error:", error)
         
         // Provide more specific error messages
+        if (error instanceof Error) {
         if (error.name === 'AbortError') {
           setMessage("Request timed out. Please check your connection and try again.")
         } else if (error.message?.includes('Failed to fetch')) {
@@ -417,6 +418,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
         } else {
           setMessage("Error: " + (error.message || "Something went wrong while placing the order"))
         }
+      }
       } finally {
         setLoading(false)
       }

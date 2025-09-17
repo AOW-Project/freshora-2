@@ -66,11 +66,11 @@ async function fetchServiceBySlug(slug: string): Promise<Service | null> {
 
 // --- Next.js Page Props ---
 type PageProps = {
-  params: { slug: string } // Updated to be simpler as params is no longer a promise here
-}
+  params: Promise<{ slug: string }>;
+};
 
 export default async function Page({ params }: PageProps) {
-  const { slug } = params
+  const { slug } = await params
 
   const service = await fetchServiceBySlug(slug)
 
