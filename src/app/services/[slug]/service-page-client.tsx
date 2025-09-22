@@ -1,72 +1,72 @@
-"use client"
+"use client";
 
-import { ChangeEvent, useCallback, useMemo, useState } from "react"
-import { notFound } from "next/navigation"
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { MapPin, Clock, Mail, Phone, CheckCircle } from "lucide-react"
-import type { Service } from "./page"
-import LoadingOverlay from "@/component/LoadingOverlay"
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { MapPin, Clock, Mail, Phone, CheckCircle } from "lucide-react";
+import type { Service } from "./page";
+import LoadingOverlay from "@/component/LoadingOverlay";
 
 type FormState = {
-  name: string
-  email: string
-  phone: string
-  question: string
-}
+  name: string;
+  email: string;
+  phone: string;
+  question: string;
+};
 
 export default function ServicePageClient({
   slug,
   service,
 }: {
-  slug: string
-  service: Service
+  slug: string;
+  service: Service;
 }) {
   const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
     phone: "",
     question: "",
-  })
-  const [loading, setLoading] = useState(false)
-  const [thankYou, setThankYou] = useState(false)
+  });
+  const [loading, setLoading] = useState(false);
+  const [thankYou, setThankYou] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const { name, value } = event.target
-      setForm((prev) => ({ ...prev, [name]: value }))
+      const { name, value } = event.target;
+      setForm((prev) => ({ ...prev, [name]: value }));
     },
     []
-  )
+  );
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
-      e.preventDefault()
-      setLoading(true)
+      e.preventDefault();
+      setLoading(true);
       try {
         const res = await fetch("/api/send-question", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(form),
-        })
+        });
         if (res.ok) {
-          setForm({ name: "", email: "", phone: "", question: "" })
-          setThankYou(true)
-          setTimeout(() => setThankYou(false), 2000)
+          setForm({ name: "", email: "", phone: "", question: "" });
+          setThankYou(true);
+          setTimeout(() => setThankYou(false), 2000);
         }
       } catch (err) {
-        console.error("Error sending question", err)
+        console.error("Error sending question", err);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     },
     [form]
-  )
+  );
 
   const serviceCategories = useMemo(
     () => [
@@ -75,13 +75,17 @@ export default function ServicePageClient({
       { name: "Express Laundry Services", slug: "express-laundry-services" },
       { name: "Shoe Cleaning", slug: "shoe-bag-spa" },
       { name: "Luxury Shoe Cleaning", slug: "luxury-shoe-cleaning" },
-      { name: "Commercial Laundry Service", slug: "commercial-laundry-service" },
+      {
+        name: "Commercial Laundry Service",
+        slug: "commercial-laundry-service",
+      },
       { name: "Curtain Cleaning Service", slug: "curtain-cleaning-service" },
       { name: "Carpet Cleaning Service", slug: "carpet-cleaning-service" },
       { name: "Soft Toy Cleaning Service", slug: "soft-toy-cleaning-service" },
+      { name: "Steam Pressing Service", slug: "steam-pressing-service" },
     ],
     []
-  )
+  );
 
   const breadcrumbNav = useMemo(
     () => (
@@ -90,17 +94,18 @@ export default function ServicePageClient({
           Home
         </Link>
         <span className="px-1 sm:px-2">/</span>
-        <Link href="/services" className="hover:text-green-400 transition-colors">
+        <Link
+          href="/services"
+          className="hover:text-green-400 transition-colors"
+        >
           Services
         </Link>
         <span className="px-1 sm:px-2">/</span>
-        <span className="text-green-400 capitalize">
-          {service.title}
-        </span>
+        <span className="text-green-400 capitalize">{service.title}</span>
       </nav>
     ),
     [service.title]
-  )
+  );
 
   const contactInfo = useMemo(
     () => (
@@ -115,7 +120,7 @@ export default function ServicePageClient({
         <div className="flex items-start gap-3">
           <Clock className="h-4 w-4 text-green-600 mt-1 flex-shrink-0" />
           <div className="text-sm">
-            <p className="text-gray-600">Mon-Fri  8am - 8pm</p>
+            <p className="text-gray-600">Mon-Fri 8am - 8pm</p>
             <p className="text-gray-600">Sat-Sun 10am - 8pm</p>
           </div>
         </div>
@@ -126,18 +131,21 @@ export default function ServicePageClient({
           </p>
         </div>
         <div className="flex items-center gap-3">
-           <Phone className="h-4 w-4 text-green-600 flex-shrink-0" />
-          <a href="tel:+971509259667" className="text-sm text-gray-600 hover:text-green-600 transition-colors">
+          <Phone className="h-4 w-4 text-green-600 flex-shrink-0" />
+          <a
+            href="tel:+971509259667"
+            className="text-sm text-gray-600 hover:text-green-600 transition-colors"
+          >
             +971 50 925 9667
           </a>
         </div>
       </div>
     ),
     []
-  )
+  );
 
   if (!service) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -244,7 +252,10 @@ export default function ServicePageClient({
                     <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800">
                       {service.secondaryTitle}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed mb-6 text-sm sm:text-base">
+                    <p
+                      style={{ whiteSpace: "pre-line" }}
+                      className="text-gray-600 leading-relaxed mb-6 text-sm sm:text-base"
+                    >
                       {service.secondaryDescription}
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
@@ -261,16 +272,18 @@ export default function ServicePageClient({
                     {/* Extra Images */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 sm:mb-8">
                       {service.gallery.slice(0, 2).map((imgSrc, index) => (
-                         <div key={index} className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden">
-                           <Image
-                             src={imgSrc}
-                             height={300}
-                             width={400}
-                             alt={`${service.title} gallery image ${index + 1}`}
-                             
-                             className="object-cover"
-                           />
-                         </div>
+                        <div
+                          key={index}
+                          className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden"
+                        >
+                          <Image
+                            src={imgSrc}
+                            height={300}
+                            width={400}
+                            alt={`${service.title} gallery image ${index + 1}`}
+                            className="object-cover"
+                          />
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -338,5 +351,5 @@ export default function ServicePageClient({
         </div>
       </div>
     </>
-  )
+  );
 }

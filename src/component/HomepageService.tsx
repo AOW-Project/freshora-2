@@ -5,22 +5,97 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
-import { FaTshirt, FaHandsWash, FaBroom, FaShoePrints, FaBusinessTime, FaChild } from "react-icons/fa";
+import { TbIroningSteamFilled } from "react-icons/tb";
+import {
+  FaTshirt,
+  FaHandsWash,
+  FaBroom,
+  FaShoePrints,
+  FaBusinessTime,
+  FaChild,
+} from "react-icons/fa";
 import { MdIron } from "react-icons/md";
 import { FaRug, FaWindowMaximize } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import clsx from "clsx";
 
 const services = [
-  { title: "Laundry", description: "Thorough washing using eco-friendly detergents to keep your clothes fresh and soft.", image: "/images/women-sorting-clothes-in-the-laundry-2025-03-14-03-27-51-utc.webp", icon: <FaBroom /> },
-  { title: "Dry Cleaning", description: "Gentle dry cleaning for delicate fabrics, ensuring they maintain their quality and shape.", image: "/images/iron-and-stack-of-shirts-on-ironing-board-space-f-2025-03-25-22-33-47-utc.webp", icon: <FaTshirt /> },
-  { title: "Express Laundry Service", description: "Quick turnaround laundry service with the same premium care.", image: "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.webp", icon: <FaHandsWash /> },
-  { title: " Shoe Cleaning", description: "Professional cleaning and restoration for  shoes.", image: "/images/light-blue-sneakers-and-backpack-2025-01-09-09-02-14-utc.webp", icon: <MdIron /> },
-  { title: "Luxury Shoe Cleaning Service", description: "Specialized treatment to clean and restore luxury shoes for batter footware.", image: "/images/erik-mclean-AnRxcupEQT0-unsplash.webp", icon: <FaShoePrints /> },
-  { title: "Commercial Laundry Service", description: "Large-scale laundry solutions for hotels, restaurants, and offices.", image: "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.webp", icon: <FaBusinessTime /> },
-  { title: "Carpet Cleaning Service", description: "Deep cleaning for carpets, removing dirt, dust, and allergens.", image: "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc.webp", icon: <FaRug /> },
-  { title: "Curtain Cleaning Service", description: "Gentle cleaning for curtains to remove dust and stains while preserving fabric quality.", image: "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.webp", icon: <FaWindowMaximize /> },
-  { title: "Soft Toy Cleaning Service", description: "Sanitizing and cleaning soft toys to make them safe and fresh for children.", image: "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.webp", icon: <FaChild /> },
+  {
+    title: "Laundry",
+    description:
+      "Thorough washing using eco-friendly detergents to keep your clothes fresh and soft.",
+    image:
+      "/images/women-sorting-clothes-in-the-laundry-2025-03-14-03-27-51-utc.webp",
+    icon: <FaBroom />,
+  },
+  {
+    title: "Dry Cleaning",
+    description:
+      "Gentle dry cleaning for delicate fabrics, ensuring they maintain their quality and shape.",
+    image:
+      "/images/iron-and-stack-of-shirts-on-ironing-board-space-f-2025-03-25-22-33-47-utc.webp",
+    icon: <FaTshirt />,
+  },
+  {
+    title: "Express Laundry Service",
+    description: "Quick turnaround laundry service with the same premium care.",
+    image:
+      "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.webp",
+    icon: <FaHandsWash />,
+  },
+  {
+    title: " Shoe Cleaning",
+    description: "Professional cleaning and restoration for  shoes.",
+    image:
+      "/images/light-blue-sneakers-and-backpack-2025-01-09-09-02-14-utc.webp",
+    icon: <MdIron />,
+  },
+  {
+    title: "Luxury Shoe Cleaning Service",
+    description:
+      "Specialized treatment to clean and restore luxury shoes for batter footware.",
+    image: "/images/erik-mclean-AnRxcupEQT0-unsplash.webp",
+    icon: <FaShoePrints />,
+  },
+  {
+    title: "Commercial Laundry Service",
+    description:
+      "Large-scale laundry solutions for hotels, restaurants, and offices.",
+    image:
+      "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.webp",
+    icon: <FaBusinessTime />,
+  },
+  {
+    title: "Carpet Cleaning Service",
+    description:
+      "Deep cleaning for carpets, removing dirt, dust, and allergens.",
+    image:
+      "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc.webp",
+    icon: <FaRug />,
+  },
+  {
+    title: "Curtain Cleaning Service",
+    description:
+      "Gentle cleaning for curtains to remove dust and stains while preserving fabric quality.",
+    image:
+      "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.webp",
+    icon: <FaWindowMaximize />,
+  },
+  {
+    title: "Soft Toy Cleaning Service",
+    description:
+      "Sanitizing and cleaning soft toys to make them safe and fresh for children.",
+    image:
+      "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.webp",
+    icon: <FaChild />,
+  },
+  {
+    title: "Steam Pressing Service",
+    description:
+      "Sanitizing and cleaning soft toys to make them safe and fresh for children.",
+    image: "/images/steam-pressing-banner.jpg",
+    icon: <TbIroningSteamFilled />,
+  },
 ];
 
 export default function ServicesSlider() {
@@ -39,7 +114,9 @@ export default function ServicesSlider() {
       <div className="container mx-auto px-4">
         {/* Heading */}
         <div className="text-center mb-12">
-          <h4 className="text-green-600 font-medium mb-3 text-sm sm:text-base">[ Our Services ]</h4>
+          <h4 className="text-green-600 font-medium mb-3 text-sm sm:text-base">
+            [ Our Services ]
+          </h4>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 leading-snug">
             Dry Cleaning & Laundry, <br /> Free Delivery
           </h2>
@@ -57,11 +134,18 @@ export default function ServicesSlider() {
           <Swiper
             modules={[Autoplay, Navigation, Pagination]}
             autoplay={{ delay: 3500, disableOnInteraction: false }}
-            navigation={{ prevEl: ".swiper-button-prev-custom", nextEl: ".swiper-button-next-custom" }}
+            navigation={{
+              prevEl: ".swiper-button-prev-custom",
+              nextEl: ".swiper-button-next-custom",
+            }}
             pagination={{ clickable: true, el: ".custom-pagination" }}
             spaceBetween={30}
             slidesPerView={3}
-            breakpoints={{ 0: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
           >
             {services.map((service, i) => (
               <SwiperSlide key={i}>
@@ -86,9 +170,13 @@ export default function ServicesSlider() {
                       >
                         {service.icon}
                       </div>
-                      <h3 className="text-lg font-bold text-white">{service.title}</h3>
+                      <h3 className="text-lg font-bold text-white">
+                        {service.title}
+                      </h3>
                     </div>
-                    <p className="text-sm text-white opacity-90">{service.description}</p>
+                    <p className="text-sm text-white opacity-90">
+                      {service.description}
+                    </p>
                   </div>
                 </div>
               </SwiperSlide>

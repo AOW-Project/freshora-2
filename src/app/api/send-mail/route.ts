@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server"
-import nodemailer from "nodemailer"
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
   try {
     const { name, email, phone, address, service, date, time, comment } =
-      await req.json()
+      await req.json();
 
     // ✅ Create reusable transporter object (only once)
     const transporter = nodemailer.createTransport({
@@ -13,17 +13,17 @@ export async function POST(req: Request) {
         user: "freshorappc@gmail.com",
         pass: process.env.GMAIL_APP_PASSWORD || "ykbl euac vysy dpta", // should be in .env
       },
-    })
+    });
 
     // ✅ Customer email HTML
     const generateOrderConfirmationEmail = (orderData: {
-      customerEmail: string
-      id: string
-      customerName: string
-      totalAmount?: string
-      status?: string
-      pickupDate?: string
-      deliveryDate?: string
+      customerEmail: string;
+      id: string;
+      customerName: string;
+      totalAmount?: string;
+      status?: string;
+      pickupDate?: string;
+      deliveryDate?: string;
     }) => {
       return `<!DOCTYPE html>
       <html>
@@ -56,14 +56,14 @@ export async function POST(req: Request) {
           </tr>
         </table>
       </body>
-      </html>`
-    }
+      </html>`;
+    };
 
     // ✅ Send customer confirmation email
     const sendOrderConfirmationEmail = async (orderData: {
-      customerEmail: string
-      id: string
-      customerName: string
+      customerEmail: string;
+      id: string;
+      customerName: string;
     }) => {
       try {
         const mailOptions = {
@@ -71,19 +71,25 @@ export async function POST(req: Request) {
           to: orderData.customerEmail,
           subject: `Order Confirmation #${orderData.id} - Freshora Laundry`,
           html: generateOrderConfirmationEmail(orderData),
-        }
+        };
 
-        const info = await transporter.sendMail(mailOptions)
-        console.log("Order confirmation email sent:", nodemailer.getTestMessageUrl(info))
-        return { success: true, messageId: info.messageId }
+        const info = await transporter.sendMail(mailOptions);
+        console.log(
+          "Order confirmation email sent:",
+          nodemailer.getTestMessageUrl(info)
+        );
+        return { success: true, messageId: info.messageId };
       } catch (error: unknown) {
         if (error instanceof Error) {
-          console.error("Error sending order confirmation email:", error.message)
-          return { success: false, error: error.message }
+          console.error(
+            "Error sending order confirmation email:",
+            error.message
+          );
+          return { success: false, error: error.message };
         }
-        return { success: false, error: "Unknown error" }
+        return { success: false, error: "Unknown error" };
       }
-    }
+    };
 
     // ✅ Business email
     const businessEmailHTML = `
@@ -98,7 +104,7 @@ export async function POST(req: Request) {
         <li><strong>Date:</strong> ${date}</li>
         <li><strong>Time:</strong> ${time}</li>
       </ul>
-    `
+    `;
 
     // ✅ Send business notification email
     await transporter.sendMail({
@@ -106,32 +112,32 @@ export async function POST(req: Request) {
       to: "freshorappc@gmail.com", // business inbox
       subject: `New Pickup Request from ${name}`,
       html: businessEmailHTML,
-    })
+    });
 
     // Example: Send confirmation to customer as well
     await sendOrderConfirmationEmail({
       customerEmail: email,
       id: Math.floor(Math.random() * 1000000).toString(), // dummy order ID
       customerName: name,
-    })
+    });
 
     return NextResponse.json({
       success: true,
       message: "Emails sent successfully!",
-    })
+    });
   } catch (error: unknown) {
     if (error instanceof Error) {
-      console.error("Email sending error:", error.message)
+      console.error("Email sending error:", error.message);
       return NextResponse.json(
         { success: false, message: error.message },
         { status: 500 }
-      )
+      );
     } else {
-      console.error("Unexpected error:", error)
+      console.error("Unexpected error:", error);
       return NextResponse.json(
         { success: false, message: "An unexpected error occurred" },
         { status: 500 }
-      )
+      );
     }
   }
 }

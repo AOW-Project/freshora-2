@@ -1,13 +1,14 @@
-"use client"
+"use client";
 
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card";
 import { useCart } from "@/app/context/cart-context"; // ✅ Import cart context
-import { CheckCircle } from "lucide-react"
-import { useRouter } from "next/navigation"
-import type React from "react"
-import { useState } from "react"
-import { FaTshirt } from "react-icons/fa"
-import { MdIron } from "react-icons/md"
+import { CheckCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
+import type React from "react";
+import { useState } from "react";
+import { FaTshirt } from "react-icons/fa";
+import { MdIron } from "react-icons/md";
+import MapSection from "./map-section";
 
 // --- Packages Data ---
 const packagesData = [
@@ -29,35 +30,38 @@ const packagesData = [
     originalPrice: 349.0,
     price: 149.0,
   },
-  {
-    id: "premium_home",
-    icon: MdIron,
-    title: "Premium Package",
-    description: "",
-    features: [
-      "6 T-Shirts",
-      "3 Pairs of Jeans",
-      "4 Button-Down Shirts",
-      "2 Pair of Shorts",
-      "9 Pairs of Underwear",
-      "8 Pairs of Socks",
-      "2 Towel",
-      "2 Set of Sheets",
-    ],
-    originalPrice: 449.0,
-    price: 449.0,
-  },
-]
+  // {
+  //   id: "premium_home",
+  //   icon: MdIron,
+  //   title: "Premium Package",
+  //   description: "",
+  //   features: [
+  //     "6 T-Shirts",
+  //     "3 Pairs of Jeans",
+  //     "4 Button-Down Shirts",
+  //     "2 Pair of Shorts",
+  //     "9 Pairs of Underwear",
+  //     "8 Pairs of Socks",
+  //     "2 Towel",
+  //     "2 Set of Sheets",
+  //   ],
+  //   originalPrice: 449.0,
+  //   price: 449.0,
+  // },
+];
 
 // --- Package Card ---
 interface PackageCardProps {
-  packageInfo: (typeof packagesData)[0]
-  onOrderNow: (packageId: string) => void
+  packageInfo: (typeof packagesData)[0];
+  onOrderNow: (packageId: string) => void;
 }
 
-const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) => {
-  const [isExpanded, setIsExpanded] = useState(false)
-  const { id, icon: Icon, title, features, price, originalPrice } = packageInfo
+const PackageCard: React.FC<PackageCardProps> = ({
+  packageInfo,
+  onOrderNow,
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const { id, icon: Icon, title, features, price, originalPrice } = packageInfo;
 
   return (
     <Card
@@ -74,7 +78,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
             <Icon size={28} />
           </div>
           <h3 className="text-lg font-bold text-gray-800">{title}</h3>
-        { /* <p className="text-sm font-medium text-green-600">Clothes Per Month</p> */}
+          {/* <p className="text-sm font-medium text-green-600">Clothes Per Month</p> */}
         </div>
         <ul className="mb-4 space-y-2 text-sm text-gray-700">
           {features.map((feature, index) => (
@@ -85,7 +89,11 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
           ))}
         </ul>
         <div className="border-t border-gray-100 pt-4 text-center">
-          {originalPrice && <p className="mb-1 text-sm text-gray-500 line-through">{originalPrice.toFixed(2)}</p>}
+          {originalPrice && (
+            <p className="mb-1 text-sm text-gray-500 line-through">
+              {originalPrice.toFixed(2)}
+            </p>
+          )}
           <p className="text-2xl font-bold text-gray-900">{price.toFixed(2)}</p>
         </div>
         <div
@@ -97,8 +105,8 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
         >
           <button
             onClick={(e) => {
-              e.stopPropagation()
-              onOrderNow(id)
+              e.stopPropagation();
+              onOrderNow(id);
             }}
             className="mt-4 w-full bg-green-600 py-3 font-semibold text-white transition-colors duration-300 hover:bg-green-700"
           >
@@ -107,16 +115,16 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 // --- Main Pickup Packages Component ---
 const PickupPackages: React.FC = () => {
-  const router = useRouter()
-  const { replaceCart } = useCart() // ✅ Use cart context
+  const router = useRouter();
+  const { replaceCart } = useCart(); // ✅ Use cart context
 
   const handleOrderNow = async (packageId: string) => {
-    const selectedPackage = packagesData.find((p) => p.id === packageId)
+    const selectedPackage = packagesData.find((p) => p.id === packageId);
     if (selectedPackage) {
       const packageItems = selectedPackage.features.map((feature, index) => ({
         id: `${packageId}-${index}`,
@@ -126,20 +134,41 @@ const PickupPackages: React.FC = () => {
         price: selectedPackage.price / selectedPackage.features.length, // Distribute price
         quantity: 1,
         serviceSlug: "package-service",
-      }))
+      }));
 
-      await replaceCart(packageItems) // ✅ Replace cart with new package
-      router.push("/cart") // Or `/pickup-form` if that's the next step
+      await replaceCart(packageItems); // Replace cart with new package
+      router.push("/cart"); // Or `/pickup-form` if that's the next step
     }
-  }
+  };
 
   return (
-    <div className="flex flex-wrap justify-center gap-6 sm:gap-11">
-      {packagesData.map((pkg) => (
-        <PackageCard key={pkg.id} packageInfo={pkg} onOrderNow={handleOrderNow} />
-      ))}
-    </div>
-  )
-}
+    <section className="flex flex-col sm:flex-row justify-center  p-6 md:px-12 lg:px-24 items-stretch gap-6 mb-0 md:mb-8 lg:mb-16">
+      <div className=" w-full flex-grow md:pr-16">
+        <div className="flex justify-end gap-6 sm:gap-11">
+          {packagesData.map((pkg) => (
+            <PackageCard
+              key={pkg.id}
+              packageInfo={pkg}
+              onOrderNow={handleOrderNow}
+            />
+          ))}
+        </div>
+      </div>
+      {/* map */}
+      <div className="flex items-stretch w-full rounded-lg overflow-hidden">
+        <iframe
+          className="h-[100%] w-full"
+          title="Freshora Laundry Location"
+          src="https://www.google.com/maps?q=Shop%20No%204%2C%20Azizi%20Riviera%2042%2C%20Meydan%2C%20Al%20Merkadh%2C%20Dubai%20UAE&output=embed"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          aria-label="Google Map showing Freshora Laundry at Shop no 4, Azizi Riviera 42, Meydan, Dubai"
+        />
+      </div>
+    </section>
+  );
+};
 
-export default PickupPackages
+export default PickupPackages;
