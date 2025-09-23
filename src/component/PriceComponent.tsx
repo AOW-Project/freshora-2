@@ -1,42 +1,47 @@
-"use client"
-import type React from "react"
-import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
-import { Poppins } from "next/font/google"
-import { FaTshirt, FaHandsWash, FaBed } from "react-icons/fa"
-import { MdIron } from "react-icons/md"
-import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CheckCircle, ShoppingCart, Zap, ChevronLeft, ChevronRight } from "lucide-react"
-import Link from "next/link"
-import { useCart } from "@/app/context/cart-context" // Import cart provider
+"use client";
+import type React from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Poppins } from "next/font/google";
+import { FaTshirt, FaHandsWash, FaBed } from "react-icons/fa";
+import { MdIron } from "react-icons/md";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  CheckCircle,
+  ShoppingCart,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import Link from "next/link";
+import { useCart } from "@/app/context/cart-context"; // Import cart provider
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
-})
+});
 
 const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState({
     width: 0,
     height: 0,
-  })
+  });
 
   useEffect(() => {
     function handleResize() {
       setWindowSize({
         width: window.innerWidth,
         height: window.innerHeight,
-      })
+      });
     }
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  return windowSize
-}
+  return windowSize;
+};
 
 const ServiceBanner: React.FC = () => {
   return (
@@ -48,28 +53,41 @@ const ServiceBanner: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <nav className="flex items-center space-x-1 sm:space-x-2 text-white mb-3 sm:mb-4">
-          <Link href="/" className="hover:text-green-400 text-sm sm:text-base transition-colors">
+          <Link
+            href="/"
+            className="hover:text-green-400 text-sm sm:text-base transition-colors"
+          >
             Home
           </Link>
           <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
-          <Link href="/pricing" className="hover:text-green-400 text-sm sm:text-base transition-colors">
+          <Link
+            href="/pricing"
+            className="hover:text-green-400 text-sm sm:text-base transition-colors"
+          >
             Prices
           </Link>
         </nav>
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white">Prices</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+          Prices
+        </h1>
       </div>
     </div>
-  )
-}
+  );
+};
 
 interface ServicePriceCardProps {
-  icon: React.ElementType
-  title: string
-  price: string
-  description: string
+  icon: React.ElementType;
+  title: string;
+  price: string;
+  description: string;
 }
 
-const ServicePriceCard: React.FC<ServicePriceCardProps> = ({ icon: Icon, title, price, description }) => {
+const ServicePriceCard: React.FC<ServicePriceCardProps> = ({
+  icon: Icon,
+  title,
+  price,
+  description,
+}) => {
   return (
     <Card className="group relative flex flex-col items-center justify-between p-4 sm:p-6 text-center h-64 sm:h-72 md:h-80 transition-all duration-500 hover:scale-105 bg-white overflow-hidden shadow-none border-none">
       <div className="flex flex-col items-center justify-center flex-1 space-y-3 sm:space-y-4 transition-all duration-500 group-hover:space-y-2">
@@ -77,9 +95,13 @@ const ServicePriceCard: React.FC<ServicePriceCardProps> = ({ icon: Icon, title, 
           <Icon size={32} className="text-green-600 sm:w-10 sm:h-10" />
         </div>
         <div className="space-y-2 transition-all duration-500 group-hover:-translate-y-6 sm:group-hover:-translate-y-8">
-          <h3 className="text-base sm:text-lg font-bold text-gray-800 leading-tight px-2">{title}</h3>
+          <h3 className="text-base sm:text-lg font-bold text-gray-800 leading-tight px-2">
+            {title}
+          </h3>
           <p className="text-xs sm:text-sm text-gray-600 px-2">{description}</p>
-          <p className="text-xl sm:text-2xl font-bold text-green-600">{price}</p>
+          <p className="text-xl sm:text-2xl font-bold text-green-600">
+            {price}
+          </p>
         </div>
       </div>
       <div className="absolute bottom-3 sm:bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-y-0 translate-y-4">
@@ -90,33 +112,51 @@ const ServicePriceCard: React.FC<ServicePriceCardProps> = ({ icon: Icon, title, 
         </Link>
       </div>
     </Card>
-  )
-}
+  );
+};
 
 const ServiceCarousel: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [cardsToShow, setCardsToShow] = useState(1)
-  const { width } = useWindowSize()
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [cardsToShow, setCardsToShow] = useState(1);
+  const { width } = useWindowSize();
 
   const services = [
-    { icon: FaTshirt, title: "Shirts Service", description: "Washed and Pressed", price: "6.00" },
-    { icon: FaHandsWash, title: "Day Dress Service", description: "price of Day dress service", price: "8.00" },
+    {
+      icon: FaTshirt,
+      title: "Shirts Service",
+      description: "Washed and Pressed",
+      price: "6.00",
+    },
+    {
+      icon: FaHandsWash,
+      title: "Day Dress Service",
+      description: "price of Day dress service",
+      price: "8.00",
+    },
     { icon: MdIron, title: "Press", description: "Press", price: "3.00" },
-    { icon: FaBed, title: "Bedding", description: "Bed Set (Wash and Press)", price: "10.50" },
-  ]
+    {
+      icon: FaBed,
+      title: "Bedding",
+      description: "Bed Set (Wash and Press)",
+      price: "10.50",
+    },
+  ];
 
   useEffect(() => {
-    if (width === 0) return
-    if (width >= 1280) setCardsToShow(4)
-    else if (width >= 1024) setCardsToShow(3)
-    else if (width >= 768) setCardsToShow(2)
-    else setCardsToShow(1)
-  }, [width])
+    if (width === 0) return;
+    if (width >= 1280) setCardsToShow(4);
+    else if (width >= 1024) setCardsToShow(3);
+    else if (width >= 768) setCardsToShow(2);
+    else setCardsToShow(1);
+  }, [width]);
 
-  const nextSlide = () => setCurrentSlide((prev) => Math.min(prev + 1, services.length - cardsToShow))
-  const prevSlide = () => setCurrentSlide((prev) => Math.max(prev - 1, 0))
+  const nextSlide = () =>
+    setCurrentSlide((prev) =>
+      Math.min(prev + 1, services.length - cardsToShow)
+    );
+  const prevSlide = () => setCurrentSlide((prev) => Math.max(prev - 1, 0));
 
-  const maxSlide = Math.max(0, services.length - cardsToShow)
+  const maxSlide = Math.max(0, services.length - cardsToShow);
 
   return (
     <div className="relative px-4 sm:px-8 md:px-12">
@@ -129,7 +169,11 @@ const ServiceCarousel: React.FC = () => {
           }}
         >
           {services.map((service, index) => (
-            <div key={index} className="px-2 sm:px-4" style={{ width: `${100 / services.length}%` }}>
+            <div
+              key={index}
+              className="px-2 sm:px-4"
+              style={{ width: `${100 / services.length}%` }}
+            >
               <ServicePriceCard {...service} />
             </div>
           ))}
@@ -165,90 +209,310 @@ const ServiceCarousel: React.FC = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 // Data for Pricing Tables
 const forGentleman = [
-  { item: "Shirts/T-Shirts", washPress: "6.00", dryCleaning: "8.00", steamPressing: "3.00" },
-  { item: "Trouser", washPress: "6.00", dryCleaning: "8.00", steamPressing: "3.00" },
-  { item: "Kandura", washPress: "10.00", dryCleaning: "12.00", steamPressing: "6.00" },
-  { item: "Ghatra", washPress: "8.00", dryCleaning: "10.00", steamPressing: "5.00" },
-  { item: "Lungi", washPress: "6.00", dryCleaning: "8.00", steamPressing: "4.00" },
-  { item: "Shorts", washPress: "6.00", dryCleaning: "8.00", steamPressing: "3.00" },
-  { item: "Cap/Tie", washPress: "5.00", dryCleaning: "7.00", steamPressing: "3.00" },
-  { item: "Jacket/Coat", washPress: "15.00", dryCleaning: "20.00", steamPressing: "8.00" },
-  { item: "Waist Coat", washPress: "10.00", dryCleaning: "14.00", steamPressing: "5.00" },
-  { item: "Suit (2pcs)", washPress: "20.00", dryCleaning: "25.00", steamPressing: "12.00" },
-  { item: "Suit (3pcs)", washPress: "30.00", dryCleaning: "35.00", steamPressing: "15.00" },
-  { item: "Salwar Kameez", washPress: "12.00", dryCleaning: "16.00", steamPressing: "8.00" },
-  { item: "Inner Wear", washPress: "3.00", dryCleaning: "5.00", steamPressing: "2.00" },
-  { item: "Socks/Handkerchief", washPress: "3.00", dryCleaning: "4.00", steamPressing: "2.00" },
-  { item: "Sweater", washPress: "10.00", dryCleaning: "14.00", steamPressing: "5.00" },
-]
+  {
+    item: "Shirts/T-Shirts",
+    washPress: "6.00",
+    dryCleaning: "8.00",
+    steamPressing: "3.00",
+  },
+  {
+    item: "Trouser",
+    washPress: "6.00",
+    dryCleaning: "8.00",
+    steamPressing: "3.00",
+  },
+  {
+    item: "Kandura",
+    washPress: "10.00",
+    dryCleaning: "12.00",
+    steamPressing: "6.00",
+  },
+  {
+    item: "Ghatra",
+    washPress: "8.00",
+    dryCleaning: "10.00",
+    steamPressing: "5.00",
+  },
+  {
+    item: "Lungi",
+    washPress: "6.00",
+    dryCleaning: "8.00",
+    steamPressing: "4.00",
+  },
+  {
+    item: "Shorts",
+    washPress: "6.00",
+    dryCleaning: "8.00",
+    steamPressing: "3.00",
+  },
+  {
+    item: "Cap/Tie",
+    washPress: "5.00",
+    dryCleaning: "7.00",
+    steamPressing: "3.00",
+  },
+  {
+    item: "Jacket/Coat",
+    washPress: "15.00",
+    dryCleaning: "20.00",
+    steamPressing: "8.00",
+  },
+  {
+    item: "Waist Coat",
+    washPress: "10.00",
+    dryCleaning: "14.00",
+    steamPressing: "5.00",
+  },
+  {
+    item: "Suit (2pcs)",
+    washPress: "20.00",
+    dryCleaning: "25.00",
+    steamPressing: "12.00",
+  },
+  {
+    item: "Suit (3pcs)",
+    washPress: "30.00",
+    dryCleaning: "35.00",
+    steamPressing: "15.00",
+  },
+  {
+    item: "Salwar Kameez",
+    washPress: "12.00",
+    dryCleaning: "16.00",
+    steamPressing: "8.00",
+  },
+  {
+    item: "Inner Wear",
+    washPress: "3.00",
+    dryCleaning: "5.00",
+    steamPressing: "2.00",
+  },
+  {
+    item: "Socks/Handkerchief",
+    washPress: "3.00",
+    dryCleaning: "4.00",
+    steamPressing: "2.00",
+  },
+  {
+    item: "Sweater",
+    washPress: "10.00",
+    dryCleaning: "14.00",
+    steamPressing: "5.00",
+  },
+];
 
 const forLadies = [
-  { item: "T-Shirts/Shirts", washPress: "6.00", dryCleaning: "8.00", steamPressing: "3.00" },
-  { item: "Trouser", washPress: "6.00", dryCleaning: "8.00", steamPressing: "3.00" },
-  { item: "Abaya", washPress: "10.00", dryCleaning: "14.00", steamPressing: "7.00" },
-  { item: "Scarf/Dupatta", washPress: "6.00", dryCleaning: "8.00", steamPressing: "4.00" },
-  { item: "Skirt/Shorts", washPress: "6.00", dryCleaning: "8.00", steamPressing: "3.00" },
-  { item: "Full Dress", washPress: "10.00", dryCleaning: "15.00", steamPressing: "6.00" },
-  { item: "Salwar Kameez", washPress: "12.00", dryCleaning: "16.00", steamPressing: "8.00" },
-  { item: "Saree", washPress: "15.00", dryCleaning: "20.00", steamPressing: "10.00" },
-  { item: "Blouse", washPress: "8.00", dryCleaning: "10.00", steamPressing: "4.00" },
-  { item: "Coat/Jacket", washPress: "15.00", dryCleaning: "20.00", steamPressing: "8.00" },
-  { item: "Suit (2pcs)", washPress: "20.00", dryCleaning: "25.00", steamPressing: "12.00" },
-  { item: "Suit (3pcs)", washPress: "30.00", dryCleaning: "35.00", steamPressing: "15.00" },
-  { item: "Sweater", washPress: "10.00", dryCleaning: "14.00", steamPressing: "5.00" },
-  { item: "Inner Wear", washPress: "3.00", dryCleaning: "5.00", steamPressing: "2.00" },
-]
+  {
+    item: "T-Shirts/Shirts",
+    washPress: "6.00",
+    dryCleaning: "8.00",
+    steamPressing: "3.00",
+  },
+  {
+    item: "Trouser",
+    washPress: "6.00",
+    dryCleaning: "8.00",
+    steamPressing: "3.00",
+  },
+  {
+    item: "Abaya",
+    washPress: "10.00",
+    dryCleaning: "14.00",
+    steamPressing: "7.00",
+  },
+  {
+    item: "Scarf/Dupatta",
+    washPress: "6.00",
+    dryCleaning: "8.00",
+    steamPressing: "4.00",
+  },
+  {
+    item: "Skirt/Shorts",
+    washPress: "6.00",
+    dryCleaning: "8.00",
+    steamPressing: "3.00",
+  },
+  {
+    item: "Full Dress",
+    washPress: "10.00",
+    dryCleaning: "15.00",
+    steamPressing: "6.00",
+  },
+  {
+    item: "Salwar Kameez",
+    washPress: "12.00",
+    dryCleaning: "16.00",
+    steamPressing: "8.00",
+  },
+  {
+    item: "Saree",
+    washPress: "15.00",
+    dryCleaning: "20.00",
+    steamPressing: "10.00",
+  },
+  {
+    item: "Blouse",
+    washPress: "8.00",
+    dryCleaning: "10.00",
+    steamPressing: "4.00",
+  },
+  {
+    item: "Coat/Jacket",
+    washPress: "15.00",
+    dryCleaning: "20.00",
+    steamPressing: "8.00",
+  },
+  {
+    item: "Suit (2pcs)",
+    washPress: "20.00",
+    dryCleaning: "25.00",
+    steamPressing: "12.00",
+  },
+  {
+    item: "Suit (3pcs)",
+    washPress: "30.00",
+    dryCleaning: "35.00",
+    steamPressing: "15.00",
+  },
+  {
+    item: "Sweater",
+    washPress: "10.00",
+    dryCleaning: "14.00",
+    steamPressing: "5.00",
+  },
+  {
+    item: "Inner Wear",
+    washPress: "3.00",
+    dryCleaning: "5.00",
+    steamPressing: "2.00",
+  },
+];
 
 const householdItems = [
-  { item: "Police Dress/Safari Dress", washPress: "14.00", dryCleaning: "18.00", steamPressing: "8.00" },
+  {
+    item: "Police Dress/Safari Dress",
+    washPress: "14.00",
+    dryCleaning: "18.00",
+    steamPressing: "8.00",
+  },
   {
     item: "Duvet Cover (Single/Double)",
     washPress: "10.00/12.00",
     dryCleaning: "12.00/14.00",
     steamPressing: "6.00/8.00",
   },
-  { item: "Blanket (Single/Double)", washPress: "22.00/30.00", dryCleaning: "30.00/35.00", steamPressing: "-" },
-  { item: "Bed Spread (Single/Double)", washPress: "20.00/25.00", dryCleaning: "25.00/30.00", steamPressing: "-" },
+  {
+    item: "Blanket (Single/Double)",
+    washPress: "22.00/30.00",
+    dryCleaning: "30.00/35.00",
+    steamPressing: "-",
+  },
+  {
+    item: "Bed Spread (Single/Double)",
+    washPress: "20.00/25.00",
+    dryCleaning: "25.00/30.00",
+    steamPressing: "-",
+  },
   {
     item: "Bed Sheet (Single/Double)",
     washPress: "10.00/12.00",
     dryCleaning: "12.00/14.00",
     steamPressing: "6.00/8.00",
   },
-  { item: "Pillow Case", washPress: "3.00", dryCleaning: "4.00", steamPressing: "2.00" },
-  { item: "Cushion Cover", washPress: "4.00", dryCleaning: "5.00", steamPressing: "3.00" },
-  { item: "Pillow/Cushion", washPress: "15.00", dryCleaning: "20.00", steamPressing: "-" },
-  { item: "Bath Rope", washPress: "10.00", dryCleaning: "12.00", steamPressing: "-" },
-  { item: "Bath Towel (M/L)", washPress: "4.00/6.00", dryCleaning: "5.00/7.00", steamPressing: "-" },
-  { item: "Hand/Face Towel", washPress: "3.00", dryCleaning: "4.00", steamPressing: "-" },
-  { item: "Bath Mat (M/L)", washPress: "3.00/10.00", dryCleaning: "5.00/15.00", steamPressing: "-" },
-  { item: "Table Cloth/Table Napkins", washPress: "8.00/3.00", dryCleaning: "10.00/4.00", steamPressing: "5.00/2.00" },
-  { item: "Shoe", washPress: "40.00/50.00", dryCleaning: "45.00/55.00", steamPressing: "-" },
-  { item: "Wedding Dress Normal", washPress: "50.00/80.00", dryCleaning: "80.00/100.00", steamPressing: "30.00/45.00" },
+  {
+    item: "Pillow Case",
+    washPress: "3.00",
+    dryCleaning: "4.00",
+    steamPressing: "2.00",
+  },
+  {
+    item: "Cushion Cover",
+    washPress: "4.00",
+    dryCleaning: "5.00",
+    steamPressing: "3.00",
+  },
+  {
+    item: "Pillow/Cushion",
+    washPress: "15.00",
+    dryCleaning: "20.00",
+    steamPressing: "-",
+  },
+  {
+    item: "Bath Rope",
+    washPress: "10.00",
+    dryCleaning: "12.00",
+    steamPressing: "-",
+  },
+  {
+    item: "Bath Towel (M/L)",
+    washPress: "4.00/6.00",
+    dryCleaning: "5.00/7.00",
+    steamPressing: "-",
+  },
+  {
+    item: "Hand/Face Towel",
+    washPress: "3.00",
+    dryCleaning: "4.00",
+    steamPressing: "-",
+  },
+  {
+    item: "Bath Mat (M/L)",
+    washPress: "3.00/10.00",
+    dryCleaning: "5.00/15.00",
+    steamPressing: "-",
+  },
+  {
+    item: "Table Cloth/Table Napkins",
+    washPress: "8.00/3.00",
+    dryCleaning: "10.00/4.00",
+    steamPressing: "5.00/2.00",
+  },
+  {
+    item: "Shoe",
+    washPress: "40.00/50.00",
+    dryCleaning: "45.00/55.00",
+    steamPressing: "-",
+  },
+  {
+    item: "Wedding Dress Normal",
+    washPress: "50.00/80.00",
+    dryCleaning: "80.00/100.00",
+    steamPressing: "30.00/45.00",
+  },
   {
     item: "Curtains (Per Sq meter)",
     washPress: "10.00/20.00",
     dryCleaning: "15.00/25.00",
     steamPressing: "10.00/20.00",
   },
-  { item: "Normal Carpet (Per Sq meter)", washPress: "20.00", dryCleaning: "20.00", steamPressing: "-" },
-  { item: "Hand woven Carpet (Per Sq meter)", washPress: "25.00", dryCleaning: "35.00", steamPressing: "-" },
-]
+  {
+    item: "Normal Carpet (Per Sq meter)",
+    washPress: "20.00",
+    dryCleaning: "20.00",
+    steamPressing: "-",
+  },
+  {
+    item: "Hand woven Carpet (Per Sq meter)",
+    washPress: "25.00",
+    dryCleaning: "35.00",
+    steamPressing: "-",
+  },
+];
 const shoesItems = [
   { item: "Sneakers / Sports Shoes", price: "65.00" },
   { item: "Leather Shoes", price: "90.00" },
   { item: "Formal Shoes", price: "90.00" },
   { item: "Designer Sneakers", price: "120.00" },
   { item: "Sandals / Slippers", price: "60.00" },
-  {item: "Designer Sandals", price: "100.00" },
+  { item: "Designer Sandals", price: "100.00" },
   { item: "Designer Formal Shoes", price: "110.00" },
   { item: "Kids Shoe Care", price: "50.00" },
-]
+];
 
 const luxuryShoes = [
   { item: "Formal Shoes", price: "120.00" },
@@ -257,21 +521,23 @@ const luxuryShoes = [
   { item: "Sandals & Flip Flops", price: "100.00" },
   { item: "Designer Sandals", price: "120.00" },
   { item: "Designer Formal Shoes", price: "140.00" },
-]
+];
 
 const packagesData = [
   {
     id: "standard",
     icon: ShoppingCart,
     title: "Standard Package",
-    features: [ "4 T-Shirts",
+    features: [
+      "4 T-Shirts",
       "2 Pairs of Jeans",
       "3 Button-Down Shirts",
       "2 Pair of Shorts",
       "14 Pairs of Underwear",
       "6 Pairs of Socks",
       "1 Towel",
-      "1 Set of Bedsheets single",],
+      "1 Set of Bedsheets single",
+    ],
     price: 149.0,
   },
   // {
@@ -289,23 +555,26 @@ const packagesData = [
   //   price: 449.0,
   //   isFeatured: true,
   // },
-]
+];
 
 interface PackageCardProps {
-  packageInfo: (typeof packagesData)[0]
-  onOrderNow: (packageId: string) => void
+  packageInfo: (typeof packagesData)[0];
+  onOrderNow: (packageId: string) => void;
 }
 
-const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) => {
-  const [isExpanded, setIsExpanded] = useState(false)
-  const { id, icon: Icon, title, features, price } = packageInfo
+const PackageCard: React.FC<PackageCardProps> = ({
+  packageInfo,
+  onOrderNow,
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const { id, icon: Icon, title, features, price } = packageInfo;
 
   return (
     <Card
       className="group relative flex w-full max-w-sm flex-col cursor-pointer border-none bg-white transition-all duration-300 hover:shadow-lg"
       onClick={() => setIsExpanded(!isExpanded)}
     >
-      <CardContent className="flex h-full flex-col p-6">
+      <CardContent className="flex h-full flex-col px-6">
         <div className="mb-4 flex flex-col items-center text-center">
           <div className="mb-3 rounded-full bg-green-100 p-4 text-green-600">
             <Icon size={28} />
@@ -332,8 +601,8 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
         >
           <button
             onClick={(e) => {
-              e.stopPropagation()
-              onOrderNow(id)
+              e.stopPropagation();
+              onOrderNow(id);
             }}
             className="mt-4 w-full bg-green-600 py-3 font-semibold text-white transition-colors duration-300 hover:bg-green-700"
           >
@@ -342,16 +611,16 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageInfo, onOrderNow }) =>
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 const PricingSection = () => {
-  const [activeTab, setActiveTab] = useState("popular") // Changed back to popular as default
-  const router = useRouter()
-  const { replaceCart } = useCart() // Use cart context
+  const [activeTab, setActiveTab] = useState("popular"); // Changed back to popular as default
+  const router = useRouter();
+  const { replaceCart } = useCart(); // Use cart context
 
   const handleOrderNow = async (packageId: string) => {
-    const selectedPackage = packagesData.find((p) => p.id === packageId)
+    const selectedPackage = packagesData.find((p) => p.id === packageId);
     if (selectedPackage) {
       const packageItems = selectedPackage.features.map((feature, index) => ({
         id: `${packageId}-${index}`,
@@ -361,12 +630,12 @@ const PricingSection = () => {
         price: selectedPackage.price / selectedPackage.features.length,
         quantity: 1,
         serviceSlug: "package-service",
-      }))
+      }));
 
-      await replaceCart(packageItems)
-      router.push("/cart")
+      await replaceCart(packageItems);
+      router.push("/cart");
     }
-  }
+  };
 
   return (
     <>
@@ -396,7 +665,11 @@ const PricingSection = () => {
           </div>
           <Card className="mb-12 sm:mb-16 lg:mb-20 shadow-lg border-none min-h-[400px]">
             <CardContent className="p-3 sm:p-6 lg:p-8">
-              <Tabs value={activeTab} onValueChange={(val) => setActiveTab(val)} className="w-full">
+              <Tabs
+                value={activeTab}
+                onValueChange={(val) => setActiveTab(val)}
+                className="w-full"
+              >
                 {/* Mobile-optimized tabs */}
                 <div className="mb-6 sm:mb-8">
                   <TabsList className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 w-full gap-1 sm:gap-2 p-1 bg-gray-100 rounded-lg h-auto">
@@ -447,8 +720,12 @@ const PricingSection = () => {
                         key={index}
                         className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50 transition-colors"
                       >
-                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">{item.item}</span>
-                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">{item.price}</span>
+                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
+                          {item.item}
+                        </span>
+                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">
+                          {item.price}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -458,29 +735,41 @@ const PricingSection = () => {
                 <TabsContent value="apparel" className="mt-6">
                   <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-8">
                     <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 border-b pb-2">For Gentlemen</h3>
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 border-b pb-2">
+                        For Gentlemen
+                      </h3>
                       <div className="space-y-0">
                         {forGentleman.map((item, index) => (
                           <div
                             key={index}
                             className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
                           >
-                            <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">{item.item}</span>
-                            <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">{item.washPress}</span>
+                            <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
+                              {item.item}
+                            </span>
+                            <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">
+                              {item.washPress}
+                            </span>
                           </div>
                         ))}
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 border-b pb-2">For Ladies</h3>
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 border-b pb-2">
+                        For Ladies
+                      </h3>
                       <div className="space-y-0">
                         {forLadies.map((item, index) => (
                           <div
                             key={index}
                             className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
                           >
-                            <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">{item.item}</span>
-                            <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">{item.washPress}</span>
+                            <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
+                              {item.item}
+                            </span>
+                            <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">
+                              {item.washPress}
+                            </span>
                           </div>
                         ))}
                       </div>
@@ -496,8 +785,12 @@ const PricingSection = () => {
                         key={index}
                         className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
                       >
-                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">{item.item}</span>
-                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">{item.washPress}</span>
+                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
+                          {item.item}
+                        </span>
+                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">
+                          {item.washPress}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -511,8 +804,12 @@ const PricingSection = () => {
                         key={index}
                         className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
                       >
-                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">{item.item}</span>
-                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">{item.price}</span>
+                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
+                          {item.item}
+                        </span>
+                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">
+                          {item.price}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -526,8 +823,12 @@ const PricingSection = () => {
                         key={index}
                         className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
                       >
-                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">{item.item}</span>
-                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">{item.price}</span>
+                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
+                          {item.item}
+                        </span>
+                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">
+                          {item.price}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -546,46 +847,56 @@ const PricingSection = () => {
           </Card>
 
           {/* Subscription Packages Section */}
-        <div className="flex flex-col lg:flex-row gap-12">
-        {/* Left: Subscription */}
-        <div className="flex-1">
-      <div className="text-left mb-8 sm:mb-12 lg:mb-16">
-        <h4 className={`text-green-600 font-medium mb-3 sm:mb-4 text-sm sm:text-base pl-5 ${poppins.className}`}>
-          [ What we offer ]
-        </h4>
-        <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 lg:mb-6 px-4">
-          Subscription Packages
-        </h2>
-        <p className="text-gray-600 max-w-2xl leading-relaxed text-sm sm:text-base px-4">
-          For clients who prefer consistent care, our packages offer exclusive value and effortless convenience
-        </p>
-      </div>
 
-     <div className="flex flex-col sm:flex-row justify-start items-start gap-6 sm:gap-8 lg:gap-12 pl-6 sm:pl-12 lg:pl-10">
-      {packagesData.map((pkg) => (
-        <PackageCard key={pkg.id} packageInfo={pkg} onOrderNow={handleOrderNow} />
-      ))}
-    </div>
+          <section className="flex flex-col justify-center items-center gap-12 h-screen py-4">
+            <div className="flex w-full flex-col sm:flex-row gap-4 ">
+              {/* Left: Subscription */}
+              <div className="p-6 ">
+                {/* Title */}
+                <div className=" flex flex-col text-left ">
+                  {/* <h4
+                  className={`text-green-600 font-medium mb-3 sm:mb-4 text-sm sm:text-base pl-5 ${poppins.className}`}
+                >
+                  [ What we offer ]
+                </h4> */}
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 lg:mb-6 px-4 w-fit text-nowrap">
+                    Subscription Packages
+                  </h2>
+                  <p className="text-gray-600 max-w-2xl leading-relaxed text-sm sm:text-base px-4 sm:mb-4 lg:mb-6">
+                    For clients who prefer consistent care, our packages offer
+                    exclusive value and effortless convenience
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 lg:gap-12 ">
+                  {packagesData.map((pkg) => (
+                    <PackageCard
+                      key={pkg.id}
+                      packageInfo={pkg}
+                      onOrderNow={handleOrderNow}
+                    />
+                  ))}
+                </div>
+              </div>
 
-    </div>
-
-        {/* Right: Map */}
-        <div className="flex-[2]">
-        <iframe
-          title="Business Location"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3103.009160312709!2d-77.455!3d38.752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b65cf1dff9f1b1%3A0x5d812!2s6494%20Signal%20Hill%20Rd%2C%20Manassas%2C%20VA%2020110!5e0!3m2!1sen!2sus!4v1234567890"
-          className="w-full h-full min-h-[400px]"
-          style={{ border: 0 }}
-          loading="lazy"
-          allowFullScreen
-        ></iframe>
-      </div>
-      </div>
-
+              {/* Right: Map */}
+              <div className="w-full p-6 sm:pl-16 flex items-stretch justify-items-stretch">
+                <div className="rounded-xl overflow-hidden w-full ">
+                  <iframe
+                    title="Business Location"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3103.009160312709!2d-77.455!3d38.752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b65cf1dff9f1b1%3A0x5d812!2s6494%20Signal%20Hill%20Rd%2C%20Manassas%2C%20VA%2020110!5e0!3m2!1sen!2sus!4v1234567890"
+                    className="w-full h-full min-h-[400px]"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default PricingSection
+export default PricingSection;

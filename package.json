@@ -16,7 +16,7 @@
   "main": "tailwind.config.js",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build || true",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },

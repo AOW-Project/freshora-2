@@ -1,35 +1,37 @@
-import { notFound } from "next/navigation"
-import ServiceOrderClient from "./service-order-client"
+import { notFound } from "next/navigation";
+import ServiceOrderClient from "./service-order-client";
 
 // --- Type Definitions ---
 interface ServiceItem {
-  id: string
-  name: string
-  price: number
-  description: string
-  unit?: string
-  image?: string
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  unit?: string;
+  image?: string;
 }
 
 interface Service {
-  id: string
-  slug: string
-  title: string
-  description: string
-  fullDescription: string
-  image?: string
-  rating: number
-  reviews: number
-  duration: string
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  fullDescription: string;
+  image?: string;
+  rating: number;
+  reviews: number;
+  duration: string;
   items: {
-    [category: string]: ServiceItem[]
-  }
+    [category: string]: ServiceItem[];
+  };
 }
 
 // Fetch all services to generate static paths
 async function fetchAllServices() {
   try {
-    const res = await fetch(`https://freshora-backend-u9xy.onrender.com/api/services`);
+    const res = await fetch(
+      `https://freshora-backend-u9xy.onrender.com/api/services`
+    );
     const result = await res.json();
     return result.success ? (result.data as Service[]) : [];
   } catch (err) {
@@ -40,27 +42,30 @@ async function fetchAllServices() {
 
 export async function generateStaticParams() {
   const services = await fetchAllServices();
-  
+
   return services.map((service) => ({
     slug: service.slug,
   }));
 }
 
-
 // Fetch service from backend
 async function fetchServiceBySlug(slug: string): Promise<Service | null> {
   try {
-    const res = await fetch(`https://freshora-backend-u9xy.onrender.com/api/services/${slug}`, { 
-      next: { revalidate: 3600 } // Revalidate every hour
-    })
+    const res = await fetch(
+      `https://freshora-backend-u9xy.onrender.com/api/services/${slug}`,
+      // `http://localhost:4000/api/services/${slug}`,
+      {
+        next: { revalidate: 3600 }, // Revalidate every hour
+      }
+    );
 
-    if (!res.ok) return null
+    if (!res.ok) return null;
 
-    const result = await res.json()
-    return result.success ? result.data : null
+    const result = await res.json();
+    return result.success ? result.data : null;
   } catch (err) {
-    console.error("Fetch service failed:", err)
-    return null
+    console.error("Fetch service failed:", err);
+    return null;
   }
 }
 
@@ -70,13 +75,13 @@ type PageProps = {
 };
 
 export default async function Page({ params }: PageProps) {
-  const { slug } = await params
-
-  const service = await fetchServiceBySlug(slug)
+  const { slug } = await params;
+  // testing
+  const service = await fetchServiceBySlug(slug);
 
   if (!service) {
-    notFound()
+    notFound();
   }
 
-  return <ServiceOrderClient slug={slug} service={service} />
+  return <ServiceOrderClient slug={slug} service={service} />;
 }

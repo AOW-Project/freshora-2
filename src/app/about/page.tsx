@@ -1,7 +1,6 @@
-
 //import { Metadata } from "next";
 import { CheckCircle2, Clock, CreditCard, Leaf, Phone } from "lucide-react";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -17,7 +16,7 @@ import HistorySection from "@/component/HistorySection";
 //const AdvantagesSection = dynamic(() => import("@/component/AdvantagesSection"), { ssr: false });
 //const HistorySection = dynamic(() => import("@/component/HistorySection"), { ssr: false });
 //const TeamSection = dynamic(() => import("@/component/TeamSection"), { ssr: false });
- /* export const metadata: Metadata = {
+/* export const metadata: Metadata = {
   title: "Best Laundry Service in Dubai | Freshora Laundry Experts",
   description: " Experience the best laundry service in Dubai with Freshora. Trusted care, high-quality cleaning, and hassle-free pickup & delivery for every garment. ",
   keywords: ["Best Laundry Service in Dubai", " Affordable laundry service", "Free Laundry Pickup and Delivery"],
@@ -25,7 +24,7 @@ import HistorySection from "@/component/HistorySection";
     canonical: "https://freshoralaundry.com/about",npm run dev
   },
 }; */
-export  async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Best Laundry Service in Dubai | Freshora Laundry Experts",
     description:
@@ -35,14 +34,15 @@ export  async function generateMetadata(): Promise<Metadata> {
       "Best Laundry Service in Dubai",
       "Dry Cleaning Dubai",
       " Free Laundry Pickup and Delivery",
-      "Best laundry company in Dubai"
+      "Best laundry company in Dubai",
     ],
     alternates: {
       canonical: "https://freshoralaundry.com/about",
     },
     openGraph: {
       title: "About Freshora Laundry",
-      description: "Trusted laundry and dry cleaning in Dubai. Learn about our story, process, and promise of quality.",
+      description:
+        "Trusted laundry and dry cleaning in Dubai. Learn about our story, process, and promise of quality.",
       url: "https://freshoralaundry.com/about",
     },
     twitter: {
@@ -58,19 +58,24 @@ export default function AboutSection() {
       <div
         className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center flex items-center"
         style={{
-          backgroundImage:  `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.webp?height=400&width=1200&text=Laundry+Machines+Background')`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.webp?height=400&width=1200&text=Laundry+Machines+Background')`,
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <nav className="flex items-center space-x-1 sm:space-x-2 text-white mb-3 sm:mb-4">
-            <Link href="/" className="hover:text-green-400 text-sm sm:text-base transition-colors">
+            <Link
+              href="/"
+              className="hover:text-green-400 text-sm sm:text-base transition-colors"
+            >
               Home
             </Link>
             <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
             <span className="text-green-400 text-sm sm:text-base">About</span>
           </nav>
 
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white">About</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+            About
+          </h1>
         </div>
       </div>
 
@@ -79,21 +84,21 @@ export default function AboutSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div className="relative order-2 lg:order-1">
               <div className="relative">
-           <Image
-             src="/images/senior-washwoman-in-the-laundry-2025-03-14-14-22-50-utc.jpg" // Make sure to save your image in public/images/guarantee.png
-             alt="Smiling woman with laundry"
-             width={500}
-             height={800}
-             className=""
-           />
-               <Image
-  src="/images/arrow-img-right.png" // make sure this exists in public/images
-  alt="Arrow"
-  width={100}  // specify intrinsic width
-  height={100} // specify intrinsic height
-  className="absolute -top-3 -right-6 sm:-top-5 sm:-right-10 w-16 sm:w-20 lg:w-24 h-auto opacity-80 hidden sm:block"
-/>
-              { /* <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 lg:-bottom-8 lg:-left-8 bg-white rounded-lg p-3 sm:p-4 lg:p-6 shadow-2xl text-center">
+                <Image
+                  src="/images/senior-washwoman-in-the-laundry-2025-03-14-14-22-50-utc.jpg" // Make sure to save your image in public/images/guarantee.png
+                  alt="Smiling woman with laundry"
+                  width={500}
+                  height={800}
+                  className=""
+                />
+                <Image
+                  src="/images/arrow-img-right.png" // make sure this exists in public/images
+                  alt="Arrow"
+                  width={100} // specify intrinsic width
+                  height={100} // specify intrinsic height
+                  className="absolute -top-3 -right-6 sm:-top-5 sm:-right-10 w-16 sm:w-20 lg:w-24 h-auto opacity-80 hidden sm:block"
+                />
+                {/* <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 lg:-bottom-8 lg:-left-8 bg-white rounded-lg p-3 sm:p-4 lg:p-6 shadow-2xl text-center">
                   <div className="text-xs sm:text-sm text-gray-700 leading-tight">More Than</div>
                   <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-600">25</div>
                   <div className="text-xs sm:text-sm text-gray-700 leading-tight">
@@ -101,44 +106,63 @@ export default function AboutSection() {
                   </div>
                 </div> */}
               </div>
-            </div> 
+            </div>
 
             <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
               <div>
-              { /* <div className="text-green-600 font-semibold text-base sm:text-lg mb-2">
+                {/* <div className="text-green-600 font-semibold text-base sm:text-lg mb-2">
                   More Than 25 Years of Excellence
-                </div> */ }
+                </div> */}
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">
-                 Freshora – Redefining the Art of Laundry
-
+                  Freshora – Redefining the Art of Laundry
                 </h2>
               </div>
 
               <p className="text-base sm:text-lg leading-relaxed text-gray-600">
-               At Freshora, laundry is more than a necessity - it is a craft. With over two decades of expertise, we have perfected the balance of advanced technology and meticulous care. From delicate silks to everyday essentials, every garment is handled with precision and respect.
+                At Freshora, laundry is more than a necessity - it is a craft.
+                With over two decades of expertise, we have perfected the
+                balance of advanced technology and meticulous care. From
+                delicate silks to everyday essentials, every garment is handled
+                with precision and respect.
               </p>
-                 <p className="text-base sm:text-lg leading-relaxed text-gray-600">
-              Our promise is simple: to deliver uncompromising quality, eco-conscious practices, and seamless convenience. With free collection and delivery, we ensure that laundry no longer disrupts your lifestyle - it enhances it.
+              <p className="text-base sm:text-lg leading-relaxed text-gray-600">
+                Our promise is simple: to deliver uncompromising quality,
+                eco-conscious practices, and seamless convenience. With free
+                collection and delivery, we ensure that laundry no longer
+                disrupts your lifestyle - it enhances it.
               </p>
 
               <div className="grid grid-cols-1 gap-6 pt-2">
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">Why Freshora</h2>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">
+                  Why Freshora
+                </h2>
                 <ul className="space-y-3 sm:space-y-4">
                   <li className="flex items-center text-gray-700">
                     <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">100% Customer Satisfaction – Every item receives our highest attention to detail.</span>
+                    <span className="text-sm sm:text-base">
+                      100% Customer Satisfaction – Every item receives our
+                      highest attention to detail.
+                    </span>
                   </li>
                   <li className="flex items-center text-gray-700">
                     <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">Free Collection and Delivery – Effortless convenience, directly to your door.</span>
+                    <span className="text-sm sm:text-base">
+                      Free Collection and Delivery – Effortless convenience,
+                      directly to your door.
+                    </span>
                   </li>
                   <li className="flex items-center text-gray-700">
                     <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">Affordable Luxury – Exceptional care without compromise.</span>
+                    <span className="text-sm sm:text-base">
+                      Affordable Luxury – Exceptional care without compromise.
+                    </span>
                   </li>
                   <li className="flex items-center text-gray-700">
                     <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">Unmatched Quality – Only premium products and processes for lasting results.</span>
+                    <span className="text-sm sm:text-base">
+                      Unmatched Quality – Only premium products and processes
+                      for lasting results.
+                    </span>
                   </li>
                 </ul>
 
@@ -154,28 +178,32 @@ export default function AboutSection() {
                       <div className="font-semibold text-gray-800 text-sm sm:text-base leading-tight">
                         Call for Quality Services
                       </div>
-                      <div className="text-green-600 font-bold text-base sm:text-lg">+971 50 925 9667</div>
+                      <div className="text-green-600 font-bold text-base sm:text-lg">
+                        +971 50 925 9667
+                      </div>
                     </div>
                   </a>
                 </div>
               </div>
             </div>
           </div>
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10 text-center mt-20">Effortless Care, Elevated Service </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10 text-center mt-20">
+            Effortless Care, Elevated Service{" "}
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-16 sm:mt-20 lg:mt-24">
             <a
               href="/contact"
               className="group bg-white rounded-lg p-4 sm:p-6 lg:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 block"
             >
-              
               <div className="flex items-start space-x-3 sm:space-x-4">
                 <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-green-100 rounded-full flex items-center justify-center group-hover:bg-green-600 transition-colors duration-300 flex-shrink-0">
                   <Clock className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-green-600 group-hover:text-white transition-colors duration-300" />
                 </div>
                 <div className="flex-1 min-w-0">
-                 
                   <h3 className="font-bold text-lg sm:text-xl text-gray-800 mb-2">
-                    <span className="group-hover:text-green-600 transition-colors">Save Time and Money</span>
+                    <span className="group-hover:text-green-600 transition-colors">
+                      Save Time and Money
+                    </span>
                   </h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     No unnecessary trips; we come to you!
@@ -194,7 +222,9 @@ export default function AboutSection() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-lg sm:text-xl text-gray-800 mb-2">
-                    <span className="group-hover:text-green-600 transition-colors">Secure Online Payments</span>
+                    <span className="group-hover:text-green-600 transition-colors">
+                      Secure Online Payments
+                    </span>
                   </h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     Manage orders and billing instantly.
@@ -213,10 +243,13 @@ export default function AboutSection() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-lg sm:text-xl text-gray-800 mb-2">
-                    <span className="group-hover:text-green-600 transition-colors">Eco-Responsible Cleaning</span>
+                    <span className="group-hover:text-green-600 transition-colors">
+                      Eco-Responsible Cleaning
+                    </span>
                   </h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                    Perc-free solutions that respect your wardrobe and the planet.
+                    Perc-free solutions that respect your wardrobe and the
+                    planet.
                   </p>
                 </div>
               </div>
@@ -226,11 +259,11 @@ export default function AboutSection() {
       </div>
 
       {/* Dynamically loaded components */}
-     {/*<LaundryStats /> */ }
+      {/*<LaundryStats /> */}
       <GuaranteeSection />
       <AdvantagesSection />
       <HistorySection />
-     {/* <TeamSection /> */}
+      {/* <TeamSection /> */}
     </>
   );
 }

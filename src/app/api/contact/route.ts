@@ -3,24 +3,23 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
   try {
-    const { name, email, phone, address, service, date, time, comment } =
-      await req.json();
+    const { name, email, phone, address, service, comment } = await req.json();
 
     // Create a test SMTP account from ethereal.email
-    const testAccount = await nodemailer.createTestAccount();
+    // const testAccount = await nodemailer.createTestAccount();
 
     // Create reusable transporter object using the test account SMTP
-const transporter = nodemailer.createTransport({
-       service: "gmail",                                                                          //lczr wrpu dtld mmht
+    const transporter = nodemailer.createTransport({
+      service: "gmail", //lczr wrpu dtld mmht
       auth: {
-    user: "freshorappc@gmail.com",
-    pass: process.env.GMAIL_APP_PASSWORD || "ykbl euac vysy dpta", // store in .env
-  },
+        user: "freshorappc@gmail.com",
+        pass: process.env.GMAIL_APP_PASSWORD || "ykbl euac vysy dpta", // store in .env
+      },
     });
 
     // Email HTML for customer
- // Email HTML for customer
-const customerEmailHTML = `<!DOCTYPE html>
+    // Email HTML for customer
+    const customerEmailHTML = `<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -57,7 +56,9 @@ const customerEmailHTML = `<!DOCTYPE html>
 
                 <div style="background-color:#f9fafb;border-radius:8px;padding:20px;margin:20px 0;">
                   <h3 style="color:#1f2937;margin:0 0 10px 0;font-size:18px;">Your Message</h3>
-                  <p style="color:#1f2937;margin:0;font-size:15px;">"${comment || "No message provided"}"</p>
+                  <p style="color:#1f2937;margin:0;font-size:15px;">"${
+                    comment || "No message provided"
+                  }"</p>
                 </div>
 
                 <p style="color:#4b5563;line-height:1.6;margin:20px 0 0 0;font-size:14px;">
@@ -83,8 +84,8 @@ const customerEmailHTML = `<!DOCTYPE html>
 </html>`;
 
     // Email HTML for business
-// Email HTML for business
-const businessEmailHTML = `
+    // Email HTML for business
+    const businessEmailHTML = `
   <h2>New Contact Form Submission</h2>
   <p>You have received a new inquiry:</p>
   <ul>
@@ -92,27 +93,28 @@ const businessEmailHTML = `
     <li><strong>Email:</strong> ${email}</li>
     <li><strong>Phone:</strong> ${phone}</li>
     <li><strong>Address:</strong> ${address || "Not provided"}</li>
-    <li><strong>Service Interested:</strong> ${service || "General Inquiry"}</li>
+    <li><strong>Service Interested:</strong> ${
+      service || "General Inquiry"
+    }</li>
     <li><strong>Message:</strong> ${comment || "No message provided"}</li>
   </ul>
 `;
 
-
     // Send customer confirmation email
-await transporter.sendMail({
-  from: `"Freshora Laundry" <freshorappc@gmail.com>`,
-  to: email, // customer's email
-  subject: "Get In Touch - Freshora Laundry",
-  html: customerEmailHTML,
-})
+    await transporter.sendMail({
+      from: `"Freshora Laundry" <freshorappc@gmail.com>`,
+      to: email, // customer's email
+      subject: "Get In Touch - Freshora Laundry",
+      html: customerEmailHTML,
+    });
 
     // Send business notification email
-await transporter.sendMail({
-  from: `"Freshora Laundry" <freshorappc@gmail.com>`,
-  to: "freshorappc@gmail.com", // business inbox
-  subject: `New Pickup Request from ${name}`,
-  html: businessEmailHTML,
-});
+    await transporter.sendMail({
+      from: `"Freshora Laundry" <freshorappc@gmail.com>`,
+      to: "freshorappc@gmail.com", // business inbox
+      subject: `New Pickup Request from ${name}`,
+      html: businessEmailHTML,
+    });
 
     console.log("Preview URL (Customer):", nodemailer.getTestMessageUrl);
     console.log("Preview URL (Business):", nodemailer.getTestMessageUrl);
@@ -137,4 +139,3 @@ await transporter.sendMail({
     }
   }
 }
-
