@@ -614,16 +614,54 @@ const PackageCard: React.FC<PackageCardProps> = ({
   );
 };
 
+// get serviceId and itemsid for the packages
+
+async function getFirstServiceItem(slug: string) {
+  try {
+    const response = await fetch(
+      `https://freshora-backend-u9xy.onrender.com/api/packages/${slug}`
+    );
+    if (!response.ok) {
+      console.error(`HTTP error! status: ${response.status}`);
+      return null; // return null on bad response
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching service item:", error);
+    return null; // return null on network error
+  }
+}
+
 const PricingSection = () => {
   const [activeTab, setActiveTab] = useState("popular"); // Changed back to popular as default
   const router = useRouter();
   const { replaceCart } = useCart(); // Use cart context
 
+  const [serviceItem, setServiceItem] = useState<{
+    id: string;
+    serviceId: string;
+  } | null>(null);
+
+  useEffect(() => {
+    async function fetchItem() {
+      const item = await getFirstServiceItem("standard-package-service");
+      setServiceItem(item);
+    }
+    fetchItem();
+  }, []);
+
+  console.log(serviceItem?.id, serviceItem?.serviceId);
+
   const handleOrderNow = async (packageId: string) => {
     const selectedPackage = packagesData.find((p) => p.id === packageId);
     if (selectedPackage) {
       const packageItems = selectedPackage.features.map((feature, index) => ({
-        id: `${packageId}-${index}`,
+        //added dynamic data
+        id: `${serviceItem?.serviceId || "cmfuocbsd0000t5vs79sqikpa"}-${
+          serviceItem?.id || "cmfuocbtx0002t5vsmzpfdlqx"
+        }`,
         name: feature,
         category: "Package Item",
         serviceType: selectedPackage.title,

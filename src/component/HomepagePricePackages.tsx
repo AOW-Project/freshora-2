@@ -5,7 +5,7 @@ import { useCart } from "@/app/context/cart-context"; // ✅ Import cart context
 import { CheckCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import type React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaTshirt } from "react-icons/fa";
 import { MdIron } from "react-icons/md";
 import MapSection from "./map-section";
@@ -118,16 +118,55 @@ const PackageCard: React.FC<PackageCardProps> = ({
   );
 };
 
+// get serviceId and itemsid for the packages
+
+async function getFirstServiceItem(slug: string) {
+  try {
+    const response = await fetch(
+      `https://freshora-backend-u9xy.onrender.com/api/packages/${slug}`
+    );
+    if (!response.ok) {
+      console.error(`HTTP error! status: ${response.status}`);
+      return null; // return null on bad response
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching service item:", error);
+    return null; // return null on network error
+  }
+}
+
 // --- Main Pickup Packages Component ---
 const PickupPackages: React.FC = () => {
   const router = useRouter();
   const { replaceCart } = useCart(); // ✅ Use cart context
 
+  const [serviceItem, setServiceItem] = useState<{
+    id: string;
+    serviceId: string;
+  } | null>(null);
+
+  useEffect(() => {
+    async function fetchItem() {
+      const item = await getFirstServiceItem("standard-package-service");
+      setServiceItem(item);
+    }
+    fetchItem();
+  }, []);
+
+  console.log(serviceItem?.id, serviceItem?.serviceId);
+
   const handleOrderNow = async (packageId: string) => {
     const selectedPackage = packagesData.find((p) => p.id === packageId);
     if (selectedPackage) {
       const packageItems = selectedPackage.features.map((feature, index) => ({
-        id: `${packageId}-${index}`,
+        // hardcoding the id for fallback
+        id: `${serviceItem?.serviceId || "cmfuocbsd0000t5vs79sqikpa"}-${
+          serviceItem?.id || "cmfuocbtx0002t5vsmzpfdlqx"
+        }`,
+        // id: `cmfuocbsd0000t5vs79sqikpa-cmfuocbtx0002t5vsmzpfdlqx`,
         name: feature,
         category: "Package Item",
         serviceType: selectedPackage.title,
