@@ -1,15 +1,11 @@
 "use client";
 
-/**
- * Schedule Pickup Modal (PickupForm)
- * - Uses your OTP verify flow
- * - Reads cart from localStorage (kept same to minimize changes)
- * - On success: clears cart via useCart().clearCart() + keeps your thankYou redirect
- * - Strong comments so future you can tweak fast
- */
-
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+
+import { useForm, Controller } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,51 +20,9 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { X, CheckCircle } from "lucide-react";
 
-// ✅ Import your cart context (same path you used elsewhere)
 import { useCart } from "../app/context/cart-context";
 
-// —————————————————————————————————————————————————————————————————————
-// Types
-// —————————————————————————————————————————————————————————————————————
-
-interface PickupFormProps {
-  open: boolean;
-  onClose: () => void;
-}
-
-interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  category: string;
-  serviceSlug?: string;
-}
-
-type EmailVerificationState = "unverified" | "pending" | "verified";
-
-interface FormDataShape {
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  city: string;
-  zipCode: string;
-  pickupDate: string;
-  pickupTime: string;
-  deliveryDate: string;
-  deliveryTime: string;
-  service:
-    | "laundry-services"
-    | "dry-cleaning-services"
-    | "express-laundry-services";
-  specialInstructions: string;
-}
-
-// —————————————————————————————————————————————————————————————————————
-// Helpers
-// —————————————————————————————————————————————————————————————————————
-
+/** ---------- reuse your helpers ---------- */
 /** Clamp a date string (yyyy-mm-dd) to today or later */
 const clampToToday = (value: string) => {
   const today = new Date();
@@ -80,20 +34,19 @@ const clampToToday = (value: string) => {
   return value;
 };
 
-/** Very light email check; your OTP API is the real validation */
 const looksLikeEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
 
-/** Build order payload with proper validation and formatting */
+const formatMoney = (n: number) => `AED${n.toFixed(2)}`;
+
 const buildOrderPayload = ({
   formData,
   cartItems,
   totalAmount,
 }: {
-  formData: FormDataShape;
-  cartItems: CartItem[];
+  formData: any;
+  cartItems: any[];
   totalAmount: number;
 }) => {
-  // Ensure dates are in ISO format
   const formatDateForAPI = (dateStr: string) => {
     if (!dateStr) return new Date().toISOString();
     const date = new Date(dateStr);
@@ -136,34 +89,93 @@ const buildOrderPayload = ({
     paymentMethod: "cash_on_delivery",
   };
 };
+/** ---------------------------------------- */
 
-/** Tiny formatter to keep money output consistent */
-const formatMoney = (n: number) => `AED${n.toFixed(2)}`;
+type CartItem = {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  category: string;
+  serviceSlug?: string;
+};
 
-// —————————————————————————————————————————————————————————————————————
-// Component
-// —————————————————————————————————————————————————————————————————————
+export interface PickupFormProps {
+  open: boolean;
+  onClose: () => void;
+}
 
+/** ---------- Zod schema ---------- */
+const todayStart = (() => {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  return d.getTime();
+})();
+
+const pickupFormSchema = z
+  .object({
+    name: z.string().min(1, "Name is required"),
+    email: z.string().email("Enter a valid email"),
+    phone: z.string().optional().nullable(),
+    address: z
+      .string()
+      .min(10, "Address is required")
+      .refine((v) => v.trim().split(/\s+/).length >= 5, {
+        message: "Please provide a detailed address with at least 5 words",
+      }),
+    city: z.string().min(1, "City is required"),
+    zipCode: z.string().optional(),
+    pickupDate: z.string().refine(
+      (val) => {
+        const d = new Date(val);
+        d.setHours(0, 0, 0, 0);
+        return !isNaN(d.getTime()) && d.getTime() >= todayStart;
+      },
+      { message: "Pickup date cannot be in the past" }
+    ),
+    pickupTime: z.string().min(1, "Pickup time required"),
+    deliveryDate: z.string().refine(
+      (val) => {
+        const d = new Date(val);
+        return !isNaN(d.getTime());
+      },
+      { message: "Delivery date required" }
+    ),
+    deliveryTime: z.string().min(1, "Delivery time required"),
+    service: z.enum([
+      "laundry-services",
+      "dry-cleaning-services",
+      "express-laundry-services",
+    ]),
+    specialInstructions: z.string().optional().or(z.literal("")).nullable(),
+  })
+  .superRefine((data, ctx) => {
+    // Ensure delivery >= pickup
+    try {
+      const p = new Date(data.pickupDate);
+      p.setHours(0, 0, 0, 0);
+      const d = new Date(data.deliveryDate);
+      d.setHours(0, 0, 0, 0);
+      if (
+        !isNaN(p.getTime()) &&
+        !isNaN(d.getTime()) &&
+        d.getTime() < p.getTime()
+      ) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Delivery date cannot be earlier than pickup date",
+          path: ["deliveryDate"],
+        });
+      }
+    } catch {}
+  });
+
+type PickupFormValues = z.infer<typeof pickupFormSchema>;
+
+/** ---------- Component ---------- */
 export default function PickupForm({ open, onClose }: PickupFormProps) {
   const router = useRouter();
-
-  // ✅ Access your CartContext so we can clear it after success
   const { clearCart } = useCart();
-
-  const [formData, setFormData] = useState<FormDataShape>({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    zipCode: "",
-    pickupDate: "",
-    pickupTime: "10:00 AM",
-    deliveryDate: "",
-    deliveryTime: "2:00 PM",
-    service: "laundry-services",
-    specialInstructions: "",
-  });
 
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -171,16 +183,45 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const [emailVerificationState, setEmailVerificationState] =
-    useState<EmailVerificationState>("unverified");
+  const [emailVerificationState, setEmailVerificationState] = useState<
+    "unverified" | "pending" | "verified"
+  >("unverified");
   const [otp, setOtp] = useState("");
   const [otpLoading, setOtpLoading] = useState(false);
   const [otpMessage, setOtpMessage] = useState("");
 
-  // —————————————————————————————————————————————————————————————————————
-  // Effects: load cart from localStorage when modal opens or service changes
-  // —————————————————————————————————————————————————————————————————————
+  // react-hook-form
+  const {
+    control,
+    handleSubmit,
+    setError,
+    reset,
+    watch,
+    trigger,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm<PickupFormValues>({
+    resolver: zodResolver(pickupFormSchema),
+    mode: "onChange",
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      city: "",
+      zipCode: "",
+      pickupDate: new Date().toISOString().split("T")[0],
+      pickupTime: "10:00 AM",
+      deliveryDate: new Date().toISOString().split("T")[0],
+      deliveryTime: "2:00 PM",
+      service: "laundry-services",
+      specialInstructions: "",
+    },
+  });
 
+  const watchedService = watch("service");
+  const watchedEmail = watch("email");
+
+  // Load cart from localStorage when modal opens (same logic you had)
   useEffect(() => {
     if (!open) return;
 
@@ -191,7 +232,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
         const items: CartItem[] = JSON.parse(savedCart);
         const itemsWithServiceSlug = items.map((item) => ({
           ...item,
-          serviceSlug: item.serviceSlug || formData.service,
+          serviceSlug: item.serviceSlug || watchedService,
         }));
         setCartItems(itemsWithServiceSlug);
         const total = itemsWithServiceSlug.reduce(
@@ -208,48 +249,35 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
       setCartItems([]);
       setTotalAmount(0);
     }
-  }, [open, formData.service]);
+  }, [open, watchedService]);
 
-  // —————————————————————————————————————————————————————————————————————
-  // Handlers
-  // —————————————————————————————————————————————————————————————————————
+  // Keep serviceSlug in cart items in sync when user changes service select
+  useEffect(() => {
+    if (!cartItems || cartItems.length === 0) return;
+    setCartItems((prev) =>
+      prev.map((it) => ({ ...it, serviceSlug: watchedService }))
+    );
+  }, [watchedService]);
 
-  const handleInputChange = useCallback(
-    (field: keyof FormDataShape, value: string) => {
-      setFormData((prev) => {
-        const next = { ...prev, [field]: value };
+  // Reset verification when email changes
+  useEffect(() => {
+    // reset OTP state when email edited
+    setEmailVerificationState("unverified");
+    setOtp("");
+    setOtpMessage("");
+  }, [watchedEmail]);
 
-        // Clamp pickup/delivery dates to today (basic guard so user can't select yesterday)
-        if (field === "pickupDate") next.pickupDate = clampToToday(value);
-        if (field === "deliveryDate") next.deliveryDate = value; // let delivery be anything; your server can validate
-
-        return next;
-      });
-
-      // Reset email verification if email changes
-      if (field === "email") {
-        setEmailVerificationState("unverified");
-        setOtp("");
-        setOtpMessage("");
-      }
-
-      // Keep serviceSlug synced on items if service changes
-      if (field === "service") {
-        setCartItems((prev) =>
-          prev.map((item) => ({ ...item, serviceSlug: value }))
-        );
-      }
-    },
-    []
-  );
-
-  const handleSendOTP = useCallback(async () => {
-    if (!formData.email) {
-      setOtpMessage("Please enter your email address first");
+  // Send OTP (validates email first using react-hook-form trigger)
+  const handleSendOTP = async () => {
+    // validate email field first
+    const valid = await trigger("email");
+    if (!valid) {
+      setOtpMessage("Please fix your email before requesting OTP.");
       return;
     }
-    if (!looksLikeEmail(formData.email)) {
-      setOtpMessage("Please enter a valid email address");
+    const emailValue = watchedEmail;
+    if (!emailValue || !looksLikeEmail(emailValue)) {
+      setOtpMessage("Enter a valid email before requesting OTP.");
       return;
     }
 
@@ -260,7 +288,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
       const res = await fetch("/api/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: formData.email }),
+        body: JSON.stringify({ email: emailValue }),
       });
 
       if (!res.ok) {
@@ -270,7 +298,9 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
       const data = await res.json();
       if (data.success) {
         setEmailVerificationState("pending");
-        setOtpMessage("OTP sent! Check the terminal/console for the code");
+        setOtpMessage(
+          "OTP sent !! If not recieved check your email address and try again"
+        );
       } else {
         setOtpMessage(
           "Failed to send OTP: " + (data.message || "Unknown error")
@@ -282,9 +312,9 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
     } finally {
       setOtpLoading(false);
     }
-  }, [formData.email]);
+  };
 
-  const handleVerifyOTP = useCallback(async () => {
+  const handleVerifyOTP = async () => {
     if (!otp) {
       setOtpMessage("Please enter the OTP");
       return;
@@ -296,7 +326,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
       const res = await fetch("/api/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: formData.email, otp }),
+        body: JSON.stringify({ email: watchedEmail, otp }),
       });
 
       if (!res.ok) {
@@ -316,189 +346,137 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
     } finally {
       setOtpLoading(false);
     }
-  }, [formData.email, otp]);
+  };
 
-  const isSubmitDisabled = useMemo(() => {
-    if (loading) return true;
-    if (emailVerificationState !== "verified") return true;
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.address ||
-      !formData.city
-    )
-      return true;
-    if (!formData.pickupDate || !formData.deliveryDate) return true;
-    if (cartItems.length === 0) return true;
-    return false;
-  }, [loading, emailVerificationState, formData, cartItems.length]);
+  // Submit handler from react-hook-form
+  const onSubmit = async (values: PickupFormValues) => {
+    // additional checks: email verification & cart not empty
+    if (emailVerificationState !== "verified") {
+      setError("email", {
+        type: "manual",
+        message: "Please verify your email before submitting",
+      });
+      return;
+    }
 
-  const handleSubmit = useCallback(
-    async (e: React.FormEvent) => {
-      e.preventDefault();
+    if (cartItems.length === 0) {
+      setMessage(
+        "Your cart is empty. Please add items before placing an order."
+      );
+      return;
+    }
 
-      if (emailVerificationState !== "verified") {
-        setMessage("Please verify your email address before submitting");
-        return;
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const orderPayload = buildOrderPayload({
+        formData: values,
+        cartItems,
+        totalAmount,
+      });
+
+      // you had a 30s AbortController; keep that
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+      const res = await fetch(
+        "https://freshora-backend-u9xy.onrender.com/api/orders",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(orderPayload),
+          signal: controller.signal,
+        }
+      );
+      clearTimeout(timeoutId);
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        let errorData;
+        try {
+          errorData = JSON.parse(errorText);
+        } catch {
+          errorData = { message: errorText };
+        }
+        throw new Error(errorData.message || `Server error: ${res.status}`);
       }
 
-      if (cartItems.length === 0) {
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const textResponse = await res.text();
+        throw new Error(
+          "Server returned invalid response format: " + textResponse
+        );
+      }
+
+      const data = await res.json();
+
+      if (data.success) {
         setMessage(
-          "Your cart is empty. Please add items before placing an order."
-        );
-        return;
-      }
-
-      // Validate address has at least 5 words
-      const addressWords = formData.address.trim().split(/\s+/);
-      if (addressWords.length < 5) {
-        setMessage("Please provide a detailed address with at least 5 words");
-        return;
-      }
-
-      setLoading(true);
-      setMessage("");
-
-      try {
-        const orderPayload = buildOrderPayload({
-          formData,
-          cartItems,
-          totalAmount,
-        });
-
-        console.log("[DEBUG] Sending order payload:", orderPayload);
-
-        // Add timeout and better error handling
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
-
-        const res = await fetch(
-          "https://freshora-backend-u9xy.onrender.com/api/orders",
-          // "http://localhost:4000/api/orders",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify(orderPayload),
-            signal: controller.signal,
-          }
+          `Order placed successfully! Order Number: ${data.data.orderNumber}`
         );
 
-        clearTimeout(timeoutId);
-
-        console.log("[DEBUG] Response status:", res.status);
-        console.log("[DEBUG] Response ok:", res.ok);
-
-        // Check if response is ok
-        if (!res.ok) {
-          const errorText = await res.text();
-          console.error("[DEBUG] Error response text:", errorText);
-
-          // Try to parse as JSON for better error message
-          let errorData;
+        // small delay so user sees message
+        setTimeout(() => {
+          clearCart();
           try {
-            errorData = JSON.parse(errorText);
-          } catch {
-            errorData = { message: errorText };
-          }
-
-          throw new Error(
-            errorData.message || `Server error: ${res.status} ${res.statusText}`
-          );
-        }
-
-        // Check if response is JSON
-        const contentType = res.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-          const textResponse = await res.text();
-          console.error("[DEBUG] Non-JSON response:", textResponse);
-          throw new Error("Server returned invalid response format");
-        }
-
-        const data = await res.json();
-        console.log("[DEBUG] Order response:", data);
-
-        if (data.success) {
-          // Show success message
-          setMessage(
-            `Order placed successfully! Order Number: ${data.data.orderNumber}`
-          );
-
-          // Small delay to show success message before redirect
-          setTimeout(() => {
-            // Clear cart first
-            clearCart();
-            try {
-              localStorage.removeItem("cart");
-            } catch (e) {
-              console.warn("Failed to clear localStorage:", e);
-            }
-
-            // Then redirect
-            router.push("/thankYou");
-          }, 1000);
-        } else {
-          const errorMessage =
-            data.message ||
-            (data.errors && Array.isArray(data.errors)
-              ? data.errors.join(", ")
-              : "") ||
-            "Unknown error occurred";
-          setMessage("Failed to place order: " + errorMessage);
-        }
-      } catch (error: unknown) {
-        console.error("[DEBUG] Order submission error:", error);
-
-        if (error instanceof Error) {
-          if (error.name === "AbortError") {
-            setMessage(
-              "Request timed out. Please check your connection and try again."
-            );
-          } else if (error.message.includes("Failed to fetch")) {
-            setMessage(
-              "Cannot connect to server. Please check your internet connection and try again."
-            );
-          } else if (error.message.includes("NetworkError")) {
-            setMessage("Network error. Please check your internet connection.");
-          } else if (error.message.includes("CORS")) {
-            setMessage("Server configuration error. Please contact support.");
-          } else {
-            setMessage("Error: " + error.message);
-          }
-        } else {
-          // handles non-Error cases (string, object, etc.)
-          setMessage("Unknown error occurred.");
-        }
-      } finally {
-        setLoading(false);
+            localStorage.removeItem("cart");
+          } catch {}
+          router.push("/thankYou");
+        }, 800);
+      } else {
+        const errorMessage =
+          data.message ||
+          (data.errors && Array.isArray(data.errors)
+            ? data.errors.join(", ")
+            : "") ||
+          "Unknown error occurred";
+        setMessage("Failed to place order: " + errorMessage);
       }
-    },
-    [
-      emailVerificationState,
-      cartItems,
-      formData,
-      totalAmount,
-      clearCart,
-      router,
-    ]
+    } catch (error: unknown) {
+      console.error("[DEBUG] Order submission error:", error);
+      if (error instanceof Error) {
+        if (error.name === "AbortError") {
+          setMessage(
+            "Request timed out. Please check your connection and try again."
+          );
+        } else if (error.message.includes("Failed to fetch")) {
+          setMessage(
+            "Cannot connect to server. Please check your internet connection and try again."
+          );
+        } else if (error.message.includes("CORS")) {
+          setMessage("Server configuration error. Please contact support.");
+        } else {
+          setMessage("Error: " + error.message);
+        }
+      } else {
+        setMessage("Unknown error occurred.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // derived disabled state
+  const isSubmitDisabled = useMemo(
+    () =>
+      isSubmitting ||
+      loading ||
+      emailVerificationState !== "verified" ||
+      cartItems.length === 0 ||
+      !isValid,
+    [isSubmitting, loading, emailVerificationState, cartItems.length, isValid]
   );
 
-  // —————————————————————————————————————————————————————————————————————
-  // Early return if modal is closed
-  // —————————————————————————————————————————————————————————————————————
-
   if (!open) return null;
-
-  // —————————————————————————————————————————————————————————————————————
-  // JSX
-  // —————————————————————————————————————————————————————————————————————
 
   return (
     <div className="fixed inset-0 backdrop-blur-custom bg-black/30 flex items-center justify-center z-[99999] p-4 animate-in fade-in-0 duration-300">
       <Card className="w-full max-w-sm rounded-lg shadow-xl border-0 bg-white overflow-hidden animate-in slide-in-from-bottom-4 duration-500">
-        {/* Header */}
         <CardHeader className="flex flex-row items-center justify-between p-3 pb-2">
           <CardTitle className="text-base font-semibold text-gray-800">
             Schedule Pickup
@@ -513,7 +491,6 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
         </CardHeader>
 
         <CardContent className="p-3 pt-0">
-          {/* Order Summary */}
           {cartItems.length > 0 && (
             <div className="mb-3 p-2 bg-gray-50 rounded-lg">
               <h4 className="text-xs font-medium text-gray-700 mb-1">
@@ -544,33 +521,42 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
             </div>
           )}
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-2">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
             {/* Name */}
-            <Input
-              placeholder="Your Name *"
-              value={formData.name}
-              onChange={(e) => handleInputChange("name", e.target.value)}
-              required
-              className="h-8 text-sm"
-              autoComplete="name"
+            <Controller
+              name="name"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  placeholder="Your Name *"
+                  className="h-8 text-sm"
+                  {...field}
+                />
+              )}
             />
+            {errors.name && (
+              <p className="text-xs text-red-600">{errors.name.message}</p>
+            )}
 
             {/* Email + Verify */}
             <div className="space-y-1">
               <div className="flex gap-1">
-                <Input
-                  type="email"
-                  placeholder="Email *"
-                  value={formData.email}
-                  onChange={(e) => handleInputChange("email", e.target.value)}
-                  required
-                  className={`h-8 text-sm flex-1 ${
-                    emailVerificationState === "verified"
-                      ? "border-green-500"
-                      : ""
-                  }`}
-                  autoComplete="email"
+                <Controller
+                  name="email"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      type="email"
+                      placeholder="Email *"
+                      className={`h-8 text-sm flex-1 ${
+                        emailVerificationState === "verified"
+                          ? "border-green-500"
+                          : ""
+                      }`}
+                      autoComplete="email"
+                    />
+                  )}
                 />
                 <Button
                   type="button"
@@ -579,7 +565,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                   onClick={handleSendOTP}
                   disabled={
                     otpLoading ||
-                    !formData.email ||
+                    !watchedEmail ||
                     emailVerificationState === "verified"
                   }
                   className="h-8 px-2 text-xs bg-transparent"
@@ -591,6 +577,9 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                   )}
                 </Button>
               </div>
+              {errors.email && (
+                <p className="text-xs text-red-600">{errors.email.message}</p>
+              )}
 
               {/* OTP */}
               {emailVerificationState === "pending" && (
@@ -631,146 +620,167 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
               )}
             </div>
 
-            {/* Phone + Service */}
-            <div className="grid grid-cols-1 gap-2">
-              <Input
-                type="tel"
-                placeholder="Phone"
-                value={formData.phone}
-                onChange={(e) => handleInputChange("phone", e.target.value)}
-                className="h-8 text-sm"
-                autoComplete="tel"
-              />
-              {/* <Select
-                value={formData.service}
-                onValueChange={(value) =>
-                  handleInputChange(
-                    "service",
-                    value as FormDataShape["service"]
-                  )
-                }
-              >
-                <SelectTrigger className="h-8 text-sm">
-                  <SelectValue placeholder="Select service" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="laundry-services">Laundry</SelectItem>
-                  <SelectItem value="dry-cleaning-services">
-                    Dry Clean
-                  </SelectItem>
-                  <SelectItem value="express-laundry-services">
-                    Express
-                  </SelectItem>
-                </SelectContent>
-              </Select> */}
-            </div>
+            {/* Phone */}
+            <Controller
+              name="phone"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  type="tel"
+                  placeholder="Phone"
+                  className="h-8 text-sm"
+                  value={watch("phone") ?? ""}
+                  autoComplete="tel"
+                />
+              )}
+            />
+            {errors.phone && (
+              <p className="text-xs text-red-600">{errors.phone.message}</p>
+            )}
 
             {/* Address */}
-            <Input
-              placeholder="Full Address * (at least 5 words)"
-              value={formData.address}
-              onChange={(e) => handleInputChange("address", e.target.value)}
-              required
-              className="h-8 text-sm"
-              autoComplete="street-address"
+            <Controller
+              name="address"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder="Full Address * (at least 5 words)"
+                  className="h-8 text-sm"
+                  autoComplete="street-address"
+                />
+              )}
             />
+            {errors.address && (
+              <p className="text-xs text-red-600">{errors.address.message}</p>
+            )}
 
             {/* City + Zip */}
             <div className="grid grid-cols-2 gap-2">
-              <Input
-                placeholder="City *"
-                value={formData.city}
-                onChange={(e) => handleInputChange("city", e.target.value)}
-                required
-                className="h-8 text-sm"
-                autoComplete="address-level2"
+              <Controller
+                name="city"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    placeholder="City *"
+                    className="h-8 text-sm"
+                    autoComplete="address-level2"
+                  />
+                )}
               />
-              <Input
-                placeholder="Zip Code"
-                value={formData.zipCode}
-                onChange={(e) => handleInputChange("zipCode", e.target.value)}
-                className="h-8 text-sm"
-                autoComplete="postal-code"
+              <Controller
+                name="zipCode"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    placeholder="Zip Code"
+                    className="h-8 text-sm"
+                    autoComplete="postal-code"
+                  />
+                )}
               />
             </div>
+            {errors.city && (
+              <p className="text-xs text-red-600">{errors.city.message}</p>
+            )}
 
             {/* Pickup + Delivery */}
             <div className="grid grid-cols-2 gap-2">
               <div className="space-y-1">
                 <p className="text-xs font-medium text-gray-500">Pickup</p>
-                <Input
-                  type="date"
-                  value={formData.pickupDate}
-                  onChange={(e) =>
-                    handleInputChange("pickupDate", e.target.value)
-                  }
-                  min={new Date().toISOString().split("T")[0]}
-                  required
-                  className="h-8 text-sm"
+                <Controller
+                  name="pickupDate"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      type="date"
+                      className="h-8 text-sm"
+                      min={new Date().toISOString().split("T")[0]}
+                    />
+                  )}
                 />
-                <Select
-                  value={formData.pickupTime}
-                  onValueChange={(value) =>
-                    handleInputChange("pickupTime", value)
-                  }
-                >
-                  <SelectTrigger className="h-8 text-sm">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="9:00 AM">9:00 AM</SelectItem>
-                    <SelectItem value="10:00 AM">10:00 AM</SelectItem>
-                    <SelectItem value="11:00 AM">11:00 AM</SelectItem>
-                    <SelectItem value="2:00 PM">2:00 PM</SelectItem>
-                    <SelectItem value="3:00 PM">3:00 PM</SelectItem>
-                    <SelectItem value="4:00 PM">4:00 PM</SelectItem>
-                  </SelectContent>
-                </Select>
+                {errors.pickupDate && (
+                  <p className="text-xs text-red-600">
+                    {errors.pickupDate.message}
+                  </p>
+                )}
+
+                <Controller
+                  name="pickupTime"
+                  control={control}
+                  render={({ field }) => (
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger className="h-8 text-sm">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="9:00 AM">9:00 AM</SelectItem>
+                        <SelectItem value="10:00 AM">10:00 AM</SelectItem>
+                        <SelectItem value="11:00 AM">11:00 AM</SelectItem>
+                        <SelectItem value="2:00 PM">2:00 PM</SelectItem>
+                        <SelectItem value="3:00 PM">3:00 PM</SelectItem>
+                        <SelectItem value="4:00 PM">4:00 PM</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
               </div>
 
               <div className="space-y-1">
                 <p className="text-xs font-medium text-gray-500">Delivery</p>
-                <Input
-                  type="date"
-                  value={formData.deliveryDate}
-                  onChange={(e) =>
-                    handleInputChange("deliveryDate", e.target.value)
-                  }
-                  required
-                  className="h-8 text-sm"
+                <Controller
+                  name="deliveryDate"
+                  control={control}
+                  render={({ field }) => (
+                    <Input {...field} type="date" className="h-8 text-sm" />
+                  )}
                 />
-                <Select
-                  value={formData.deliveryTime}
-                  onValueChange={(value) =>
-                    handleInputChange("deliveryTime", value)
-                  }
-                >
-                  <SelectTrigger className="h-8 text-sm">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="9:00 AM">9:00 AM</SelectItem>
-                    <SelectItem value="10:00 AM">10:00 AM</SelectItem>
-                    <SelectItem value="11:00 AM">11:00 AM</SelectItem>
-                    <SelectItem value="2:00 PM">2:00 PM</SelectItem>
-                    <SelectItem value="3:00 PM">3:00 PM</SelectItem>
-                    <SelectItem value="4:00 PM">4:00 PM</SelectItem>
-                  </SelectContent>
-                </Select>
+                {errors.deliveryDate && (
+                  <p className="text-xs text-red-600">
+                    {errors.deliveryDate.message}
+                  </p>
+                )}
+
+                <Controller
+                  name="deliveryTime"
+                  control={control}
+                  render={({ field }) => (
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger className="h-8 text-sm">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="9:00 AM">9:00 AM</SelectItem>
+                        <SelectItem value="10:00 AM">10:00 AM</SelectItem>
+                        <SelectItem value="11:00 AM">11:00 AM</SelectItem>
+                        <SelectItem value="2:00 PM">2:00 PM</SelectItem>
+                        <SelectItem value="3:00 PM">3:00 PM</SelectItem>
+                        <SelectItem value="4:00 PM">4:00 PM</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
               </div>
             </div>
 
             {/* Special Instructions */}
-            <Textarea
-              placeholder="Special instructions"
-              value={formData.specialInstructions}
-              onChange={(e) =>
-                handleInputChange("specialInstructions", e.target.value)
-              }
-              className="min-h-[50px] resize-none text-sm"
+            <Controller
+              name="specialInstructions"
+              control={control}
+              render={({ field }) => (
+                <Textarea
+                  {...field}
+                  placeholder="Special instructions"
+                  className="min-h-[50px] resize-none text-sm"
+                  value={watch("specialInstructions") ?? ""}
+                />
+              )}
             />
 
-            {/* Submit */}
             <Button
               type="submit"
               className="w-full h-9 bg-green-600 hover:bg-green-700 text-white font-medium text-sm"

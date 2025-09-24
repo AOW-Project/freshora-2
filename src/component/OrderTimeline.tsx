@@ -17,7 +17,7 @@ const statusConfig = [
     label: "Order Received",
     subtitle: (
       <>
-        Our Freshora team will pick up your clothes within
+        Our Freshora team will pick up your items within
         <strong> 1 hour</strong>
       </>
     ),

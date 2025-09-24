@@ -1,19 +1,22 @@
-import { type NextRequest, NextResponse } from "next/server"
-import { storeOTP } from "@/lib/otp-storage"
-import nodemailer from "nodemailer"
+import { type NextRequest, NextResponse } from "next/server";
+import { storeOTP } from "@/lib/otp-storage";
+import nodemailer from "nodemailer";
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json()
+    const { email } = await request.json();
 
     if (!email) {
-      return NextResponse.json({ success: false, message: "Email is required" })
+      return NextResponse.json({
+        success: false,
+        message: "Email is required",
+      });
     }
 
     // Generate 6-digit OTP
-    const otp = Math.floor(100000 + Math.random() * 900000).toString()
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-    storeOTP(email, otp)
+    storeOTP(email, otp);
 
     try {
       // Create transporter
@@ -23,7 +26,7 @@ export async function POST(request: NextRequest) {
           user: process.env.EMAIL_USER || "freshorappc@gmail.com",
           pass: process.env.EMAIL_PASS || "ykbl euac vysy dpta",
         },
-      })
+      });
 
       // Email content
       const mailOptions = {
@@ -42,31 +45,32 @@ export async function POST(request: NextRequest) {
             <p style="color: #666; font-size: 14px;">If you didn't request this code, please ignore this email.</p>
           </div>
         `,
-      }
+      };
 
       // Send email
-      await transporter.sendMail(mailOptions)
+      await transporter.sendMail(mailOptions);
 
-      console.log(`📧 OTP sent to ${email}: ${otp}`)
+      console.log(`📧 OTP sent to ${email}: ${otp}`);
 
       return NextResponse.json({
         success: true,
         message: "OTP sent to your email address successfully",
-      })
+      });
     } catch (emailError) {
-      console.error("Email sending failed:", emailError)
+      console.error("Email sending failed:", emailError);
       // Fallback to console log if email fails
-      console.log(`📧 OTP for ${email}: ${otp} (Email failed, check terminal)`)
+      console.log(`📧 OTP for ${email}: ${otp} (Email failed, check terminal)`);
 
       return NextResponse.json({
         success: true,
-        message: "OTP generated (check terminal - email service not configured)",
+        message:
+          "OTP generated (check terminal - email service not configured)",
         // Remove this in production - only for testing
         otp: process.env.NODE_ENV === "development" ? otp : undefined,
-      })
+      });
     }
   } catch (error) {
-    console.error("Error sending OTP:", error)
-    return NextResponse.json({ success: false, message: "Failed to send OTP" })
+    console.error("Error sending OTP:", error);
+    return NextResponse.json({ success: false, message: "Failed to send OTP" });
   }
 }

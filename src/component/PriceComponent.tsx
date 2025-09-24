@@ -658,9 +658,9 @@ const PricingSection = () => {
     const selectedPackage = packagesData.find((p) => p.id === packageId);
     if (selectedPackage) {
       const packageItems = selectedPackage.features.map((feature, index) => ({
-        //added dynamic data
-        id: `${serviceItem?.serviceId || "cmfuocbsd0000t5vs79sqikpa"}-${
-          serviceItem?.id || "cmfuocbtx0002t5vsmzpfdlqx"
+        //added dynamic data and hardcoded fallback data
+        id: `${serviceItem?.serviceId || "cmfwe5ysv0000t5h0eb35k10o"}-${
+          serviceItem?.id || "standard"
         }`,
         name: feature,
         category: "Package Item",

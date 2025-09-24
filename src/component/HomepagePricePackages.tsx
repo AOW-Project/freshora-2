@@ -162,9 +162,9 @@ const PickupPackages: React.FC = () => {
     const selectedPackage = packagesData.find((p) => p.id === packageId);
     if (selectedPackage) {
       const packageItems = selectedPackage.features.map((feature, index) => ({
-        // hardcoding the id for fallback
-        id: `${serviceItem?.serviceId || "cmfuocbsd0000t5vs79sqikpa"}-${
-          serviceItem?.id || "cmfuocbtx0002t5vsmzpfdlqx"
+        // added dynamic data and hardcoded fallback data
+        id: `${serviceItem?.serviceId || "cmfwe5ysv0000t5h0eb35k10o"}-${
+          serviceItem?.id || "standard"
         }`,
         // id: `cmfuocbsd0000t5vs79sqikpa-cmfuocbtx0002t5vsmzpfdlqx`,
         name: feature,
