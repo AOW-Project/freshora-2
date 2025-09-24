@@ -373,8 +373,8 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
         const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
         const res = await fetch(
-          // "https://freshora-backend-u9xy.onrender.com/api/orders",
-          "http://localhost:4000/api/orders",
+          "https://freshora-backend-u9xy.onrender.com/api/orders",
+          // "http://localhost:4000/api/orders",
           {
             method: "POST",
             headers: {
