@@ -34,7 +34,26 @@ const clampToToday = (value: string) => {
   return value;
 };
 
-const looksLikeEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
+const looksLikeEmail = (email: string): boolean => {
+  // Basic email structure check
+  if (!/^\S+@\S+\.\S+$/.test(email)) return false;
+
+  const [local, domain] = email.split("@");
+
+  // Only apply Gmail-specific checks if domain is gmail.com
+  if (domain.toLowerCase() === "gmail.com") {
+    // Rule: 6–30 chars
+    if (local.length < 6 || local.length > 30) return false;
+
+    // Rule: cannot be only numbers
+    if (/^\d+$/.test(local)) return false;
+
+    // Allowed: letters, numbers, periods
+    if (!/^[a-zA-Z0-9.]+$/.test(local)) return false;
+  }
+
+  return true;
+};
 
 const formatMoney = (n: number) => `AED${n.toFixed(2)}`;
 
@@ -115,8 +134,11 @@ const todayStart = (() => {
 const pickupFormSchema = z
   .object({
     name: z.string().min(1, "Name is required"),
-    email: z.string().email("Enter a valid email"),
-    phone: z.string().optional().nullable(),
+    email: z.string().email("Please enter a valid email"),
+    phone: z
+      .string()
+      .regex(/^\d{10,}$/, "Please enter a valid number with at least 10 digits")
+      .optional(),
     address: z
       .string()
       .min(10, "Address is required")
