@@ -109,7 +109,7 @@ export default function OrderTracker() {
     console.log("[v0] Tracking order:", orderNumber);
 
     try {
-      const apiUrl = `https://freshora-backend-u9xy.onrender.com/api/tracking/${orderNumber}`;
+      const apiUrl = `http://54.213.197.88/api/tracking/${orderNumber}`;
       console.log("[v0] Making request to:", apiUrl);
 
       const response = await fetch(apiUrl);
@@ -232,7 +232,7 @@ export default function OrderTracker() {
             </div> */}
 
             {/* Status Timeline */}
-            <OrderTimeline currentStatus={orderStatus.status} />
+            <OrderTimeline currentStatus={"pending"} />
             {/* Customer & Address Info */}
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-3">

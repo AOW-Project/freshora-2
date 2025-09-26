@@ -29,10 +29,9 @@ interface Service {
 // Fetch all services to generate static paths
 async function fetchAllServices() {
   try {
-    const res = await fetch(
-      `https://freshora-backend-u9xy.onrender.com/api/services`
-    );
+    const res = await fetch(`http://54.213.197.88/api/services`);
     const result = await res.json();
+    console.log("hit aws lightsail successfully");
     return result.success ? (result.data as Service[]) : [];
   } catch (err) {
     console.error("Failed to fetch all services for static generation:", err);
@@ -52,7 +51,7 @@ export async function generateStaticParams() {
 async function fetchServiceBySlug(slug: string): Promise<Service | null> {
   try {
     const res = await fetch(
-      `https://freshora-backend-u9xy.onrender.com/api/services/${slug}`,
+      `http://54.213.197.88/api/services/${slug}`,
       // `http://localhost:4000/api/services/${slug}`,
       {
         next: { revalidate: 3600 }, // Revalidate every hour
