@@ -618,9 +618,7 @@ const PackageCard: React.FC<PackageCardProps> = ({
 
 async function getFirstServiceItem(slug: string) {
   try {
-    const response = await fetch(
-      `https://freshora-backend-u9xy.onrender.com/api/packages/${slug}`
-    );
+    const response = await fetch(`http://54.213.197.88/api/packages/${slug}`);
     if (!response.ok) {
       console.error(`HTTP error! status: ${response.status}`);
       return null; // return null on bad response
