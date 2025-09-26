@@ -5,6 +5,8 @@ import {
   Truck,
   WashingMachine,
   Fan,
+  Package,
+  ShieldCheck,
   Loader2,
 } from "lucide-react";
 
@@ -24,24 +26,24 @@ const statusConfig = [
   },
   {
     status: "pickedUp",
-    icon: CheckCircle,
+    icon: Package,
     color: "bg-blue-500",
     label: "Pickup Completed",
-    subtitle: "Your garments are in safe hands",
+    subtitle: "Your items are in safe hands",
   },
   {
-    status: "washing",
-    icon: WashingMachine,
+    status: "processing",
+    icon: Loader2,
     color: "bg-purple-500",
-    label: "Washing in Progress",
-    subtitle: "Freshness is loading",
+    label: "Processing in Progress",
+    subtitle: "Your items are being carefully serviced",
   },
   {
-    status: "drying",
-    icon: Fan,
+    status: "qualityCheck",
+    icon: ShieldCheck,
     color: "bg-orange-500",
-    label: "Drying in Progress",
-    subtitle: "Almost done with the cleaning process",
+    label: "Quality Check",
+    subtitle: "Ensuring everything meets Freshora standards",
   },
   {
     status: "outForDelivery",

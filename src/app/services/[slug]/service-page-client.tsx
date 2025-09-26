@@ -169,9 +169,9 @@ export default function ServicePageClient({
 
         {/* Main Layout */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
             {/* Sidebar Categories */}
-            <aside className="lg:col-span-1 order-2 lg:order-1">
+            <aside className="lg:col-span-3 order-2 lg:order-1">
               <Card className="sticky top-24">
                 <CardContent className="p-0">
                   <div className="lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
@@ -194,10 +194,10 @@ export default function ServicePageClient({
             </aside>
 
             {/* Main Content */}
-            <main className="lg:col-span-3 order-1 lg:order-2">
-              <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
+            <main className="lg:col-span-6 order-1 lg:order-2">
+              <div className="grid grid-cols-1 gap-6 lg:gap-8">
                 {/* Service Image */}
-                <div className="xl:col-span-2 relative w-full h-48 sm:h-56 md:h-64 lg:h-80 rounded-lg shadow-lg overflow-hidden">
+                <div className=" relative w-full h-48 sm:h-56 md:h-64 lg:h-80 rounded-lg shadow-lg overflow-hidden">
                   <Image
                     src={service.image || "/images/layout01-img01.jpg"}
                     alt={service.title}
@@ -206,35 +206,12 @@ export default function ServicePageClient({
                     priority
                   />
                 </div>
-
-                {/* Contact Info */}
-                <div className="xl:col-span-1">
-                  <Card className="h-fit">
-                    <CardContent className="p-4 sm:p-6">
-                      <h3 className="text-lg font-semibold mb-4 text-gray-800">
-                        Our Contacts
-                      </h3>
-                      {contactInfo}
-                      <div className="space-y-3">
-                        <Link href={`/services/${slug}/orders`}>
-                          <Button
-                            onClick={() => setIsNavigating(true)}
-                            variant="outline"
-                            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold"
-                          >
-                            Get the Service
-                          </Button>
-                        </Link>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
               </div>
 
-              {/* Service Details + Ask Form */}
-              <div className="mt-6 sm:mt-8 grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
+              {/* Service Details*/}
+              <div className="mt-6 sm:mt-8 flex flex-col gap-6 lg:gap-8">
                 {/* Service Content */}
-                <div className="xl:col-span-2">
+                <div className="flex flex-col gap-6 lg:gap-8">
                   <div className="mb-6 sm:mb-8">
                     <div className="border-l-4 border-green-600 pl-4 mb-6">
                       <h4 className="text-green-600 font-medium mb-2 text-sm sm:text-base">
@@ -246,6 +223,19 @@ export default function ServicePageClient({
                       <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                         {service.fullDescription}
                       </p>
+                    </div>
+
+                    {/* get the services button */}
+                    <div className="my-8 h-11 ">
+                      <Link href={`/services/${slug}/orders`}>
+                        <Button
+                          onClick={() => setIsNavigating(true)}
+                          variant="outline"
+                          className="w-full h-full bg-green-600 hover:bg-green-700 text-white hover:text-white font-semibold cursor-pointer"
+                        >
+                          Get the Service
+                        </Button>
+                      </Link>
                     </div>
 
                     {/* Features */}
@@ -288,65 +278,74 @@ export default function ServicePageClient({
                     </div>
                   </div>
                 </div>
-
-                {/* Ask Question Form */}
-                <aside className="xl:col-span-1">
-                  <Card className="sticky top-24">
-                    <CardContent className="p-4 sm:p-6">
-                      {thankYou ? (
-                        <div className="flex items-center justify-center h-40 text-green-600 font-semibold text-lg">
-                          ✅ Thank you for your question!
-                        </div>
-                      ) : (
-                        <>
-                          <h3 className="text-lg font-semibold mb-4 text-gray-800">
-                            Ask Your Question
-                          </h3>
-                          <form className="space-y-4" onSubmit={handleSubmit}>
-                            <Input
-                              name="name"
-                              value={form.name}
-                              onChange={handleChange}
-                              placeholder="Your name"
-                              required
-                            />
-                            <Input
-                              type="email"
-                              name="email"
-                              value={form.email}
-                              onChange={handleChange}
-                              placeholder="E-mail"
-                              required
-                            />
-                            <Input
-                              name="phone"
-                              value={form.phone}
-                              onChange={handleChange}
-                              placeholder="Phone"
-                            />
-                            <Textarea
-                              name="question"
-                              value={form.question}
-                              onChange={handleChange}
-                              placeholder="Your question"
-                              className="min-h-[100px]"
-                              required
-                            />
-                            <Button
-                              type="submit"
-                              className="w-full bg-green-600 hover:bg-green-700"
-                              disabled={loading}
-                            >
-                              {loading ? "Sending..." : "Ask Question"}
-                            </Button>
-                          </form>
-                        </>
-                      )}
-                    </CardContent>
-                  </Card>
-                </aside>
               </div>
             </main>
+
+            <aside className="lg:col-span-3 order-3">
+              {/* Contact Info */}
+              <Card className="h-fit sticky top-24">
+                <CardContent className="p-4 sm:p-6">
+                  <h3 className="text-lg font-semibold mb-4 text-gray-800">
+                    Our Contacts
+                  </h3>
+                  {contactInfo}
+                </CardContent>
+              </Card>
+              {/* Ask Question Form */}
+              {/* <Card className="">
+                <CardContent className="p-4 sm:p-6">
+                  {thankYou ? (
+                    <div className="flex items-center justify-center h-40 text-green-600 font-semibold text-lg">
+                      ✅ Thank you for your question!
+                    </div>
+                  ) : (
+                    <>
+                      <h3 className="text-lg font-semibold mb-4 text-gray-800">
+                        Ask Your Question
+                      </h3>
+                      <form className="space-y-4" onSubmit={handleSubmit}>
+                        <Input
+                          name="name"
+                          value={form.name}
+                          onChange={handleChange}
+                          placeholder="Your name"
+                          required
+                        />
+                        <Input
+                          type="email"
+                          name="email"
+                          value={form.email}
+                          onChange={handleChange}
+                          placeholder="E-mail"
+                          required
+                        />
+                        <Input
+                          name="phone"
+                          value={form.phone}
+                          onChange={handleChange}
+                          placeholder="Phone"
+                        />
+                        <Textarea
+                          name="question"
+                          value={form.question}
+                          onChange={handleChange}
+                          placeholder="Your question"
+                          className="min-h-[100px]"
+                          required
+                        />
+                        <Button
+                          type="submit"
+                          className="w-full bg-green-600 hover:bg-green-700"
+                          disabled={loading}
+                        >
+                          {loading ? "Sending..." : "Ask Question"}
+                        </Button>
+                      </form>
+                    </>
+                  )}
+                </CardContent>
+              </Card> */}
+            </aside>
           </div>
         </div>
       </div>
