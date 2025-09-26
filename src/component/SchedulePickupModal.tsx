@@ -22,115 +22,6 @@ import { X, CheckCircle } from "lucide-react";
 
 import { useCart } from "../app/context/cart-context";
 
-/** ---------- reuse your helpers ---------- */
-/** Clamp a date string (yyyy-mm-dd) to today or later */
-const clampToToday = (value: string) => {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const incoming = new Date(value);
-  incoming.setHours(0, 0, 0, 0);
-  if (Number.isNaN(incoming.getTime())) return value;
-  if (incoming < today) return today.toISOString().split("T")[0];
-  return value;
-};
-
-const looksLikeEmail = (email: string): boolean => {
-  // Basic email structure check
-  if (!/^\S+@\S+\.\S+$/.test(email)) return false;
-
-  const [local, domain] = email.split("@");
-
-  // Only apply Gmail-specific checks if domain is gmail.com
-  if (domain.toLowerCase() === "gmail.com") {
-    // Rule: 6–30 chars
-    if (local.length < 6 || local.length > 30) return false;
-
-    // Rule: cannot be only numbers
-    if (/^\d+$/.test(local)) return false;
-
-    // Allowed: letters, numbers, periods
-    if (!/^[a-zA-Z0-9.]+$/.test(local)) return false;
-  }
-
-  return true;
-};
-
-const formatMoney = (n: number) => `AED${n.toFixed(2)}`;
-
-const buildOrderPayload = ({
-  formData,
-  cartItems,
-  totalAmount,
-}: {
-  formData: any;
-  cartItems: any[];
-  totalAmount: number;
-}) => {
-  const formatDateForAPI = (dateStr: string) => {
-    if (!dateStr) return new Date().toISOString();
-    const date = new Date(dateStr);
-    return isNaN(date.getTime())
-      ? new Date().toISOString()
-      : date.toISOString();
-  };
-
-  const validatedCartItems = cartItems.map((item) => ({
-    id: item.id,
-    name: item.name,
-    price: Number(item.price) || 0,
-    quantity: Number(item.quantity) || 1,
-    category: item.category || "General",
-    serviceSlug: item.serviceSlug || formData.service,
-  }));
-
-  return {
-    name: formData.name.trim(),
-    customerInfo: {
-      email: formData.email.toLowerCase().trim(),
-      phone: formData.phone.trim() || "",
-      address: formData.address.trim(),
-      city: formData.city.trim(),
-      zipCode: formData.zipCode.trim() || "",
-    },
-    pickupInfo: {
-      date: formatDateForAPI(formData.pickupDate),
-      time: formData.pickupTime,
-      address: formData.address.trim(),
-      instructions: formData.specialInstructions.trim() || "",
-    },
-    deliveryInfo: {
-      date: formatDateForAPI(formData.deliveryDate),
-      time: formData.deliveryTime,
-      address: formData.address.trim(),
-    },
-    cartItems: validatedCartItems,
-    totalAmount: Number(totalAmount) || 0,
-    paymentMethod: "cash_on_delivery",
-  };
-};
-/** ---------------------------------------- */
-
-type CartItem = {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  category: string;
-  serviceSlug?: string;
-};
-
-export interface PickupFormProps {
-  open: boolean;
-  onClose: () => void;
-}
-
-/** ---------- Zod schema ---------- */
-const todayStart = (() => {
-  const d = new Date();
-  d.setHours(0, 0, 0, 0);
-  return d.getTime();
-})();
-
 const pickupFormSchema = z
   .object({
     name: z.string().min(1, "Name is required"),
@@ -193,6 +84,115 @@ const pickupFormSchema = z
   });
 
 type PickupFormValues = z.infer<typeof pickupFormSchema>;
+
+/** ---------- reuse your helpers ---------- */
+/** Clamp a date string (yyyy-mm-dd) to today or later */
+const clampToToday = (value: string) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const incoming = new Date(value);
+  incoming.setHours(0, 0, 0, 0);
+  if (Number.isNaN(incoming.getTime())) return value;
+  if (incoming < today) return today.toISOString().split("T")[0];
+  return value;
+};
+
+const looksLikeEmail = (email: string): boolean => {
+  // Basic email structure check
+  if (!/^\S+@\S+\.\S+$/.test(email)) return false;
+
+  const [local, domain] = email.split("@");
+
+  // Only apply Gmail-specific checks if domain is gmail.com
+  if (domain.toLowerCase() === "gmail.com") {
+    // Rule: 6–30 chars
+    if (local.length < 6 || local.length > 30) return false;
+
+    // Rule: cannot be only numbers
+    if (/^\d+$/.test(local)) return false;
+
+    // Allowed: letters, numbers, periods
+    if (!/^[a-zA-Z0-9.]+$/.test(local)) return false;
+  }
+
+  return true;
+};
+
+const formatMoney = (n: number) => `AED${n.toFixed(2)}`;
+
+const buildOrderPayload = ({
+  formData,
+  cartItems,
+  totalAmount,
+}: {
+  formData: PickupFormValues;
+  cartItems: CartItem[];
+  totalAmount: number;
+}) => {
+  const formatDateForAPI = (dateStr: string) => {
+    if (!dateStr) return new Date().toISOString();
+    const date = new Date(dateStr);
+    return isNaN(date.getTime())
+      ? new Date().toISOString()
+      : date.toISOString();
+  };
+
+  const validatedCartItems = cartItems.map((item) => ({
+    id: item.id,
+    name: item.name,
+    price: Number(item.price) || 0,
+    quantity: Number(item.quantity) || 1,
+    category: item.category || "General",
+    serviceSlug: item.serviceSlug || formData.service,
+  }));
+
+  return {
+    name: formData.name.trim(),
+    customerInfo: {
+      email: formData.email.toLowerCase().trim(),
+      phone: (formData.phone ?? "").trim(),
+      address: formData.address.trim(),
+      city: formData.city.trim(),
+      zipCode: (formData.zipCode ?? "").trim(),
+    },
+    pickupInfo: {
+      date: formatDateForAPI(formData.pickupDate),
+      time: formData.pickupTime,
+      address: formData.address.trim(),
+      instructions: (formData.specialInstructions ?? "").trim(),
+    },
+    deliveryInfo: {
+      date: formatDateForAPI(formData.deliveryDate),
+      time: formData.deliveryTime,
+      address: formData.address.trim(),
+    },
+    cartItems: validatedCartItems,
+    totalAmount: Number(totalAmount) || 0,
+    paymentMethod: "cash_on_delivery",
+  };
+};
+/** ---------------------------------------- */
+
+type CartItem = {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  category: string;
+  serviceSlug?: string;
+};
+
+export interface PickupFormProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+/** ---------- Zod schema ---------- */
+const todayStart = (() => {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  return d.getTime();
+})();
 
 /** ---------- Component ---------- */
 export default function PickupForm({ open, onClose }: PickupFormProps) {
