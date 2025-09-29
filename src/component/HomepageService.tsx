@@ -92,7 +92,7 @@ const services = [
   {
     title: "Steam Pressing Service",
     description:
-      "Sanitizing and cleaning soft toys to make them safe and fresh for children.",
+      "Steam pressing clothes to make them crisp, smooth, and ready to wear with confidence.",
     image: "/images/steam-pressing-banner.jpg",
     icon: <TbIroningSteamFilled />,
   },
