@@ -15,7 +15,7 @@ const services = [
     image:
       "/images/women-sorting-clothes-in-the-laundry-2025-03-14-03-27-51-utc.webp",
     title: "Laundry Services",
-    description: "Professional laundry for all clothes.",
+    description: "The pile that haunted your weekend? Gone by evening.",
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const services = [
     image:
       "/images/iron-and-stack-of-shirts-on-ironing-board-space-f-2025-03-25-22-33-47-utc.webp",
     title: "Dry Cleaning Services",
-    description: "Gentle care for delicate garments.",
+    description: "Care so gentle, even labels would approve.",
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const services = [
     image:
       "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.webp",
     title: "Express Laundry Services",
-    description: "Same-day laundry services.",
+    description: "Book at breakfast, wear it by dinner.",
   },
   {
     id: 4,
@@ -39,14 +39,16 @@ const services = [
     image:
       "/images/light-blue-sneakers-and-backpack-2025-01-09-09-02-14-utc.webp",
     title: "Shoe Cleaning",
-    description: "Luxury cleaning for shoes .",
+    description:
+      "Fresh enough for first steps, because the shoes you love should outlast the dirt.",
   },
   {
     id: 5,
     slug: "luxury-shoe-cleaning",
     image: "/images/erik-mclean-AnRxcupEQT0-unsplash.webp",
     title: "Luxury Shoe Cleaning",
-    description: "Premium shoe care services.",
+    description:
+      "Conditioned, polished, protected — Because luxury deserves more than a wipe-down.",
   },
   {
     id: 6,
@@ -54,7 +56,8 @@ const services = [
     image:
       "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.webp",
     title: "Commercial Laundry Service",
-    description: "Laundry solutions for businesses.",
+    description:
+      "High volume, tight deadlines, zero excuses. Bulk care with boutique standards.",
   },
   {
     id: 7,
@@ -62,7 +65,7 @@ const services = [
     image:
       "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.webp",
     title: "Curtain Cleaning Service",
-    description: "Expert curtain cleaning at your doorstep.",
+    description: "Every breeze leaves something behind — we take it out.",
   },
   {
     id: 8,
@@ -70,7 +73,7 @@ const services = [
     image:
       "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc (1).webp",
     title: "Carpet Cleaning Service",
-    description: "Deep cleaning for carpets and rugs.",
+    description: "Dust and stains pulled from where your vacuum can’t reach.",
   },
   {
     id: 9,
@@ -78,14 +81,15 @@ const services = [
     image:
       "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.webp",
     title: "Soft Toy Cleaning Service",
-    description: "Safe and hygienic cleaning for toys.",
+    description: "Playmates deserve the same care as playtime.",
   },
   {
     id: 10,
     slug: "steam-pressing-service",
     image: "/images/steam-pressing-banner.jpg",
     title: "Steam Pressing Service",
-    description: "Safe and hygienic cleaning for toys.",
+    description:
+      "Wrinkles erased, confidence intact. A standard of polish that matches the pace of the city.",
   },
 ];
 
