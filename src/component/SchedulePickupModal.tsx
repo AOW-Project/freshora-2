@@ -22,66 +22,66 @@ import { X, CheckCircle } from "lucide-react";
 
 import { useCart } from "../app/context/cart-context";
 
-const pickupFormSchema = z
-  .object({
-    name: z.string().min(1, "Name is required"),
-    email: z.string().email("Please enter a valid email"),
-    phone: z
-      .string()
-      .regex(/^\d{10,}$/, "Please enter a valid number with at least 10 digits")
-      .optional(),
-    address: z
-      .string()
-      .min(10, "Address is required")
-      .refine((v) => v.trim().split(/\s+/).length >= 5, {
-        message: "Please provide a detailed address with at least 5 words",
-      }),
-    city: z.string().min(1, "City is required"),
-    zipCode: z.string().optional(),
-    pickupDate: z.string().refine(
-      (val) => {
-        const d = new Date(val);
-        d.setHours(0, 0, 0, 0);
-        return !isNaN(d.getTime()) && d.getTime() >= todayStart;
-      },
-      { message: "Pickup date cannot be in the past" }
-    ),
-    pickupTime: z.string().min(1, "Pickup time required"),
-    deliveryDate: z.string().refine(
-      (val) => {
-        const d = new Date(val);
-        return !isNaN(d.getTime());
-      },
-      { message: "Delivery date required" }
-    ),
-    deliveryTime: z.string().min(1, "Delivery time required"),
-    service: z.enum([
-      "laundry-services",
-      "dry-cleaning-services",
-      "express-laundry-services",
-    ]),
-    specialInstructions: z.string().optional().or(z.literal("")).nullable(),
-  })
-  .superRefine((data, ctx) => {
-    // Ensure delivery >= pickup
-    try {
-      const p = new Date(data.pickupDate);
-      p.setHours(0, 0, 0, 0);
-      const d = new Date(data.deliveryDate);
+const pickupFormSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Please enter a valid email"),
+  phone: z
+    .string()
+    .regex(/^\d{10,}$/, "Please enter a valid number with at least 10 digits")
+    .optional(),
+  address: z
+    .string()
+    .min(10, "Address is required")
+    .refine((v) => v.trim().split(/\s+/).length >= 5, {
+      message: "Please provide a detailed address with at least 5 words",
+    }),
+  city: z.string().min(1, "City is required"),
+  zipCode: z.string().optional(),
+  pickupDate: z.string().refine(
+    (val) => {
+      const d = new Date(val);
       d.setHours(0, 0, 0, 0);
-      if (
-        !isNaN(p.getTime()) &&
-        !isNaN(d.getTime()) &&
-        d.getTime() < p.getTime()
-      ) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Delivery date cannot be earlier than pickup date",
-          path: ["deliveryDate"],
-        });
-      }
-    } catch {}
-  });
+      return !isNaN(d.getTime()) && d.getTime() >= todayStart;
+    },
+    { message: "Pickup date cannot be in the past" }
+  ),
+  pickupTime: z.string().min(1, "Pickup time required"),
+  deliveryDate: z.string().refine(
+    (val) => {
+      const d = new Date(val);
+      return !isNaN(d.getTime());
+    },
+    { message: "Delivery date required" }
+  ),
+  deliveryTime: z.string().min(1, "Delivery time required"),
+  service: z.enum([
+    "laundry-services",
+    "dry-cleaning-services",
+    "express-laundry-services",
+  ]),
+  specialInstructions: z.string().optional().or(z.literal("")).nullable(),
+});
+// commenting since devivery date is removed
+// .superRefine((data, ctx) => {
+//   // Ensure delivery >= pickup
+//   try {
+//     const p = new Date(data.pickupDate);
+//     p.setHours(0, 0, 0, 0);
+//     const d = new Date(data.deliveryDate);
+//     d.setHours(0, 0, 0, 0);
+//     if (
+//       !isNaN(p.getTime()) &&
+//       !isNaN(d.getTime()) &&
+//       d.getTime() < p.getTime()
+//     ) {
+//       ctx.addIssue({
+//         code: z.ZodIssueCode.custom,
+//         message: "Delivery date cannot be earlier than pickup date",
+//         path: ["deliveryDate"],
+//       });
+//     }
+//   } catch {}
+// });
 
 type PickupFormValues = z.infer<typeof pickupFormSchema>;
 
@@ -710,9 +710,11 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
             )}
 
             {/* Pickup + Delivery */}
-            <div className="grid grid-cols-2 gap-2">
-              <div className="space-y-1">
-                <p className="text-xs font-medium text-gray-500">Pickup</p>
+            <div className="grid grid-cols-2 gap-1">
+              <div className="">
+                <p className="text-xs mb-2 font-medium text-gray-500">
+                  Pickup Date
+                </p>
                 <Controller
                   name="pickupDate"
                   control={control}
@@ -730,13 +732,18 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                     {errors.pickupDate.message}
                   </p>
                 )}
+              </div>
+              <div className="">
+                <p className="text-xs mb-2 font-medium text-gray-500">
+                  Pickup Time
+                </p>
 
                 <Controller
                   name="pickupTime"
                   control={control}
                   render={({ field }) => (
                     <Select value={field.value} onValueChange={field.onChange}>
-                      <SelectTrigger className="h-8 text-sm">
+                      <SelectTrigger className="h-8 text-sm min-w-full">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -752,7 +759,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                 />
               </div>
 
-              <div className="space-y-1">
+              {/* <div className="space-y-1">
                 <p className="text-xs font-medium text-gray-500">Delivery</p>
                 <Controller
                   name="deliveryDate"
@@ -786,7 +793,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                     </Select>
                   )}
                 />
-              </div>
+              </div> */}
             </div>
 
             {/* Special Instructions */}
@@ -796,7 +803,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
               render={({ field }) => (
                 <Textarea
                   {...field}
-                  placeholder="Special instructions"
+                  placeholder="Add your instructions here..."
                   className="min-h-[50px] resize-none text-sm"
                   value={watch("specialInstructions") ?? ""}
                 />
