@@ -109,7 +109,7 @@ export default function OrderTracker() {
     console.log("[v0] Tracking order:", orderNumber);
 
     try {
-      const apiUrl = `http://54.213.197.88/api/tracking/${orderNumber}`;
+      const apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/tracking/${orderNumber}`;
       console.log("[v0] Making request to:", apiUrl);
 
       const response = await fetch(apiUrl);

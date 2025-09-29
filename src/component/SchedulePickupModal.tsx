@@ -402,15 +402,18 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 30000);
 
-      const res = await fetch("http://54.213.197.88/api/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(orderPayload),
-        signal: controller.signal,
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(orderPayload),
+          signal: controller.signal,
+        }
+      );
       clearTimeout(timeoutId);
 
       if (!res.ok) {

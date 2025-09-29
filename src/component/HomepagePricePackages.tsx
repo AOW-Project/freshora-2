@@ -122,9 +122,13 @@ const PackageCard: React.FC<PackageCardProps> = ({
 
 async function getFirstServiceItem(slug: string) {
   try {
-    const response = await fetch(`http://54.213.197.88/api/packages/${slug}`);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/packages/${slug}`
+    );
     if (!response.ok) {
       console.error(`HTTP error! status: ${response.status}`);
+      console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
+
       return null; // return null on bad response
     }
 
