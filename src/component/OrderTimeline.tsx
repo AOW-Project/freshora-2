@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Clock,
-  CheckCircle,
-  Truck,
-  WashingMachine,
-  Fan,
-  Package,
-  ShieldCheck,
-  Loader2,
-} from "lucide-react";
+import { Clock, CheckCircle, Truck, Package, Loader2 } from "lucide-react";
 
 // Status configuration array
 const statusConfig = [
@@ -37,13 +28,6 @@ const statusConfig = [
     color: "bg-purple-500",
     label: "Processing in Progress",
     subtitle: "Your items are being carefully serviced",
-  },
-  {
-    status: "qualityCheck",
-    icon: ShieldCheck,
-    color: "bg-orange-500",
-    label: "Quality Check",
-    subtitle: "Ensuring everything meets Freshora standards",
   },
   {
     status: "outForDelivery",
