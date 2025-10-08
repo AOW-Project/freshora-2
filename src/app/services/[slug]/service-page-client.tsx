@@ -195,7 +195,7 @@ export default function ServicePageClient({
 
             {/* Main Content */}
             <main className="lg:col-span-6 order-1 lg:order-2">
-              <div className="grid grid-cols-1 gap-6 lg:gap-8">
+              <div className="">
                 {/* Service Image */}
                 <div className=" relative w-full h-48 sm:h-56 md:h-64 lg:h-80 rounded-lg shadow-lg overflow-hidden">
                   <Image
@@ -209,11 +209,11 @@ export default function ServicePageClient({
               </div>
 
               {/* Service Details*/}
-              <div className="mt-6 sm:mt-8 flex flex-col gap-6 lg:gap-8">
+              <div className="flex flex-col">
                 {/* Service Content */}
-                <div className="flex flex-col gap-6 lg:gap-8">
-                  <div className="mb-6 sm:mb-8">
-                    <div className="border-l-4 border-green-600 pl-4 mb-6">
+                <div className="flex flex-col">
+                  <div className="sticky top-14 bg-gray-50 z-50 pt-12 rounded-lg ">
+                    <div className="border-l-4 border-green-600 pl-4 mb-6 ">
                       <h4 className="text-green-600 font-medium mb-2 text-sm sm:text-base">
                         What we offer
                       </h4>
@@ -226,7 +226,7 @@ export default function ServicePageClient({
                     </div>
 
                     {/* get the services button */}
-                    <div className="my-8 h-11 ">
+                    <div className="my-8 h-11  bg-gray-50">
                       <Link href={`/services/${slug}/orders`}>
                         <Button
                           onClick={() => setIsNavigating(true)}
@@ -237,45 +237,45 @@ export default function ServicePageClient({
                         </Button>
                       </Link>
                     </div>
+                  </div>
 
-                    {/* Features */}
-                    <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800">
-                      {service.secondaryTitle}
-                    </h3>
-                    <p
-                      style={{ whiteSpace: "pre-line" }}
-                      className="text-gray-600 leading-relaxed mb-6 text-sm sm:text-base"
-                    >
-                      {service.secondaryDescription}
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-                      {service.features.map((feature, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                          <span className="text-sm sm:text-base text-gray-700">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                  {/* Features */}
+                  <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800">
+                    {service.secondaryTitle}
+                  </h3>
+                  <p
+                    style={{ whiteSpace: "pre-line" }}
+                    className="text-gray-600 leading-relaxed mb-6 text-sm sm:text-base"
+                  >
+                    {service.secondaryDescription}
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                    {service.features.map((feature, index) => (
+                      <div key={index} className="flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                        <span className="text-sm sm:text-base text-gray-700">
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
 
-                    {/* Extra Images */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 sm:mb-8">
-                      {service.gallery.slice(0, 2).map((imgSrc, index) => (
-                        <div
-                          key={index}
-                          className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden"
-                        >
-                          <Image
-                            src={imgSrc}
-                            height={300}
-                            width={400}
-                            alt={`${service.title} gallery image ${index + 1}`}
-                            className="object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
+                  {/* Extra Images */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 sm:mb-8">
+                    {service.gallery.slice(0, 2).map((imgSrc, index) => (
+                      <div
+                        key={index}
+                        className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden"
+                      >
+                        <Image
+                          src={imgSrc}
+                          height={300}
+                          width={400}
+                          alt={`${service.title} gallery image ${index + 1}`}
+                          className="object-cover"
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
