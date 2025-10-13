@@ -1,16 +1,15 @@
-"use client"
+"use client";
 
 //import AnimatedParticles from "@/component/AnimatedParticles"
-import { Poppins } from "next/font/google"
-import Link from "next/link"
-import { useState } from "react"
-
+import { Poppins } from "next/font/google";
+import Link from "next/link";
+import { useState } from "react";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
-})
+});
 
 const faqData = [
   {
@@ -36,7 +35,6 @@ const faqData = [
         q: "Q5: How much does laundry service cost in Dubai? ",
         a: "Prices depend on the weight of laundry and type of clothing. We offer affordable per-kg rates — contact us for a custom quote. ",
       },
-      
     ],
   },
   {
@@ -87,9 +85,7 @@ const faqData = [
         q: "Q5: How much does express laundry cost in Dubai? ",
         a: ": Express services carry a small additional charge compared to regular laundry. Exact pricing depends on order size and urgency.  ",
       },
-
     ],
-
   },
   {
     category: "4. Shoe & Bag Spa ",
@@ -114,8 +110,9 @@ const faqData = [
         q: "Q5: What are the charges for shoe and bag cleaning in Dubai? ",
         a: " Pricing depends on the brand, material, and condition. Standard cleaning is reasonably priced, while luxury care may cost slightly more. ",
       },
-    ], },
-    {
+    ],
+  },
+  {
     category: "5. Luxury Shoe Cleaning Service ",
     questions: [
       {
@@ -138,8 +135,9 @@ const faqData = [
         q: "Q5: How much does luxury shoe cleaning cost in Dubai? ",
         a: " Pricing depends on the brand and material. High-end shoes usually start at a premium rate for specialized care.  ",
       },
-    ], },
-     {
+    ],
+  },
+  {
     category: "6. Commercial Laundry Service  ",
     questions: [
       {
@@ -152,7 +150,7 @@ const faqData = [
       },
       {
         q: "Q3: How do you maintain hygiene in commercial laundry? ",
- 
+
         a: " We follow strict cleaning protocols, high-temperature washing, and fabric-safe disinfectants.",
       },
       {
@@ -163,9 +161,10 @@ const faqData = [
         q: "Q5: What are the commercial laundry charges in Dubai?  ",
         a: "  Prices are customized based on volume and service frequency. We offer affordable packages for businesses. ",
       },
-    ], },
+    ],
+  },
 
-    {
+  {
     category: "7. Curtain Cleaning Service  ",
     questions: [
       {
@@ -178,7 +177,7 @@ const faqData = [
       },
       {
         q: "Q3: Do you remove and reinstall the curtains? ",
- 
+
         a: " Yes, our team can take down, clean, and reinstall your curtains for total convenience. ",
       },
       {
@@ -189,8 +188,9 @@ const faqData = [
         q: "Q5: How much does curtain cleaning cost in Dubai?  ",
         a: "  Pricing depends on curtain size, fabric, and cleaning method. We provide competitive per-piece rates.  ",
       },
-    ], },
-     {
+    ],
+  },
+  {
     category: "8. Carpet Cleaning Service   ",
     questions: [
       {
@@ -203,7 +203,7 @@ const faqData = [
       },
       {
         q: "Q3: Is your carpet cleaning safe for kids and pets? ",
- 
+
         a: "  Absolutely. We use eco-friendly and non-toxic cleaning solutions. ",
       },
       {
@@ -214,8 +214,9 @@ const faqData = [
         q: "Q5: What is the cost of carpet cleaning in Dubai?   ",
         a: " Pricing depends on carpet size and condition. We offer per-square-meter rates for transparency. ",
       },
-    ], },
-      {
+    ],
+  },
+  {
     category: "9. Soft Toy Cleaning Service    ",
     questions: [
       {
@@ -223,12 +224,12 @@ const faqData = [
         a: "  Soft toys collect dust, bacteria, and allergens. Professional cleaning keeps them safe and hygienic for children.  ",
       },
       {
-        q: " Q2: Do you guarantee that toys remain soft after cleaning? "  ,
+        q: " Q2: Do you guarantee that toys remain soft after cleaning? ",
         a: "   Yes, our gentle process ensures toys stay soft, cuddly, and safe. ",
       },
       {
         q: "Q3: How often should soft toys be cleaned? ",
- 
+
         a: "   Every 3–6 months, depending on use and exposure to dust or spills.  ",
       },
       {
@@ -239,15 +240,38 @@ const faqData = [
         q: "Q5: What are the charges for soft toy cleaning in Dubai?",
         a: " Prices depend on toy size and fabric. We offer affordable rates with discounts for multiple toys.  ",
       },
-    ], },
-    
-    
+    ],
+  },
+  {
+    category: "10. Steam Pressing Service",
+    questions: [
+      {
+        q: "Q1: Why should clothes be steam pressed instead of just ironed?   ",
+        a: "  Steam pressing uses hot vapor to relax fabric fibers, giving clothes a smoother, longer-lasting finish without crushing the material like traditional ironing.  ",
+      },
+      {
+        q: " Q2: Will my clothes stay crisp and fresh after steam pressing? ",
+        a: "   Yes! Steam pressing restores shape, removes wrinkles, and keeps fabrics looking professionally pressed for days ",
+      },
+      {
+        q: "Q3: How often should I get my garments steam pressed for the best results? ",
 
-    
-]
+        a: "   For everyday wear, once every few washes keeps clothes fresh and wrinkle-free. For formal or office wear, steam pressing before each use is ideal.  ",
+      },
+      {
+        q: "Q4: Do you also offer combo services with laundry and dry cleaning?   ",
+        a: "  Absolutely. Freshora lets you combine laundry and steam pressing for convenience, so your clothes come back perfectly clean and pressed.  ",
+      },
+      {
+        q: "Q5: What are the charges for steam pressing services in Dubai?",
+        a: " Pricing depends on the garment type and quantity. Premium fabrics and delicate items may vary, ensuring each piece gets the care it deserves.  ",
+      },
+    ],
+  },
+];
 
 export default function FAQPage() {
-  const [openIndex, setOpenIndex] = useState<string | null>(null)
+  const [openIndex, setOpenIndex] = useState<string | null>(null);
 
   // --- Form state
   const [form, setForm] = useState({
@@ -255,40 +279,40 @@ export default function FAQPage() {
     email: "",
     phone: "",
     message: "",
-  })
+  });
 
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const toggleAccordion = (index: string) => {
-    setOpenIndex(openIndex === index ? null : index)
-  }
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   // --- Handle form submit
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
+    e.preventDefault();
+    setLoading(true);
     try {
       const res = await fetch("/api/send-question", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
-      })
+      });
 
       if (res.ok) {
-        setForm({ name: "", email: "", phone: "", message: "" })
-        setSuccess(true)
-        setTimeout(() => setSuccess(false), 1500) // hide popup after 1.5s
+        setForm({ name: "", email: "", phone: "", message: "" });
+        setSuccess(true);
+        setTimeout(() => setSuccess(false), 1500); // hide popup after 1.5s
       } else {
-        alert("Something went wrong. Please try again.")
+        alert("Something went wrong. Please try again.");
       }
     } catch (err) {
-      console.error(err)
-      alert("Error sending message")
+      console.error(err);
+      alert("Error sending message");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div>
@@ -316,7 +340,9 @@ export default function FAQPage() {
       {/* FAQ Section */}
       <section className="max-w-6xl mx-auto py-12 px-4">
         <div className="text-center mb-10">
-          <p className={`text-green-600 font-medium mb-2 text-center ${poppins.className}`}>
+          <p
+            className={`text-green-600 font-medium mb-2 text-center ${poppins.className}`}
+          >
             [ Frequently Asked Questions ]
           </p>
           <h2 className="text-2xl md:text-3xl font-bold">
@@ -328,12 +354,17 @@ export default function FAQPage() {
         <div className="grid md:grid-cols-2 gap-8">
           {faqData.map((category, categoryIndex) => (
             <div key={category.category}>
-              <h3 className="text-lg font-semibold mb-4">{category.category}</h3>
+              <h3 className="text-lg font-semibold mb-4">
+                {category.category}
+              </h3>
               <div className="space-y-2">
                 {category.questions.map((item, questionIndex) => {
-                  const uniqueIndex = `${categoryIndex}-${questionIndex}`
+                  const uniqueIndex = `${categoryIndex}-${questionIndex}`;
                   return (
-                    <div key={uniqueIndex} className="border rounded-md bg-white shadow-sm">
+                    <div
+                      key={uniqueIndex}
+                      className="border rounded-md bg-white shadow-sm"
+                    >
                       <button
                         onClick={() => toggleAccordion(uniqueIndex)}
                         className="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-gray-50 transition-colors"
@@ -345,7 +376,9 @@ export default function FAQPage() {
                       </button>
                       <div
                         className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                          openIndex === uniqueIndex ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                          openIndex === uniqueIndex
+                            ? "max-h-96 opacity-100"
+                            : "max-h-0 opacity-0"
                         }`}
                       >
                         <div className="px-4 pb-4 text-gray-600 text-sm leading-relaxed">
@@ -353,7 +386,7 @@ export default function FAQPage() {
                         </div>
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -367,14 +400,20 @@ export default function FAQPage() {
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold mb-2">Ask Your Question</h3>
             <p className="text-gray-500">
-              We look forward to helping you enjoy and maintain a clean, healthy environment.
+              We look forward to helping you enjoy and maintain a clean, healthy
+              environment.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4 relative">
+          <form
+            onSubmit={handleSubmit}
+            className="grid md:grid-cols-2 gap-4 relative"
+          >
             {success && (
               <div className="absolute inset-0 flex items-center justify-center bg-white/80 rounded-md z-10 animate-fade">
-                <p className="text-green-600 font-semibold text-lg">✅ Thank you for your question!</p>
+                <p className="text-green-600 font-semibold text-lg">
+                  ✅ Thank you for your question!
+                </p>
               </div>
             )}
 
@@ -420,5 +459,5 @@ export default function FAQPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
