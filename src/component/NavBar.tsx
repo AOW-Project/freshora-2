@@ -14,6 +14,9 @@ import {
   FaShoppingCart,
   FaTimes,
 } from "react-icons/fa";
+import { GrLocation } from "react-icons/gr";
+import { LuClock4 } from "react-icons/lu";
+import { MdMailOutline } from "react-icons/md";
 import { useCart } from "../app/context/cart-context";
 
 interface NavItem {
@@ -67,20 +70,6 @@ const navItems: NavItem[] = [
   { title: "Contacts", href: "/contact" },
 ];
 
-// ✅ Moved social links outside the component for better practice
-const socialLinks = [
-  {
-    Icon: FaFacebookF,
-    href: "https://www.facebook.com/profile.php?id=61579978694620",
-    label: "Facebook",
-  },
-  {
-    Icon: FaInstagram,
-    href: "https://www.instagram.com/freshoralaundry?igsh=MWs2bWF4bXV3bjV5dQ==", // Add your Instagram link here
-    label: "Instagram",
-  },
-];
-
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -110,44 +99,38 @@ const Navbar = () => {
       >
         {/* Top Info Bar */}
         <div
-          className={`hidden xl:block bg-gray-100 text-sm text-gray-700 transition-all duration-300 ${
+          className={`hidden xl:block bg-white- text-sm text-gray-700 transition-all duration-300 ${
             scrolled ? "h-0 overflow-hidden opacity-0" : "h-auto opacity-100"
           }`}
         >
-          <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center py-2 px-6">
-            <span className="truncate">
-              Address: Shop no 4, Azizi Riviera 42, Meydan, Al Merkadh, Dubai
-              UAE
-            </span>
-            <div className="flex gap-4 flex-wrap">
-              <span>
-                {" "}
-                Timing: Mon to Friday - 8 am to 8pm Sat-Sun - 10am to 8pm{" "}
+          <div className="w-full mx-auto flex flex-wrap justify-between items-center py-2 px-12">
+            <div className="flex flex-row justify-center flex-nowrap items-center gap-1">
+              <GrLocation className="text-green-500" size={16} />
+              <span className="truncate flex flex-nowrap">
+                Shop no 4, Azizi Riviera 42, Meydan, Al Merkadh, Dubai UAE
               </span>
-              <span className="truncate">freshorappc@gmail.com</span>
             </div>
-            <div className="flex gap-3 items-center">
+
+            <div className="flex flex-row justify-center flex-nowrap items-center gap-1">
+              <LuClock4 className="text-green-500" size={16} />
+              <span className="truncate flex flex-nowrap">
+                Mon to Friday - 8 am to 8pm Sat-Sun - 10am to 8pm{" "}
+              </span>
+            </div>
+            <div className="flex flex-row justify-center flex-nowrap items-center gap-1">
+              <MdMailOutline className="text-green-500" size={16} />
+              <span className="truncate flex flex-nowrap">
+                freshorappc@gmail.com
+              </span>
+            </div>
+
+            <div className="flex flex-row justify-center flex-nowrap items-center gap-1">
+              <FaPhoneAlt className="text-green-500" />
               <span className="flex items-center gap-1">
-                <FaPhoneAlt className="text-green-500" />
                 <a href="tel:+971509259667">
                   <span className="text-base">+971 50 925 9667</span>
                 </a>
               </span>
-              <div className="flex gap-2">
-                {/* ✅ Corrected and placed the social links mapping here */}
-                {socialLinks.map((social, i) => (
-                  <a
-                    key={i}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="hover:text-green-500 cursor-pointer"
-                  >
-                    <social.Icon />
-                  </a>
-                ))}
-              </div>
             </div>
           </div>
         </div>
@@ -175,7 +158,9 @@ const Navbar = () => {
                   : "text-lg sm:text-xl lg:text-2xl"
               }`}
             >
-              <span className="text-green-600">Freshora </span>
+              <span className="text-green-600 font-[var(--font-robotocondensed)]">
+                Freshora{" "}
+              </span>
               <span className="text-black">Laundry</span>
             </span>
           </Link>
@@ -191,7 +176,7 @@ const Navbar = () => {
               >
                 <Link
                   href={item.href}
-                  className="flex items-center hover:text-green-600 transition-colors py-2"
+                  className="flex items-center font-roboto hover:text-green-600 transition-colors py-2"
                 >
                   {item.title}
                   {item.subItems && (

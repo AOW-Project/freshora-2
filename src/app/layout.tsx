@@ -8,13 +8,29 @@ import { ToastContainer } from "react-toastify";
 import LastPageTracker from "@/component/LastPageTracker";
 import WhatsAppFloatingButton from "@/component/WhatsAppFloatingButton";
 import AnalyticsLoader from "@/component/AnalyticsLoader";
+import { Roboto, Roboto_Condensed } from "next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"], // Choose the weights you need
+  variable: "--font-roboto",
+  display: "swap",
+});
+
+const robotoCondensed = Roboto_Condensed({
+  subsets: ["latin"],
+  weight: ["400", "700"], // Choose the weights you need
+  variable: "--font-roboto-condensed",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   // Your existing title - it's great!
   title: "Laundry Service in Dubai | Freshora – Quality and Convenience",
 
   // Your existing description - also great!
-  description: "Freshora offers top-notch Laundry Service in Dubai with doorstep pickup and delivery. Fast, eco-friendly, and reliable care for all your garments.",
+  description:
+    "Freshora offers top-notch Laundry Service in Dubai with doorstep pickup and delivery. Fast, eco-friendly, and reliable care for all your garments.",
 
   // Adding the meta keywords
   keywords: [
@@ -27,34 +43,40 @@ export const metadata: Metadata = {
 
   // Adding the canonical URL
   alternates: {
-    canonical: 'https://freshoralaundry.com/',
+    canonical: "https://freshoralaundry.com/",
   },
 
   // This is the recommended way to add Google Site Verification
   verification: {
-    google: 'rA4Z54HNZDzcvU8-4_PtJfHLlncS2jKC6m92KXo7nA0',
-    
+    google: "rA4Z54HNZDzcvU8-4_PtJfHLlncS2jKC6m92KXo7nA0",
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${roboto.variable} ${robotoCondensed.variable}`}
+    >
       {/* The <head> tag is managed by Next.js, so you don't need to add it here */}
-      <body>
+      <body className="font-roboto">
         <CartProvider>
           <div className="relative z-10 min-h-screen">
             <Navbar />
             <LastPageTracker />
             <link
-          rel="preload"
-          href="/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.webp"
-          as="image"
-          fetchPriority="high"
-        />
-            <main className="relative z-20">{children}
+              rel="preload"
+              href="/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.webp"
+              as="image"
+              fetchPriority="high"
+            />
+            <main className="relative z-20">
+              {children}
               <WhatsAppFloatingButton />
-
             </main>
             <Footer />
           </div>
@@ -63,7 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </CartProvider>
 
         {/* Use the Next.js Script component for Google Analytics */}
-    {  /* <Script
+        {/* <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-RNHPFY4CMF"
         />
@@ -78,7 +100,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               gtag('config', 'G-RNHPFY4CMF');
             `,
           }}
-        /> */ }
+        /> */}
       </body>
     </html>
   );
