@@ -19,7 +19,7 @@ const roboto = Roboto({
 
 const robotoCondensed = Roboto_Condensed({
   subsets: ["latin"],
-  weight: ["400", "700"], // Choose the weights you need
+  weight: ["400", "500", "700"], // Choose the weights you need
   variable: "--font-roboto-condensed",
   display: "swap",
 });
