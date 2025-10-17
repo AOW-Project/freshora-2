@@ -80,7 +80,7 @@ export default function ServicePageClient({
         slug: "commercial-laundry-service",
       },
       { name: "Curtain Cleaning Service", slug: "curtain-cleaning-service" },
-      { name: "Carpet Cleaning Service", slug: "carpet-cleaning-service" },
+      { name: "Carpet Cleaning Service", slug: "carpet-cleaning-services" },
       { name: "Soft Toy Cleaning Service", slug: "soft-toy-cleaning-service" },
       { name: "Steam Pressing Service", slug: "steam-pressing-service" },
     ],
