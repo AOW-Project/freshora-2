@@ -18,6 +18,7 @@ import { MdIron } from "react-icons/md";
 import { FaRug, FaWindowMaximize } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import clsx from "clsx";
+import CurvedCarousel from "./CurvedCarousel";
 
 const services = [
   {
@@ -111,80 +112,19 @@ export default function ServicesSlider() {
 
   return (
     <section className="py-16 bg-white relative">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto ">
         {/* Heading */}
-        <div className="text-center mb-12">
-          <h4 className="text-green-600 font-medium mb-3 text-sm sm:text-base">
-            [ Our Services ]
-          </h4>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 leading-snug">
-            Dry Cleaning & Laundry, <br /> Free Delivery
+        <div className="text-center mb-12 px-4">
+          <h1 className="text-3xl  font-medium text-primary-green">
+            Dry Cleaning & Laundry,{" "}
+            <span className="text-secondary-green"> Free Delivery</span>
+          </h1>
+          <h2 className="text-xl font-medium text-[#606060] text-center my-3">
+            Our Services
           </h2>
         </div>
-
         {/* Slider */}
-        <div className="relative">
-          <button className="swiper-button-prev-custom absolute left-3 top-1/2 -translate-y-1/2 z-20 p-3 bg-white shadow-lg rounded-full hover:bg-green-600 hover:text-white transition">
-            <IoChevronBack size={20} />
-          </button>
-          <button className="swiper-button-next-custom absolute right-3 top-1/2 -translate-y-1/2 z-20 p-3 bg-white shadow-lg rounded-full hover:bg-green-600 hover:text-white transition">
-            <IoChevronForward size={20} />
-          </button>
-
-          <Swiper
-            modules={[Autoplay, Navigation, Pagination]}
-            autoplay={{ delay: 3500, disableOnInteraction: false }}
-            navigation={{
-              prevEl: ".swiper-button-prev-custom",
-              nextEl: ".swiper-button-next-custom",
-            }}
-            pagination={{ clickable: true, el: ".custom-pagination" }}
-            spaceBetween={30}
-            slidesPerView={3}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-          >
-            {services.map((service, i) => (
-              <SwiperSlide key={i}>
-                <div
-                  className="relative h-[450px] overflow-hidden group shadow-lg"
-                  style={{
-                    backgroundImage: `url(${service.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                >
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition flex flex-col justify-end p-6">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div
-                        className={clsx(
-                          "bg-green-600 w-14 h-14 rounded-full flex items-center justify-center shrink-0",
-                          "[&>svg]:w-8 [&>svg]:h-8 [&>svg]:block",
-                          "transition-transform duration-500",
-                          shake && "animate-shake"
-                        )}
-                      >
-                        {service.icon}
-                      </div>
-                      <h3 className="text-lg font-bold text-white">
-                        {service.title}
-                      </h3>
-                    </div>
-                    <p className="text-sm text-white opacity-90">
-                      {service.description}
-                    </p>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-
-        <div className="custom-pagination mt-6 flex justify-center gap-2"></div>
+        <CurvedCarousel />
       </div>
     </section>
   );

@@ -16,9 +16,9 @@ export default function HomePage() {
       <HowWeWorkSection />
       <LaundryService />
       <HomepageServices />
-      <HomepagePricingCards />
-      <TestimonialsSection />
+      {/* <HomepagePricingCards /> */}
       <HomepagePricePackages />
+      <TestimonialsSection />
       {/* <MapSection/> */}
     </>
   );

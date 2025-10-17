@@ -9,6 +9,56 @@ import { useEffect, useState } from "react";
 import { FaTshirt } from "react-icons/fa";
 import { MdIron } from "react-icons/md";
 import MapSection from "./map-section";
+import { FaArrowDownLong } from "react-icons/fa6";
+
+// Small Cards
+
+interface SmallPackageCardProps {
+  title: string;
+  price: number;
+  description: string;
+}
+
+function SmallPackageCard({
+  title,
+  price,
+  description,
+}: SmallPackageCardProps) {
+  const router = useRouter();
+
+  const handleOrderClick = () => {
+    router.push("/services");
+  };
+
+  return (
+    <div className="w-full h-full border border-[#CCCCCC]  overflow-hidden">
+      {/* Top section */}
+      <div className="bg-[#F3F6F4] h-1/2 flex flex-col justify-evenly items-center text-secondary-green py-4">
+        <h2 className="text-3xl font-bold text-secondary-green py-2 ">
+          {title}
+        </h2>
+        <h3 className="text-3xl font-normal flex items-center gap-2">
+          {price.toFixed(2)} <span className="text-xl font-medium">AED</span>
+        </h3>
+      </div>
+
+      {/* Bottom section */}
+      <div className="bg-white h-1/2 py-4 flex items-center text-secondary-green">
+        <div className="w-full flex flex-col items-center justify-center">
+          <h3 className="text-zinc-600 py-2 text-xl font-medium">
+            {description}
+          </h3>
+          <button
+            onClick={handleOrderClick}
+            className="mt-4 px-20 py-3 rounded bg-secondary-green font-semibold text-white transition-colors duration-300 hover:bg-white cursor-pointer cta-button"
+          >
+            Order Now
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 // --- Packages Data ---
 const packagesData = [
@@ -60,58 +110,60 @@ const PackageCard: React.FC<PackageCardProps> = ({
   packageInfo,
   onOrderNow,
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
   const { id, icon: Icon, title, features, price, originalPrice } = packageInfo;
 
   return (
-    <Card
-      className="group relative flex w-full max-w-sm flex-col cursor-pointer border-none bg-white transition-all duration-300 hover:shadow-lg"
-      onClick={() => setIsExpanded(!isExpanded)}
-    >
+    <Card className="group relative flex w-full flex-col cursor-pointer rounded-none border border-[#CCCCCC] p-0 m-0 bg-white transition-all duration-300">
       <CardContent
-        className={`flex h-full flex-col p-6 transition-all duration-300 ${
-          isExpanded ? "pt-4 pb-4" : "group-hover:pt-4 group-hover:pb-4"
-        }`}
+        className={`flex h-full flex-col p-0 m-0 transition-all duration-300`}
       >
-        <div className="mb-4 flex flex-col items-center text-center">
-          <div className="mb-3 rounded-full bg-green-100 p-4 text-green-600">
-            <Icon size={28} />
-          </div>
-          <h3 className="text-lg font-bold text-gray-800">{title}</h3>
-          {/* <p className="text-sm font-medium text-green-600">Clothes Per Month</p> */}
-        </div>
-        <ul className="mb-4 space-y-2 text-sm text-gray-700">
-          {features.map((feature, index) => (
-            <li key={index} className="flex items-start gap-2">
-              <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-500" />
-              {feature}
-            </li>
-          ))}
-        </ul>
-        <div className="border-t border-gray-100 pt-4 text-center">
-          {originalPrice && (
-            <p className="mb-1 text-sm text-gray-500 line-through">
-              {originalPrice.toFixed(2)}
+        {/* header */}
+        <div className="relative px-10 pt-6 py-12 flex flex-col items-center text-center text-white bg-primary-green">
+          <h3 className="text-3xl font-bold  text-white">{title}</h3>
+          <div className=" py-2 flex items-center gap-3 text-center">
+            {originalPrice && (
+              <p className="text-3xl font-medium text-white line-through">
+                {originalPrice.toFixed(2)}
+              </p>
+            )}
+            <p className="text-3xl font-normal text-white">
+              {price.toFixed(2)} AED
             </p>
-          )}
-          <p className="text-2xl font-bold text-gray-900">{price.toFixed(2)}</p>
+          </div>
+          <div className=" border border-primary-green absolute -bottom-[10%] left-[50%] -translate-x-[50%] rounded-full bg-white p-2 text-green-600">
+            <FaArrowDownLong size={20} />
+          </div>
         </div>
-        <div
-          className={`overflow-hidden transition-all duration-300 ${
-            isExpanded
-              ? "translate-y-0 opacity-100"
-              : "translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
-          }`}
-        >
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onOrderNow(id);
-            }}
-            className="mt-4 w-full bg-green-600 py-3 font-semibold text-white transition-colors duration-300 hover:bg-green-700"
-          >
-            Order Now
-          </button>
+        <div className="w-full py-6 px-4 bg-[#F3F6F4]">
+          <h2 className="text-xl text-center font-medium text-primary-green my-3">
+            The Cost of Clean Clothes Benefits
+          </h2>
+          <div className="w-full flex justify-center">
+            <div className="max-w-fit">
+              <ul className="mb-4 space-y-2 text-sm text-gray-700">
+                {features.map((feature, index) => (
+                  <li
+                    key={index}
+                    className="flex items-start text-lg font-medium gap-2"
+                  >
+                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="w-full flex justify-center">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onOrderNow(id);
+              }}
+              className="mt-4 px-20 py-3 rounded bg-secondary-green font-semibold text-white transition-colors duration-300 hover:bg-white cursor-pointer cta-button"
+            >
+              Order Now
+            </button>
+          </div>
         </div>
       </CardContent>
     </Card>
@@ -143,7 +195,7 @@ async function getFirstServiceItem(slug: string) {
 // --- Main Pickup Packages Component ---
 const PickupPackages: React.FC = () => {
   const router = useRouter();
-  const { replaceCart } = useCart(); // ✅ Use cart context
+  const { replaceCart } = useCart(); // Use cart context
 
   const [serviceItem, setServiceItem] = useState<{
     id: string;
@@ -183,30 +235,62 @@ const PickupPackages: React.FC = () => {
   };
 
   return (
-    <section className="flex flex-col sm:flex-row justify-center  p-6 md:px-12 lg:px-24 items-stretch gap-6 mb-0 md:mb-8 lg:mb-16">
-      <div className=" w-full flex-grow md:pr-16">
-        <div className="flex justify-end gap-6 sm:gap-11">
-          {packagesData.map((pkg) => (
-            <PackageCard
-              key={pkg.id}
-              packageInfo={pkg}
-              onOrderNow={handleOrderNow}
-            />
-          ))}
-        </div>
+    <section className="flex flex-col justify-center  p-6 md:px-12 lg:px-24 items-center gap-6 mb-0 md:mb-8 lg:mb-16">
+      <div className="w-full">
+        <h1 className="text-3xl font-medium text-center">
+          <span className="text-primary-green">Our Laundry </span>
+          Service Prices
+        </h1>
+        <h2 className="text-xl font-medium text-[#606060] text-center my-3">
+          Affordable Prices
+        </h2>
+        <p className="text-center text-zinc-600 text-base font-normal">
+          Our prices are simple and affordable which are easy on pocket in
+          comparison with the high street prices.
+        </p>
       </div>
-      {/* map */}
-      <div className="flex items-stretch w-full rounded-lg overflow-hidden">
-        <iframe
-          className="h-[100%] w-full"
-          title="Freshora Laundry Location"
-          src="https://www.google.com/maps?q=Shop%20No%204%2C%20Azizi%20Riviera%2042%2C%20Meydan%2C%20Al%20Merkadh%2C%20Dubai%20UAE&output=embed"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          aria-label="Google Map showing Freshora Laundry at Shop no 4, Azizi Riviera 42, Meydan, Dubai"
-        />
+      {/* offer cards */}
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* 1st col offer */}
+        <div className="grid grid-cols-1 gap-6">
+          {/* small cards  */}
+          <SmallPackageCard
+            title="Blanket Service"
+            price={25.0}
+            description="Washed and Pressed"
+          />
+          <SmallPackageCard
+            title="Ironing Service"
+            price={3.0}
+            description="Iron and Fold"
+          />
+        </div>
+        {/* 2nd col offer */}
+        <div className=" w-full flex-grow">
+          <div className="flex justify-center gap-6 sm:gap-11">
+            {packagesData.map((pkg) => (
+              <PackageCard
+                key={pkg.id}
+                packageInfo={pkg}
+                onOrderNow={handleOrderNow}
+              />
+            ))}
+          </div>
+        </div>
+        {/* 3rd col offer */}
+        <div className="grid grid-cols-1 md:hidden lg:grid lg:grid-cols-1 gap-6">
+          <SmallPackageCard
+            title="Curtains Service"
+            price={25.0}
+            description="Washed and Pressed"
+          />
+
+          <SmallPackageCard
+            title="Repairs & Alterations"
+            price={12.0}
+            description="Simple Sewing"
+          />
+        </div>
       </div>
     </section>
   );
