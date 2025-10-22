@@ -1,10 +1,9 @@
-"use client"
+"use client";
 
-
-import { Clock, Mail, MapPin, Phone } from "lucide-react"
-import Link from "next/link"
-import type React from "react"
-import { useState } from "react"
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
+import type React from "react";
+import { useState } from "react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -12,25 +11,27 @@ export default function ContactPage() {
     email: "",
     phone: "",
     message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
-    type: "success" | "error" | null
-    message: string
-  }>({ type: null, message: "" })
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus({ type: null, message: "" })
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
 
     try {
       const response = await fetch("/api/send-question", {
@@ -39,118 +40,150 @@ export default function ContactPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (response.ok) {
         setSubmitStatus({
           type: "success",
           message: "Your message has been sent successfully!",
-        })
+        });
         // Reset form
         setFormData({
           name: "",
           email: "",
           phone: "",
           message: "",
-        })
+        });
       } else {
         setSubmitStatus({
           type: "error",
           message: data.error || "Failed to send message",
-        })
+        });
       }
     } catch (error) {
       setSubmitStatus({
         type: "error",
         message: "Network error. Please try again later.",
-      })
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen ">
+      {/* Header Section */}
       <div
-        className="relative h-32 sm:h-40 bg-cover bg-center flex items-center"
+        className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center bg-fixed flex items-center justify-center px-6"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.JPG?height=400&width=1200&text=Laundry+Machines+Background')`,
+          backgroundImage: `url('/images/redesign/about-banner.png')`,
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <nav className="flex items-center space-x-1 sm:space-x-2 text-white mb-2 text-sm">
-            <Link href="/" className="hover:text-green-400 transition-colors">
-              Home
-            </Link>
-            <span className="px-1 sm:px-2">/</span>
-            <span className="hover:text-green-400">Contact</span>
-          </nav>
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">Contact</h1>
+        {" "}
+        {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
+        <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center z-30">
+          <p>
+            Make Freshora as your laundry partner.
+            <span className="text-[#FFFF00]">We are just one call away!</span>
+          </p>
         </div>
       </div>
+      {/* breadcrumbs */}
+      <div className="w-full max-w-7xl mx-auto px-6 py-5 ">
+        <nav className="flex items-center space-x-1 sm:space-x-2 text-black">
+          <Link
+            href="/"
+            className="hover:text-green-400 text-sm sm:text-base transition-colors"
+          >
+            Home
+          </Link>
+          <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
+          <span className="text-green-400 text-sm sm:text-base">FAQs</span>
+        </nav>
+      </div>
 
-      <section className="py-8 sm:py-10 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-green-600 text-sm font-semibold mb-2 tracking-wide">[ Get in Touch With Us ]</h2>
-          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-8 text-gray-800">Contact Information</h1>
+      <section className=" max-w-7xl mx-auto py-8 sm:py-10 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="my-10">
+          <h2 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
+            Contact
+            <span className="text-secondary-green"> Information</span>
+          </h2>
+          <h3 className="text-xl my-3 font-medium text-gray-600 text-center">
+            Frequently Asked Questions
+          </h3>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <MapPin className="w-6 h-6 text-green-600" />
-              </div>
-              <h3 className="font-semibold text-base mb-2 text-gray-800">Post Address</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Shop no 4, Azizi riviera 42 Meydan 
-                <br />
-                 Al Merkadh , Dubai UAE
-              </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="text-center">
+            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <MapPin className="w-6 h-6 text-green-600" />
             </div>
+            <h3 className="font-semibold text-base mb-2 text-gray-800">
+              Post Address
+            </h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Shop no 4, Azizi riviera 42 Meydan
+              <br />
+              Al Merkadh , Dubai UAE
+            </p>
+          </div>
 
-            <div className="text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Phone className="w-6 h-6 text-green-600" />
-              </div>
-              <h3 className="font-semibold text-base mb-2 text-gray-800">Contact Phone</h3>
-              <p className="text-gray-600 text-sm">
-  <a href="tel:+971509259667" className="hover:text-green-600 transition-colors">
-    +971 50 925 9667
-  </a>
-</p>
+          <div className="text-center">
+            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Phone className="w-6 h-6 text-green-600" />
             </div>
+            <h3 className="font-semibold text-base mb-2 text-gray-800">
+              Contact Phone
+            </h3>
+            <p className="text-gray-600 text-sm">
+              <a
+                href="tel:+971509259667"
+                className="hover:text-green-600 transition-colors"
+              >
+                +971 50 925 9667
+              </a>
+            </p>
+          </div>
 
-            <div className="text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Mail className="w-6 h-6 text-green-600" />
-              </div>
-              <h3 className="font-semibold text-base mb-2 text-gray-800">E-mail Address</h3>
-              <p className="text-gray-600 text-sm">freshorappc@gmail.com</p>
+          <div className="text-center">
+            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Mail className="w-6 h-6 text-green-600" />
             </div>
+            <h3 className="font-semibold text-base mb-2 text-gray-800">
+              E-mail Address
+            </h3>
+            <p className="text-gray-600 text-sm">freshorappc@gmail.com</p>
+          </div>
 
-            <div className="text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Clock className="w-6 h-6 text-green-600" />
-              </div>
-              <h3 className="font-semibold text-base mb-2 text-gray-800">Opening Hours</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Mon-Fri 08:00 AM - 08:00 PM
-                <br />
-                Sat-Sun: 10am - 8pm
-              </p>
+          <div className="text-center">
+            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Clock className="w-6 h-6 text-green-600" />
             </div>
+            <h3 className="font-semibold text-base mb-2 text-gray-800">
+              Opening Hours
+            </h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Mon-Fri 08:00 AM - 08:00 PM
+              <br />
+              Sat-Sun: 10am - 8pm
+            </p>
           </div>
         </div>
       </section>
 
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+      <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 mb-20 gap-0">
         <div className="bg-white p-6 sm:p-8 lg:p-10 flex flex-col justify-center order-2 lg:order-1">
-          <h3 className="text-2xl sm:text-3xl font-bold mb-2 text-gray-800">Get in Touch.</h3>
-          <h4 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800">We&apos;re Here to Help.</h4>
+          <h3 className="text-2xl sm:text-3xl text-primary-green font-medium mb-2 ">
+            Get in Touch.
+          </h3>
+          <h4 className="text-2xl sm:text-3xl font-medium mb-4 text-secondary-green">
+            We&apos;re Here to Help.
+          </h4>
           <p className="text-gray-600 mb-6 text-sm leading-relaxed">
-            We look forward to helping you create and maintain a clean, healthy environment that&apos;s enjoyable as it
-            is functional.
+            We look forward to helping you create and maintain a clean, healthy
+            environment that&apos;s enjoyable as it is functional.
           </p>
 
           {submitStatus.type && (
@@ -173,7 +206,7 @@ export default function ContactPage() {
               onChange={handleInputChange}
               placeholder="Your name"
               required
-              className="border border-gray-300 rounded-lg w-full p-3 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+              className="border border-gray-300 rounded w-full p-3 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
             />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <input
@@ -183,7 +216,7 @@ export default function ContactPage() {
                 onChange={handleInputChange}
                 placeholder="E-mail"
                 required
-                className="border border-gray-300 rounded-lg w-full p-3 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                className="border border-gray-300 rounded w-full p-3 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
               />
               <input
                 type="tel"
@@ -191,7 +224,7 @@ export default function ContactPage() {
                 value={formData.phone}
                 onChange={handleInputChange}
                 placeholder="Phone"
-                className="border border-gray-300 rounded-lg w-full p-3 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                className="border border-gray-300 rounded w-full p-3 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
               />
             </div>
             <textarea
@@ -201,17 +234,25 @@ export default function ContactPage() {
               placeholder="Your message"
               rows={4}
               required
-              className="border border-gray-300 rounded-lg w-full p-3 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent resize-vertical transition-all"
+              className="border border-gray-300 rounded w-full p-3 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent resize-vertical transition-all"
             ></textarea>
-            <div className="flex items-start gap-2">
-              <input type="checkbox" required className="mt-1 flex-shrink-0 w-4 h-4" />
-              <label className="text-xs text-gray-600 leading-relaxed">I accept the privacy and terms.</label>
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                required
+                className="mt-1 flex-shrink-0 w-4 h-4"
+              />
+              <label className="text-xs text-gray-600 leading-relaxed">
+                I accept the privacy and terms.
+              </label>
             </div>
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full px-6 py-3 rounded-lg transition-colors font-semibold text-sm shadow-lg hover:shadow-xl ${
-                isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-700 text-white"
+              className={`w-full px-6 py-3 rounded transition-colors font-semibold text-sm shadow-lg hover:shadow-xl cta-button ${
+                isSubmitting
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-secondary-green hover:bg-green-700 text-white"
               }`}
             >
               {isSubmitting ? "Sending..." : "Send Message"}
@@ -232,5 +273,5 @@ export default function ContactPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }

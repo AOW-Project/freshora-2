@@ -2,8 +2,9 @@
 
 //import AnimatedParticles from "@/component/AnimatedParticles"
 import { Poppins } from "next/font/google";
+import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,7 +14,7 @@ const poppins = Poppins({
 
 const faqData = [
   {
-    category: "1. Laundry Service ",
+    category: "Laundry Service ",
     questions: [
       {
         q: "Q1: How does Freshora’s laundry service work?",
@@ -38,7 +39,7 @@ const faqData = [
     ],
   },
   {
-    category: "2. Dry Cleaning Service",
+    category: "Dry Cleaning Service",
     questions: [
       {
         q: "Q1: What types of clothes need dry cleaning? ",
@@ -63,7 +64,7 @@ const faqData = [
     ],
   },
   {
-    category: "3. Express Laundry Service ",
+    category: "Express Laundry Service ",
     questions: [
       {
         q: "Q1: What is express laundry service? ",
@@ -88,7 +89,7 @@ const faqData = [
     ],
   },
   {
-    category: "4. Shoe & Bag Spa ",
+    category: "Shoe & Bag Spa ",
     questions: [
       {
         q: "Q1: What items can be cleaned in the Shoe & Bag Spa?",
@@ -113,7 +114,7 @@ const faqData = [
     ],
   },
   {
-    category: "5. Luxury Shoe Cleaning Service ",
+    category: "Luxury Shoe Cleaning Service ",
     questions: [
       {
         q: "Q1: What makes luxury shoe cleaning different? ",
@@ -138,7 +139,7 @@ const faqData = [
     ],
   },
   {
-    category: "6. Commercial Laundry Service  ",
+    category: "Commercial Laundry Service  ",
     questions: [
       {
         q: "Q1: What businesses can benefit from your commercial laundry? ",
@@ -165,7 +166,7 @@ const faqData = [
   },
 
   {
-    category: "7. Curtain Cleaning Service  ",
+    category: "Curtain Cleaning Service  ",
     questions: [
       {
         q: "Q1: Why is professional curtain cleaning important?  ",
@@ -191,7 +192,7 @@ const faqData = [
     ],
   },
   {
-    category: "8. Carpet Cleaning Service   ",
+    category: "Carpet Cleaning Service   ",
     questions: [
       {
         q: "Q1: How often should carpets be professionally cleaned?   ",
@@ -217,7 +218,7 @@ const faqData = [
     ],
   },
   {
-    category: "9. Soft Toy Cleaning Service    ",
+    category: "Soft Toy Cleaning Service    ",
     questions: [
       {
         q: "Q1: Why should soft toys be professionally cleaned?   ",
@@ -243,7 +244,7 @@ const faqData = [
     ],
   },
   {
-    category: "10. Steam Pressing Service",
+    category: "Steam Pressing Service",
     questions: [
       {
         q: "Q1: Why should clothes be steam pressed instead of just ironed?   ",
@@ -315,79 +316,106 @@ export default function FAQPage() {
   };
 
   return (
-    <div>
+    <>
       {/* Header Section */}
       <div
-        className="relative h-64 bg-cover bg-center flex items-center"
+        className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center bg-fixed flex items-center justify-center px-6"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.webp?height=400&width=1200')`,
+          backgroundImage: `url('/images/redesign/about-banner.png')`,
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 w-full">
-          {/* Breadcrumb */}
-          <nav className="flex items-center space-x-2 text-white mb-4">
-            <Link href="/" className="hover:text-green-400">
-              Home
-            </Link>
-            <span className="px-2">/</span>
-            <span className="text-green-400">FAQs</span>
-          </nav>
-
-          <h1 className="text-4xl md:text-5xl font-bold text-white">FAQs</h1>
+        {" "}
+        {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
+        <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center z-30">
+          <p>
+            We strive to help you achieve a welcoming,{" "}
+            <span className="text-[#FFFF00]">
+              effective cleaning practices, & personalized attention.
+            </span>
+          </p>
+          <p className="text-[#FFFF00]">
+            effective cleaning practices, & personalized attention.
+          </p>
         </div>
+      </div>
+      {/* breadcrumbs */}
+      <div className="w-full max-w-7xl mx-auto px-6 py-5 ">
+        <nav className="flex items-center space-x-1 sm:space-x-2 text-black">
+          <Link
+            href="/"
+            className="hover:text-green-400 text-sm sm:text-base transition-colors"
+          >
+            Home
+          </Link>
+          <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
+          <span className="text-green-400 text-sm sm:text-base">Contact</span>
+        </nav>
       </div>
 
       {/* FAQ Section */}
-      <section className="max-w-6xl mx-auto py-12 px-4">
-        <div className="text-center mb-10">
-          <p
-            className={`text-green-600 font-medium mb-2 text-center ${poppins.className}`}
-          >
-            [ Frequently Asked Questions ]
-          </p>
-          <h2 className="text-2xl md:text-3xl font-bold">
-            Reliable Answers to Our Most Common Questions
+      <section className="max-w-7xl mx-auto py-12 px-4">
+        <div className="my-10">
+          <h2 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
+            Reliable Answers
+            <span className="text-secondary-green">
+              {" "}
+              to Our Most Common Questions
+            </span>
           </h2>
+          <h3 className="text-xl my-3 font-medium text-gray-600 text-center">
+            Frequently Asked Questions
+          </h3>
         </div>
 
         {/* Accordion */}
         <div className="grid md:grid-cols-2 gap-8">
           {faqData.map((category, categoryIndex) => (
-            <div key={category.category}>
-              <h3 className="text-lg font-semibold mb-4">
+            <div key={categoryIndex} className="relative">
+              {/* question mark */}
+              <div className="absolute left-0 top-0">
+                <Image
+                  src="/images/redesign/faq-question.svg"
+                  alt="question mark"
+                  height={100}
+                  width={60}
+                />
+              </div>
+              <h3 className="text-lg font-semibold text-primary-green pl-20">
                 {category.category}
               </h3>
-              <div className="space-y-2">
-                {category.questions.map((item, questionIndex) => {
-                  const uniqueIndex = `${categoryIndex}-${questionIndex}`;
-                  return (
-                    <div
-                      key={uniqueIndex}
-                      className="border rounded-md bg-white shadow-sm"
-                    >
-                      <button
-                        onClick={() => toggleAccordion(uniqueIndex)}
-                        className="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-gray-50 transition-colors"
-                      >
-                        <span className="font-medium">{item.q}</span>
-                        <span className="text-xl font-bold text-green-600 ml-4 flex-shrink-0">
-                          {openIndex === uniqueIndex ? "−" : "+"}
-                        </span>
-                      </button>
+              <div className=" bg-[#F3F6F4] pl-14 pr-6 pb-4">
+                <div className="space-y-2">
+                  {category.questions.map((item, questionIndex) => {
+                    const uniqueIndex = `${categoryIndex}-${questionIndex}`;
+                    return (
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                          openIndex === uniqueIndex
-                            ? "max-h-96 opacity-100"
-                            : "max-h-0 opacity-0"
-                        }`}
+                        key={uniqueIndex}
+                        className="border-b border-black bg-none"
                       >
-                        <div className="px-4 pb-4 text-gray-600 text-sm leading-relaxed">
-                          {item.a}
+                        <button
+                          onClick={() => toggleAccordion(uniqueIndex)}
+                          className="w-full flex justify-between items-center px-4 py-3 text-secondary-green text-left hover:bg-gray-50 transition-colors"
+                        >
+                          <span className="font-medium">{item.q}</span>
+                          <span className="text-xl font-bold text-secondary-green ml-4 flex-shrink-0">
+                            {openIndex === uniqueIndex ? "−" : "+"}
+                          </span>
+                        </button>
+                        <div
+                          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                            openIndex === uniqueIndex
+                              ? "max-h-96 opacity-100"
+                              : "max-h-0 opacity-0"
+                          }`}
+                        >
+                          <div className="px-4 pb-4 text-gray-600 text-sm leading-relaxed">
+                            {item.a}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             </div>
           ))}
@@ -395,10 +423,12 @@ export default function FAQPage() {
       </section>
 
       {/* Ask Your Question */}
-      <section className="bg-gray-50 py-12">
+      <section className="bg-white py-12">
         <div className="max-w-3xl mx-auto px-4">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold mb-2">Ask Your Question</h3>
+            <h3 className="text-3xl md:text-4xl font-medium mb-2 text-primary-green">
+              Ask Your <span className="text-secondary-green">Question</span>
+            </h3>
             <p className="text-gray-500">
               We look forward to helping you enjoy and maintain a clean, healthy
               environment.
@@ -410,7 +440,7 @@ export default function FAQPage() {
             className="grid md:grid-cols-2 gap-4 relative"
           >
             {success && (
-              <div className="absolute inset-0 flex items-center justify-center bg-white/80 rounded-md z-10 animate-fade">
+              <div className="absolute inset-0 flex items-center justify-center bg-white/80 rounded-sm z-10 animate-fade">
                 <p className="text-green-600 font-semibold text-lg">
                   ✅ Thank you for your question!
                 </p>
@@ -423,7 +453,7 @@ export default function FAQPage() {
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               required
-              className="border border-gray-300 rounded-md p-3 w-full focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              className="border border-gray-400 rounded-sm p-3 w-full focus:ring-2 focus:ring-green-500 focus:border-transparent"
             />
             <input
               type="email"
@@ -431,14 +461,14 @@ export default function FAQPage() {
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               required
-              className="border border-gray-300 rounded-md p-3 w-full focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              className="border border-gray-400 rounded-sm p-3 w-full focus:ring-2 focus:ring-green-500 focus:border-transparent"
             />
             <input
               type="tel"
               placeholder="Phone"
               value={form.phone}
               onChange={(e) => setForm({ ...form, phone: e.target.value })}
-              className="border border-gray-300 rounded-md p-3 w-full focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              className="border border-gray-400 rounded-sm p-3 w-full focus:ring-2 focus:ring-green-500 focus:border-transparent"
             />
             <textarea
               placeholder="Your question"
@@ -446,18 +476,18 @@ export default function FAQPage() {
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
               required
-              className="border border-gray-300 rounded-md p-3 w-full md:col-span-2 focus:ring-2 focus:ring-green-500 focus:border-transparent resize-vertical"
+              className="border border-gray-400 rounded p-3 w-full md:col-span-2 focus:ring-2 focus:ring-green-500 focus:border-transparent resize-vertical"
             ></textarea>
             <button
               type="submit"
               disabled={loading}
-              className="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-md md:col-span-2 transition-colors font-medium disabled:opacity-50"
+              className="bg-secondary-green text-white py-3 px-6 rounded-sm md:col-span-2 transition-colors font-medium disabled:opacity-50 cta-button"
             >
               {loading ? "Sending..." : "Submit Question"}
             </button>
           </form>
         </div>
       </section>
-    </div>
+    </>
   );
 }

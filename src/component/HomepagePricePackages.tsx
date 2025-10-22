@@ -238,8 +238,8 @@ const PickupPackages: React.FC = () => {
     <section className="flex flex-col justify-center  p-6 md:px-12 lg:px-24 items-center gap-6 mb-0 md:mb-8 lg:mb-16">
       <div className="w-full">
         <h1 className="text-3xl font-medium text-center">
-          <span className="text-primary-green">Our Laundry </span>
-          Service Prices
+          <span className="text-primary-green">Our Most Popular </span>
+          Package Prices
         </h1>
         <h2 className="text-xl font-medium text-[#606060] text-center my-3">
           Affordable Prices
