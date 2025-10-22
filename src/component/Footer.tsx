@@ -10,11 +10,29 @@ import {
 import { GrLocation } from "react-icons/gr";
 import { LuClock4 } from "react-icons/lu";
 import { MdMailOutline } from "react-icons/md";
+import { FaArrowUpLong } from "react-icons/fa6";
 
 import Link from "next/link";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export default function Footer() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Show button when user scrolls down 800px
+    const toggleVisibility = () => {
+      if (window.scrollY > 800) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
   // Compute year once to avoid unnecessary recalculation
   const currentYear = useMemo(() => new Date().getFullYear(), []);
 
@@ -252,25 +270,19 @@ export default function Footer() {
       </div>
 
       {/* Floating Scroll to Top Button */}
-      <button
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="fixed bottom-6 right-6 bg-green-500 p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 z-[1000]"
-        aria-label="Scroll to top"
-      >
-        <svg
-          className="w-5 h-5 text-white"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
+      {isVisible && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className={`fixed bottom-6 right-6 bg-secondary-green border-2 border-primary-green p-3 rounded-full shadow-lg hover:bg-primary-green transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-400 z-[1000] ${
+            isVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-10 pointer-events-none"
+          }`}
+          aria-label="Scroll to top"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M5 15l7-7 7 7"
-          />
-        </svg>
-      </button>
+          <FaArrowUpLong size={20} />
+        </button>
+      )}
     </footer>
   );
 }

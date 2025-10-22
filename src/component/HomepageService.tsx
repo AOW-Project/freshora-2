@@ -1,10 +1,7 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { TbIroningSteamFilled } from "react-icons/tb";
 import {
   FaTshirt,
@@ -17,7 +14,6 @@ import {
 import { MdIron } from "react-icons/md";
 import { FaRug, FaWindowMaximize } from "react-icons/fa6";
 import { useState, useEffect } from "react";
-import clsx from "clsx";
 import CurvedCarousel from "./CurvedCarousel";
 
 const services = [

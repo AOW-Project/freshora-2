@@ -358,3 +358,9 @@ body::before {
   background-color: #00a63e;
   transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
+
+/* testimonial slider dots */
+.swiper-pagination {
+  z-index: 50;
+  bottom: -30px !important; /* moves it below the carousel */
+}
