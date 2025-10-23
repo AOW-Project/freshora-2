@@ -7,6 +7,7 @@ import LaundryService from "@/component/LaundryService";
 import ServiceBanner from "@/component/ServiceBanner";
 import ServicesGrid from "@/component/ServicesGrid";
 import type { Metadata } from "next";
+import Link from "next/link";
 // ✅ SEO metadata for Services listing page
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -19,14 +20,15 @@ export async function generateMetadata(): Promise<Metadata> {
       "Carpet Cleaning Dubai",
       "Curtain Cleaning Dubai",
       "Shoe Cleaning Dubai",
-      "Best Laundry Dubai"
+      "Best Laundry Dubai",
     ],
     alternates: {
       canonical: "https://freshoralaundry.com/services",
     },
     openGraph: {
       title: "Laundry & Cleaning Services in Dubai",
-      description: "Explore Freshora’s wide range of laundry and cleaning services in Dubai.",
+      description:
+        "Explore Freshora’s wide range of laundry and cleaning services in Dubai.",
       url: "https://freshoralaundry.com/services",
     },
     twitter: {
@@ -41,15 +43,26 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Services() {
   return (
     <>
-
-    
       {/* <Navbar /> */}
       {/* <Footer /> */}
-     {/* <AnimatedParticles zIndex={5} /> */ }
+      {/* <AnimatedParticles zIndex={5} /> */}
       {/* Content Wrapper */}
       <ServiceBanner />
+      {/* breadcrumbs */}
+      <div className="w-full max-w-7xl mx-auto px-6 py-5 ">
+        <nav className="flex items-center space-x-1 sm:space-x-2 text-black">
+          <Link
+            href="/"
+            className="hover:text-green-400 text-sm sm:text-base transition-colors"
+          >
+            Home
+          </Link>
+          <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
+          <span className="text-green-400 text-sm sm:text-base">Services</span>
+        </nav>
+      </div>
       <ServicesGrid />
-      <LaundryService />
+      {/* <LaundryService /> */}
       <FeaturesComponent />
       <CouponCarousel />
     </>

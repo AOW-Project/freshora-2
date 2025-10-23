@@ -1,11 +1,10 @@
 import { FaLeaf, FaShoePrints, FaTshirt, FaTruck } from "react-icons/fa";
-import { Poppins } from 'next/font/google';
-
+import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'], // Add as needed
-  display: 'swap',
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // Add as needed
+  display: "swap",
 });
 
 const features = [
@@ -39,17 +38,29 @@ export default function FeaturesComponent() {
   return (
     <section className="bg-white py-16">
       <div className="max-w-6xl mx-auto px-4 text-center">
-    <p className={`text-green-600 font-medium mb-2 text-center ${poppins.className}`}>[ Why you’ll love us ]</p>
-        <h2 className="text-3xl font-bold text-gray-800 mb-10">Our Features</h2>
+        <div className="my-10">
+          <h2 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
+            Professional Laundry Services
+            <span className="text-secondary-green">
+              {" "}
+              with a Full Range of Features
+            </span>
+          </h2>
+          <h3 className="text-xl my-3 font-medium text-gray-600 text-center">
+            Why you’ll love us 
+          </h3>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
           {features.map((feature, index) => (
             <div key={index} className="flex gap-4 items-start">
-              <div className="w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md">
+              {/* <div className="w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md">
                 {feature.icon}
-              </div>
+              </div> */}
               <div>
-                <h3 className="font-semibold text-lg text-gray-900 mb-1">{feature.title}</h3>
+                <h3 className="font-semibold text-lg text-secondary-green mb-3">
+                  {feature.title}
+                </h3>
                 <p className="text-gray-600 text-sm">{feature.description}</p>
               </div>
             </div>

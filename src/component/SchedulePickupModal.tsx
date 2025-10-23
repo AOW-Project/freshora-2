@@ -118,7 +118,7 @@ const looksLikeEmail = (email: string): boolean => {
   return true;
 };
 
-const formatMoney = (n: number) => `AED${n.toFixed(2)}`;
+const formatMoney = (n: number) => `AED ${n.toFixed(2)}`;
 
 const buildOrderPayload = ({
   formData,
@@ -498,24 +498,24 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
 
   return (
     <div className="fixed inset-0 backdrop-blur-custom bg-black/30 flex items-center justify-center z-[99999] p-4 animate-in fade-in-0 duration-300">
-      <Card className="w-full max-w-sm rounded-lg shadow-xl border-0 bg-white overflow-hidden animate-in slide-in-from-bottom-4 duration-500">
-        <CardHeader className="flex flex-row items-center justify-between p-3 pb-2">
-          <CardTitle className="text-base font-semibold text-gray-800">
+      <Card className="w-full max-w-sm rounded shadow-xl border-0 bg-white overflow-hidden animate-in slide-in-from-bottom-4 duration-500">
+        <CardHeader className="flex flex-row items-center justify-between p-3 pb-2 border-b">
+          <CardTitle className="text-xl font-medium text-secondary-green">
             Schedule Pickup
           </CardTitle>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
+            className="text-red-600 hover:text-gray-600 transition-colors"
             aria-label="Close"
           >
-            <X className="h-4 w-4" />
+            <X className="h-5 w-5" />
           </button>
         </CardHeader>
 
         <CardContent className="p-3 pt-0">
           {cartItems.length > 0 && (
-            <div className="mb-3 p-2 bg-gray-50 rounded-lg">
-              <h4 className="text-xs font-medium text-gray-700 mb-1">
+            <div className="mb-3 p-2 rounded-lg">
+              <h4 className="text-md font-medium text-gray-700 my-2">
                 Order Summary
               </h4>
               <div className="space-y-1">
@@ -525,7 +525,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                     className="flex justify-between text-xs text-gray-600"
                   >
                     <span>
-                      {item.name} x{item.quantity}
+                      {item.name} x {item.quantity}
                     </span>
                     <span>{formatMoney(item.price * item.quantity)}</span>
                   </div>
@@ -535,7 +535,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                     +{cartItems.length - 3} more items
                   </div>
                 )}
-                <div className="border-t pt-1 mt-1 flex justify-between text-sm font-medium text-gray-800">
+                <div className="border-t border-b py-2 mt-2 flex justify-between text-xl font-medium text-secondary-green">
                   <span>Total</span>
                   <span>{formatMoney(totalAmount)}</span>
                 </div>
@@ -551,7 +551,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
               render={({ field }) => (
                 <Input
                   placeholder="Your Name *"
-                  className="h-8 text-sm"
+                  className="h-8 text-sm rounded"
                   {...field}
                 />
               )}
@@ -571,7 +571,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                       {...field}
                       type="email"
                       placeholder="Email *"
-                      className={`h-8 text-sm flex-1 ${
+                      className={`h-8 text-sm flex-1 rounded ${
                         emailVerificationState === "verified"
                           ? "border-green-500"
                           : ""
@@ -590,7 +590,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                     !watchedEmail ||
                     emailVerificationState === "verified"
                   }
-                  className="h-8 px-2 text-xs bg-transparent"
+                  className="h-8 px-2 text-xs rounded bg-secondary-green text-white"
                 >
                   {emailVerificationState === "verified" ? (
                     <CheckCircle className="h-3 w-3 text-green-600" />
@@ -612,7 +612,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
                     maxLength={6}
-                    className="flex-1 h-8 text-center text-sm"
+                    className="flex-1 h-8 text-center text-sm rounded"
                     inputMode="numeric"
                     autoComplete="one-time-code"
                   />
@@ -621,7 +621,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                     size="sm"
                     onClick={handleVerifyOTP}
                     disabled={otpLoading || !otp}
-                    className="h-8 px-2 text-xs"
+                    className="h-8 px-2 text-xs rounded bg-secondary-green text-white"
                   >
                     OK
                   </Button>
@@ -651,7 +651,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                   {...field}
                   type="tel"
                   placeholder="Phone"
-                  className="h-8 text-sm"
+                  className="h-8 text-sm rounded"
                   value={watch("phone") ?? ""}
                   autoComplete="tel"
                 />
@@ -669,7 +669,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                 <Input
                   {...field}
                   placeholder="Full Address * (at least 5 words)"
-                  className="h-8 text-sm"
+                  className="h-8 text-sm rounded"
                   autoComplete="street-address"
                 />
               )}
@@ -687,7 +687,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                   <Input
                     {...field}
                     placeholder="City *"
-                    className="h-8 text-sm"
+                    className="h-8 text-sm rounded"
                     autoComplete="address-level2"
                   />
                 )}
@@ -699,7 +699,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                   <Input
                     {...field}
                     placeholder="Zip Code"
-                    className="h-8 text-sm"
+                    className="h-8 text-sm rounded"
                     autoComplete="postal-code"
                   />
                 )}
@@ -722,7 +722,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                     <Input
                       {...field}
                       type="date"
-                      className="h-8 text-sm"
+                      className="h-8 text-sm rounded"
                       min={new Date().toISOString().split("T")[0]}
                     />
                   )}
@@ -743,7 +743,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                   control={control}
                   render={({ field }) => (
                     <Select value={field.value} onValueChange={field.onChange}>
-                      <SelectTrigger className="h-8 text-sm min-w-full">
+                      <SelectTrigger className="h-8 text-sm min-w-full rounded">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -804,7 +804,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                 <Textarea
                   {...field}
                   placeholder="Add your instructions here..."
-                  className="min-h-[50px] resize-none text-sm"
+                  className="min-h-[50px] resize-none text-sm rounded"
                   value={watch("specialInstructions") ?? ""}
                 />
               )}
@@ -812,7 +812,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
 
             <Button
               type="submit"
-              className="w-full h-9 bg-green-600 hover:bg-green-700 text-white font-medium text-sm"
+              className="w-full h-9 bg-secondary-green text-white font-medium text-sm rounded cta-button"
               disabled={isSubmitDisabled}
             >
               {loading

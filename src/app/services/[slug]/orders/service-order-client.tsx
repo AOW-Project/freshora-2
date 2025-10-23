@@ -66,13 +66,13 @@ const ItemCard = ({
   const totalAmount = item.price * quantity;
 
   return (
-    <Card className="p-4 flex flex-col">
-      <div className="flex-grow">
+    <Card className="p-4 flex flex-col border border-primary-green rounded ">
+      <div className="flex-grow flex flex-col items-center">
         <h4 className="font-semibold text-lg">{item.name}</h4>
         <p className="text-sm text-gray-600 mb-2">{item.description}</p>
       </div>
       <div className="mt-auto">
-        <div className="flex items-center gap-4 mb-4">
+        <div className="flex justify-center item-center gap-4 mb-4">
           <p className="text-green-600 font-bold text-lg">
             {item.price.toFixed(2)} AED
             {item.unit && (
@@ -90,25 +90,25 @@ const ItemCard = ({
             </div>
           )}
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-2 items-center">
           <div className="flex items-center gap-3">
             <Button
               variant="outline"
               size="sm"
               onClick={() => onUpdateQuantity(item.id, -1)}
               disabled={quantity === 0}
-              className="h-8 w-8 p-0"
+              className="h-8 w-8 p-0 rounded bg-primary-green text-white"
             >
               -
             </Button>
-            <span className="font-medium min-w-[2rem] text-center">
+            <span className="font-medium border rounded border-primary-green p-1 min-w-[2rem] text-center">
               {quantity}
             </span>
             <Button
               variant="outline"
               size="sm"
               onClick={() => onUpdateQuantity(item.id, 1)}
-              className="h-8 w-8 p-0"
+              className="h-8 w-8 p-0 rounded bg-primary-green text-white"
             >
               +
             </Button>
@@ -116,7 +116,7 @@ const ItemCard = ({
           <Button
             onClick={() => onAddToOrder(item, category)}
             disabled={quantity === 0}
-            className="bg-blue-600 hover:bg-blue-700"
+            className="bg-secondary-green w-full rounded hover:bg-primary-green flex-shrink-0"
           >
             Add
           </Button>
@@ -157,17 +157,26 @@ export default function ServiceOrderClient({
 
   const breadcrumbNav = useMemo(
     () => (
-      <nav className="flex items-center space-x-2 text-white mb-4">
-        <Link href="/" className="hover:text-green-400">
-          Home
-        </Link>
-        <span className="px-2">/</span>
-        <Link href="/services" className="hover:text-green-400">
-          Services
-        </Link>
-        <span className="px-2">/</span>
-        <span className="text-green-400">Order</span>
-      </nav>
+      <div className="w-full max-w-7xl mx-auto px-6 py-5 bg-white ">
+        <nav className="flex items-center space-x-1 sm:space-x-2 text-black">
+          <Link
+            href="/"
+            className="hover:text-green-400 text-sm sm:text-base transition-colors"
+          >
+            Home
+          </Link>
+          <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
+          <Link
+            href="/services"
+            className="hover:text-green-400 text-sm sm:text-base transition-colors"
+          >
+            Services
+          </Link>
+          <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
+
+          <span className="text-green-400 capitalize">Order</span>
+        </nav>
+      </div>
     ),
     []
   );
@@ -229,13 +238,13 @@ export default function ServiceOrderClient({
   );
 
   const OrderSummary = () => (
-    <div className="w-full bg-white border border-gray-200 rounded-lg p-6">
+    <div className="w-full bg-white border shadow border-gray-200 rounded p-6">
       <h3 className="text-xl font-bold mb-4">Order Summary</h3>
       <div className="space-y-3 mb-6 max-h-60 overflow-y-auto">
         {tempOrder.map((item) => (
           <div
             key={item.id}
-            className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+            className="flex items-center justify-between p-3 bg-gray-50 rounded"
           >
             <div className="flex-1">
               <h4 className="font-medium text-sm">{item.name}</h4>
@@ -265,7 +274,7 @@ export default function ServiceOrderClient({
       <Button
         onClick={handleAddAllToCart}
         disabled={isAddingToCart}
-        className="w-full bg-green-600 hover:bg-green-700"
+        className="w-full bg-primary-green rounded cta-button"
         size="lg"
       >
         <ShoppingCart className="h-4 w-4 mr-2" />
@@ -292,26 +301,34 @@ export default function ServiceOrderClient({
 
   return (
     <div>
+      {/* Header Banner */}
       <div
-        className="relative h-64 bg-cover bg-center flex items-center"
+        className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center bg-fixed flex items-center justify-center px-6"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/modern-office-laundry.png')`,
+          backgroundImage: `url('/images/redesign/about-banner.png')`,
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 w-full">
-          {breadcrumbNav}
-          <h1 className="text-4xl md:text-5xl font-bold text-white">
-            Select Your Items
-          </h1>
+        {" "}
+        {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
+        <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center z-30">
+          <p>
+            Professional Laundry{" "}
+            <span className="text-[#FFFF00]">
+              Services Designed for Your Lifestyle
+            </span>
+          </p>
         </div>
       </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        {breadcrumbNav}
+      </div>
 
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-white">
         <div className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto px-4 py-6">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                <h1 className="text-3xl md:text-4xl font-bold text-secondary-green mb-2">
                   {service.title}
                 </h1>
                 <div className="flex items-center gap-4">
@@ -351,20 +368,28 @@ export default function ServiceOrderClient({
         </div>
 
         {/* --- RESPONSIVE LAYOUT FIX --- */}
-        <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="max-w-7xl mx-auto px-4 py-20 grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2">
-            <Card>
-              <CardContent className="p-6">
-                <Tabs defaultValue={categories[0]} className="w-full">
+            <Card className="p-0 relative rounded-none">
+              <CardContent className="p-4">
+                <Tabs
+                  defaultValue={categories[0]}
+                  className="w-full border-0 shadow-0"
+                >
                   <TabsList
-                    className="grid w-full"
+                    className="grid gap-4 absolute right-0 -top-12 w-full bg-white"
                     style={{
                       gridTemplateColumns: `repeat(${categories.length}, minmax(0, 1fr))`,
                     }}
                   >
                     {categories.map((category) => (
-                      <TabsTrigger key={category} value={category}>
+                      <TabsTrigger
+                        className={`py-3 rounded-t-xl rounded-b-none border-0 transition-all duration-300 data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:font-semibold data-[state=inactive]:bg-gray-100 data-[state=inactive]:text-gray-600 hover:bg-primary-green/80 hover:text-white
+        `}
+                        key={category}
+                        value={category}
+                      >
                         {category
                           .replace(/-/g, " ")
                           .replace(/\b\w/g, (l) => l.toUpperCase())}

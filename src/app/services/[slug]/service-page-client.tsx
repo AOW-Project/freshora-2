@@ -11,6 +11,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Clock, Mail, Phone, CheckCircle } from "lucide-react";
 import type { Service } from "./page";
 import LoadingOverlay from "@/component/LoadingOverlay";
+import { RiCheckDoubleLine } from "react-icons/ri";
+import CouponCarousel from "@/component/CouponCarousel";
 
 type FormState = {
   name: string;
@@ -89,20 +91,26 @@ export default function ServicePageClient({
 
   const breadcrumbNav = useMemo(
     () => (
-      <nav className="flex items-center space-x-1 sm:space-x-2 text-white mb-3 sm:mb-4 text-sm">
-        <Link href="/" className="hover:text-green-400 transition-colors">
-          Home
-        </Link>
-        <span className="px-1 sm:px-2">/</span>
-        <Link
-          href="/services"
-          className="hover:text-green-400 transition-colors"
-        >
-          Services
-        </Link>
-        <span className="px-1 sm:px-2">/</span>
-        <span className="text-green-400 capitalize">{service.title}</span>
-      </nav>
+      <div className="w-full max-w-7xl mx-auto px-6 py-5 bg-white ">
+        <nav className="flex items-center space-x-1 sm:space-x-2 text-black">
+          <Link
+            href="/"
+            className="hover:text-green-400 text-sm sm:text-base transition-colors"
+          >
+            Home
+          </Link>
+          <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
+          <Link
+            href="/services"
+            className="hover:text-green-400 text-sm sm:text-base transition-colors"
+          >
+            Services
+          </Link>
+          <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
+
+          <span className="text-green-400 capitalize">{service.title}</span>
+        </nav>
+      </div>
     ),
     [service.title]
   );
@@ -151,38 +159,44 @@ export default function ServicePageClient({
   return (
     <>
       <LoadingOverlay show={isNavigating} />
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-white">
         {/* Header Banner */}
         <div
-          className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center flex items-center"
+          className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center bg-fixed flex items-center justify-center px-6"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/modern-office-laundry.png')`,
+            backgroundImage: `url('/images/redesign/about-banner.png')`,
           }}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            {breadcrumbNav}
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white capitalize">
-              {service.title}
-            </h1>
+          {" "}
+          {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
+          <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center z-30">
+            <p>
+              Professional Laundry{" "}
+              <span className="text-[#FFFF00]">
+                Services Designed for Your Lifestyle
+              </span>
+            </p>
           </div>
         </div>
-
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          {breadcrumbNav}
+        </div>
         {/* Main Layout */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
             {/* Sidebar Categories */}
             <aside className="lg:col-span-3 order-2 lg:order-1">
-              <Card className="sticky top-24">
-                <CardContent className="p-0">
+              <Card className="sticky top-24 rounded-none border-0 p-0 overflow-hidden shadow-none">
+                <CardContent className="p-0  overflow-hidden ">
                   <div className="lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
                     {serviceCategories.map((category) => (
                       <Link
                         key={category.slug}
                         href={`/services/${category.slug}`}
-                        className={`block px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 last:border-b-0 transition-colors text-sm sm:text-base ${
+                        className={`block px-4 sm:px-6 py-3  sm:py-4 transition-colors text-sm border border-gray-500 rounded-tr-sm sm:text-base ${
                           category.slug === slug
-                            ? "bg-green-600 text-white"
-                            : "hover:bg-gray-50 text-gray-700"
+                            ? "bg-white text-primary-green border-r-0 border-b-0"
+                            : "hover:bg-primary-green bg-gray-50 text-gray-800 hover:text-white"
                         }`}
                       >
                         {category.name}
@@ -195,8 +209,35 @@ export default function ServicePageClient({
 
             {/* Main Content */}
             <main className="lg:col-span-6 order-1 lg:order-2">
+              {/* Service Details*/}
+              <div className="z-50 bg-white pt-5 pb-2 rounded-lg">
+                <div className="mb-6 ">
+                  <h2 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
+                    {service.title}
+                  </h2>
+                  <h3 className="text-xl my-3 font-medium text-gray-600 text-center">
+                    What we offer
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                    {service.fullDescription}
+                  </p>
+                </div>
+                {/* get the services button */}
+                <div className="my-4 h-11  bg-gray-50">
+                  <Link href={`/services/${slug}/orders`}>
+                    <Button
+                      onClick={() => setIsNavigating(true)}
+                      variant="outline"
+                      className="w-full h-full bg-secondary-green text-white cta-button font-semibold cursor-pointer"
+                    >
+                      Get the Service
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Service Image */}
               <div className="">
-                {/* Service Image */}
                 <div className=" relative w-full h-48 sm:h-56 md:h-64 lg:h-80 rounded-lg shadow-lg overflow-hidden">
                   <Image
                     src={service.image || "/images/layout01-img01.jpg"}
@@ -208,82 +249,56 @@ export default function ServicePageClient({
                 </div>
               </div>
 
-              {/* Service Details*/}
-              <div className="flex flex-col">
-                {/* Service Content */}
-                <div className="flex flex-col">
-                  <div className="sticky top-14 bg-gray-50 z-50 pt-12 rounded-lg ">
-                    <div className="border-l-4 border-green-600 pl-4 mb-6 ">
-                      <h4 className="text-green-600 font-medium mb-2 text-sm sm:text-base">
-                        What we offer
-                      </h4>
-                      <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
-                        {service.title}
-                      </h2>
-                      <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                        {service.fullDescription}
-                      </p>
-                    </div>
-
-                    {/* get the services button */}
-                    <div className="my-8 h-11  bg-gray-50">
-                      <Link href={`/services/${slug}/orders`}>
-                        <Button
-                          onClick={() => setIsNavigating(true)}
-                          variant="outline"
-                          className="w-full h-full bg-green-600 hover:bg-green-700 text-white hover:text-white font-semibold cursor-pointer"
-                        >
-                          Get the Service
-                        </Button>
-                      </Link>
-                    </div>
+              {/* Features */}
+              <h3 className="text-lg sm:text-2xl font-medium my-4 text-secondary-green">
+                {service.secondaryTitle}
+              </h3>
+              <p
+                style={{ whiteSpace: "pre-line" }}
+                className="text-gray-600 leading-relaxed mb-6 text-sm sm:text-base"
+              >
+                {service.secondaryDescription}
+              </p>
+              <div className="grid grid-cols-1  gap-3 sm:gap-4 mb-6 sm:mb-8">
+                {service.features.map((feature, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <RiCheckDoubleLine
+                      size={20}
+                      className="text-primary-green flex-shrink-0"
+                    />
+                    <span className="text-xl font-medium sm:text-base text-secondary-green">
+                      {feature}
+                    </span>
                   </div>
-
-                  {/* Features */}
-                  <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-800">
-                    {service.secondaryTitle}
-                  </h3>
-                  <p
-                    style={{ whiteSpace: "pre-line" }}
-                    className="text-gray-600 leading-relaxed mb-6 text-sm sm:text-base"
-                  >
-                    {service.secondaryDescription}
-                  </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-                    {service.features.map((feature, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                        <span className="text-sm sm:text-base text-gray-700">
-                          {feature}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Extra Images */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 sm:mb-8">
-                    {service.gallery.slice(0, 2).map((imgSrc, index) => (
-                      <div
-                        key={index}
-                        className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden"
-                      >
-                        <Image
-                          src={imgSrc}
-                          height={300}
-                          width={400}
-                          alt={`${service.title} gallery image ${index + 1}`}
-                          className="object-cover"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </div>
+
+              {/* Extra Images */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 sm:mb-8">
+                {service.gallery.slice(0, 2).map((imgSrc, index) => (
+                  <div
+                    key={index}
+                    className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden"
+                  >
+                    <Image
+                      src={imgSrc}
+                      height={300}
+                      width={400}
+                      alt={`${service.title} gallery image ${index + 1}`}
+                      className="object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Coupon */}
+
+              <CouponCarousel />
             </main>
 
             <aside className="lg:col-span-3 order-3">
               {/* Contact Info */}
-              <Card className="h-fit sticky top-24">
+              <Card className="h-fit mb-6">
                 <CardContent className="p-4 sm:p-6">
                   <h3 className="text-lg font-semibold mb-4 text-gray-800">
                     Our Contacts
@@ -291,6 +306,15 @@ export default function ServicePageClient({
                   {contactInfo}
                 </CardContent>
               </Card>
+              {/* Special Offer */}
+
+              <div className="sticky top-24 w-full h-44 flex flex-col justify-center items-center bg-secondary-green rounded">
+                <h2 className="text-xl font-medium text-[#FFFF00]">Special</h2>
+                <h2 className="text-xl font-medium text-[#FFFF00]">
+                  Welcome Offer
+                </h2>
+                <p className="text-base text-white">Click Here</p>
+              </div>
               {/* Ask Question Form */}
               {/* <Card className="">
                 <CardContent className="p-4 sm:p-6">

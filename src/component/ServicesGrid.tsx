@@ -95,18 +95,17 @@ const services = [
 
 const ServicesGrid = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-16">
-      <h4
-        className={`text-green-600 font-medium mb-2 text-center ${poppins.className}`}
-      >
-        [ Our Services ]
-      </h4>
-      <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">
-        Dry Cleaning & Laundry,
-        <br />
-        Free Delivery
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="max-w-7xl mx-auto px-4">
+      <div className="my-10">
+        <h2 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
+          Professional
+          <span className="text-secondary-green"> Laundry Sevices</span>
+        </h2>
+        <h3 className="text-xl my-3 font-medium text-gray-600 text-center">
+          Our Services
+        </h3>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2  gap-8">
         {services.map((service) => (
           <ServiceCard
             key={service.id}

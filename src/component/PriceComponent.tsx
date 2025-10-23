@@ -7,6 +7,7 @@ import { FaTshirt, FaHandsWash, FaBed } from "react-icons/fa";
 import { MdIron } from "react-icons/md";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import HomepagePricePackages from "@/component/HomepagePricePackages";
 import {
   CheckCircle,
   ShoppingCart,
@@ -46,30 +47,18 @@ const useWindowSize = () => {
 const ServiceBanner: React.FC = () => {
   return (
     <div
-      className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center flex items-center"
+      className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center bg-fixed flex items-center justify-center px-6"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.webp?height=400&width=1200&text=Laundry+Machines+Background')`,
+        backgroundImage: `url('/images/redesign/about-banner.png')`,
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <nav className="flex items-center space-x-1 sm:space-x-2 text-white mb-3 sm:mb-4">
-          <Link
-            href="/"
-            className="hover:text-green-400 text-sm sm:text-base transition-colors"
-          >
-            Home
-          </Link>
-          <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
-          <Link
-            href="/pricing"
-            className="hover:text-green-400 text-sm sm:text-base transition-colors"
-          >
-            Prices
-          </Link>
-        </nav>
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-          Prices
-        </h1>
+      {" "}
+      {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
+      <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center z-30">
+        <p>Our prices are simple & affordable which are easy</p>
+        <p className="text-[#FFFF00]">
+          on pocket in comparison with the high street prices.
+        </p>
       </div>
     </div>
   );
@@ -106,7 +95,7 @@ const ServicePriceCard: React.FC<ServicePriceCardProps> = ({
       </div>
       <div className="absolute bottom-3 sm:bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-y-0 translate-y-4">
         <Link href="/services">
-          <button className="px-4 sm:px-6 py-2 bg-green-600 text-white text-xs sm:text-sm font-semibold hover:bg-green-700 transition-colors duration-300 shadow-md">
+          <button className="px-4 sm:px-6 py-2 bg-green-600 text-white text-xs sm:text-sm font-semibold hover:bg-primary-green transition-colors duration-300 shadow-md">
             Order Now
           </button>
         </Link>
@@ -115,100 +104,40 @@ const ServicePriceCard: React.FC<ServicePriceCardProps> = ({
   );
 };
 
-const ServiceCarousel: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [cardsToShow, setCardsToShow] = useState(1);
-  const { width } = useWindowSize();
+interface PricingTableProps {
+  title: string;
+  table: {
+    item: string;
+    price: string | number;
+    washPress?: string | number;
+    dryCleaning?: string | number;
+    steamPressing?: string | number;
+  }[];
+}
 
-  const services = [
-    {
-      icon: FaTshirt,
-      title: "Shirts Service",
-      description: "Washed and Pressed",
-      price: "6.00",
-    },
-    {
-      icon: FaHandsWash,
-      title: "Day Dress Service",
-      description: "price of Day dress service",
-      price: "8.00",
-    },
-    { icon: MdIron, title: "Press", description: "Press", price: "3.00" },
-    {
-      icon: FaBed,
-      title: "Bedding",
-      description: "Bed Set (Wash and Press)",
-      price: "10.50",
-    },
-  ];
-
-  useEffect(() => {
-    if (width === 0) return;
-    if (width >= 1280) setCardsToShow(4);
-    else if (width >= 1024) setCardsToShow(3);
-    else if (width >= 768) setCardsToShow(2);
-    else setCardsToShow(1);
-  }, [width]);
-
-  const nextSlide = () =>
-    setCurrentSlide((prev) =>
-      Math.min(prev + 1, services.length - cardsToShow)
-    );
-  const prevSlide = () => setCurrentSlide((prev) => Math.max(prev - 1, 0));
-
-  const maxSlide = Math.max(0, services.length - cardsToShow);
-
+const PricingTable: React.FC<PricingTableProps> = ({ title, table }) => {
   return (
-    <div className="relative px-4 sm:px-8 md:px-12">
-      <div className="relative overflow-hidden">
-        <div
-          className="flex transition-transform duration-500 ease-in-out"
-          style={{
-            transform: `translateX(-${(currentSlide * 100) / cardsToShow}%)`,
-            width: `${(services.length * 100) / cardsToShow}%`,
-          }}
-        >
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="px-2 sm:px-4"
-              style={{ width: `${100 / services.length}%` }}
-            >
-              <ServicePriceCard {...service} />
-            </div>
-          ))}
-        </div>
-
-        {/* Navigation Arrows */}
-        <button
-          onClick={prevSlide}
-          disabled={currentSlide === 0}
-          className="absolute left-0 sm:left-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg p-2 sm:p-3 hover:bg-green-50 transition-colors z-10 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <ChevronLeft className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
-        </button>
-        <button
-          onClick={nextSlide}
-          disabled={currentSlide >= maxSlide}
-          className="absolute right-0 sm:right-2 top-1/2 transform -translate-y-1/2 bg-white shadow-lg p-2 sm:p-3 hover:bg-green-50 transition-colors z-10 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <ChevronRight className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
-        </button>
-
-        {/* Dots Indicator */}
-        <div className="flex justify-center mt-6 sm:mt-8 space-x-2 sm:space-x-3">
-          {Array.from({ length: maxSlide + 1 }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors ${
-                currentSlide === index ? "bg-green-600" : "bg-gray-300"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
+    <table className="w-full border border-primary-green rounded-2xl overflow-hidden shadow-sm">
+      <thead>
+        <tr className="bg-primary-green text-white text-center">
+          <th colSpan={2} className="py-3 text-lg font-semibold tracking-wide">
+            {title}
+          </th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-gray-200">
+        {table.map((item, index) => (
+          <tr key={index} className="hover:bg-gray-50 transition-colors">
+            <td className="py-3 sm:py-4 px-6 text-gray-700 text-sm sm:text-base">
+              {item.item}
+            </td>
+            <td className="py-3 sm:py-4 px-6 font-semibold text-primary-green text-base sm:text-lg text-right">
+              {item.price}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 
@@ -523,6 +452,14 @@ const luxuryShoes = [
   { item: "Designer Formal Shoes", price: "140.00" },
 ];
 
+const mostPopularItems = [
+  { item: "Shirts/T-Shirts", price: "6.00" },
+  { item: "Trouser", price: "6.00" },
+  { item: "Blouse", price: "8.00" },
+  { item: "Coat/Jacket", price: "15.00" },
+  { item: "Suit (2pcs)", price: "25.00" },
+];
+
 const packagesData = [
   {
     id: "standard",
@@ -604,7 +541,7 @@ const PackageCard: React.FC<PackageCardProps> = ({
               e.stopPropagation();
               onOrderNow(id);
             }}
-            className="mt-4 w-full bg-green-600 py-3 font-semibold text-white transition-colors duration-300 hover:bg-green-700"
+            className="mt-4 w-full bg-green-600 py-3 font-semibold text-white transition-colors duration-300 hover:bg-primary-green"
           >
             Order Now
           </button>
@@ -678,29 +615,75 @@ const PricingSection = () => {
   return (
     <>
       <ServiceBanner />
-      <section className="bg-white py-8 sm:py-12 lg:py-20">
+      {/* breadcrumbs */}
+      <div className="w-full max-w-7xl mx-auto px-6 py-5 ">
+        <nav className="flex items-center space-x-1 sm:space-x-2 text-black">
+          <Link
+            href="/"
+            className="hover:text-green-400 text-sm sm:text-base transition-colors"
+          >
+            Home
+          </Link>
+          <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
+          <span className="text-green-400 text-sm sm:text-base">Prices</span>
+        </nav>
+      </div>
+      <section className="bg-white py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Service Carousel Section */}
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h4
-              className={`text-green-600 font-medium mb-2 sm:mb-3 lg:mb-4 text-xs sm:text-sm lg:text-base ${poppins.className}`}
-            >
-              [ Affordable Prices ]
-            </h4>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 lg:mb-6 px-2">
-              Freshora – Accessible Luxury, Transparent Pricing
+          <div className="my-10">
+            <h2 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
+              Accessible Luxury,
+              <span className="text-secondary-green">
+                {" "}
+                Transparent & Affordable Prices
+              </span>
             </h2>
+            <h3 className="text-xl my-3 font-medium text-gray-600 text-center">
+              Our Full Price Table
+            </h3>
           </div>
-          <div className="mb-12 sm:mb-16 lg:mb-20">
-            <ServiceCarousel />
-          </div>
-
-          {/* Full Price Table Section */}
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 lg:mb-6 px-2">
-              Full Price Table
-            </h2>
-          </div>
+          {/* tables */}
+          {/* <div className="w-full grid grid-cols-12 gap-2">
+           
+            <div className="col-span-4 space-y-4">
+              
+              <PricingTable title="Most Popular" table={mostPopularItems} />
+            
+              <PricingTable title="Shoes" table={shoesItems} />
+            
+              <PricingTable title="Luxury Shoes" table={luxuryShoes} />
+            </div>
+        
+            <div className="col-span-8">
+              <table className="w-full border border-primary-green rounded-2xl overflow-hidden shadow-sm">
+                <thead>
+                  <tr className="bg-primary-green text-white text-center">
+                    <th
+                      colSpan={2}
+                      className="py-3 text-lg font-semibold tracking-wide"
+                    >
+                      Apparel
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {forGentleman.map((item, index) => (
+                    <tr
+                      key={index}
+                      className="hover:bg-gray-50 transition-colors"
+                    >
+                      <td className="py-3 sm:py-4 px-6 text-gray-700 text-sm sm:text-base">
+                        {item.item}
+                      </td>
+                      <td className="py-3 sm:py-4 px-6 font-semibold text-primary-green text-base sm:text-lg text-right">
+                        {item.washPress}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div> */}
           <Card className="mb-12 sm:mb-16 lg:mb-20 shadow-lg border-none min-h-[400px]">
             <CardContent className="p-3 sm:p-6 lg:p-8">
               <Tabs
@@ -713,31 +696,31 @@ const PricingSection = () => {
                   <TabsList className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 w-full gap-1 sm:gap-2 p-1 bg-gray-100 rounded-lg h-auto">
                     <TabsTrigger
                       value="popular"
-                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-green-700 data-[state=active]:bg-green-700 data-[state=active]:text-white data-[state=active]:border-green-700 rounded-md whitespace-nowrap"
+                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-primary-green data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:border-primary-green rounded-md whitespace-nowrap"
                     >
                       Most Popular
                     </TabsTrigger>
                     <TabsTrigger
                       value="apparel"
-                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-green-700 data-[state=active]:bg-green-700 data-[state=active]:text-white data-[state=active]:border-green-700 rounded-md"
+                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-primary-green data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:border-primary-green rounded-md"
                     >
                       Apparel
                     </TabsTrigger>
                     <TabsTrigger
                       value="household"
-                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-green-700 data-[state=active]:bg-green-700 data-[state=active]:text-white data-[state=active]:border-green-700 rounded-md"
+                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-primary-green data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:border-primary-green rounded-md"
                     >
                       Household
                     </TabsTrigger>
                     <TabsTrigger
                       value="shoes"
-                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-green-700 data-[state=active]:bg-green-700 data-[state=active]:text-white data-[state=active]:border-green-700 rounded-md"
+                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-primary-green data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:border-primary-green rounded-md"
                     >
                       Shoes
                     </TabsTrigger>
                     <TabsTrigger
                       value="luxury_shoes"
-                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-green-700 data-[state=active]:bg-green-700 data-[state=active]:text-white data-[state=active]:border-green-700 rounded-md whitespace-nowrap col-span-2 sm:col-span-1"
+                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-primary-green data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:border-primary-green rounded-md whitespace-nowrap col-span-2 sm:col-span-1"
                     >
                       Luxury Shoes
                     </TabsTrigger>
@@ -761,7 +744,7 @@ const PricingSection = () => {
                         <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
                           {item.item}
                         </span>
-                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">
+                        <span className="font-bold text-primary-green text-base sm:text-lg whitespace-nowrap">
                           {item.price}
                         </span>
                       </div>
@@ -785,7 +768,7 @@ const PricingSection = () => {
                             <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
                               {item.item}
                             </span>
-                            <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">
+                            <span className="font-bold text-primary-green text-base sm:text-lg whitespace-nowrap">
                               {item.washPress}
                             </span>
                           </div>
@@ -805,7 +788,7 @@ const PricingSection = () => {
                             <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
                               {item.item}
                             </span>
-                            <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">
+                            <span className="font-bold text-primary-green text-base sm:text-lg whitespace-nowrap">
                               {item.washPress}
                             </span>
                           </div>
@@ -826,7 +809,7 @@ const PricingSection = () => {
                         <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
                           {item.item}
                         </span>
-                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">
+                        <span className="font-bold text-primary-green text-base sm:text-lg whitespace-nowrap">
                           {item.washPress}
                         </span>
                       </div>
@@ -845,7 +828,7 @@ const PricingSection = () => {
                         <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
                           {item.item}
                         </span>
-                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">
+                        <span className="font-bold text-primary-green text-base sm:text-lg whitespace-nowrap">
                           {item.price}
                         </span>
                       </div>
@@ -864,7 +847,7 @@ const PricingSection = () => {
                         <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
                           {item.item}
                         </span>
-                        <span className="font-bold text-green-600 text-base sm:text-lg whitespace-nowrap">
+                        <span className="font-bold text-primary-green text-base sm:text-lg whitespace-nowrap">
                           {item.price}
                         </span>
                       </div>
@@ -876,7 +859,7 @@ const PricingSection = () => {
               <div className="flex justify-center mt-6 sm:mt-8">
                 <Link
                   href="/services"
-                  className="px-6 sm:px-8 py-3 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition-colors duration-300 shadow-md text-sm sm:text-base"
+                  className="px-6 sm:px-8 py-3 bg-secondary-green cta-button text-white font-semibold rounded  transition-colors duration-300 shadow-md text-sm sm:text-base"
                 >
                   View Services
                 </Link>
@@ -886,17 +869,11 @@ const PricingSection = () => {
 
           {/* Subscription Packages Section */}
 
-          <section className="flex flex-col justify-center items-center gap-12 h-screen py-4">
+          {/* <section className="flex flex-col justify-center items-center gap-12 h-screen py-4">
             <div className="flex w-full flex-col sm:flex-row gap-4 ">
-              {/* Left: Subscription */}
+
               <div className="p-6 ">
-                {/* Title */}
                 <div className=" flex flex-col text-left ">
-                  {/* <h4
-                  className={`text-green-600 font-medium mb-3 sm:mb-4 text-sm sm:text-base pl-5 ${poppins.className}`}
-                >
-                  [ What we offer ]
-                </h4> */}
                   <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 lg:mb-6 px-4 w-fit text-nowrap">
                     Subscription Packages
                   </h2>
@@ -916,7 +893,7 @@ const PricingSection = () => {
                 </div>
               </div>
 
-              {/* Right: Map */}
+          
               <div className="w-full p-6 sm:pl-16 flex items-stretch justify-items-stretch">
                 <div className="rounded-xl overflow-hidden w-full ">
                   <iframe
@@ -930,9 +907,10 @@ const PricingSection = () => {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
         </div>
       </section>
+      <HomepagePricePackages />
     </>
   );
 };

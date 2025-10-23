@@ -18,7 +18,15 @@ const parseFeatureString = (feature: string) => {
 };
 
 export default function CartPage() {
-  const { cartItems, replaceCart, clearCart, getTotalPrice, isLoading, updateQuantity, removeFromCart } = useCart();
+  const {
+    cartItems,
+    replaceCart,
+    clearCart,
+    getTotalPrice,
+    isLoading,
+    updateQuantity,
+    removeFromCart,
+  } = useCart();
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [packagePrice, setPackagePrice] = useState<number | null>(null);
 
@@ -56,7 +64,8 @@ export default function CartPage() {
     processPackage();
   }, [replaceCart]);
 
-  const finalTotalPrice = packagePrice !== null ? packagePrice : getTotalPrice();
+  const finalTotalPrice =
+    packagePrice !== null ? packagePrice : getTotalPrice();
 
   if (isLoading && cartItems.length === 0 && packagePrice === null) {
     return (
@@ -68,16 +77,51 @@ export default function CartPage() {
 
   if (cartItems.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="relative h-64 bg-cover bg-center flex items-center" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/modern-office-laundry.png')` }}>
-          <div className="max-w-7xl mx-auto px-4 w-full">
-            <nav className="flex items-center space-x-2 text-white mb-4"><Link href="/" className="hover:text-green-400">Home</Link><span className="px-2">/</span><span className="text-green-400">Cart</span></nav>
-            <h1 className="text-4xl md:text-5xl font-bold text-white">Shopping Cart</h1>
+      <div className="min-h-screen bg-white">
+        <div
+          className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center bg-fixed flex items-center justify-center px-6"
+          style={{
+            backgroundImage: `url('/images/redesign/about-banner.png')`,
+          }}
+        >
+          {" "}
+          {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
+          <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center z-30">
+            <p className="text-center">
+              We Offer a Full Range of Professional Laundry Services,
+              <span className="text-[#FFFF00]">
+                Ensuring Freshness & Care for Every Fabric.
+              </span>
+            </p>
           </div>
+        </div>
+        <div className="w-full max-w-7xl mx-auto px-6 py-5 bg-white ">
+          <nav className="flex items-center space-x-1 sm:space-x-2 text-black">
+            <Link
+              href="/"
+              className="hover:text-green-400 text-sm sm:text-base transition-colors"
+            >
+              Home
+            </Link>
+            <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
+            <span className="text-green-400 capitalize">Your Cart</span>
+          </nav>
         </div>
         <div className="max-w-4xl mx-auto px-4 py-12">
           <Card className="text-center py-16">
-            <CardContent><h2 className="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h2><p className="text-gray-600 mb-8">Add some items to your cart to get started.</p><Link href="/services"><Button className="bg-green-600 hover:bg-green-700">Browse Services</Button></Link></CardContent>
+            <CardContent>
+              <h2 className="text-2xl font-bold text-secondary-green mb-4">
+                Your cart is empty
+              </h2>
+              <p className="text-gray-600 mb-8">
+                Add some items to your cart to get started.
+              </p>
+              <Link href="/services">
+                <Button className="bg-secondary-green cta-button rounded">
+                  Browse Services
+                </Button>
+              </Link>
+            </CardContent>
           </Card>
         </div>
       </div>
@@ -90,59 +134,129 @@ export default function CartPage() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50">
-        <div className="relative h-64 bg-cover bg-center flex items-center" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/modern-office-laundry.png')` }}>
-          <div className="max-w-7xl mx-auto px-4 w-full">
-            <nav className="flex items-center space-x-2 text-white mb-4"><Link href="/" className="hover:text-green-400">Home</Link><span className="px-2">/</span><span className="text-green-400">Cart</span></nav>
-            <h1 className="text-4xl md:text-5xl font-bold text-white">Shopping Cart</h1>
+      <div className="min-h-screen bg-white">
+        <div
+          className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center bg-fixed flex items-center justify-center px-6"
+          style={{
+            backgroundImage: `url('/images/redesign/about-banner.png')`,
+          }}
+        >
+          {" "}
+          {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
+          <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center z-30">
+            <p className="text-center">
+              We Offer a Full Range of Professional Laundry Services,
+              <span className="text-[#FFFF00]">
+                Ensuring Freshness & Care for Every Fabric.
+              </span>
+            </p>
           </div>
         </div>
-
+        <div className="w-full max-w-7xl mx-auto px-6 py-5 bg-white ">
+          <nav className="flex items-center space-x-1 sm:space-x-2 text-black">
+            <Link
+              href="/"
+              className="hover:text-green-400 text-sm sm:text-base transition-colors"
+            >
+              Home
+            </Link>
+            <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
+            <span className="text-green-400 capitalize">Your Cart</span>
+          </nav>
+        </div>
         <div className="max-w-7xl mx-auto px-4 py-8">
-          <button onClick={handleBack} className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 mb-6">
+          <button
+            onClick={handleBack}
+            className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 mb-6"
+          >
             <ArrowLeft className="h-4 w-4" />
             Back to Services
           </button>
 
           {/* --- RESPONSIVE LAYOUT FIX --- */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-
             {/* Cart Items */}
             <div className="lg:col-span-2 space-y-4">
-              <Card>
+              <Card className="border-none shadow-none">
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                    <CardTitle>Cart Items ({cartItems.reduce((acc, item) => acc + item.quantity, 0)})</CardTitle>
-                    <Button variant="outline" size="sm" onClick={() => { clearCart(); setPackagePrice(null); }} className="text-red-600 hover:text-red-700 bg-transparent">Clear Cart</Button>
+                    <CardTitle className="text-gray-500">
+                      Cart Items (
+                      {cartItems.reduce((acc, item) => acc + item.quantity, 0)})
+                    </CardTitle>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        clearCart();
+                        setPackagePrice(null);
+                      }}
+                      className="text-red-600 hover:text-red-700 bg-transparent"
+                    >
+                      Clear Cart
+                    </Button>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     {cartItems.map((item) => (
-                      <div key={item.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 border rounded-lg">
-                        
+                      <div
+                        key={item.id}
+                        className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-4 border-b"
+                      >
                         {/* Item Details */}
-                        <div className="flex-1">
+                        <div className="flex flex-col items-start">
                           <h3 className="font-semibold">{item.name}</h3>
-                          <p className="text-sm text-gray-600">{item.category}</p>
-                        </div>
-                        
-                        {/* Wrapper for controls on mobile */}
-                        <div className="w-full sm:w-auto flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <Button variant="outline" size="sm" className="h-8 w-8 p-0" onClick={() => updateQuantity(item.id, item.quantity - 1)}><Minus className="h-4 w-4" /></Button>
-                            <span className="font-medium min-w-[2rem] text-center">{item.quantity}</span>
-                            <Button variant="outline" size="sm" className="h-8 w-8 p-0" onClick={() => updateQuantity(item.id, item.quantity + 1)}><Plus className="h-4 w-4" /></Button>
-                          </div>
-                          
-                          <div className="text-right flex flex-col items-end">
-                             <p className="font-semibold text-gray-800">
-                               AED {(item.price * item.quantity).toFixed(2)}
-                             </p>
-                            <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-700 p-1 h-auto" onClick={() => removeFromCart(item.id)}><Trash2 className="h-4 w-4" /></Button>
-                          </div>
+                          <p className="text-sm text-gray-600">
+                            {item.category}
+                          </p>
                         </div>
 
+                        {/* Wrapper for controls on mobile */}
+                        <div className="w-full sm:w-auto flex items-center justify-evenly gap-6">
+                          <div className="flex items-center gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="h-8 w-8 p-0 bg-primary-green"
+                              onClick={() =>
+                                updateQuantity(item.id, item.quantity - 1)
+                              }
+                            >
+                              <Minus
+                                color="white"
+                                className="h-4 w-4 rounded"
+                              />
+                            </Button>
+                            <span className="font-medium min-w-[2rem] text-center">
+                              {item.quantity}
+                            </span>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="h-8 w-8 p-0 bg-primary-green"
+                              onClick={() =>
+                                updateQuantity(item.id, item.quantity + 1)
+                              }
+                            >
+                              <Plus color="white" className="h-4 w-4 rounded" />
+                            </Button>
+                          </div>
+
+                          <div className="text-right flex items-center justify-evenly">
+                            <p className="font-semibold text-gray-800">
+                              AED {(item.price * item.quantity).toFixed(2)}
+                            </p>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-red-500 hover:text-red-700 p-1 h-auto"
+                              onClick={() => removeFromCart(item.id)}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -152,14 +266,35 @@ export default function CartPage() {
 
             {/* Order Summary */}
             <div className="lg:sticky lg:top-24">
-              <Card>
-                <CardHeader><CardTitle>Order Summary</CardTitle></CardHeader>
+              <Card className="rounded shadow-none">
+                <CardHeader>
+                  <CardTitle>Order Summary</CardTitle>
+                </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="flex justify-between"><span>Subtotal:</span><span>AED {finalTotalPrice.toFixed(2)}</span></div>
-                    <div className="flex justify-between"><span>Delivery:</span><span className="text-green-600">Free</span></div>
-                    <div className="border-t pt-4 mt-2"><div className="flex justify-between text-lg font-bold"><span>Total:</span><span className="text-green-600">AED {finalTotalPrice.toFixed(2)}</span></div></div>
-                    <Button onClick={() => setCheckoutOpen(true)} className="w-full bg-green-600 hover:bg-green-700 mt-4" size="lg">Proceed to Checkout</Button>
+                    <div className="flex justify-between">
+                      <span>Subtotal:</span>
+                      <span>AED {finalTotalPrice.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Delivery:</span>
+                      <span className="text-green-600">Free</span>
+                    </div>
+                    <div className="border-t pt-4 mt-2">
+                      <div className="flex justify-between text-lg font-bold">
+                        <span>Total:</span>
+                        <span className="text-green-600">
+                          AED {finalTotalPrice.toFixed(2)}
+                        </span>
+                      </div>
+                    </div>
+                    <Button
+                      onClick={() => setCheckoutOpen(true)}
+                      className="w-full bg-green-600 hover:bg-green-700 mt-4 rounded"
+                      size="lg"
+                    >
+                      Proceed to Checkout
+                    </Button>
                   </div>
                 </CardContent>
               </Card>

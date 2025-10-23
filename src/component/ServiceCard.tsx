@@ -1,7 +1,7 @@
-import React from 'react';
-import Link from 'next/link';
-import { FaCheckCircle } from 'react-icons/fa';
-import Image from 'next/image';
+import React from "react";
+import Link from "next/link";
+import { FaCheckCircle } from "react-icons/fa";
+import Image from "next/image";
 interface ServiceCardProps {
   id: number;
   image: string;
@@ -10,29 +10,34 @@ interface ServiceCardProps {
   slug: string;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({  image, title, description, slug }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({
+  image,
+  title,
+  description,
+  slug,
+}) => {
   return (
     <Link href={`/services/${slug}`}>
-      <div className="bg-white shadow-md rounded-md overflow-hidden cursor-pointer transform transition-transform hover:scale-105 hover:shadow-lg">
-      {/* The parent div defines the size and acts as a positioning anchor*/ }
-<div className="relative w-full h-48">
-  <Image
-    src={image || "/placeholder.svg"}
-    alt={title}
-    fill
-    className="object-cover"
-  />
-</div>
-        <div className="p-4 text-left">
-          <div className="flex justify-start mb-4">
-            <div className="bg-green-500 p-3 rounded-full text-white">
-              <FaCheckCircle size={20} />
-            </div>
+      <div className="bg-white shadow-md rounded-md border border-primary-green overflow-hidden cursor-pointer transform transition-transform hover:scale-105 hover:shadow-lg flex flex-col sm:flex-row">
+        {/* Fixed-size image container */}
+        <div className="relative flex-shrink-0 w-full h-36 sm:w-56 sm:h-48 overflow-hidden">
+          <Image
+            src={image || "/placeholder.svg"}
+            alt={title}
+            fill
+            className="object-cover object-center"
+          />
+        </div>
+
+        <div className="p-4 text-left flex flex-col justify-between">
+          <div>
+            <h3 className="text-lg font-semibold mb-2">{title}</h3>
+            <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+              {description}
+            </p>
           </div>
-          <h3 className="text-lg font-semibold mb-2">{title}</h3>
-          <p className="text-sm text-gray-600 mb-4">{description}</p>
-          <button className="bg-green-600 text-white text-sm px-4 py-2 rounded hover:bg-green-700 transition">
-            More Info
+          <button className="bg-secondary-green text-white text-sm px-6 py-2 rounded hover:bg-green-700 transition self-start">
+            Get the Service
           </button>
         </div>
       </div>

@@ -1,29 +1,26 @@
-"use client";
-
-import Link from "next/link";
 import React from "react";
 
 const BannerSection = () => {
   return (
     <div
-      className="relative h-64 bg-cover bg-center flex items-center"
+      className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center bg-fixed flex items-center justify-center px-6"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/images/a-basket-of-laundry-and-public-laundromat-2024-11-27-17-08-56-utc.webp?height=400&width=1200&text=Laundry+Machines+Background')`,
+        backgroundImage: `url('/images/redesign/about-banner.png')`,
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 w-full">
-        {/* Breadcrumb */}
-        <nav className="flex items-center space-x-2 text-white mb-4">
-          <Link href="/" className="hover:text-green-400">
-            Home
-          </Link>
-          <span className="px-2">/</span>
-          <Link href="/services" className="hover:text-green-400">
-            Services
-          </Link>
-        </nav>
-
-        <h1 className="text-4xl md:text-5xl font-bold text-white">Services</h1>
+      {" "}
+      {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
+      <div className="text-white text-base sm:text-2xl md:text-3xl space-y-5 font-medium flex flex-col justify-center items-center z-30">
+        <p>
+          We Offer a Full Range of Professional Laundry Services,{" "}
+          <span className="text-[#FFFF00]">
+            Ensuring Freshness & Care for Every Fabric
+          </span>
+        </p>
+        <button className="text-white border-2 rounded-full px-8 py-3 bg-secondary-green hover:bg-primary-green transition-colors ease-in-out duration-500 border-[#FFFF00] text-xl font-medium cursor-pointer">
+          <p className="uppercase">Specials Welcome Offer</p>
+          <p className="text-base font-normal">Click here</p>
+        </button>
       </div>
     </div>
   );
