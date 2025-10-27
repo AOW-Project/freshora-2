@@ -20,6 +20,7 @@ import { GrLocation } from "react-icons/gr";
 import { LuClock4 } from "react-icons/lu";
 import { MdMailOutline } from "react-icons/md";
 import { useCart } from "../app/context/cart-context";
+import { usePathname } from "next/navigation";
 
 interface NavItem {
   title: string;
@@ -96,6 +97,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { getTotalItems } = useCart();
+  const pathname = usePathname();
 
   const handleDropdownEnter = useCallback(
     (index: number) => setOpenDropdown(index),
@@ -188,60 +190,68 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav
-            className="hidden lg:flex justify-evenly space-x-5 items-center 
-          lg:space-x-8"
+            className="hidden lg:flex gap-5 items-center 
+          lg:gap-8"
           >
-            {navItems.map((item, index) => (
-              <div
-                key={index}
-                className="relative flex items-center justify-center border-b-1 border-gray-400 hover:border-black "
-                onMouseEnter={() => item.subItems && handleDropdownEnter(index)}
-                onMouseLeave={handleDropdownLeave}
-              >
-                <Link
-                  href={item.href}
-                  className="flex items-center justify-center font-roboto-condensed text-primary-green hover:text-black font-medium transition-colors py-2"
+            {navItems.map((item, index) => {
+              const isActive = pathname === item.href;
+              return (
+                <div
+                  key={index}
+                  className={`relative px-3 items-center  justify-center border-b-1 border-gray-400 hover:border-black transition-all ease-in-out duration-500  ${
+                    isActive
+                      ? " bg-secondary-green text-white rounded"
+                      : "bg-transparent text-primary-green"
+                  }  `}
+                  onMouseEnter={() =>
+                    item.subItems && handleDropdownEnter(index)
+                  }
+                  onMouseLeave={handleDropdownLeave}
                 >
-                  {item.title}
-                  {item.subItems && (
-                    <FaChevronDown
-                      className={`ml-1 text-xs transition-transform duration-200 ${
-                        openDropdown === index ? "rotate-180" : ""
-                      }`}
-                    />
-                  )}
-                </Link>
-                {/* <div className="w-[100%] h-[2px] absolute bg-black bottom-0"></div> */}
-                {item.subItems && (
-                  <div
-                    className={`absolute top-full shadow-lg rounded-lg mt-1 w-[560px] z-50 border border-gray-100 transition-all duration-200 grid grid-cols-2 p-4 bg-[#F3F6F4] font-medium gap-2 ${
-                      openDropdown === index
-                        ? "opacity-100 visible translate-y-0"
-                        : "opacity-0 invisible -translate-y-2"
-                    }`}
-                    role="menu"
+                  <Link
+                    href={item.href}
+                    className={`flex items-center justify-center font-roboto-condensed  font-medium transition-all ease-in-out py-2 `}
                   >
-                    {item.subItems.map((sub, subIndex) => (
-                      <Link
-                        key={subIndex}
-                        href={sub.href}
-                        className="group px-4 py-2 font-medium text-sm bg-white hover:bg-primary-green text-primary-green hover:text-white transition-colors rounded flex items-center gap-2"
-                      >
-                        <Image
-                          src={`/images/redesign/${sub.icon}`}
-                          alt="Freshora Laundry Logo"
-                          width={16}
-                          height={16}
-                          className="w-9 h-9 sm:w-8 sm:h-8 transition-all duration-300 group-hover:invert group-hover:brightness-0 group-hover:sepia group-hover:hue-rotate-[120deg] group-hover:saturate-[10]"
-                          priority
-                        />
-                        {sub.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+                    {item.title}
+                    {item.subItems && (
+                      <FaChevronDown
+                        className={`ml-1 text-xs transition-transform duration-200 ${
+                          openDropdown === index ? "rotate-180" : ""
+                        }`}
+                      />
+                    )}
+                  </Link>
+                  {item.subItems && (
+                    <div
+                      className={`absolute top-full right-[50%] translate-x-[50%] shadow-lg rounded-lg mt-1 w-[560px] z-50 border border-gray-100 transition-all duration-200 grid grid-cols-2 p-4 bg-[#F3F6F4] font-medium gap-2 ${
+                        openDropdown === index
+                          ? "opacity-100 visible translate-y-0"
+                          : "opacity-0 invisible -translate-y-2"
+                      }`}
+                      role="menu"
+                    >
+                      {item.subItems.map((sub, subIndex) => (
+                        <Link
+                          key={subIndex}
+                          href={sub.href}
+                          className="group px-4 py-2 font-medium text-sm bg-white hover:bg-primary-green text-primary-green hover:text-white transition-colors rounded flex items-center gap-2"
+                        >
+                          <Image
+                            src={`/images/redesign/${sub.icon}`}
+                            alt="Freshora Laundry Logo"
+                            width={16}
+                            height={16}
+                            className="w-9 h-9 sm:w-8 sm:h-8 transition-all duration-300 group-hover:invert group-hover:brightness-0 group-hover:sepia group-hover:hue-rotate-[120deg] group-hover:saturate-[10]"
+                            priority
+                          />
+                          {sub.title}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </nav>
 
           {/* Right Actions */}

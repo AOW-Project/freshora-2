@@ -124,7 +124,7 @@ const TestimonialsSection = () => {
             >
               {testimonials.map((testimonial, index) => (
                 <SwiperSlide key={index}>
-                  <div className="w-full relative space-y-2 max-w-[600px] rounded bg-white border border-black p-6">
+                  <div className="w-full relative space-y-2 h-56 max-w-[600px] rounded bg-white border border-black p-6">
                     <div className="flex gap-2 justify-items">
                       <div className=" relative w-14 h-14 rounded-full border overflow-hidden border-primary-green">
                         <Image

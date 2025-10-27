@@ -1,12 +1,14 @@
 import React from "react";
 import { Clock, CheckCircle, Truck, Package, Loader2 } from "lucide-react";
+import Image from "next/image";
 
 // Status configuration array
 const statusConfig = [
   {
     status: "pending",
     icon: Clock,
-    color: "bg-yellow-500",
+    img: "/images/redesign/timeline-order-recieved.svg",
+    color: "bg-green-400",
     label: "Order Received",
     subtitle: (
       <>
@@ -18,28 +20,32 @@ const statusConfig = [
   {
     status: "pickedUp",
     icon: Package,
-    color: "bg-blue-500",
+    img: "/images/redesign/timeline-pickup-completed.svg",
+    color: "bg-green-400",
     label: "Pickup Completed",
     subtitle: "Your items are in safe hands",
   },
   {
     status: "processing",
     icon: Loader2,
-    color: "bg-purple-500",
+    img: "/images/redesign/timeline-processing.svg",
+    color: "bg-green-400",
     label: "Processing in Progress",
     subtitle: "Your items are being carefully serviced",
   },
   {
     status: "outForDelivery",
     icon: Truck,
-    color: "bg-indigo-500",
+    img: "/images/redesign/timeline-out-for-delivery.svg",
+    color: "bg-green-400",
     label: "Out for Delivery",
     subtitle: "Our delivery partner is on the way to return your items",
   },
   {
     status: "delivered",
     icon: CheckCircle,
-    color: "bg-green-500",
+    img: "/images/redesign/timeline-delivered.svg",
+    color: "bg-green-400",
     label: "Delivered",
     subtitle: "Thank you for choosing Freshora",
   },
@@ -68,19 +74,35 @@ const OrderTimeline = ({ currentStatus = "delivered" }) => {
       <h3 className="font-semibold text-lg">Order Status</h3>
 
       <div className="bg-gray-50 rounded-lg p-6">
-        <div className="relative">
+        <div className="relative flex justify-between">
           {statusConfig.map((status, index) => {
             const Icon = status.icon;
             const statusState = getStatusState(index, currentStatusIndex);
             const isLast = index === statusConfig.length - 1;
 
             return (
-              <div key={status.status} className="relative">
-                <div className="flex items-center gap-4 pb-8">
+              <div key={status.status} className="relative  ">
+                <div className="flex flex-col w-28  items-center gap-4 pb-8">
+                  {/* status image  */}
+                  <div className="flex relative h-14 p-2 items-center ">
+                    <Image
+                      alt={status.label}
+                      src={status.img}
+                      height={20}
+                      width={20}
+                      className={`h-16 w-auto ${
+                        statusState === "completed"
+                          ? "opacity-100"
+                          : statusState === "current"
+                          ? " opacity-100"
+                          : " opacity-30"
+                      }`}
+                    />
+                  </div>
                   {/* Status Icon */}
-                  <div className="relative z-10">
+                  <div className="relative h-full w-full flex items-center justify-center   z-10">
                     <div
-                      className={`p-3 rounded-full transition-all duration-300 ${
+                      className={`p-2 z-20 rounded-full h-2 w-2 transition-all duration-300 ${
                         statusState === "completed"
                           ? "bg-green-500 text-white"
                           : statusState === "current"
@@ -88,30 +110,41 @@ const OrderTimeline = ({ currentStatus = "delivered" }) => {
                           : "bg-gray-200 text-gray-400"
                       }`}
                     >
-                      {statusState === "current" &&
-                      status.status === "drying" ? (
+                      {/* <Icon className="h-5 w-5" /> */}
+                      {/* {statusState === "current" &&
+                      status.status === "processing" ? (
                         <Loader2 className="h-5 w-5 animate-spin" />
                       ) : (
                         <Icon className="h-5 w-5" />
-                      )}
+                      )} */}
                     </div>
+                    {/* connecting lines */}
+                    {!isLast && (
+                      <div
+                        className={`absolute left-1/2  top-1/2 w-[130%] h-0.5 ${
+                          statusState === "completed"
+                            ? "bg-green-500"
+                            : "bg-gray-300"
+                        }`}
+                      />
+                    )}
                   </div>
 
                   {/* Status Content */}
-                  <div className="flex-1">
+                  <div className="flex-1 items-center justify-center">
                     <p
-                      className={`font-medium ${
+                      className={`font-medium  text-center ${
                         statusState === "current"
-                          ? "text-gray-900"
+                          ? "text-primary-green"
                           : statusState === "completed"
-                          ? "text-gray-700"
+                          ? "text-secondary-green"
                           : "text-gray-400"
                       }`}
                     >
                       {status.label}
                     </p>
                     <p
-                      className={`text-sm ${
+                      className={`text-sm text-center ${
                         statusState === "current"
                           ? "text-gray-600"
                           : statusState === "completed"
@@ -136,16 +169,16 @@ const OrderTimeline = ({ currentStatus = "delivered" }) => {
                 </div>
 
                 {/* Connecting Line */}
-                {!isLast && (
+                {/* {!isLast && (
                   <div
-                    className={`absolute left-6 top-12 w-0.5 h-8 ${
+                    className={`absolute left-6  top-10 w-full h-0.5 ${
                       statusState === "completed"
                         ? "bg-green-500"
                         : "bg-gray-300"
                     }`}
                     style={{ transform: "translateX(-50%)" }}
                   />
-                )}
+                )} */}
               </div>
             );
           })}

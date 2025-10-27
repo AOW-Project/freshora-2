@@ -3,7 +3,7 @@ import OrderTracker from "../../component/order-tracker";
 
 export default function TrackPage() {
   return (
-    <div className="min-h-screen bg-white py-8">
+    <div className="min-h-screen mb-20 bg-white">
       {/* Header Section */}
       <div
         className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center bg-fixed flex items-center justify-center px-6"
@@ -15,8 +15,8 @@ export default function TrackPage() {
         {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
         <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center z-30">
           <p>
-            Please Enter Your Track Number to
-            <span className="text-[#FFFF00]">Check Your Laundry Status</span>
+            Please Enter Your Order Number to
+            <span className="text-[#FFFF00]"> Check Your Laundry Status</span>
           </p>
         </div>
       </div>
@@ -35,7 +35,7 @@ export default function TrackPage() {
           </span>
         </nav>
       </div>
-      <div className="max-w-4xl mx-auto px-4">
+      <div className="max-w-4xl mx-auto px-4 ">
         <div className="my-10">
           <h2 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
             Track

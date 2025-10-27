@@ -56,27 +56,35 @@ export default function CurvedCarousel() {
     },
   ];
   return (
-    <div className="relative overflow-hidden w-screen">
+    <div className="relative overflow-hidden w-full">
       {/* Curved top */}
       <div className="absolute top-[-70px] left-0 w-[calc(100vw+120px)] h-[120px] bg-white rounded-[45%] translate-x-[-60px] z-10" />
 
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{ delay: 1500, disableOnInteraction: false }}
+        loop={true}
         pagination={{ clickable: true }}
         spaceBetween={10}
-        slidesPerView={5}
+        slidesPerView={2} // default (mobile)
+        breakpoints={{
+          640: { slidesPerView: 3 },
+          1024: { slidesPerView: 5 }, // show 5 on desktop
+        }}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
         className="overflow-hidden relative z-0 pb-16"
       >
         {services.map((service, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} className="relative">
             <img
               src={service.src}
               alt={service.alt}
-              className="w-full h-[300px] object-cover md:h-[350px]"
+              className="w-full h-[350px] object-cover md:h-[450px]"
             />
+            <div className="absolute z-50 w-full h-[25%] text-xl pt-2 font-medium bg-primary-green/70 text-white bottom-0 text-center">
+              {service.alt}
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -150,7 +150,7 @@ export default function OrderTracker() {
   // };
 
   return (
-    <div className="max-w-2xl mx-auto p-4 space-y-6">
+    <div className="w-full max-w-7xl mx-auto p-4 space-y-6">
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -164,12 +164,17 @@ export default function OrderTracker() {
         <CardContent className="space-y-4">
           <div className="flex gap-2">
             <Input
-              placeholder="Enter order number (e.g., ORD-123456)"
+              placeholder="Enter order number (e.g., LS6365645ZU)"
               value={orderNumber}
               onChange={(e) => setOrderNumber(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && trackOrder()}
+              className="rounded"
             />
-            <Button onClick={trackOrder} disabled={loading}>
+            <Button
+              onClick={trackOrder}
+              disabled={loading}
+              className="bg-secondary-green rounded"
+            >
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Track"}
             </Button>
           </div>
@@ -198,41 +203,8 @@ export default function OrderTracker() {
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
-            {/* Status Timeline Old */}
-            {/* <div className="space-y-4">
-              <h3 className="font-semibold text-lg">Order Status</h3>
-              <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
-                {(() => {
-                  const config = getCurrentStatusConfig("");
-                  const Icon = statusConfig[0].icon;
-                  return (
-                    <div>
-                      {statusConfig.map((status, index) => (
-                        <div
-                          key={index}
-                          className="flex items-center gap-3 p-4"
-                        >
-                          <div
-                            className={`p-2 rounded-full ${status.color} text-white`}
-                          >
-                            <Icon className="h-4 w-4" />
-                          </div>
-                          <div>
-                            <p className="font-medium">{status.label}</p>
-                            <p className="text-sm text-gray-600">
-                              {status.subtitle}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  );
-                })()}
-              </div>
-            </div> */}
-
             {/* Status Timeline */}
-            <OrderTimeline currentStatus={"pending"} />
+            <OrderTimeline currentStatus={"processing"} />
             {/* Customer & Address Info */}
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-3">
@@ -262,7 +234,7 @@ export default function OrderTracker() {
                 </div>
               </div>
 
-              <div className="space-y-3">
+              {/* <div className="space-y-3">
                 <h4 className="font-medium flex items-center gap-2">
                   <Truck className="h-4 w-4" />
                   Delivery Details
@@ -287,7 +259,7 @@ export default function OrderTracker() {
                     {orderStatus.customer?.zipCode || "Not provided"}
                   </p>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Order Items */}
