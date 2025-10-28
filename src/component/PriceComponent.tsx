@@ -147,13 +147,13 @@ const forGentleman = [
     item: "Shirts/T-Shirts",
     washPress: "6.00",
     dryCleaning: "8.00",
-    steamPressing: "3.00",
+    steamPressing: "4.00",
   },
   {
     item: "Trouser",
     washPress: "6.00",
     dryCleaning: "8.00",
-    steamPressing: "3.00",
+    steamPressing: "4.00",
   },
   {
     item: "Kandura",
@@ -165,7 +165,7 @@ const forGentleman = [
     item: "Ghatra",
     washPress: "8.00",
     dryCleaning: "10.00",
-    steamPressing: "5.00",
+    steamPressing: "6.00",
   },
   {
     item: "Lungi",
@@ -177,12 +177,12 @@ const forGentleman = [
     item: "Shorts",
     washPress: "6.00",
     dryCleaning: "8.00",
-    steamPressing: "3.00",
+    steamPressing: "4.00",
   },
   {
     item: "Cap/Tie",
     washPress: "5.00",
-    dryCleaning: "7.00",
+    dryCleaning: "8.00",
     steamPressing: "3.00",
   },
   {
@@ -192,46 +192,52 @@ const forGentleman = [
     steamPressing: "8.00",
   },
   {
+    item: "Leather Jacket",
+    washPress: "25.00",
+    dryCleaning: "35.00",
+    steamPressing: "-",
+  },
+  {
     item: "Waist Coat",
     washPress: "10.00",
-    dryCleaning: "14.00",
-    steamPressing: "5.00",
+    dryCleaning: "15.00",
+    steamPressing: "6.00",
   },
   {
     item: "Suit (2pcs)",
-    washPress: "20.00",
+    washPress: "-",
     dryCleaning: "25.00",
     steamPressing: "12.00",
   },
   {
     item: "Suit (3pcs)",
-    washPress: "30.00",
+    washPress: "-",
     dryCleaning: "35.00",
     steamPressing: "15.00",
   },
   {
-    item: "Salwar Kameez",
-    washPress: "12.00",
-    dryCleaning: "16.00",
-    steamPressing: "8.00",
-  },
-  {
     item: "Inner Wear",
-    washPress: "3.00",
+    washPress: "4.00",
     dryCleaning: "5.00",
     steamPressing: "2.00",
   },
   {
-    item: "Socks/Handkerchief",
-    washPress: "3.00",
-    dryCleaning: "4.00",
+    item: "Pair of Socks",
+    washPress: "4.00",
+    dryCleaning: "5.00",
     steamPressing: "2.00",
   },
   {
-    item: "Sweater",
+    item: "Sweater/Pull over",
     washPress: "10.00",
     dryCleaning: "14.00",
-    steamPressing: "5.00",
+    steamPressing: "6.00",
+  },
+  {
+    item: "Handkerchief",
+    washPress: "2.00",
+    dryCleaning: "-",
+    steamPressing: "1.00",
   },
 ];
 
@@ -240,19 +246,19 @@ const forLadies = [
     item: "T-Shirts/Shirts",
     washPress: "6.00",
     dryCleaning: "8.00",
-    steamPressing: "3.00",
+    steamPressing: "4.00",
   },
   {
-    item: "Trouser",
+    item: "Trouser/Pants",
     washPress: "6.00",
     dryCleaning: "8.00",
-    steamPressing: "3.00",
+    steamPressing: "4.00",
   },
   {
-    item: "Abaya",
+    item: "Abaya/Burqah",
     washPress: "10.00",
     dryCleaning: "14.00",
-    steamPressing: "7.00",
+    steamPressing: "8.00",
   },
   {
     item: "Scarf/Dupatta",
@@ -264,31 +270,31 @@ const forLadies = [
     item: "Skirt/Shorts",
     washPress: "6.00",
     dryCleaning: "8.00",
-    steamPressing: "3.00",
+    steamPressing: "4.00",
   },
   {
     item: "Full Dress",
-    washPress: "10.00",
+    washPress: "12.00",
     dryCleaning: "15.00",
     steamPressing: "6.00",
   },
   {
     item: "Salwar Kameez",
     washPress: "12.00",
-    dryCleaning: "16.00",
+    dryCleaning: "15.00",
     steamPressing: "8.00",
-  },
-  {
-    item: "Saree",
-    washPress: "15.00",
-    dryCleaning: "20.00",
-    steamPressing: "10.00",
   },
   {
     item: "Blouse",
     washPress: "8.00",
     dryCleaning: "10.00",
     steamPressing: "4.00",
+  },
+  {
+    item: "Saree",
+    washPress: "12.00",
+    dryCleaning: "16.00",
+    steamPressing: "6.00",
   },
   {
     item: "Coat/Jacket",
@@ -298,27 +304,33 @@ const forLadies = [
   },
   {
     item: "Suit (2pcs)",
-    washPress: "20.00",
+    washPress: "-",
     dryCleaning: "25.00",
     steamPressing: "12.00",
   },
   {
     item: "Suit (3pcs)",
-    washPress: "30.00",
+    washPress: "-",
     dryCleaning: "35.00",
     steamPressing: "15.00",
   },
   {
-    item: "Sweater",
+    item: "Sweater/Pull over",
     washPress: "10.00",
     dryCleaning: "14.00",
-    steamPressing: "5.00",
+    steamPressing: "6.00",
   },
   {
     item: "Inner Wear",
-    washPress: "3.00",
+    washPress: "4.00",
     dryCleaning: "5.00",
     steamPressing: "2.00",
+  },
+  {
+    item: "Handkerchief",
+    washPress: "2.00",
+    dryCleaning: "-",
+    steamPressing: "1.00",
   },
 ];
 
@@ -330,28 +342,28 @@ const householdItems = [
     steamPressing: "8.00",
   },
   {
+    item: "Bed Sheet (Single/Double)",
+    washPress: "10.00 / 12.00",
+    dryCleaning: "12.00 / 14.00",
+    steamPressing: "6.00 / 8.00",
+  },
+  {
     item: "Duvet Cover (Single/Double)",
-    washPress: "10.00/12.00",
-    dryCleaning: "12.00/14.00",
-    steamPressing: "6.00/8.00",
+    washPress: "10.00 / 12.00",
+    dryCleaning: "12.00 / 14.00",
+    steamPressing: "6.00 / 8.00",
   },
   {
     item: "Blanket (Single/Double)",
-    washPress: "22.00/30.00",
-    dryCleaning: "30.00/35.00",
+    washPress: "22.00 / 30.00",
+    dryCleaning: "30.00 / 35.00",
     steamPressing: "-",
   },
   {
-    item: "Bed Spread (Single/Double)",
-    washPress: "20.00/25.00",
-    dryCleaning: "25.00/30.00",
+    item: "Duvet (S/M/L)",
+    washPress: "20.00 / 25.00 / 30.00",
+    dryCleaning: "25.00 / 30.00 / 35.00",
     steamPressing: "-",
-  },
-  {
-    item: "Bed Sheet (Single/Double)",
-    washPress: "10.00/12.00",
-    dryCleaning: "12.00/14.00",
-    steamPressing: "6.00/8.00",
   },
   {
     item: "Pillow Case",
@@ -360,10 +372,10 @@ const householdItems = [
     steamPressing: "2.00",
   },
   {
-    item: "Cushion Cover",
-    washPress: "4.00",
-    dryCleaning: "5.00",
-    steamPressing: "3.00",
+    item: "Cushion Cover/Pillow Cover",
+    washPress: "6.00",
+    dryCleaning: "8.00",
+    steamPressing: "4.00",
   },
   {
     item: "Pillow/Cushion",
@@ -372,92 +384,93 @@ const householdItems = [
     steamPressing: "-",
   },
   {
-    item: "Bath Rope",
-    washPress: "10.00",
-    dryCleaning: "12.00",
+    item: "Bath Robe",
+    washPress: "15.00",
+    dryCleaning: "-",
     steamPressing: "-",
   },
   {
     item: "Bath Towel (M/L)",
-    washPress: "4.00/6.00",
-    dryCleaning: "5.00/7.00",
+    washPress: "4.00 / 6.00",
+    dryCleaning: "5.00 / 7.00",
     steamPressing: "-",
   },
   {
-    item: "Hand/Face Towel",
-    washPress: "3.00",
-    dryCleaning: "4.00",
+    item: "Blanket (Single/Double",
+    washPress: "25.00 / 35.00",
+    dryCleaning: "-",
     steamPressing: "-",
   },
   {
-    item: "Bath Mat (M/L)",
-    washPress: "3.00/10.00",
-    dryCleaning: "5.00/15.00",
-    steamPressing: "-",
-  },
-  {
-    item: "Table Cloth/Table Napkins",
-    washPress: "8.00/3.00",
-    dryCleaning: "10.00/4.00",
-    steamPressing: "5.00/2.00",
-  },
-  {
-    item: "Shoe",
-    washPress: "40.00/50.00",
-    dryCleaning: "45.00/55.00",
-    steamPressing: "-",
-  },
-  {
-    item: "Wedding Dress Normal",
-    washPress: "50.00/80.00",
-    dryCleaning: "80.00/100.00",
-    steamPressing: "30.00/45.00",
+    item: "Wedding Dress",
+    washPress: "50.00 - 80.00",
+    dryCleaning: "80.00 - 100.00",
+    steamPressing: "30.00 - 45.00",
   },
   {
     item: "Curtains (Per Sq meter)",
-    washPress: "10.00/20.00",
-    dryCleaning: "15.00/25.00",
-    steamPressing: "10.00/20.00",
+    washPress: "12.00",
+    dryCleaning: "18.00",
+    steamPressing: "10.00",
   },
   {
     item: "Normal Carpet (Per Sq meter)",
-    washPress: "20.00",
-    dryCleaning: "20.00",
+    washPress: "25.00",
+    dryCleaning: "-",
     steamPressing: "-",
   },
   {
-    item: "Hand woven Carpet (Per Sq meter)",
-    washPress: "25.00",
-    dryCleaning: "35.00",
+    item: "Premium Carpet (Per Sq meter)",
+    washPress: "30.00",
+    dryCleaning: "-",
     steamPressing: "-",
   },
 ];
 const shoesItems = [
-  { item: "Sneakers / Sports Shoes", price: "65.00" },
-  { item: "Leather Shoes", price: "90.00" },
-  { item: "Formal Shoes", price: "90.00" },
-  { item: "Designer Sneakers", price: "120.00" },
-  { item: "Sandals / Slippers", price: "60.00" },
-  { item: "Designer Sandals", price: "100.00" },
-  { item: "Designer Formal Shoes", price: "110.00" },
+  { item: "Formal Shoes", price: "100.00" },
+  { item: "Sandals / Flip Flops", price: "60.00" },
+  { item: "Leather/ Mix material Sandal & Flip Flops", price: "80.00" },
   { item: "Kids Shoe Care", price: "50.00" },
+  { item: "Sneakers / Sports Shoes", price: "80.00" },
 ];
 
 const luxuryShoes = [
-  { item: "Formal Shoes", price: "120.00" },
-  { item: "Sports Sneakers", price: "100.00" },
-  { item: "Designer Sneakers", price: "150.00" },
-  { item: "Sandals & Flip Flops", price: "100.00" },
-  { item: "Designer Sandals", price: "120.00" },
-  { item: "Designer Formal Shoes", price: "140.00" },
+  { item: "Designer and Luxury Formal Shoes", price: "120.00" },
+  { item: "Designer and Luxury Sports Sneakers", price: "150.00" },
+  { item: "Designer and Luxury Sandals / Flip Flops", price: "100.00" },
 ];
 
 const mostPopularItems = [
-  { item: "Shirts/T-Shirts", price: "6.00" },
-  { item: "Trouser", price: "6.00" },
-  { item: "Blouse", price: "8.00" },
-  { item: "Coat/Jacket", price: "15.00" },
-  { item: "Suit (2pcs)", price: "25.00" },
+  {
+    item: "Shirts/T-Shirts",
+    washPress: "6.00",
+    dryCleaning: "8.00",
+    steamPressing: "4.00",
+  },
+  {
+    item: "Trouser",
+    washPress: "6.00",
+    dryCleaning: "8.00",
+    steamPressing: "4.00",
+  },
+  {
+    item: "Jacket/Coat",
+    washPress: "15.00",
+    dryCleaning: "20.00",
+    steamPressing: "8.00",
+  },
+  {
+    item: "Blouse",
+    washPress: "8.00",
+    dryCleaning: "10.00",
+    steamPressing: "4.00",
+  },
+  {
+    item: "Suit (2pcs)",
+    washPress: "-",
+    dryCleaning: "25.00",
+    steamPressing: "12.00",
+  },
 ];
 
 const packagesData = [
@@ -642,48 +655,6 @@ const PricingSection = () => {
               Our Full Price Table
             </h3>
           </div>
-          {/* tables */}
-          {/* <div className="w-full grid grid-cols-12 gap-2">
-           
-            <div className="col-span-4 space-y-4">
-              
-              <PricingTable title="Most Popular" table={mostPopularItems} />
-            
-              <PricingTable title="Shoes" table={shoesItems} />
-            
-              <PricingTable title="Luxury Shoes" table={luxuryShoes} />
-            </div>
-        
-            <div className="col-span-8">
-              <table className="w-full border border-primary-green rounded-2xl overflow-hidden shadow-sm">
-                <thead>
-                  <tr className="bg-primary-green text-white text-center">
-                    <th
-                      colSpan={2}
-                      className="py-3 text-lg font-semibold tracking-wide"
-                    >
-                      Apparel
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {forGentleman.map((item, index) => (
-                    <tr
-                      key={index}
-                      className="hover:bg-gray-50 transition-colors"
-                    >
-                      <td className="py-3 sm:py-4 px-6 text-gray-700 text-sm sm:text-base">
-                        {item.item}
-                      </td>
-                      <td className="py-3 sm:py-4 px-6 font-semibold text-primary-green text-base sm:text-lg text-right">
-                        {item.washPress}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div> */}
           <Card className="mb-12 sm:mb-16 lg:mb-20 shadow-lg border-none min-h-[400px]">
             <CardContent className="p-3 sm:p-6 lg:p-8">
               <Tabs
@@ -729,70 +700,137 @@ const PricingSection = () => {
 
                 {/* Most Popular Tab */}
                 <TabsContent value="popular" className="mt-6">
-                  <div className="space-y-0">
-                    {[
-                      { item: "Shirts/T-Shirts", price: "6.00" },
-                      { item: "Trouser", price: "6.00" },
-                      { item: "Blouse", price: "8.00" },
-                      { item: "Coat/Jacket", price: "15.00" },
-                      { item: "Suit (2pcs)", price: "25.00" },
-                    ].map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50 transition-colors"
-                      >
-                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
-                          {item.item}
-                        </span>
-                        <span className="font-bold text-primary-green text-base sm:text-lg whitespace-nowrap">
-                          {item.price}
-                        </span>
-                      </div>
-                    ))}
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full">
+                      <thead>
+                        <tr className=" text-gray-600 text-center">
+                          <th className="py-3 px-4 text-sm sm:text-base font-semibold"></th>
+                          <th className="py-3 px-4 text-sm sm:text-base font-semibold">
+                            Wash & Press
+                          </th>
+                          <th className="py-3 px-4 text-sm sm:text-base font-semibold">
+                            Dry Cleaning
+                          </th>
+                          <th className="py-3 px-4 text-sm sm:text-base font-semibold">
+                            Steam Pressing
+                          </th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {mostPopularItems.map((item, index) => (
+                          <tr
+                            key={index}
+                            className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
+                          >
+                            <td className="py-3 px-4 text-gray-700 text-sm sm:text-base">
+                              {item.item}
+                            </td>
+                            <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                              {item.washPress}
+                            </td>
+                            <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                              {item.dryCleaning}
+                            </td>
+                            <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                              {item.steamPressing}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </TabsContent>
 
                 {/* Apparel Tab */}
                 <TabsContent value="apparel" className="mt-6">
-                  <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-8">
+                  <div className="grid grid-cols-1 gap-8">
                     <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 border-b pb-2">
-                        For Gentlemen
-                      </h3>
-                      <div className="space-y-0">
-                        {forGentleman.map((item, index) => (
-                          <div
-                            key={index}
-                            className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
-                          >
-                            <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
-                              {item.item}
-                            </span>
-                            <span className="font-bold text-primary-green text-base sm:text-lg whitespace-nowrap">
-                              {item.washPress}
-                            </span>
-                          </div>
-                        ))}
+                      <div className="overflow-x-auto">
+                        <table className="min-w-full">
+                          <thead>
+                            <tr className=" text-gray-600 text-center">
+                              <th className="py-3 px-4 text-primary-green text-base sm:text-lg font-semibold">
+                                For Gentlemen
+                              </th>
+                              <th className="py-3 px-4 text-sm sm:text-base font-semibold">
+                                Wash & Press
+                              </th>
+                              <th className="py-3 px-4 text-sm sm:text-base font-semibold">
+                                Dry Cleaning
+                              </th>
+                              <th className="py-3 px-4 text-sm sm:text-base font-semibold">
+                                Steam Pressing
+                              </th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            {forGentleman.map((item, index) => (
+                              <tr
+                                key={index}
+                                className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
+                              >
+                                <td className="py-3 px-4 text-gray-700 text-sm sm:text-base">
+                                  {item.item}
+                                </td>
+                                <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                                  {item.washPress}
+                                </td>
+                                <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                                  {item.dryCleaning}
+                                </td>
+                                <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                                  {item.steamPressing}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 border-b pb-2">
-                        For Ladies
-                      </h3>
-                      <div className="space-y-0">
-                        {forLadies.map((item, index) => (
-                          <div
-                            key={index}
-                            className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
-                          >
-                            <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
-                              {item.item}
-                            </span>
-                            <span className="font-bold text-primary-green text-base sm:text-lg whitespace-nowrap">
-                              {item.washPress}
-                            </span>
-                          </div>
-                        ))}
+                      <div className="overflow-x-auto">
+                        <table className="min-w-full">
+                          <thead>
+                            <tr className=" text-gray-600 text-center">
+                              <th className="py-3 px-4 text-primary-green text-base sm:text-lg font-semibold">
+                                For Ladies
+                              </th>
+                              <th className="py-3 px-4 text-sm sm:text-base font-semibold">
+                                Wash & Press
+                              </th>
+                              <th className="py-3 px-4 text-sm sm:text-base font-semibold">
+                                Dry Cleaning
+                              </th>
+                              <th className="py-3 px-4 text-sm sm:text-base font-semibold">
+                                Steam Pressing
+                              </th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            {forLadies.map((item, index) => (
+                              <tr
+                                key={index}
+                                className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
+                              >
+                                <td className="py-3 px-4 text-gray-700 text-sm sm:text-base">
+                                  {item.item}
+                                </td>
+                                <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                                  {item.washPress}
+                                </td>
+                                <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                                  {item.dryCleaning}
+                                </td>
+                                <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                                  {item.steamPressing}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
@@ -800,58 +838,91 @@ const PricingSection = () => {
 
                 {/* Household Tab */}
                 <TabsContent value="household" className="mt-6">
-                  <div className="space-y-0">
-                    {householdItems.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
-                      >
-                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
-                          {item.item}
-                        </span>
-                        <span className="font-bold text-primary-green text-base sm:text-lg whitespace-nowrap">
-                          {item.washPress}
-                        </span>
-                      </div>
-                    ))}
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full">
+                      <thead>
+                        <tr className=" text-gray-600 text-center">
+                          <th className="py-3 px-4 text-sm sm:text-base font-semibold"></th>
+                          <th className="py-3 px-4 text-sm sm:text-base font-semibold">
+                            Wash & Press
+                          </th>
+                          <th className="py-3 px-4 text-sm sm:text-base font-semibold">
+                            Dry Cleaning
+                          </th>
+                          <th className="py-3 px-4 text-sm sm:text-base font-semibold">
+                            Steam Pressing
+                          </th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {householdItems.map((item, index) => (
+                          <tr
+                            key={index}
+                            className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
+                          >
+                            <td className="py-3 px-4 text-gray-700 text-sm sm:text-base">
+                              {item.item}
+                            </td>
+                            <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                              {item.washPress}
+                            </td>
+                            <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                              {item.dryCleaning}
+                            </td>
+                            <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                              {item.steamPressing}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </TabsContent>
 
                 {/* Shoes Tab */}
                 <TabsContent value="shoes" className="mt-6">
-                  <div className="space-y-0">
-                    {shoesItems.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
-                      >
-                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
-                          {item.item}
-                        </span>
-                        <span className="font-bold text-primary-green text-base sm:text-lg whitespace-nowrap">
-                          {item.price}
-                        </span>
-                      </div>
-                    ))}
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full">
+                      <tbody>
+                        {shoesItems.map((item, index) => (
+                          <tr
+                            key={index}
+                            className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
+                          >
+                            <td className="py-3 px-4 text-gray-700 text-sm sm:text-base">
+                              {item.item}
+                            </td>
+                            <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                              {item.price}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </TabsContent>
 
                 {/* Luxury Shoes Tab */}
                 <TabsContent value="luxury_shoes" className="mt-6">
-                  <div className="space-y-0">
-                    {luxuryShoes.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex justify-between items-center border-b border-gray-200 py-3 sm:py-4 hover:bg-gray-50"
-                      >
-                        <span className="text-gray-700 text-sm sm:text-base pr-4 flex-1">
-                          {item.item}
-                        </span>
-                        <span className="font-bold text-primary-green text-base sm:text-lg whitespace-nowrap">
-                          {item.price}
-                        </span>
-                      </div>
-                    ))}
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full">
+                      <tbody>
+                        {luxuryShoes.map((item, index) => (
+                          <tr
+                            key={index}
+                            className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
+                          >
+                            <td className="py-3 px-4 text-gray-700 text-sm sm:text-base">
+                              {item.item}
+                            </td>
+                            <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                              {item.price}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </TabsContent>
               </Tabs>

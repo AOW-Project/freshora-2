@@ -155,6 +155,14 @@ const Navbar = () => {
                 </a>
               </span>
             </div>
+            <div className="flex flex-row justify-center flex-nowrap items-center gap-1">
+              <FaPhoneAlt className="text-primary-green" />
+              <span className="flex items-center gap-1">
+                <a href="tel:+971045799667">
+                  <span className="text-base">+971 (0) 4 579 9667</span>
+                </a>
+              </span>
+            </div>
           </div>
         </div>
 
@@ -234,7 +242,7 @@ const Navbar = () => {
                         <Link
                           key={subIndex}
                           href={sub.href}
-                          className="group px-4 py-2 font-medium text-sm bg-white hover:bg-primary-green text-primary-green hover:text-white transition-colors rounded flex items-center gap-2"
+                          className="group px-4 py-2 font-medium text-sm bg-white hover:bg-primary-green text-primary-green hover:text-white transition-colors duration-300 rounded flex items-center gap-2"
                         >
                           <Image
                             src={`/images/redesign/${sub.icon}`}

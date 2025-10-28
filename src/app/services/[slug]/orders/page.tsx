@@ -33,7 +33,7 @@ async function fetchAllServices() {
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/services`
     );
     const result = await res.json();
-    console.log("hit aws lightsail successfully");
+    console.log("fetched services succesfully");
     return result.success ? (result.data as Service[]) : [];
   } catch (err) {
     console.error("Failed to fetch all services for static generation:", err);

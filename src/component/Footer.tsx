@@ -162,6 +162,12 @@ export default function Footer() {
                     +971 50 925 9667
                   </a>
                 </li>
+                <li className="flex items-start gap-2">
+                  <FaPhoneAlt className="text-white" />
+                  <a href="tel:+971045799667" className=" hover:underline">
+                    +971 (0) 4 579 9667
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

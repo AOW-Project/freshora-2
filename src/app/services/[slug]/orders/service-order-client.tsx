@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ShoppingCart, Star, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -137,6 +139,63 @@ export default function ServiceOrderClient({
   const [tempOrder, setTempOrder] = useState<OrderItem[]>([]);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
 
+  const [isChecked, setIsChecked] = useState(false);
+
+  const pathname = usePathname();
+
+  // service details
+  const serviceCategories = useMemo(
+    () => [
+      {
+        name: "Laundry Services",
+        slug: "laundry-services",
+        icon: "Laundry.svg",
+      },
+      {
+        name: "Dry Cleaning Services",
+        slug: "dry-cleaning-services",
+        icon: "Dry-clean.svg",
+      },
+      {
+        name: "Express Laundry Services",
+        slug: "express-laundry-services",
+        icon: "Express.svg",
+      },
+      { name: "Shoe Cleaning", slug: "shoe-bag-spa", icon: "Shoe-spa.svg" },
+      {
+        name: "Luxury Shoe Cleaning",
+        slug: "luxury-shoe-cleaning",
+        icon: "Luxury-shoe.svg",
+      },
+      {
+        name: "Commercial Laundry Service",
+        slug: "commercial-laundry-service",
+        icon: "Commercial.svg",
+      },
+      {
+        name: "Curtain Cleaning Service",
+        slug: "curtain-cleaning-service",
+        icon: "Curtain.svg",
+      },
+      {
+        name: "Carpet Cleaning Service",
+        slug: "carpet-cleaning-services",
+        icon: "Carpet.svg",
+      },
+      {
+        name: "Soft Toy Cleaning Service",
+        slug: "soft-toy-cleaning-service",
+        icon: "Toy.svg",
+      },
+      {
+        name: "Steam Pressing Service",
+        slug: "steam-pressing-service",
+        icon: "Steam.svg",
+      },
+    ],
+    []
+  );
+
   const categories = useMemo(() => {
     return service.items ? Object.keys(service.items) : [];
   }, [service.items]);
@@ -154,6 +213,11 @@ export default function ServiceOrderClient({
       0
     );
   }, [tempOrder]);
+
+  // ⚡ Apply +50% charge if express selected
+  const finalTotal = useMemo(() => {
+    return isChecked ? orderTotal * 1.5 : orderTotal;
+  }, [orderTotal, isChecked]);
 
   const breadcrumbNav = useMemo(
     () => (
@@ -201,12 +265,19 @@ export default function ServiceOrderClient({
         const cartItem = {
           id: `${service.id}-${item.id}`,
           name: item.name,
-          price: item.price,
+          // 💰 Apply +50% if express selected
+          price: isChecked ? item.price * 1.5 : item.price,
           quantity: item.quantity,
         };
         await addToCart(cartItem);
       }
-      toast.success(`All items added to cart successfully!`);
+
+      toast.success(
+        `All items added to cart successfully${
+          isChecked ? " with express service!" : "!"
+        }`
+      );
+
       setTempOrder([]);
     } catch (error) {
       const errorMessage =
@@ -216,7 +287,7 @@ export default function ServiceOrderClient({
     } finally {
       setIsAddingToCart(false);
     }
-  }, [tempOrder, addToCart, service.id]);
+  }, [tempOrder, addToCart, service.id, isChecked]);
 
   const handleAddToOrder = useCallback(
     (item: ServiceItem, category: string) => {
@@ -265,11 +336,72 @@ export default function ServiceOrderClient({
           </div>
         ))}
       </div>
+      <div className="border-t pt-5 mb-6">
+        <div className="flex items-start gap-3">
+          {/* Custom checkbox container */}
+          <div
+            onClick={() => setIsChecked((prev) => !prev)}
+            className={`relative w-5 h-5 flex items-center justify-center rounded border-2 cursor-pointer transition-all duration-200 ${
+              isChecked
+                ? "bg-primary-green border-primary-green"
+                : "border-gray-300 bg-white hover:border-primary-green/70"
+            }`}
+          >
+            {/* Check icon */}
+            {isChecked && (
+              <svg
+                className="w-3.5 h-3.5 text-white"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            )}
+          </div>
+
+          {/* Text content */}
+          <div className="flex-1">
+            <label
+              htmlFor="express-laundry"
+              className="font-medium text-black cursor-pointer"
+              onClick={() => setIsChecked((prev) => !prev)}
+            >
+              Express Laundry
+            </label>
+            <p className="text-gray-500 text-sm mt-1 leading-snug">
+              Get your clothes washed and pressed within 6 hours using our
+              express laundry service,
+              <span className="font-semibold text-green-600"> +50%</span> on
+              total order.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Total Section */}
       <div className="border-t pt-4 mb-6">
         <div className="flex justify-between items-center text-lg font-bold">
           <span>Total:</span>
-          <span className="text-green-600">{orderTotal.toFixed(2)} AED</span>
+          <span
+            className={`${
+              isChecked ? "text-primary-green" : "text-green-600"
+            } transition-all duration-300`}
+          >
+            {finalTotal.toFixed(2)} AED
+          </span>
         </div>
+
+        {isChecked && (
+          <p className="text-sm text-green-600 mt-1">
+            Express service charge applied
+          </p>
+        )}
       </div>
       <Button
         onClick={handleAddAllToCart}
@@ -322,7 +454,46 @@ export default function ServiceOrderClient({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {breadcrumbNav}
       </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="flex justify-evenly w-full py-5 gap-3 overflow-x-scroll lg:overflow-hidden">
+          {serviceCategories.map((category) => {
+            const isActive = pathname == `/services/${category.slug}/orders`;
+            return (
+              <Link
+                key={category.slug}
+                href={`/services/${category.slug}/orders`}
+                className={`relative w-[110px] p-3 transition-colors duration-300 flex flex-col items-center group justify-start gap-3  border border-primary-green text-center text-gray-500 font-medium rounded  text-base hover:bg-primary-green bg-gray-50  hover:text-white  ${
+                  isActive ? "bg-primary-green text-white" : ""
+                }`}
+              >
+                <Image
+                  src={`/images/redesign/${category.icon}`}
+                  alt="Freshora Laundry Logo"
+                  width={16}
+                  height={16}
+                  className={`w-9 h-9 sm:w-8 sm:h-8 transition-all duration-300 group-hover:invert group-hover:brightness-0 group-hover:sepia group-hover:hue-rotate-[120deg] group-hover:saturate-[10]  ${
+                    isActive
+                      ? "invert brightness-0 sepia hue-rotate-[120deg] saturate-[10]"
+                      : ""
+                  }`}
+                  priority
+                />
+                {category.name}
 
+                {/* Triangle Pointer */}
+                <div
+                  className={`absolute left-1/2 -translate-x-1/2 bottom-[-8px] 
+                w-0 h-0 
+                border-l-[10px] border-l-transparent 
+                border-r-[10px] border-r-transparent 
+                border-t-[10px] border-t-primary-green 
+                ${isActive ? "block" : "hidden"}`}
+                ></div>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
       <div className="min-h-screen bg-white">
         <div className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto px-4 py-6">
@@ -385,7 +556,7 @@ export default function ServiceOrderClient({
                   >
                     {categories.map((category) => (
                       <TabsTrigger
-                        className={`py-3 rounded-t-xl rounded-b-none border-0 transition-all duration-300 data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:font-semibold data-[state=inactive]:bg-gray-100 data-[state=inactive]:text-gray-600 hover:bg-primary-green/80 hover:text-white
+                        className={`py-3 rounded-t-xl rounded-b-none border-0 transition-all duration-300 data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:font-semibold data-[state=inactive]:bg-gray-100 data-[state=inactive]:text-gray-600 hover:bg-primary-green/80 hover:text-white cursor-pointer
         `}
                         key={category}
                         value={category}

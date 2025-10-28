@@ -145,6 +145,14 @@ export default function ContactPage() {
                 +971 50 925 9667
               </a>
             </p>
+            <p className="text-gray-600 text-sm">
+              <a
+                href="tel:+971045799667"
+                className="hover:text-green-600 transition-colors"
+              >
+                +971 (0) 4 579 9667
+              </a>
+            </p>
           </div>
 
           <div className="text-center">

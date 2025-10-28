@@ -4,11 +4,11 @@ import Image from "next/image";
 
 const coupon = {
   id: 1,
-  title: "50% OFF",
+  title: "25% OFF",
   subtitle: "Launch Month Offer",
   address: "Shop no 4, Azizi Riviera 42, Meydan, Al Merkadh, Dubai UAE",
   email: "freshorappc@gmail.com",
-  expires: "October 15, 2025",
+  expires: "November 30, 2025",
   note: "On your total bill!",
 };
 
