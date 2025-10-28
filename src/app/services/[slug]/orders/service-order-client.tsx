@@ -219,32 +219,6 @@ export default function ServiceOrderClient({
     return isChecked ? orderTotal * 1.5 : orderTotal;
   }, [orderTotal, isChecked]);
 
-  const breadcrumbNav = useMemo(
-    () => (
-      <div className="w-full max-w-7xl mx-auto px-6 py-5 bg-white ">
-        <nav className="flex items-center space-x-1 sm:space-x-2 text-black">
-          <Link
-            href="/"
-            className="hover:text-green-400 text-sm sm:text-base transition-colors"
-          >
-            Home
-          </Link>
-          <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
-          <Link
-            href="/services"
-            className="hover:text-green-400 text-sm sm:text-base transition-colors"
-          >
-            Services
-          </Link>
-          <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
-
-          <span className="text-green-400 capitalize">Order</span>
-        </nav>
-      </div>
-    ),
-    []
-  );
-
   const updateQuantity = useCallback(
     (itemId: string, change: number) => {
       const newQuantity = Math.max(0, (quantities[itemId] || 0) + change);
@@ -433,27 +407,6 @@ export default function ServiceOrderClient({
 
   return (
     <div>
-      {/* Header Banner */}
-      <div
-        className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center bg-fixed flex items-center justify-center px-6"
-        style={{
-          backgroundImage: `url('/images/redesign/about-banner.png')`,
-        }}
-      >
-        {" "}
-        {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
-        <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center z-30">
-          <p>
-            Professional Laundry{" "}
-            <span className="text-[#FFFF00]">
-              Services Designed for Your Lifestyle
-            </span>
-          </p>
-        </div>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        {breadcrumbNav}
-      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex justify-evenly w-full py-5 gap-3 overflow-x-scroll lg:overflow-hidden">
           {serviceCategories.map((category) => {
