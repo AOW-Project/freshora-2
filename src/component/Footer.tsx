@@ -58,11 +58,11 @@ export default function Footer() {
       href: "/services/dry-cleaning-services",
       icon: "Dry-clean.svg",
     },
-    {
-      title: "Express Laundry Services",
-      href: "/services/express-laundry-services",
-      icon: "Express.svg",
-    },
+    // {
+    //   title: "Express Laundry Services",
+    //   href: "/services/express-laundry-services",
+    //   icon: "Express.svg",
+    // },
     {
       title: "Shoe & Bag Spa",
       href: "/services/shoe-bag-spa",
@@ -83,11 +83,11 @@ export default function Footer() {
       href: "/services/carpet-cleaning-services",
       icon: "Carpet.svg",
     },
-    {
-      title: "Curtain Cleaning Service",
-      href: "/services/curtain-cleaning-service",
-      icon: "Curtain.svg",
-    },
+    // {
+    //   title: "Curtain Cleaning Service",
+    //   href: "/services/curtain-cleaning-service",
+    //   icon: "Curtain.svg",
+    // },
     {
       title: "Soft Toy Cleaning Service",
       href: "/services/soft-toy-cleaning-service",
