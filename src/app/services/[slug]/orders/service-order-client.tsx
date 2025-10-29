@@ -156,27 +156,27 @@ export default function ServiceOrderClient({
         slug: "dry-cleaning-services",
         icon: "Dry-clean.svg",
       },
-      {
-        name: "Express Laundry Services",
-        slug: "express-laundry-services",
-        icon: "Express.svg",
-      },
+      // {
+      //   name: "Express Laundry Services",
+      //   slug: "express-laundry-services",
+      //   icon: "Express.svg",
+      // },
       { name: "Shoe Cleaning", slug: "shoe-bag-spa", icon: "Shoe-spa.svg" },
       {
         name: "Luxury Shoe Cleaning",
         slug: "luxury-shoe-cleaning",
         icon: "Luxury-shoe.svg",
       },
-      {
-        name: "Commercial Laundry Service",
-        slug: "commercial-laundry-service",
-        icon: "Commercial.svg",
-      },
-      {
-        name: "Curtain Cleaning Service",
-        slug: "curtain-cleaning-service",
-        icon: "Curtain.svg",
-      },
+      // {
+      //   name: "Commercial Laundry Service",
+      //   slug: "commercial-laundry-service",
+      //   icon: "Commercial.svg",
+      // },
+      // {
+      //   name: "Curtain Cleaning Service",
+      //   slug: "curtain-cleaning-service",
+      //   icon: "Curtain.svg",
+      // },
       {
         name: "Carpet Cleaning Service",
         slug: "carpet-cleaning-services",
@@ -310,53 +310,55 @@ export default function ServiceOrderClient({
           </div>
         ))}
       </div>
-      <div className="border-t pt-5 mb-6">
-        <div className="flex items-start gap-3">
-          {/* Custom checkbox container */}
-          <div
-            onClick={() => setIsChecked((prev) => !prev)}
-            className={`relative w-5 h-5 flex items-center justify-center rounded border-2 cursor-pointer transition-all duration-200 ${
-              isChecked
-                ? "bg-primary-green border-primary-green"
-                : "border-gray-300 bg-white hover:border-primary-green/70"
-            }`}
-          >
-            {/* Check icon */}
-            {isChecked && (
-              <svg
-                className="w-3.5 h-3.5 text-white"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            )}
-          </div>
-
-          {/* Text content */}
-          <div className="flex-1">
-            <label
-              htmlFor="express-laundry"
-              className="font-medium text-black cursor-pointer"
+      {pathname === "/services/laundry-services/orders" && (
+        <div className="border-t pt-5 mb-6">
+          <div className="flex items-start gap-3">
+            {/* Custom checkbox container */}
+            <div
               onClick={() => setIsChecked((prev) => !prev)}
+              className={`relative w-5 h-5 flex items-center justify-center rounded border-2 cursor-pointer transition-all duration-200 ${
+                isChecked
+                  ? "bg-primary-green border-primary-green"
+                  : "border-gray-300 bg-white hover:border-primary-green/70"
+              }`}
             >
-              Express Laundry
-            </label>
-            <p className="text-gray-500 text-sm mt-1 leading-snug">
-              Get your clothes washed and pressed within 6 hours using our
-              express laundry service,
-              <span className="font-semibold text-green-600"> +50%</span> on
-              total order.
-            </p>
+              {/* Check icon */}
+              {isChecked && (
+                <svg
+                  className="w-3.5 h-3.5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              )}
+            </div>
+
+            {/* Text content */}
+            <div className="flex-1">
+              <label
+                htmlFor="express-laundry"
+                className="font-medium text-black cursor-pointer"
+                onClick={() => setIsChecked((prev) => !prev)}
+              >
+                Express Laundry
+              </label>
+              <p className="text-gray-500 text-sm mt-1 leading-snug">
+                Get your clothes washed and pressed within 6 hours using our
+                express laundry service,
+                <span className="font-semibold text-green-600"> +50%</span> on
+                total order.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Total Section */}
       <div className="border-t pt-4 mb-6">
@@ -408,7 +410,7 @@ export default function ServiceOrderClient({
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="flex justify-evenly w-full py-5 gap-3 overflow-x-scroll lg:overflow-hidden">
+        <div className="flex justify-center w-full py-5 gap-3 overflow-x-scroll lg:overflow-hidden">
           {serviceCategories.map((category) => {
             const isActive = pathname == `/services/${category.slug}/orders`;
             return (

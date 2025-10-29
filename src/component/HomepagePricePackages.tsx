@@ -10,6 +10,7 @@ import { FaTshirt } from "react-icons/fa";
 import { MdIron } from "react-icons/md";
 import MapSection from "./map-section";
 import { FaArrowDownLong } from "react-icons/fa6";
+import Image from "next/image";
 
 // Small Cards
 
@@ -256,39 +257,46 @@ const PickupPackages: React.FC = () => {
           {/* small cards  */}
           <SmallPackageCard
             title="Blanket Service"
-            price={25.0}
-            description="Washed and Pressed"
+            price={35.0}
+            description="Dry cleaning"
           />
           <SmallPackageCard
-            title="Ironing Service"
-            price={3.0}
-            description="Iron and Fold"
+            title="Designer Shoes"
+            price={120.0}
+            description="Premium cleaning for high-end formal shoes"
           />
         </div>
-        {/* 2nd col offer */}
-        <div className=" w-full flex-grow">
-          <div className="flex justify-center gap-6 sm:gap-11">
-            {packagesData.map((pkg) => (
+        {/* {packagesData.map((pkg) => (
               <PackageCard
                 key={pkg.id}
                 packageInfo={pkg}
                 onOrderNow={handleOrderNow}
               />
-            ))}
+            ))} */}
+        {/* 2nd col offer */}
+        <div className="w-full flex-grow">
+          <div className="relative w-full h-full ">
+            <Image
+              alt="offer-img"
+              src="/images/redesign/offer-img.jpg"
+              fill
+              className="object-contain rounded"
+            />
           </div>
         </div>
+
         {/* 3rd col offer */}
         <div className="grid grid-cols-1 md:hidden lg:grid lg:grid-cols-1 gap-6">
           <SmallPackageCard
             title="Curtains Service"
-            price={25.0}
-            description="Washed and Pressed"
+            price={12.0}
+            description="Washed and Pressed (Per Sq meter) "
           />
 
           <SmallPackageCard
-            title="Repairs & Alterations"
-            price={12.0}
-            description="Simple Sewing"
+            title="Wedding Dress"
+            price={80.0}
+            description="Washed and Pressed"
           />
         </div>
       </div>

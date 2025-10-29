@@ -39,7 +39,7 @@ export default function CouponCarousel() {
             <div>
               <div className="flex flex-col justify-between items-start gap-2 px-6 py-4 border-b">
                 <p className="text-xl font-medium text-primary-green">
-                  On Your Total Bill !{" "}
+                  On Wash | Press | Fold{" "}
                 </p>
                 <div className="flex items-center gap-2">
                   <Image

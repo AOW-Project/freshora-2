@@ -25,14 +25,14 @@ const services = [
     title: "Dry Cleaning Services",
     description: "Care so gentle, even labels would approve.",
   },
-  {
-    id: 3,
-    slug: "express-laundry-services",
-    image:
-      "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.webp",
-    title: "Express Laundry Services",
-    description: "Book at breakfast, wear it by dinner.",
-  },
+  // {
+  //   id: 3,
+  //   slug: "express-laundry-services",
+  //   image:
+  //     "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.webp",
+  //   title: "Express Laundry Services",
+  //   description: "Book at breakfast, wear it by dinner.",
+  // },
   {
     id: 4,
     slug: "shoe-bag-spa",
@@ -59,14 +59,14 @@ const services = [
     description:
       "High volume, tight deadlines, zero excuses. Bulk care with boutique standards.",
   },
-  {
-    id: 7,
-    slug: "curtain-cleaning-service",
-    image:
-      "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.webp",
-    title: "Curtain Cleaning Service",
-    description: "Every breeze leaves something behind — we take it out.",
-  },
+  // {
+  //   id: 7,
+  //   slug: "curtain-cleaning-service",
+  //   image:
+  //     "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.webp",
+  //   title: "Curtain Cleaning Service",
+  //   description: "Every breeze leaves something behind — we take it out.",
+  // },
   {
     id: 8,
     slug: "carpet-cleaning-services",

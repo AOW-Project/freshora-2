@@ -13,6 +13,7 @@ import type { Service } from "./page";
 import LoadingOverlay from "@/component/LoadingOverlay";
 import { RiCheckDoubleLine } from "react-icons/ri";
 import CouponCarousel from "@/component/CouponCarousel";
+import { usePathname } from "next/navigation";
 
 type FormState = {
   name: string;
@@ -37,6 +38,8 @@ export default function ServicePageClient({
   const [loading, setLoading] = useState(false);
   const [thankYou, setThankYou] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
+
+  const pathname = usePathname();
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -74,14 +77,14 @@ export default function ServicePageClient({
     () => [
       { name: "Laundry Services", slug: "laundry-services" },
       { name: "Dry Cleaning Services", slug: "dry-cleaning-services" },
-      { name: "Express Laundry Services", slug: "express-laundry-services" },
+      // { name: "Express Laundry Services", slug: "express-laundry-services" },
       { name: "Shoe Cleaning", slug: "shoe-bag-spa" },
       { name: "Luxury Shoe Cleaning", slug: "luxury-shoe-cleaning" },
       {
         name: "Commercial Laundry Service",
         slug: "commercial-laundry-service",
       },
-      { name: "Curtain Cleaning Service", slug: "curtain-cleaning-service" },
+      // { name: "Curtain Cleaning Service", slug: "laundry-services" },
       { name: "Carpet Cleaning Service", slug: "carpet-cleaning-services" },
       { name: "Soft Toy Cleaning Service", slug: "soft-toy-cleaning-service" },
       { name: "Steam Pressing Service", slug: "steam-pressing-service" },
@@ -232,16 +235,28 @@ export default function ServicePageClient({
                   </p>
                 </div>
                 {/* get the services button */}
-                <div className="my-4 h-11  bg-gray-50">
-                  <Link href={`/services/${slug}/orders`}>
-                    <Button
-                      onClick={() => setIsNavigating(true)}
-                      variant="outline"
-                      className="w-full h-full bg-secondary-green text-white cta-button font-semibold cursor-pointer"
-                    >
-                      Get the Service
-                    </Button>
-                  </Link>
+                <div className="my-4 h-11 bg-gray-50">
+                  {pathname === "/services/commercial-laundry-service" ? (
+                    <Link href="/contact">
+                      <Button
+                        onClick={() => setIsNavigating(true)}
+                        variant="outline"
+                        className="w-full h-full bg-secondary-green text-white cta-button font-semibold cursor-pointer"
+                      >
+                        Contact for Prices
+                      </Button>
+                    </Link>
+                  ) : (
+                    <Link href={`/services/${slug}/orders`}>
+                      <Button
+                        onClick={() => setIsNavigating(true)}
+                        variant="outline"
+                        className="w-full h-full bg-secondary-green text-white cta-button font-semibold cursor-pointer"
+                      >
+                        Get the Service
+                      </Button>
+                    </Link>
+                  )}
                 </div>
               </div>
 
