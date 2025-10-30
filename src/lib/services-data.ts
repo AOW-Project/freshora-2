@@ -22,7 +22,7 @@ export interface Service {
     basic: { price: string; description: string };
     premium: { price: string; description: string };
   };
-  duration: string;
+  duration?: string;
   rating: number;
   reviews: number;
   process: string[];
@@ -141,7 +141,7 @@ const services: Service[] = [
           "Individual pricing with fabric protection and minor repairs",
       },
     },
-    duration: "2-3 days",
+    // duration: "2-3 days",
     rating: 5,
     reviews: 89,
     process: [
@@ -212,7 +212,7 @@ const services: Service[] = [
         description: "Premium care with express service",
       },
     },
-    duration: "4-8 hours",
+    // duration: "4-8 hours",
     rating: 5,
     reviews: 156,
     process: [
@@ -282,7 +282,7 @@ const services: Service[] = [
         description: "Full restoration with color matching",
       },
     },
-    duration: "3-5 days",
+    // duration: "3-5 days",
     rating: 5,
     reviews: 73,
     process: [
@@ -350,7 +350,7 @@ const services: Service[] = [
         description: "Full restoration with mirror shine",
       },
     },
-    duration: "2-4 days",
+    // duration: "2-4 days",
     rating: 5,
     reviews: 92,
     process: [
@@ -420,7 +420,7 @@ const services: Service[] = [
         description: "Tailored service agreements",
       },
     },
-    duration: "24-48 hours",
+    // duration: "24-48 hours",
     rating: 5,
     reviews: 234,
     process: [
@@ -489,7 +489,7 @@ const services: Service[] = [
         description: "Delicate fabric care with protection",
       },
     },
-    duration: "3-5 days",
+    // duration: "3-5 days",
     rating: 5,
     reviews: 67,
     process: [
@@ -558,7 +558,7 @@ const services: Service[] = [
         description: "Deep cleaning with stain protection",
       },
     },
-    duration: "2-4 hours",
+    // duration: "2-4 hours",
     rating: 5,
     reviews: 145,
     process: [
@@ -624,7 +624,7 @@ const services: Service[] = [
         description: "Deep sanitization with allergen treatment",
       },
     },
-    duration: "2-3 days",
+    // duration: "2-3 days",
     rating: 5,
     reviews: 89,
     process: [
@@ -696,7 +696,7 @@ const services: Service[] = [
         description: "Individual pricing with express service",
       },
     },
-    duration: "24-48 hours",
+    // duration: "24-48 hours",
     rating: 5,
     reviews: 127,
     process: [

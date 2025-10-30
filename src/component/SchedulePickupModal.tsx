@@ -207,7 +207,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
 
   const [emailVerificationState, setEmailVerificationState] = useState<
     "unverified" | "pending" | "verified"
-  >("unverified");
+  >("verified");
   const [otp, setOtp] = useState("");
   const [otpLoading, setOtpLoading] = useState(false);
   const [otpMessage, setOtpMessage] = useState("");
@@ -243,7 +243,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
   const watchedService = watch("service");
   const watchedEmail = watch("email");
 
-  // Load cart from localStorage when modal opens (same logic you had)
+  // Load cart from localStorage when modal opens
   useEffect(() => {
     if (!open) return;
 
@@ -262,6 +262,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
           0
         );
         setTotalAmount(total);
+        // console.log("CHECK CART ITEMS:", cartItems);
       } else {
         setCartItems([]);
         setTotalAmount(0);
@@ -282,12 +283,12 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
   }, [watchedService]);
 
   // Reset verification when email changes
-  useEffect(() => {
-    // reset OTP state when email edited
-    setEmailVerificationState("unverified");
-    setOtp("");
-    setOtpMessage("");
-  }, [watchedEmail]);
+  // useEffect(() => {
+  //   // reset OTP state when email edited
+  //   setEmailVerificationState("unverified");
+  //   setOtp("");
+  //   setOtpMessage("");
+  // }, [watchedEmail]);
 
   // Send OTP (validates email first using react-hook-form trigger)
   const handleSendOTP = async () => {
@@ -580,7 +581,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                     />
                   )}
                 />
-                <Button
+                {/* <Button
                   type="button"
                   variant="outline"
                   size="sm"
@@ -597,14 +598,14 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                   ) : (
                     "Verify"
                   )}
-                </Button>
+                </Button> */}
               </div>
               {errors.email && (
                 <p className="text-xs text-red-600">{errors.email.message}</p>
               )}
 
               {/* OTP */}
-              {emailVerificationState === "pending" && (
+              {/* {emailVerificationState === "pending" && (
                 <div className="flex gap-1">
                   <Input
                     type="text"
@@ -626,7 +627,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
                     OK
                   </Button>
                 </div>
-              )}
+              )} */}
 
               {otpMessage && (
                 <p

@@ -240,8 +240,7 @@ export default function ServicePageClient({
                     <Link href="/contact">
                       <Button
                         onClick={() => setIsNavigating(true)}
-                        variant="outline"
-                        className="w-full h-full bg-secondary-green text-white cta-button font-semibold cursor-pointer"
+                        className="w-full h-full bg-secondary-green text-white hover:bg-primary-green hover:text-white transition-colors duration-300 ease-in-out font-semibold cursor-pointer"
                       >
                         Contact for Prices
                       </Button>
@@ -250,8 +249,7 @@ export default function ServicePageClient({
                     <Link href={`/services/${slug}/orders`}>
                       <Button
                         onClick={() => setIsNavigating(true)}
-                        variant="outline"
-                        className="w-full h-full bg-secondary-green text-white cta-button font-semibold cursor-pointer"
+                        className="w-full h-full bg-secondary-green text-white hover:bg-primary-green hover:text-white transition-colors duration-300 ease-in-out font-semibold cursor-pointer"
                       >
                         Get the Service
                       </Button>

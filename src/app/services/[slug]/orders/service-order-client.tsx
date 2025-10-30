@@ -95,7 +95,6 @@ const ItemCard = ({
         <div className="flex flex-col gap-2 items-center">
           <div className="flex items-center gap-3">
             <Button
-              variant="outline"
               size="sm"
               onClick={() => onUpdateQuantity(item.id, -1)}
               disabled={quantity === 0}
@@ -107,7 +106,6 @@ const ItemCard = ({
               {quantity}
             </span>
             <Button
-              variant="outline"
               size="sm"
               onClick={() => onUpdateQuantity(item.id, 1)}
               className="h-8 w-8 p-0 rounded bg-primary-green text-white"
@@ -239,10 +237,13 @@ export default function ServiceOrderClient({
         const cartItem = {
           id: `${service.id}-${item.id}`,
           name: item.name,
-          // 💰 Apply +50% if express selected
+          // Apply +50% if express selected
           price: isChecked ? item.price * 1.5 : item.price,
           quantity: item.quantity,
+          serviceType: service.title, // ✅ e.g. "Laundry Services (Wash & Press)"
+          category: item.category, // ✅ e.g. "men" | "women" | "household"
         };
+
         await addToCart(cartItem);
       }
 
@@ -261,7 +262,7 @@ export default function ServiceOrderClient({
     } finally {
       setIsAddingToCart(false);
     }
-  }, [tempOrder, addToCart, service.id, isChecked]);
+  }, [tempOrder, addToCart, service.id, service.title, isChecked]);
 
   const handleAddToOrder = useCallback(
     (item: ServiceItem, category: string) => {
@@ -410,7 +411,7 @@ export default function ServiceOrderClient({
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="flex justify-center w-full py-5 gap-3 overflow-x-scroll lg:overflow-hidden">
+        <div className="flex max-w-fit mx-auto px-10 py-5 gap-3 overflow-x-scroll lg:overflow-hidden">
           {serviceCategories.map((category) => {
             const isActive = pathname == `/services/${category.slug}/orders`;
             return (
@@ -473,12 +474,12 @@ export default function ServiceOrderClient({
                       {service.rating.toFixed(1)} ({service.reviews} reviews)
                     </span>
                   </div>
-                  <Badge
+                  {/* <Badge
                     variant="secondary"
                     className="bg-green-100 text-green-800"
                   >
                     {service.duration}
-                  </Badge>
+                  </Badge> */}
                 </div>
               </div>
               {getTotalItems() > 0 && (
