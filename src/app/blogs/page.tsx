@@ -5,7 +5,7 @@ interface BlogCardProps {
   id: number;
   image: string;
   title: string;
-  description: string;
+  description: React.ReactNode;
   slug: string;
 }
 
@@ -114,7 +114,7 @@ export const blogs = [
       {
         title: "1. Laundry That Works Around Your Schedule",
         description:
-          "We’ve all had those mornings when the clock seems to move faster than you do. Between early work calls, endless errands, and trying to find that one clean shirt buried in the laundry pile, it can feel impossible to stay on top of chores. That’s exactly how express laundry benefits for busy schedules — by saving you precious time without compromising on freshness or quality. It’s more than just fast washing; it’s about simplifying your day while following the best laundry service tips to keep your clothes looking spotless and ready for anything.",
+          "Laundry can easily take hours each week, sorting, washing, drying, and folding. Express laundry benefits for busy schedules by handling it all efficiently. Professional laundromats use high-capacity machines and optimized cycles to clean large loads in a fraction of the time without compromising quality. While your clothes are cared for, you can focus on work, errands, or simply resting.",
       },
       {
         title: "2. The Smart Science Behind Express Cleaning",
@@ -158,39 +158,63 @@ export const blogs = [
       },
       {
         title: "10. Fits Every Lifestyle",
-        description:
-          "Laundry express services work for everyone Office wear that must be fresh daily Gym clothes need regular washing Travel laundry that can’t wait Family clothing piles",
+        description: (
+          <div>
+            <p>Laundry express services work for everyone :</p>
+            <ul className="list-disc ml-6">
+              <li>Office wear that must be fresh daily</li>
+              <li>Gym clothes need regular washing</li>
+              <li>Travel laundry that can’t wait Family clothing piles</li>
+              <li>Family clothing piles</li>
+            </ul>
+            <p>
+              No matter your schedule, express laundry helps keep your routine
+              effortless while protecting your clothes.
+            </p>
+          </div>
+        ),
       },
       {
-        title: "Final Thoughts: Time Is the Real Luxury",
-        description: "Final Thoughts: Time Is the Real Luxury",
+        title: "Final Thoughts : Time Is the Real Luxury",
+        description: (
+          <p>
+            Laundry should never feel like a full-time job. With express laundry
+            benefits for busy schedules, you gain back valuable time without
+            sacrificing cleanliness or clothing care. Your clothes receive
+            professional attention, and you get to focus on what truly matters:
+            work, family, or well-deserved relaxation.
+            <br />
+            Skip the laundry struggle. Let professionals handle it and enjoy the
+            freedom of fresh laundry, fewer chores, and more moments that
+            matter.
+          </p>
+        ),
       },
     ],
     faqs: [
       {
-        question: "1. How fast is express laundry compared to regular washing?",
+        question: "How fast is express laundry compared to regular washing?",
         answer:
           "Express laundry can clean, dry, and fold your clothes within a few hours — what normally takes half a day at home can be done the same day without compromising on quality.",
       },
       {
-        question: "2. Does express laundry damage fabrics because it’s faster?",
+        question: "Does express laundry damage fabrics because it’s faster?",
         answer:
           "Not at all. Professional Express Laundry uses advanced machines, gentle detergents, and fabric-specific programs to protect your clothes while ensuring a deep clean.",
       },
       {
         question:
-          "3. Can I get my clothes picked up and delivered with express laundry?",
+          "Can I get my clothes picked up and delivered with express laundry?",
         answer:
           "Yes! Many express laundry services, including Freshora, offer doorstep pickup and delivery, making it easy to manage laundry without interrupting your day.",
       },
       {
-        question: "4. Is Express Laundry eco-friendly?",
+        question: "Is Express Laundry eco-friendly?",
         answer:
           "Yes. Modern express laundry systems use water- and energy-efficient machines with eco-friendly detergents, helping you save time and support a cleaner planet.",
       },
       {
-        question:
-          "5. What types of clothes are best suited for Express Laundry?",
+        question: "What types of clothes are best suited for Express Laundry?",
         answer:
           "From office wear and gym outfits to kids’ clothes and travel laundry — express laundry handles all types of daily wear, keeping them fresh, clean, and ready when you need them most.",
       },
@@ -214,77 +238,298 @@ export const blogs = [
         ],
       },
     },
-    title: "Eco-Friendly Laundry Tips for a Greener Clean",
-    description:
-      "Discover simple, eco-friendly laundry tips that actually work. Learn how to save water, energy, and your clothes while keeping your laundry routine sustainable.",
+    title: "Eco-Friendly Laundry Tips Anyone Can Try at Home",
+    description: (
+      <div>
+        <p className="font-medium text-lg">
+          I Tried Eco-Friendly Laundry Tips, Here’s What Actually Worked
+        </p>
+        <p>
+          <br />
+          It all started with one of those Instagram posts claiming that doing
+          laundry is ruining the planet. At first, I rolled my eyes. But then I
+          thought about it, every week I’m running a machine, using electricity,
+          water, and chemicals. I’d never stopped to consider the environmental
+          cost.
+          <br />
+          So, I decided to try eco-friendly laundry tips for a month. Turns out,
+          some tips work beautifully, while others made me realize that being
+          <br />
+          sustainable doesn’t always mean doing everything yourself. Here’s what
+          I learned.
+        </p>
+      </div>
+    ),
+
     content: [
       {
-        title: "1. Where Does All the Energy Go?",
-        description:
-          "Almost 90% of a washing machine’s energy use comes from heating water. Switching to cold-water washes saves energy without compromising cleanliness. Modern eco-friendly detergents perform excellently in cold water, helping you reduce your electricity bill while keeping clothes fresh. Just remember to sort clothes properly and use the right cycle settings for the best results.",
+        title: "Where Does All the Energy Go?",
+        description: (
+          <div>
+            <p className="mb-2">
+              I found out that almost 90% of a washing machine’s energy use
+              comes from heating the water. That blew my mind.
+              <br />
+              So, I switched to cold-water washes, half expecting mediocre
+              results.
+              <br />
+              Instead, my clothes came out just as clean, maybe cleaner. And my
+              electricity bill? Noticeably lower.
+            </p>
+
+            <h4 className="font-medium mb-1">Why It Works : </h4>
+            <p className="mb-2">
+              Modern <strong> eco-friendly laundry detergent </strong> is
+              formulated to perform well in cold water. The cleaning agents
+              don’t rely on heat, so you’re saving energy without sacrificing
+              freshness.
+            </p>
+            <h4 className="font-medium mb-1">Reality Check : </h4>
+            <p className="mb-2">
+              Cold water is great, but it’s not a magic fix. You still need to
+              separate darks and lights, choose the right cycle, and remember to
+              change your settings.
+            </p>
+          </div>
+        ),
       },
       {
-        title: "2. Am I Using Too Much Detergent?",
-        description:
-          "More detergent doesn’t mean cleaner clothes. Eco-friendly detergents are concentrated, requiring only a small amount per load. Using less improves rinsing, prevents buildup, and extends fabric life. However, cheaper green detergents might not dissolve well in cold water, so investing in quality is key to effective and sustainable washing.",
+        title: "Am I Using Too Much Detergent?",
+        description: (
+          <div>
+            <p className="mb-2">
+              I used to think more detergent meant cleaner clothes. I’d pour
+              half the bottle into one load. Then I read that most modern,
+              eco-friendly laundry detergents are super concentrated; you only
+              Cold water is great, but it’s not a magic fix. You still need to
+              separate darks and lights, choose the right cycle, and remember to
+              change your settings.need a small capful.
+              <br />
+              When I tried it, my clothes came out cleaner and softer. No
+              residue, no stiffness.
+            </p>
+
+            <h4 className="font-medium mb-1">Why It Works : </h4>
+            <p className="mb-2">
+              Less detergent means better rinsing. It prevents buildup that
+              traps dirt and dulls fabric. Plus, your detergent lasts twice as
+              long, which saves money.
+            </p>
+            <h4 className="font-medium mb-1">Reality Check : </h4>
+            <p className="mb-2">
+              Not all detergents work equally well in cold water. Some cheaper
+              green laundry detergent options struggle to dissolve properly. So,
+              you need to be mindful of what you buy; quality matters more than
+              quantity.
+            </p>
+          </div>
+        ),
       },
       {
-        title: "3. The Air-Drying Experiment",
-        description:
-          "Air drying reduces electricity use, prevents fiber damage, and helps clothes last longer. While it keeps fabrics bright and fresh, it’s not always practical in humid or hot climates. Some fabrics wrinkle or fade under direct sunlight. Balancing air drying with occasional machine drying ensures longevity without the inconvenience.",
+        title: "The Air-Drying Experiment",
+        description: (
+          <div>
+            <p className="mb-2">
+              Everyone says air drying is the eco move, so I gave up my dryer
+              for a week.
+              <br />
+              Yes, my clothes lasted longer, stayed brighter, and smelled
+              fresher. But the downside? It took forever. In Dubai’s heat,
+              clothes either dry too slowly or get bleached in direct sunlight.
+            </p>
+
+            <h4 className="font-medium mb-1">Why It Works : </h4>
+            <p className="mb-2">
+              No heat means no damage to fibers or elasticity. Clothes genuinely
+              last longer.
+            </p>
+            <h4 className="font-medium mb-1">But : </h4>
+            <p className="mb-2">
+              Air drying isn’t always practical. Some fabrics need shade; others
+              wrinkle badly. I found myself going back to the dryer when I
+              needed clothes fast.
+            </p>
+          </div>
+        ),
       },
       {
-        title: "4. Do We Really Need to Wash After Every Wear?",
-        description:
-          "Not every piece of clothing needs immediate washing. Jeans, sweaters, and even shirts can go multiple wears if unstained. Washing less frequently saves water, energy, and reduces wear and tear. It’s mostly a mindset shift — once you realize clean doesn’t always mean freshly washed, your laundry load and environmental impact drop dramatically.",
+        title: "Do We Really Need to Wash After Every Wear?",
+        description: (
+          <div>
+            <p className="mb-2">
+              This was the easiest and most effective change.
+              <br />
+              Not everything needs a wash after one wear. Jeans can go several
+              rounds. Sweaters and hoodies, too. Even shirts are fine for a
+              second wear if they’re not stained or sweaty.
+            </p>
+
+            <h4 className="font-medium mb-1">Why It Works : </h4>
+            <p className="mb-2">
+              Less washing means less energy, less water, and slower wear and
+              tear. Fabrics retain color and shape longer.
+              <br />
+              The challenge is more psychological; it feels “wrong” not to wash,
+              even when something’s still clean. But once I got over that
+              mindset, laundry day got a lot lighter.
+            </p>
+          </div>
+        ),
       },
       {
-        title: "5. The Eco Gadgets and DIY Fixes",
-        description:
-          "Wool dryer balls and vinegar rinses can make laundry more sustainable. Dryer balls reduce drying time by improving air circulation, while vinegar softens fabric and removes residue naturally. However, their impact is modest and requires consistency. These small hacks complement good laundry habits but aren’t game-changers on their own.",
+        title: "The Eco Gadgets and DIY Fixes",
+        description: (
+          <div>
+            <p className="mb-2">
+              I tried wool dryer balls and vinegar rinses because everyone
+              online swears by them.
+              <br />
+              The dryer balls helped a bit; clothes were softer and dried
+              slightly faster. But they made a racket and didn’t feel
+              revolutionary. Vinegar worked well as a natural softener, but
+              remembering to add it each time (and dealing with the smell)
+              wasn’t exactly convenient.
+            </p>
+
+            <h4 className="font-medium mb-1">Why They Works : </h4>
+            <p className="mb-2">
+              Dryer balls improve air circulation, reducing drying time. Vinegar
+              removes detergent residue, which softens fabric naturally.
+            </p>
+            <h4 className="font-medium mb-1">But Here's the Truth : </h4>
+            <p className="mb-2">
+              These tips are fine if you enjoy experimenting. But they’re not
+              life-changing, and they require consistency that’s hard to
+              maintain.
+            </p>
+          </div>
+        ),
       },
       {
-        title: "6. The Eco-Cycle Myth",
-        description:
-          "Eco modes on washing machines use less water and electricity, making them great for lightly soiled clothes. But for heavier loads, they can underperform, leading to rewashing and wasted resources. Use eco cycles wisely — they’re efficient only when your clothes don’t need deep cleaning.",
+        title: "The Eco-Cycle Myth",
+        description: (
+          <div>
+            <p className="mb-2">
+              Most machines now have an “eco” mode, so I tried it out. It uses
+              less water and electricity, which sounds great, but only if your
+              clothes aren’t that dirty.
+              <br />
+              Heavily soiled loads came out half-clean, and I had to wash them
+              again, wasting more energy overall.
+            </p>
+
+            <h4 className="font-medium mb-1">Why It Sometimes Works : </h4>
+            <p className="mb-2">
+              For light loads, it’s efficient. For anything more, it’s hit or
+              miss.
+            </p>
+          </div>
+        ),
       },
       {
-        title: "7. The Big Realization",
-        description:
-          "After weeks of experimenting, it became clear that being eco-friendly isn’t just about doing everything at home. Professional laundry services often use high-efficiency machines, eco detergents, and water recycling systems. They handle fabrics correctly, extending clothing lifespan — which is the most sustainable practice of all.",
+        title: "The Big Realization",
+        description: (
+          <div>
+            <p className="mb-2">
+              After weeks of trying every{" "}
+              <strong> eco-friendly laundry tip</strong> I could find, I had to
+              ask myself: was I actually helping the planet or just working
+              harder?
+              <br />
+              Cold water, less detergent, air drying, vinegar rinses, and eco
+              cycles, all nice in theory. But in practice, I was spending more
+              time managing settings, monitoring loads, and redoing washes.
+              <br />
+              Then it hit me: maybe individual effort isn’t the most efficient
+              route.
+              <br />
+              Professional laundry services operate at scale. They use
+              high-efficiency machines that handle full loads with minimal water
+              and energy. They use premium, fabric-safe products like{" "}
+              <strong> eco-friendly laundry detergent</strong> and have proper
+              wastewater systems in place. Most importantly, they know exactly
+              how to care for each fabric, so your clothes last longer, which is
+              the most sustainable thing you can do.
+              <br />
+              Meanwhile, at home, I was wasting water, overusing detergent, and
+              occasionally ruining clothes I’d have to replace. Every
+              replacement means new manufacturing, packaging, and shipping, all
+              of which impact the environment.
+              <br />
+              <br />
+              So, what’s actually the eco move?
+              <br />
+              It’s not doing everything yourself; it’s choosing the most
+              efficient option overall.
+            </p>
+          </div>
+        ),
       },
       {
-        title: "8. The Smart Way to Be Eco-Friendly",
-        description:
-          "True sustainability is about efficiency — saving time, energy, and resources while protecting your clothes. Services like Freshora operate with optimized systems that reduce waste and preserve garments using green detergents. Sometimes, letting professionals handle laundry is the smartest eco choice, proving that sustainability can also mean simplicity.",
+        title: "The Smart Way to Be Eco-Friendly",
+        description: (
+          <div>
+            <p className="mb-2">
+              True sustainability isn’t just about turning down your water
+              temperature or swapping in vinegar. It’s about using resources
+              efficiently, time, energy, and fabric lifespan included.
+              <br />
+              That’s why I started using professional laundry services like
+              Freshora. They wash smarter, not harder. Their systems are
+              optimized for minimal waste, maximum care, and long-term garment
+              preservation, often using{" "}
+              <strong> green laundry detergent </strong>for optimal results.
+              <br />
+              It’s better for your clothes, your schedule, and yes, even the
+              environment.
+              <br />
+              So, while it’s great to switch to cold water and cut back on
+              detergent, the real eco-friendly laundry tip might just be letting
+              experts handle it, because sometimes, the most sustainable choice
+              is the one that simply makes sense.
+            </p>
+
+            <h4 className="font-medium mb-1">Why It Works : </h4>
+            <p className="mb-2">
+              No heat means no damage to fibers or elasticity. Clothes genuinely
+              last longer.
+            </p>
+            <h4 className="font-medium mb-1">But : </h4>
+            <p className="mb-2">
+              Air drying isn’t always practical. Some fabrics need shade; others
+              wrinkle badly. I found myself going back to the dryer when I
+              needed clothes fast.
+            </p>
+          </div>
+        ),
       },
     ],
     faqs: [
       {
-        question: "1. Are eco-friendly detergents really effective?",
+        question: "Are eco-friendly detergents really effective?",
         answer:
           "Yes, good eco-friendly detergents clean just as well as traditional ones. They’re biodegradable, free from harsh chemicals, and work effectively in cold water washes.",
       },
       {
         question:
-          "2. Can washing clothes in cold water really clean them properly?",
+          "Can washing clothes in cold water really clean them properly?",
         answer:
           "Absolutely. Modern detergents are designed for cold water cleaning. This saves energy, keeps colors vibrant, and still removes dirt and stains effectively.",
       },
       {
-        question: "3. Does air drying clothes help the environment?",
+        question: "Does air drying clothes help the environment?",
         answer:
           "Yes. Air drying eliminates dryer energy use, reduces carbon footprint, and helps fabrics maintain their shape and texture for longer.",
       },
       {
         question:
-          "4. What’s the simplest way to make my laundry routine eco-friendly?",
+          "What’s the simplest way to make my laundry routine eco-friendly?",
         answer:
           "Use cold water, full loads, biodegradable detergents, and air dry when possible. Small consistent changes add up to a big environmental difference.",
       },
       {
         question:
-          "5. Are there certifications I should look for when buying eco-friendly laundry products?",
+          "Are there certifications I should look for when buying eco-friendly laundry products?",
         answer:
           "Look for labels like 'biodegradable,' 'phosphate-free,' or certifications such as Ecolabel and USDA Organic. These ensure products meet verified environmental standards.",
       },
@@ -301,73 +546,203 @@ export const blogs = [
         "Avoid common clothes pressing mistakes with simple tips for smooth, crisp, and damage-free garments.",
       url: "https://freshoralaundry.com/blogs/common-clothes-pressing-mistakes",
       keywords: {
-        primary: "Common Clothes Pressing Mistakes",
+        primary: ["Common Clothes Pressing Mistakes"],
         secondary: ["iron to press clothes", "clothing care tips"],
       },
     },
     title: "Common Clothes Pressing Mistakes and How to Avoid Them",
-    description:
-      "Pressing may look simple, but one wrong move can lead to shiny patches, distorted seams, or scorched fabrics. Here’s how to avoid the most common clothes pressing mistakes and keep your garments looking crisp and lasting longer.",
+    description: (
+      <p>
+        If you’ve ever ended up with shiny patches, strange fabric lines, or
+        clothes that suddenly fit differently after ironing, you’re not alone.
+        Pressing may look simple: plug in the iron, glide it over, done. But
+        there’s a fine line between crisp perfection and fabric disaster.
+        <br />
+        <br />
+        Here’s a guide to the most common clothes pressing mistakes and how you
+        can avoid them for smooth, sharp, and long-lasting garments.
+      </p>
+    ),
     content: [
       {
         title: "1. Using the Wrong Heat Setting",
-        description:
-          "One of the easiest ways to ruin clothes is by using too much heat. Fabrics like polyester, silk, or nylon can scorch or even melt under high temperatures. Too little heat, on the other hand, leads to repeated pressing without results, wearing out the fabric faster. Always check the garment’s care label before you iron to press clothes. Start low and gradually increase if needed. Test on a hidden corner if unsure.",
+        description: (
+          <p>
+            One of the easiest ways to ruin clothes is by using too much heat.
+            Fabrics like polyester, silk, or nylon can scorch or even melt under
+            high temperatures. Too little heat, on the other hand, leads to
+            repeated pressing without results, wearing out the fabric faster.
+            <br />
+            <br />
+            <strong>Fix :</strong>Always check the garment’s care label before
+            you iron to press clothes. Start low and gradually increase if
+            needed. Test on a hidden corner if unsure. This step is a basic yet
+            crucial clothing care tip.
+          </p>
+        ),
       },
       {
         title: "2. Skipping Steam",
-        description:
-          "Steam helps relax fibers, making it easier to remove wrinkles without pressing too hard. Skipping steam often leads to flattened textures and stiff fabrics. Use the steam function on your iron or a handheld garment steamer. Lightly mist delicate clothes with water before ironing for smoother results.",
+        description: (
+          <p>
+            Steam helps relax fibers, making it easier to remove wrinkles
+            without pressing too hard. Skipping steam often leads to flattened
+            textures and stiff fabrics.
+            <br />
+            <br />
+            <strong>Fix :</strong> Use the steam function on your iron or a
+            handheld garment steamer. Lightly mist delicate clothes with water
+            before ironing for smoother results.
+          </p>
+        ),
       },
       {
         title: "3. Pressing Instead of Gliding",
-        description:
-          "A heavy hand doesn’t make clothes look sharper. Pressing too hard can crush the weave, distort seams, and even leave shiny patches. Gently iron to press clothes using light gliding motions. For stubborn wrinkles, use multiple light passes rather than one heavy press.",
+        description: (
+          <p>
+            A heavy hand doesn’t make clothes look sharper. Pressing too hard
+            can crush the weave, distort seams, and even leave shiny patches.
+            <br />
+            <br />
+            <strong>Fix :</strong> Gently iron to press clothes using light
+            gliding motions. For stubborn wrinkles, use multiple light passes
+            rather than one heavy press. Proper technique is one of the most
+            effective clothing care tips.
+          </p>
+        ),
       },
       {
         title: "4. Ignoring Fabric Direction",
-        description:
-          "Every fabric has a grain, the natural direction of its threads. Ironing across or against it can twist, stretch, or distort the fabric’s original shape. Always iron along the weave — shirts from shoulders to hem, pants along the leg’s length. This prevents distortion and keeps clothes looking crisp.",
+        description: (
+          <p>
+            Every fabric has a grain, the natural direction of its threads.
+            Ironing across or against it can twist, stretch, or distort the
+            fabric’s original shape.
+            <br />
+            <br />
+            <strong>Fix :</strong> Always iron along the weave. Shirts: move
+            from shoulders to hem; pants: follow the leg’s length. This prevents
+            distortion and keeps clothes looking crisp.
+          </p>
+        ),
       },
       {
         title: "5. Ironing Dirty or Stained Clothes",
-        description:
-          "Ironing over dirt or stains sets them permanently into the fabric. Even a speck can become a stubborn mark once pressed. Ensure garments are freshly washed and fully dry before ironing. Treat any stains first.",
+        description: (
+          <p>
+            Ironing over dirt or stains sets them permanently into the fabric.
+            Even a speck can become a stubborn mark once pressed.
+            <br />
+            <br />
+            <strong>Fix :</strong> Ensure garments are freshly washed and fully
+            dry before ironing. Treat any stains first. This is one of the most
+            overlooked common clothes pressing mistakes in everyday laundry
+            routines.
+          </p>
+        ),
       },
       {
         title: "6. Forgetting to Clean the Iron Plate",
-        description:
-          "A dirty iron plate can leave streaks, residue, or burn marks on clothes. Built-up fibers, starch, or detergent residue transfer easily under heat. Clean your iron regularly using a damp cloth or specialized cleaner, always when the iron is cool and unplugged.",
+        description: (
+          <p>
+            A dirty iron plate can leave streaks, residue, or burn marks on
+            clothes. Built-up fibers, starch, or detergent residue transfer
+            easily under heat.
+            <br />
+            <br />
+            <strong>Fix :</strong> Clean your iron regularly using a damp cloth
+            or specialized cleaner, always when the iron is cool and unplugged.
+          </p>
+        ),
       },
       {
         title: "7. Using Tap Water in Steam Irons",
-        description:
-          "Minerals in tap water can build up inside your iron, causing white stains or water spots. Over time, steam vents may clog. Use distilled or filtered water in your steam iron. Run a self-cleaning cycle or clean with equal parts water and vinegar if needed.",
+        description: (
+          <p>
+            Minerals in tap water can build up inside your iron, causing white
+            stains or water spots. Over time, steam vents may clog.
+            <br />
+            <br />
+            <strong>Fix :</strong> Use distilled or filtered water in your steam
+            iron. Run a self-cleaning cycle or clean with equal parts water and
+            vinegar if needed.
+          </p>
+        ),
       },
       {
         title: "8. Skipping a Pressing Cloth",
-        description:
-          "Ironing delicate fabrics directly can create shiny marks. Direct heat flattens and reflects the fibers. Always use a thin cotton or muslin protective cloth between the iron and the garment.",
+        description: (
+          <p>
+            Ironing delicate fabrics directly can create shiny marks. Direct
+            heat flattens and reflects the fibers.
+            <br />
+            <br />
+            <strong>Fix :</strong> Always use a thin cotton or muslin protective
+            cloth between the iron and the garment. This simple step is a must
+            in clothing care tips and prevents shiny patches or burns.
+          </p>
+        ),
       },
       {
         title: "9. Ironing in Circles",
-        description:
-          "Many people unconsciously move the iron in circular motions, which can stretch the fabric and distort its shape. Glide the iron in straight, smooth strokes, following the fabric grain for a professional finish.",
+        description: (
+          <p>
+            Many people unconsciously move the iron in circular motions, which
+            can stretch the fabric and distort its shape.
+            <br />
+            <br />
+            <strong>Fix :</strong> Glide the iron in straight, smooth strokes,
+            following the fabric grain. This ensures a professional finish
+            without pulling the fibers.
+          </p>
+        ),
       },
       {
         title: "10. Ignoring Cool-Down Time",
-        description:
-          "Folding or hanging clothes immediately after ironing may undo your effort. Warm fabrics crease easily as they cool. Let freshly pressed clothes cool completely before folding or hanging. This ensures a long-lasting, smooth finish.",
+        description: (
+          <p>
+            Folding or hanging clothes immediately after ironing may undo your
+            effort. Warm fabrics crease easily as they cool.
+            <br />
+            <br />
+            <strong>Fix :</strong> Let freshly pressed clothes cool completely
+            before folding or hanging. This step ensures a long-lasting, smooth
+            finish.
+          </p>
+        ),
       },
       {
         title: "11. Forgetting to Empty the Iron’s Water Tank",
-        description:
-          "Water left in your steam iron can cause rust or bacterial buildup, leading to stains and odors. Empty the water tank after each use and leave the lid open to dry.",
+        description: (
+          <p>
+            Water left in your steam iron can cause rust or bacterial buildup,
+            leading to stains and odors.
+            <br />
+            <br />
+            <strong>Fix :</strong> Empty the water tank after each use and leave
+            the lid open to dry.
+          </p>
+        ),
       },
       {
         title: "Final Thoughts: Avoid These Common Clothes Pressing Mistakes",
-        description:
-          "Pressing clothes is more than removing wrinkles; it’s about maintaining shape, texture, and garment lifespan. Most mistakes come from rushing or overlooking small details. By avoiding common clothes pressing mistakes, using a protective cloth, and following proper clothing care tips, your garments will last longer and look sharper. Next time you iron to press clothes, slow down, check your settings, and treat your clothes the way they deserve. A few mindful steps are all it takes to turn everyday ironing into professional-quality garment care.",
+        description: (
+          <p>
+            Pressing clothes is more than removing wrinkles; it’s about
+            maintaining shape, texture, and garment lifespan. Most mistakes come
+            from rushing or overlooking small details.
+            <br />
+            By avoiding <strong>common clothes pressing mistakes</strong>, using
+            a protective cloth, and following proper
+            <strong> clothing care tips</strong>, your garments will last longer
+            and look sharper.
+            <br />
+            Next time you <strong>iron to press clothes</strong>, slow down,
+            check your settings, and treat your clothes the way they deserve. A
+            few mindful steps are all it takes to turn everyday ironing into
+            professional-quality garment care.
+          </p>
+        ),
       },
     ],
     faqs: [
@@ -400,7 +775,6 @@ export const blogs = [
       },
     ],
   },
-
   {
     id: 4,
     slug: "why-clothes-lose-shape-after-ironing",
@@ -412,58 +786,167 @@ export const blogs = [
         "Discover why clothes lose shape after ironing and learn simple tips to keep fabrics crisp, well-fitted, and long-lasting.",
       url: "https://freshoralaundry.com/blogs/why-clothes-lose-shape-after-ironing",
       keywords: {
-        primary: "Why Clothes Lose Shape After Ironing",
+        primary: ["Why Clothes Lose Shape After Ironing"],
         secondary: ["clothing care tips", "fabric care"],
       },
     },
     title: "The Hidden Reason Why Clothes Lose Shape After Ironing",
-    description:
-      "Ever noticed how some clothes look slightly off after ironing? The fit feels different, the fabric doesn’t drape the same, and suddenly your favorite shirt just doesn’t look as sharp as it used to. Most people blame the fabric, the detergent, or even the tailor, but the real culprit often lies in your ironing habits. Let’s explore why clothes lose shape after ironing and how you can fix it using simple clothing care tips and proper fabric care.",
+    description: (
+      <p>
+        Ever noticed how some clothes look slightly off after ironing? The fit
+        feels different, the fabric doesn’t drape the same, and suddenly your
+        favorite shirt just doesn’t look as sharp as it used to. Most people
+        blame the fabric, the detergent, or even the tailor, but the real
+        culprit often lies in your ironing habits.
+        <br />
+        <br />
+        Let’s explore why clothes lose shape after ironing and how you can fix
+        it using simple clothing care tips and proper fabric care.
+      </p>
+    ),
     content: [
       {
         title: "1. Too Much Heat, Too Little Attention",
-        description:
-          "Every fabric has a heat tolerance. Cotton can handle high temperatures, but synthetics like polyester or rayon can melt or lose elasticity when overheated. Using the wrong temperature doesn’t just leave shine marks; it weakens the fibers, causing them to stretch, warp, or lose their natural shape. Always check the garment’s care label before ironing. Adjust your iron’s heat based on fabric type. When in doubt, start with low heat and increase gradually.",
+        description: (
+          <p>
+            Every fabric has a heat tolerance. Cotton can handle high
+            temperatures, but synthetics like polyester or rayon can melt or
+            lose elasticity when overheated. Using the wrong temperature doesn’t
+            just leave shine marks; it weakens the fibers, causing them to
+            stretch, warp, or lose their natural shape.
+            <br />
+            <br />
+            <strong>Fix :</strong> Always check the garment’s care label before
+            ironing. Adjust your iron’s heat based on fabric type. When in
+            doubt, start with low heat and increase gradually.
+          </p>
+        ),
       },
       {
         title: "2. Skipping the Steam",
-        description:
-          "Steam does more than remove wrinkles; it helps fibers relax and regain their natural form. Ironing without steam presses fabrics flat instead of reshaping them. Over time, this flattens textures, ruins pleats, and makes garments look lifeless. Use the steam function generously, or invest in a garment steamer for delicate fabrics. Steam restores shape without putting extra pressure on fibers, a vital clothing care tip.",
+        description: (
+          <p>
+            Steam does more than remove wrinkles; it helps fibers relax and
+            regain their natural form. Ironing without steam presses fabrics
+            flat instead of reshaping them. Over time, this flattens textures,
+            ruins pleats, and makes garments look lifeless.
+            <br />
+            <br />
+            <strong>Fix :</strong> Use the steam function generously, or invest
+            in a garment steamer for delicate fabrics. Steam restores shape
+            without putting extra pressure on fibers, a vital clothing care tip.
+          </p>
+        ),
       },
       {
         title: "3. Ironing Clothes That Are Too Dry",
-        description:
-          "Completely dry fabrics can become stiff, and ironing them may break down elasticity. That “crisp” feeling might seem good, but it makes fibers brittle, meaning your clothes won’t drape naturally. Lightly dampen clothes before ironing. This allows heat and steam to work together, smoothing wrinkles without compromising fabric care.",
+        description: (
+          <p>
+            Completely dry fabrics can become stiff, and ironing them may break
+            down elasticity. That “crisp” feeling might seem good, but it makes
+            fibers brittle, meaning your clothes won’t drape naturally.
+            <br />
+            <br />
+            <strong>Fix :</strong> Lightly dampen clothes before ironing. This
+            allows heat and steam to work together, smoothing wrinkles without
+            compromising fabric care..
+          </p>
+        ),
       },
       {
         title: "4. Pressing Instead of Gliding",
-        description:
-          "Pressing the iron too hard may seem like the quickest way to remove wrinkles, but it flattens fibers and damages the weave. Soft fabrics like wool, silk, or blends rely on their natural loft to maintain shape. Glide the iron smoothly with light pressure. Let the steam and heat do most of the work instead of relying solely on force.",
+        description: (
+          <p>
+            Pressing the iron too hard may seem like the quickest way to remove
+            wrinkles, but it flattens fibers and damages the weave. Soft fabrics
+            like wool, silk, or blends rely on their natural loft to maintain
+            shape.
+            <br />
+            <br />
+            <strong>Fix :</strong> Glide the iron smoothly with light pressure.
+            Let the steam and heat do most of the work instead of relying solely
+            on force.
+          </p>
+        ),
       },
       {
         title: "5. Ignoring the Fabric’s Grain",
-        description:
-          "Every woven fabric has a grain, the natural direction of threads. Ironing against it stretches or twists the weave, causing seams to distort and panels to become uneven. This is a key reason why clothes lose shape after ironing. Iron in line with the weave. For shirts, move from shoulders to hem; for trousers, follow the leg’s natural direction.",
+        description: (
+          <p>
+            Every woven fabric has a grain, the natural direction of threads.
+            Ironing against it stretches or twists the weave, causing seams to
+            distort and panels to become uneven. This is a key reason why
+            clothes lose shape after ironing.
+            <br />
+            <br />
+            <strong>Fix :</strong> Iron in line with the weave. For shirts, move
+            from shoulders to hem; for trousers, follow the leg’s natural
+            direction.
+          </p>
+        ),
       },
       {
         title: "6. Using the Wrong Ironing Surface",
-        description:
-          "An unsuitable ironing surface can undo all your careful work. Hard boards flatten textures, while soft or uneven boards stretch fabrics and leave unwanted lines. Use a padded ironing board with a heat-reflective cover. It protects fibers while ensuring smooth, professional results, an essential fabric care practice.",
+        description: (
+          <p>
+            An unsuitable ironing surface can undo all your careful work. Hard
+            boards flatten textures, while soft or uneven boards stretch fabrics
+            and leave unwanted lines.
+            <br />
+            <br />
+            <strong>Fix :</strong> Use a padded ironing board with a
+            heat-reflective cover. It protects fibers while ensuring smooth,
+            professional results, an essential fabric care practice.
+          </p>
+        ),
       },
       {
         title: "7. Skipping Aftercare",
-        description:
-          "How you handle clothes after ironing matters as much as the ironing itself. Folding or hanging garments while still warm can create new creases or stretching as they cool. Let freshly ironed clothes cool completely before storing or wearing. This allows fibers to “set,” maintaining their shape.",
+        description: (
+          <p>
+            How you handle clothes after ironing matters as much as the ironing
+            itself. Folding or hanging garments while still warm can create new
+            creases or stretching as they cool.
+            <br />
+            <br />
+            <strong>Fix :</strong> Let freshly ironed clothes cool completely
+            before storing or wearing. This allows fibers to “set,” maintaining
+            their shape.
+          </p>
+        ),
       },
       {
         title: "8. Ironing When It’s Not Necessary",
-        description:
-          "Not every fabric requires ironing. Knits, linen blends, and some synthetics respond better to steaming or air drying. Over-ironing wears fabrics out, weakening their texture and elasticity. Reserve ironing for structured fabrics like cotton shirts, trousers, and formal wear. For other garments, steam them or hang them in a steamy bathroom to release wrinkles naturally.",
+        description: (
+          <p>
+            Not every fabric requires ironing. Knits, linen blends, and some
+            synthetics respond better to steaming or air drying. Over-ironing
+            wears fabrics out, weakening their texture and elasticity.
+            <br />
+            <br />
+            <strong>Fix :</strong> Reserve ironing for structured fabrics like
+            cotton shirts, trousers, and formal wear. For other garments, steam
+            them or hang them in a steamy bathroom to release wrinkles
+            naturally.
+          </p>
+        ),
       },
       {
         title: "The Takeaway",
-        description:
-          "Losing shape after ironing isn’t bad luck; it’s usually the result of heat, pressure, and neglect of proper clothing care tips. Understanding why clothes lose shape after ironing will help you care for your wardrobe more effectively. With mindful fabric care, your clothes will not only look sharper but last longer. Treat your garments with the attention they deserve, and they’ll stay crisp, elegant, and perfectly shaped every time.",
+        description: (
+          <p>
+            Losing shape after ironing isn’t bad luck; it’s usually the result
+            of heat, pressure, and neglect of proper clothing care tips.
+            Understanding why clothes lose shape after ironing will help you
+            care for your wardrobe more effectively.
+            <br />
+            <br />
+            With mindful fabric care, your clothes will not only look sharper
+            but last longer. Treat your garments with the attention they
+            deserve, and they’ll stay crisp, elegant, and perfectly shaped every
+            time.
+          </p>
+        ),
       },
     ],
     faqs: [
@@ -507,7 +990,7 @@ export const blogs = [
         "Learn how to safely wash stuffed toys while keeping them soft, clean, and intact. Simple tips for handwashing, machine washing, and air drying plush toys.",
       url: "https://freshoralaundry.com/blogs/how-to-safely-wash-stuffed-toys",
       keywords: {
-        primary: "How to Safely Wash Stuffed Toys",
+        primary: ["How to Safely Wash Stuffed Toys"],
         secondary: ["plush toy care", "toy washing machine"],
       },
     },
@@ -517,8 +1000,31 @@ export const blogs = [
     content: [
       {
         title: "Step 1: Check the Label First",
-        description:
-          "Every plush toy is different. Before washing, read the care tag carefully: Surface clean only: Spot clean with a damp cloth and mild soap. Handwash safe: Wash gently in lukewarm water. Machine washable: Use a delicate cycle with mild detergent. If the tag is missing, always test a small hidden area with water first.",
+        description: (
+          <div>
+            <p>
+              Every plush toy is different. Before washing, read the care tag
+              carefully :
+            </p>
+            <ul className="list-disc ml-6">
+              <li>
+                <strong>Surface clean only: </strong>Spot clean with a damp
+                cloth and mild soap.{" "}
+              </li>
+              <li>
+                <strong>Handwash safe: </strong>Wash gently in lukewarm water.{" "}
+              </li>
+              <li>
+                <strong>Machine washable: </strong>Use a delicate cycle with
+                mild detergent.{" "}
+              </li>
+            </ul>
+            <p>
+              If the tag is missing, always test a small hidden area with water
+              first.
+            </p>
+          </div>
+        ),
       },
       {
         title: "Step 2: Pre-Treat Stains",
@@ -532,13 +1038,42 @@ export const blogs = [
       },
       {
         title: "Step 4: Choose a Gentle Cycle",
-        description:
-          "Use cold or lukewarm water only. Add a small amount of mild detergent; avoid bleach or fabric softener. Select the delicate cycle with a slow spin speed. Pro tip: Add a few towels to balance the load and cushion the toys during the wash.",
+        description: (
+          <div>
+            <ul className="list-disc ml-6">
+              <li>Use cold or lukewarm water only.</li>
+              <li>
+                Add a small amount of mild detergent; avoid bleach or fabric
+                softener.
+              </li>
+              <li>Select the delicate cycle with a slow spin speed.</li>
+            </ul>
+            <p>
+              <strong>Pro tip :</strong> Add a few towels to balance the load
+              and cushion the toys during the wash.
+            </p>
+          </div>
+        ),
       },
       {
         title: "Step 5: Skip the Dryer",
-        description:
-          "Dryers can cause heat damage, shrinkage, or melted features. Instead: Press the toy gently with a towel to remove excess water. Air dry flat on a clean surface. Keep out of direct sunlight to prevent fading. To speed up drying, use a fan or a hairdryer on cool mode, never hot air.",
+        description: (
+          <div>
+            <p>
+              Dryers can cause heat damage, shrinkage, or melted features.
+              Instead :
+            </p>
+            <ul className="list-disc ml-6">
+              <li>Press the toy gently with a towel to remove excess water.</li>
+              <li>Air dry flat on a clean surface.</li>
+              <li>Keep out of direct sunlight to prevent fading.</li>
+            </ul>
+            <p>
+              To speed up drying, use a fan or a hairdryer on cool mode, never
+              hot air.
+            </p>
+          </div>
+        ),
       },
       {
         title: "Step 6: Fluff and Restore",
@@ -547,8 +1082,21 @@ export const blogs = [
       },
       {
         title: "Step 7: Sanitize Between Washes",
-        description:
-          "You don’t need to wash stuffed toys weekly. Keep them fresh between washes by vacuuming lightly with a brush attachment, sprinkling baking soda to absorb odors (then vacuuming it off), and storing them away from moisture and direct sunlight.",
+        description: (
+          <div>
+            <p>
+              You don’t need to wash stuffed toys weekly. Keep them fresh
+              between washes by:
+            </p>
+            <ul className="list-disc ml-6">
+              <li>Vacuuming lightly with a brush attachment.</li>
+              <li>
+                Sprinkling baking soda to absorb odors (then vacuuming it off).
+              </li>
+              <li>Storing away from moisture and direct sunlight.</li>
+            </ul>
+          </div>
+        ),
       },
       {
         title: "When in Doubt, Go Professional",
@@ -610,52 +1158,66 @@ export const blogs = [
     title:
       "The Secret to Keeping Plush Toys Looking Brand New: How to Clean Plush Toys at Home",
     description:
-      "Discover simple and safe ways to clean your plush toys at home while keeping them soft and cuddly. From handwashing to machine care and storage, learn the complete guide to plush toy care.",
+      "Let’s be honest, plush toys are more than just cute decor or childhood keepsakes. They’ve seen your best days, wiped away tears, and probably survived a few coffee spills along the way. But even the most loved toys deserve some TLC. If yours are starting to look a little tired, here’s a practical guide on how to clean plush toys at home while maintaining their softness and shape.",
     content: [
       {
         title: "1. Give Them a Weekly “Spa Day”",
         description:
-          "A quick dust-off with a lint roller or a soft-bristle brush works wonders. For toys on shelves, use a gentle vacuum on low suction to keep them fresh and free of dust — an easy way to maintain regular plush toy care.",
+          "No fancy products required. A quick dust-off with a lint roller or a soft-bristle brush does wonders. For toys sitting on shelves, a gentle vacuum on low suction keeps them fresh, fluff-free, and well-maintained as part of regular plush toy care.",
       },
       {
         title: "2. The Golden Rule: Check the Label",
         description:
-          "Before washing, check your toy’s care tag. Some are handwash-only, while others can handle the washing machine. Ignoring this can cause stiffness or damage to delicate fabrics.",
+          "Before dunking your toy in water, check its care tag. Some plush toys are handwash-only, while others can survive a spin in the washing machine. Ignoring the label risks turning your cuddly companion into a stiff or damaged mess.",
       },
       {
         title: "3. Handwash With a Soft Touch",
         description:
-          "Fill a bucket with lukewarm water and mild detergent. Let the toy soak, gently massage, and rinse thoroughly. Press with a towel to remove excess water — ideal for delicately cleaning stuffed animals at home.",
+          "Fill a bucket with lukewarm water and a small amount of mild detergent. Let the toy soak for a few minutes, then gently massage the fabric, no twisting or squeezing. Rinse thoroughly and press with a towel to remove excess water. This method is ideal for delicately cleaning stuffed animals at home.",
       },
       {
         title: "4. Machine Wash Like a Pro",
         description:
-          "For machine-safe plush toys, place them in a pillowcase or mesh bag to protect stitching. Use a gentle cycle, cold water, and mild detergent. Avoid bleach or softeners to keep them soft and colorful.",
+          "Modern plush toys often tolerate machine washing safely. Place them in a pillowcase or mesh laundry bag to protect stitching and delicate parts. Choose a gentle cycle with cold water and mild detergent. Avoid bleach or fabric softeners to preserve softness and color.",
       },
       {
         title: "5. Air Dry the Smart Way",
-        description:
-          "Skip the dryer — it can damage stuffing. Instead, air dry flat on a towel and fluff the toy gently while drying. Keep them out of direct sunlight to avoid fading.",
+        description: (
+          <div>
+            <p>
+              Dryers are harsh on plush toys, causing shrinkage or damaged
+              stuffing. Instead:
+            </p>
+            <ul className="list-disc ml-6">
+              <li>Air dry flat on a towel.</li>
+              <li>Gently fluff the toy while drying to restore shape.</li>
+              <li>
+                A little indirect sunlight is fine, but avoid direct exposure to
+                prevent fading.
+              </li>
+            </ul>
+          </div>
+        ),
       },
       {
         title: "6. Freshen Up Without Water",
         description:
-          "If your toy smells musty but looks clean, sprinkle baking soda over it. Let it sit for 15–20 minutes, then shake or vacuum off. This removes odors naturally — a simple plush toy care trick.",
+          "If your plush toy smells musty but looks clean, skip the wash. Sprinkle baking soda over the surface, let it sit for 15–20 minutes, then shake or vacuum it off. This simple trick keeps your plush toy care routine easy and effective.",
       },
       {
         title: "7. Store Them Like Collectibles",
         description:
-          "Avoid tossing them in closets. Store plush toys in breathable fabric bins or display them on open shelves, dusting regularly to maintain their look and freshness.",
+          "Avoid tossing toys in closets. Store them in breathable fabric bins to prevent moisture buildup. For extra-special pieces, display on open shelves but dust regularly to maintain their appearance.",
       },
       {
         title: "8. Call in the Pros When Needed",
         description:
-          "For high-end, vintage, or sentimental toys, consider professional eco-friendly laundry services. They clean gently and safely, preserving softness and color for long-lasting plush toy care.",
+          "High-end, vintage, or sentimental plush toys often require professional care. Eco-friendly laundry services use gentle cleaning methods that sanitize and refresh without harming delicate fabrics or stuffing, ensuring long-lasting plush toy care.",
       },
       {
         title: "The Bottom Line",
         description:
-          "A little consistent care goes a long way. From weekly dusting to smart washing and storage, these simple steps will keep your plush companions soft, clean, and ready for hugs — just like new.",
+          "A little consistent care goes a long way. By following these tips on how to clean plush toys at home, from weekly dusting to safe washing and smart storage, your beloved plush companions can stay soft, bright, and ready for a cuddle, just like the day you brought them home.",
       },
     ],
     faqs: [
@@ -700,7 +1262,7 @@ export const blogs = [
     },
     title: "Eco-Friendly Ways to Clean Curtains and Keep Them Spotless",
     description:
-      "Discover eco-friendly methods to clean curtains effectively without harsh chemicals. From natural cleaning solutions to professional care, learn how to keep your curtains fresh, spotless, and sustainable.",
+      "Curtains are more than just decor; they act as dust catchers, air filters, and mood setters. Keeping them clean doesn’t have to mean harsh chemicals or excessive water use. Here’s a guide on eco-friendly ways to clean curtains while maintaining their look and longevity.",
     content: [
       {
         title: "1. Start with Regular Dusting",
@@ -788,54 +1350,236 @@ export const blogs = [
         "curtain cleaning",
       ],
     },
-    title: "Why Regular Curtain Cleaning Is a Must for Every Home",
-    description:
-      "Explore the key benefits of regular curtain cleaning — from improving indoor air quality to extending fabric life. Learn why clean curtains are essential for a healthier, fresher home.",
+    title:
+      "Why Regular Curtain Cleaning Is a Must for Every Home: The benefits of regular curtain cleaning",
+    description: (
+      <p>
+        When was the last time you actually cleaned your curtains? If you can’t
+        remember, you’re not alone. Curtains are one of the most overlooked
+        parts of home cleaning, quietly collecting dust, odors, and allergens
+        while hanging in plain sight.
+        <br />
+        <br />
+        But the truth is, the benefits of regular curtain cleaning go far beyond
+        appearance. Clean curtains contribute to a healthier, fresher, and more
+        comfortable home environment. Here’s why they deserve more attention and
+        care.
+      </p>
+    ),
     content: [
       {
         title: "Curtains Are Dust Magnets",
-        description:
-          "Curtains act like filters. Every time a breeze passes through an open window or your AC circulates air, it traps dust, pollen, and tiny airborne particles. Over time, this buildup becomes visible as dullness or discoloration and invisible as allergens that can affect your breathing. Regular curtain cleaning helps reduce dust, keep fabrics looking bright, and maintain indoor air quality by minimizing airborne irritants.",
+        description: (
+          <div>
+            <p>
+              Curtains act like filters. Every time a breeze passes through an
+              open window or your AC circulates air, it traps dust, pollen, and
+              tiny airborne particles.
+              <br />
+              Over time, this buildup becomes visible as dullness or
+              discoloration and invisible as allergens that can affect your
+              breathing.
+            </p>
+
+            <p>
+              <strong>Regular curtain cleaning helps:</strong>
+            </p>
+            <ul className="list-disc ml-6">
+              <li>Reduce dust buildup that triggers sneezing or allergies</li>
+              <li>Keep fabrics looking brighter and fresher.</li>
+              <li>
+                Maintain indoor air quality by minimizing airborne irritants.
+              </li>
+            </ul>
+            <p>
+              If you or your family suffer from dust allergies or asthma, clean
+              curtains can make a noticeable difference in comfort and health.
+            </p>
+          </div>
+        ),
       },
       {
         title: "Hidden Allergens Lurk in Fabric Fibers",
-        description:
-          "Curtains trap pet dander, mold spores, and bacteria, especially in humid or urban environments. Over time, this buildup can cause musty smells and impact air quality. Opt for professional curtain cleaning every 3–6 months to sanitize and protect the fabric without causing damage.",
+        description: (
+          <div>
+            <p>
+              Curtains also trap pet dander, mold spores, and microscopic
+              bacteria. Humid environments or homes near busy roads accelerate
+              this accumulation.
+              <br />
+              Eventually, the fabric may smell musty and contribute to indoor
+              air pollution.
+            </p>
+
+            <p>
+              <strong>Solution:</strong>
+            </p>
+
+            <p>
+              Opt for professional curtain cleaning every 3–6 months, especially
+              in dusty urban areas like Dubai. This ensures fabrics are
+              sanitized and safe without damaging the material.
+            </p>
+          </div>
+        ),
       },
       {
         title: "Clean Curtains Keep Your Home Smelling Fresh",
-        description:
-          "Curtains absorb everyday odors from cooking, smoke, and the environment. Regular cleaning removes trapped odors and restores your home’s natural freshness. Light airing helps between washes, but deep cleaning is what truly eliminates lingering smells.",
+        description: (
+          <div>
+            <p>
+              Curtains absorb everyday odors from cooking, smoke, or general
+              household activity. Over time, these smells cling to the fabric
+              and make rooms feel stale.
+            </p>
+
+            <p>
+              <strong>A fresh cleaning routine can:</strong>
+            </p>
+            <ul className="list-disc ml-6">
+              <li>Remove trapped odors</li>
+              <li>Restore your home’s natural freshness.</li>
+              <li>Prevent lingering smells from circulating.</li>
+            </ul>
+            <p>
+              Light, regular airing helps between washes, but deep cleaning is
+              what truly refreshes curtains.
+            </p>
+          </div>
+        ),
       },
       {
         title: "Protect Indoor Air Quality",
-        description:
-          "Once curtains become saturated with dust and allergens, they can release particles back into the air, causing sneezing, itchy eyes, and discomfort. Clean curtains contribute to better indoor air quality — especially beneficial for children, seniors, and pets.",
+        description: (
+          <div>
+            <p>
+              Curtains play a key role in maintaining indoor air quality by
+              trapping dust and allergens. Once saturated, they can release
+              particles back into the air, causing sneezing, itchy eyes, or a
+              dusty smell despite cleaning other surfaces.
+              <br />
+              <strong>Clean curtains = cleaner air</strong> which is especially
+              important for children, elderly family members, and pets.,
+            </p>
+          </div>
+        ),
       },
       {
         title: "Extend Fabric Life and Color",
-        description:
-          "Sunlight, dust, and pollutants weaken curtain fibers over time. Regular cleaning removes residues that cause fading and brittleness. Whether sheer or heavy drapes, professional care restores texture, preserves color, and helps your curtains hang better and last longer.",
+        description: (
+          <p>
+            Sunlight, dust, and pollutants gradually degrade curtain fibers.
+            Regular cleaning removes residues that cause fading, brittleness, or
+            discoloration.
+            <br />
+            Whether delicate sheer curtains or heavy drapes, professional care
+            restores texture, preserves color, and prevents premature wear.
+            Clean curtains hang better, look crisp, and instantly enhance any
+            room’s appearance.
+          </p>
+        ),
       },
       {
         title: "Seasonal Cleaning Keeps Homes Healthier",
-        description:
-          "Each season brings new pollutants — summer dust, monsoon moisture, or winter buildup from closed windows. Cleaning your curtains every few months keeps your home fresh and protects against seasonal allergens.",
+        description: (
+          <div>
+            <p>Different seasons bring different pollutants: </p>
+
+            <p>
+              <strong>Regular curtain cleaning helps:</strong>
+            </p>
+            <ul className="list-disc ml-6">
+              <li>
+                <strong>Summer: </strong>Dust, pollen, and outdoor allergens
+              </li>
+              <li>
+                <strong>Monsoon/Humid weather: </strong>Trapped indoor dust from
+                closed windows
+              </li>
+              <li>
+                <strong>Winter: </strong>
+                Trapped indoor dust from closed windows
+              </li>
+            </ul>
+            <p>
+              Cleaning curtains every few months helps your home stay fresh and
+              safe throughout the year.
+            </p>
+          </div>
+        ),
       },
       {
         title: "Dry Cleaning vs. Regular Washing: Know What Works",
-        description:
-          "Not all curtains can be washed at home. Cotton and linen can handle gentle washing, while silk, velvet, and sheer fabrics require dry cleaning. When unsure, always check the label or consult professionals to avoid shrinkage or fading.",
+        description: (
+          <div>
+            <p>
+              Not all curtains can go in the washing machine. Some fabrics
+              shrink, fade, or get damaged without proper care.
+            </p>
+
+            <p>
+              <strong>Quick guide:</strong>
+            </p>
+            <ul className="list-disc ml-6">
+              <li>
+                <strong>Cotton/Linen: </strong>Often machine-washable with a
+                gentle detergent
+              </li>
+              <li>
+                <strong>Silk/Velvet: </strong>Benefit from low-moisture
+                professional cleaning
+              </li>
+              <li>
+                <strong>Sheer or Delicate Fabrics: </strong>
+                Trapped indoor dust from closed windows
+              </li>
+            </ul>
+            <p>
+              When in doubt, check the label or rely on experts like Freshora
+              for safe, effective curtain cleaning.
+            </p>
+          </div>
+        ),
       },
       {
         title: "Professional Cleaning Makes a Visible Difference",
-        description:
-          "Vacuuming removes only surface dust, but professional cleaning goes deeper — eliminating grime, sanitizing fabric, and restoring brightness without harsh chemicals. At Freshora, we use eco-friendly methods that are gentle, safe, and effective for both your fabric and family.",
+        description: (
+          <div>
+            <p>
+              Even occasional vacuuming only removes surface dust. Professional
+              curtain cleaning goes deeper, eliminating hidden grime, restoring
+              color, and sanitizing without harsh chemicals.
+            </p>
+
+            <p>At Freshora, our eco-friendly methods are:</p>
+            <ul className="list-disc ml-6">
+              <li>Gentle on fabric</li>
+              <li>Safe for your family and pets</li>
+              <li>Effective in removing deep-set dust and odors</li>
+              <li>Water-efficient and environmentally conscious</li>
+            </ul>
+            <p>
+              Your curtains come back looking, smelling, and feeling like new.
+            </p>
+          </div>
+        ),
       },
       {
         title: "The Fresh Takeaway",
-        description:
-          "Curtains quietly frame your home and protect your air quality — they deserve care too. The benefits of regular curtain cleaning extend beyond appearance, helping preserve health, freshness, and comfort in every room.",
+        description: (
+          <p>
+            Curtains quietly frame your home, filter light, and trap dust, but
+            they also deserve care in return. The benefits of regular curtain
+            cleaning go beyond neatness; they protect your health, preserve
+            interiors, and make your home feel fresh and breathable every day.
+            <br />
+            <br />
+            Next time you tackle your cleaning checklist, don’t stop at the
+            floor or furniture. Look up, your curtains deserve attention too. A
+            truly clean home starts from every corner, every fabric, and every
+            curtain.
+          </p>
+        ),
       },
     ],
     faqs: [
@@ -885,43 +1629,124 @@ export const blogs = [
     },
     title:
       "Common Laundry Mistakes to Avoid: Keep Your Luxury Bags Looking Fresh",
-    description:
-      "Discover the top laundry mistakes to avoid and learn practical fabric care tips to protect your luxury bags from damage, fading, and wear over time.",
+    description: (
+      <p>
+        Luxury bags aren’t just accessories; they’re investments, confidence
+        boosters, and often carry memories of special moments. But if you’ve
+        ever noticed dull leather, frayed edges, or mysterious stains on the
+        lining, you know how quickly that “fresh out of the boutique” look can
+        fade.
+        <br />
+        The good news? You don’t need a closet full of products or an elaborate
+        at-home setup to preserve your bags. With the right habits and a bit of
+        fabric care, you can maintain their luxury appeal all year long. Here’s
+        a guide highlighting common laundry mistakes to avoid and simple steps
+        to care for your bags.
+      </p>
+    ),
     content: [
       {
-        title: "Store Bags Like They’re Still on Display",
-        description:
-          "How you store a handbag determines how it will age. Empty bags lose shape, and stacking them can cause creases. Stuff your bags with acid-free tissue paper or a clean scarf to retain shape. Store upright in breathable dust covers, not plastic, and use silica gel packs to prevent moisture damage. This preserves the bag’s structure and longevity.",
+        title: "1. Store Bags Like They’re Still on Display",
+        description: (
+          <p>
+            Many people think storing bags in a dust bag is enough. But how you
+            store a handbag determines how it will age. Empty bags lose shape,
+            and stacking them can cause creases.
+            <br />
+            <strong>Tip:</strong>
+            Stuff bags with acid-free tissue paper or a clean scarf to retain
+            their shape. Store them upright in breathable dust covers, not
+            plastic, and use silica gel packs in humid areas to prevent moisture
+            damage. This small step preserves the bag’s structure and longevity.
+          </p>
+        ),
       },
       {
-        title: "Handle With Care (Literally)",
-        description:
-          "Natural oils, lotions, and sanitizer residue can discolor and dull leather over time. Always clean your hands before handling your bag. Rotate how you carry it to avoid uneven wear, especially on handles that age faster due to constant contact.",
+        title: "2. Handle With Care (Literally)",
+        description: (
+          <p>
+            Natural oils, lotions, and sanitizer residue can discolor and dull
+            leather over time. Always clean your hands before handling your bag.
+            <br />
+            <strong>Tip:</strong>
+            Rotate how you carry your bag on your arm to avoid uneven wear.
+            Handles often show aging faster than the rest of the bag due to
+            constant pressure. Gentle handling is key to lasting beauty.
+          </p>
+        ),
       },
       {
-        title: "Rotate, Don’t Overuse",
-        description:
-          "Using the same bag every day accelerates wear and tear. Leather and fabric need time to rest and breathe. Rotate your bags weekly to extend their lifespan and keep your collection feeling fresh and well-maintained.",
+        title: "3. Rotate, Don’t Overuse",
+        description: (
+          <p>
+            Carrying the same bag every day accelerates wear. Leather and fabric
+            need time to rest and breathe.
+            <br />
+            <strong>Tip:</strong>
+            Rotate your bags weekly. It not only extends their life but also
+            keeps your collection feeling fresh and exciting.
+          </p>
+        ),
       },
       {
-        title: "Clean Smarter, Not Harder",
-        description:
-          "Deep cleaning with harsh wipes or alcohol-based sprays can damage material and cause peeling or fading. Instead, wipe your bag after each use with a soft, dry microfiber cloth. For delicate materials like suede or exotic leather, trust professional bag spas for safe and thorough cleaning.",
+        title: "4. Clean Smarter, Not Harder",
+        description: (
+          <p>
+            A major clothing care mistake is attempting “deep cleaning” at home
+            with harsh wipes or alcohol-based sprays. These can cause stains,
+            peeling, or fading.
+            <br />
+            <strong>Tip:</strong>
+            Use a soft, dry microfiber cloth to wipe your bag after each use.
+            For stubborn stains or delicate materials like suede or exotic
+            leather, trust a professional bag spa. This ensures proper fabric
+            care without risking damage.
+          </p>
+        ),
       },
       {
-        title: "Protect the Inside as Much as the Outside",
-        description:
-          "Most people focus on cleaning the bag’s exterior, but interiors matter too. Makeup, ink, and spills can stain linings permanently. Use pouches or organizers to separate cosmetics, pens, and liquids to keep the inside as pristine as the outside.",
+        title: "5. Protect the Inside as Much as the Outside",
+        description: (
+          <p>
+            Most people focus on exteriors, ignoring linings. Makeup, ink, or
+            accidental spills often ruin interiors.
+            <br />
+            <strong>Tip:</strong>
+            Use small pouches or organizers to separate cosmetics, pens, and
+            liquids. Protecting the lining preserves the bag’s cleanliness and
+            freshness.
+          </p>
+        ),
       },
       {
-        title: "Avoid Direct Sunlight and Heat",
-        description:
-          "Exposure to sunlight fades and dries out leather. Storing bags in bright areas or hot cars can lead to cracks and color loss. Keep your bags in cool, shaded spaces. If fading occurs, professionals can restore color, but prevention is best.",
+        title: "6. Avoid Direct Sunlight and Heat",
+        description: (
+          <p>
+            Just like skin, leather fades and dries out in the sunlight. Storing
+            bags in bright windows or hot cars accelerates color loss and
+            material damage.
+            <br />
+            <strong>Tip:</strong>
+            Keep bags in cool, shaded areas. If fading occurs, professionals can
+            restore color and texture, but prevention is always the best
+            approach.
+          </p>
+        ),
       },
       {
-        title: "Know When It’s Time for a Professional Refresh",
-        description:
-          "Even with regular care, bags eventually need professional attention. Experts can remove scuffs, oxidation, and dull finishes using fabric-safe solutions. Routine professional conditioning restores softness, shine, and longevity, keeping your bags looking new.",
+        title: "7. Know When It’s Time for a Professional Refresh",
+        description: (
+          <p>
+            Even with careful handling, every luxury bag eventually needs expert
+            attention. Scuffs, oxidation, or dull finishes require specialized
+            care.
+            <br />
+            <strong>Tip:</strong>A professional bag spa examines material type,
+            uses fabric-safe solutions, and conditions leather to restore
+            softness, shine, and longevity. Regular professional care ensures
+            your bags look as good as the day you bought them.
+          </p>
+        ),
       },
       {
         title: "The Takeaway",
@@ -954,6 +1779,307 @@ export const blogs = [
         question: "Is it okay to leave wet clothes in the machine overnight?",
         answer:
           "No. Leaving wet laundry overnight encourages mildew, musty odors, and wrinkles. Move clothes to the dryer or hang them within 30 minutes after the cycle ends to keep them fresh.",
+      },
+    ],
+  },
+  {
+    id: 10,
+    slug: "when-to-use-dry-cleaning",
+    image:
+      "/images/women-sorting-clothes-in-the-laundry-2025-03-14-03-27-51-utc.webp",
+    meta: {
+      title: "When to Use Dry Cleaning Instead of Washing",
+      description:
+        "Learn when to use dry cleaning vs washing clothes at home. Discover which fabrics need professional care and how to avoid costly mistakes.",
+      url: "https://freshoralaundry.com/blogs/when-to-use-dry-cleaning",
+      keywords: [
+        "When to use dry cleaning",
+        "Washing clothes",
+        "stain removal",
+      ],
+    },
+    title: "When to use dry cleaning instead of washing? ",
+    description: (
+      <div>
+        <h3 className="text-lg font-medium">
+          I Tested It So You Don’t Have To
+        </h3>
+
+        <p>
+          I used to treat care labels like suggestions. “Dry Clean Only”? I’d
+          roll my eyes, toss the garment in the washing machine, and hope for
+          the best.
+          <br />
+          That hope ended the day I ruined a silk blouse worth AED 800. It came
+          out shriveled, dull, and shrunken, barely fitting a child. That’s when
+          I realized I needed to understand when to use dry cleaning versus
+          washing clothes at home.
+          <br />
+          <br />
+          That hope ended the day I ruined a silk blouse worth AED 800. It came
+          out shriveled, dull, and shrunken, barely fitting a child. That’s when
+          I realized I needed to understand when to use dry cleaning versus
+          washing clothes at home.
+        </p>
+      </div>
+    ),
+    content: [
+      {
+        title: "The Science Behind Dry Cleaning",
+        description: (
+          <div>
+            <p>
+              I always thought dry cleaning was just fancy washing without
+              water. Not quite.
+            </p>
+            <ul className="list-disc ml-6">
+              <li>
+                <strong>Washing clothes </strong>involves water, detergent, and
+                friction.
+              </li>
+              <li>
+                <strong>Dry cleaning </strong>uses special solvents, no water,
+                and gentle chemistry.
+              </li>
+            </ul>
+            <p>
+              <strong>Takeaway: </strong>
+              Dry cleaning isn’t a luxury; it’s essential fabric care for items
+              that water could ruin.
+            </p>
+          </div>
+        ),
+      },
+      {
+        title: "Fabrics That Actually Need Dry Cleaning",
+        description: (
+          <div>
+            <p>
+              Here’s a list of clothes that truly require professional
+              treatment:
+            </p>
+            <ul className="list-disc ml-6">
+              <li>
+                <strong>Silk: </strong>Loses shine and shape; colors bleed
+                easily.
+              </li>
+              <li>
+                <strong>Rayon and Viscose: </strong>Stretch and deform when wet.
+              </li>
+              <li>
+                <strong>Wool and Cashmere:</strong>Shrinks quickly in water.
+              </li>
+              <li>
+                <strong>Velvet: </strong>Crushed forever in a washer.
+              </li>
+              <li>
+                <strong>Linen Suits or Blazers: </strong> Lose structure; never
+                look the same.
+              </li>
+              <li>
+                <strong>Leather and Suede: </strong> Water is damaging; they
+                need oils and professional care.
+              </li>
+            </ul>
+            <p>
+              Remember, the
+              <strong>
+                “Dry Clean Only” tag isn’t a suggestion, it’s a warning.
+              </strong>
+            </p>
+          </div>
+        ),
+      },
+      {
+        title: "When the Tag Says “Dry Clean” (But Not “Only”)",
+        description: (
+          <div>
+            <p>
+              Some garments say <strong> “Dry Clean” </strong>without the
+              “Only.” That tiny difference changes everything.
+            </p>
+            <ul className="list-disc ml-6">
+              <li>
+                Cotton shirts labeled this way are usually safe for gentle cold
+                water washing.
+              </li>
+              <li>Polyester blends are durable enough for machine washing.</li>
+              <li>
+                Unlined wool sweaters? Hand wash with wool detergent and lay
+                flat to dry.
+              </li>
+            </ul>
+            <p>
+              <strong>Tip: </strong>Treat these fabrics delicately, in cold
+              water, no twisting or wringing, and skip the dryer. This ensures
+              you don’t damage fibers while washing clothes at home.
+            </p>
+          </div>
+        ),
+      },
+      {
+        title: "When to Dry Clean Even if the Tag Doesn’t Say So",
+        description: (
+          <div>
+            <p>Some clothes need professional help regardless of labels:</p>
+            <ul className="list-disc ml-6">
+              <li>
+                <strong>Oil or grease stains: </strong>Regular detergent may
+                fail; dry cleaning solvents handle stubborn stain removal.
+              </li>
+              <li>
+                <strong>Special occasion outfits: </strong>Special occasion
+                outfits:
+              </li>
+              <li>
+                <strong>Dark or bright colors: </strong>Dry cleaning preserves
+                dye vibrancy.
+              </li>
+              <li>
+                <strong>Delicate embellishments </strong>Beading, sequins, or
+                lace can get ruined in a machine.
+              </li>
+              <li>
+                <strong>Favorite or expensive pieces: </strong> When in doubt,
+                dry clean, regret costs more than cleaning.
+              </li>
+            </ul>
+          </div>
+        ),
+      },
+      {
+        title: "Beyond Cleaning: The Restoration Factor",
+        description: (
+          <div>
+            <p>
+              Professional dry cleaning isn’t just about removing dirt. It
+              restores your clothes.
+            </p>
+            <ul className="list-disc ml-6">
+              <li>Silk regains luster.</li>
+              <li>Wool looks plush again.</li>
+              <li>Structured garments maintain their lines.</li>
+              <li>
+                Minor issues like loose buttons or hems get noticed and fixed.
+              </li>
+            </ul>
+            <p>
+              It’s essentially a spa treatment for your wardrobe and ensures the
+              best stain removal results without risking the integrity of your
+              garments.
+            </p>
+          </div>
+        ),
+      },
+      {
+        title: "How to Know If Clothes Actually Need Dry Cleaning",
+        description: (
+          <div>
+            <p>Over-cleaning is common. Here’s a quick check:</p>
+            <ul className="list-disc ml-6">
+              <li>
+                <strong>Small Test: </strong>Slightly musty? Air it out
+              </li>
+              <li>
+                <strong>Look Test: </strong>Visible stains? Yes, clean it. No
+                stains? Wait.
+              </li>
+              <li>
+                <strong>Touch Test: </strong>Crisp and fresh? Leave it. Limp or
+                sticky? Time to dry clean.
+              </li>
+            </ul>
+            <p>
+              Between cleans, refresh clothes with a steamer or fabric sprays.
+              Proper hanging also prevents unnecessary washes, helping you
+              maintain your wardrobe without frequent washing of clothes.
+            </p>
+          </div>
+        ),
+      },
+      {
+        title: "Environmental Considerations",
+        description: (
+          <p>
+            Traditional solvents like perchloroethylene aren’t eco-friendly.
+            Modern services, like Freshora, use biodegradable hydrocarbon or
+            liquid CO₂ methods, protecting both fabrics and the planet.
+            <br />
+            Ask your cleaner about the solvent they use; it matters.
+          </p>
+        ),
+      },
+      {
+        title: "The Smart Rule of Thumb",
+        description: (
+          <div>
+            <p>
+              <strong>Always dry clean:</strong>
+            </p>
+
+            <ul className="list-disc ml-6">
+              <li>Silk, wool, velvet, rayon, leather</li>
+              <li>Suits, blazers, gowns, structured garments</li>
+              <li>Anything labeled “Dry Clean Only”</li>
+              <li>Items with oil stains or delicate detailing</li>
+              <li>Expensive or sentimental clothing</li>
+            </ul>
+            <p>
+              It’s essentially a spa treatment for your wardrobe and ensures the
+              best stain removal results without risking the integrity of your
+              garments.
+              <br />
+              <br />
+            </p>
+            <p>
+              <strong>Safe to wash at home:</strong>
+            </p>
+            <ul className="list-disc ml-6">
+              <li>Cotton</li>
+              <li>Polyester blends</li>
+              <li>Anything labeled “Dry Clean Only”</li>
+              <li>Everyday wear</li>
+              <li>Some “Dry Clean” (not “Only”) items, handled carefully.</li>
+            </ul>
+            <p>
+              <br />
+              <strong>Golden rule:</strong>
+              If you love it, dry clean it. The cost of cleaning is always
+              cheaper than regret.
+            </p>
+          </div>
+        ),
+      },
+      {
+        title: "Final Thoughts",
+        description:
+          "Dry cleaning isn’t fancy; it’s maintenance. Proper care keeps your clothes looking and feeling like new. Skip the spin cycle for delicate fabrics; your wardrobe and your style will thank you. With the right stain removal techniques and careful washing clothes, you can extend the life of your favorite garments.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Which fabrics should always be dry-cleaned?",
+        answer:
+          "Delicate fabrics like silk, wool, cashmere, velvet, rayon, and leather should be dry cleaned to prevent damage such as shrinking, fading, or loss of texture.",
+      },
+      {
+        question: `Can I hand-wash items labeled "Dry Clean Only"?`,
+        answer: `Some garments labeled "Dry Clean Only," like cotton or polyester blends, can be hand-washed carefully in cold water. However, fabrics like silk, wool, and rayon may require professional cleaning to maintain their integrity.`,
+      },
+      {
+        question: "How can I tell if my clothes need dry cleaning?",
+        answer:
+          " If garments have oil-based stains, delicate embellishments, or are made of sensitive fabrics, they should be dry cleaned. Additionally, items with strong odors or that have lost their shape may benefit from professional cleaning.",
+      },
+      {
+        question: "Is dry cleaning harmful to the environment?",
+        answer:
+          "Traditional dry cleaning methods use chemicals like perchloroethylene (PERC), which can be harmful. However, eco-friendly dry cleaners now use biodegradable solvents, reducing environmental impact.",
+      },
+      {
+        question: "Does dry cleaning extend the life of my clothes?",
+        answer:
+          "Yes, dry cleaning can prolong the lifespan of garments by preserving fabric quality, preventing shrinkage, and maintaining color vibrancy.",
       },
     ],
   },

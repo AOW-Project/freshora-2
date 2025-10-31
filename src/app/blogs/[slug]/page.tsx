@@ -123,8 +123,8 @@ export default async function Page({ params }: PageProps) {
 
           {blogData?.content?.map((data) => (
             <div key={data.title}>
-              <h2 className="text-base font-medium mb-2">{data.title}</h2>
-              <p className="text-sm mb-4">{data.description}</p>
+              <div className="text-base font-medium mb-1">{data.title}</div>
+              <div className="text-sm mb-4 prose">{data.description}</div>
             </div>
           ))}
 
