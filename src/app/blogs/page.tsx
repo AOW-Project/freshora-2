@@ -164,7 +164,7 @@ export const blogs = [
             <ul className="list-disc ml-6">
               <li>Office wear that must be fresh daily</li>
               <li>Gym clothes need regular washing</li>
-              <li>Travel laundry that can’t wait Family clothing piles</li>
+              <li>Travel laundry that can&apos;t wait Family clothing piles</li>
               <li>Family clothing piles</li>
             </ul>
             <p>
@@ -242,21 +242,21 @@ export const blogs = [
     description: (
       <div>
         <p className="font-medium text-lg">
-          I Tried Eco-Friendly Laundry Tips, Here’s What Actually Worked
+          I Tried Eco-Friendly Laundry Tips, Here&apos;s What Actually Worked
         </p>
         <p>
           <br />
           It all started with one of those Instagram posts claiming that doing
           laundry is ruining the planet. At first, I rolled my eyes. But then I
-          thought about it, every week I’m running a machine, using electricity,
-          water, and chemicals. I’d never stopped to consider the environmental
-          cost.
+          thought about it, every week I&apos;m running a machine, using
+          electricity, water, and chemicals. I&apos;d never stopped to consider
+          the environmental cost.
           <br />
           So, I decided to try eco-friendly laundry tips for a month. Turns out,
           some tips work beautifully, while others made me realize that being
           <br />
-          sustainable doesn’t always mean doing everything yourself. Here’s what
-          I learned.
+          sustainable doesn&apos;t always mean doing everything yourself.
+          Here&apos;s what I learned.
         </p>
       </div>
     ),
@@ -267,7 +267,7 @@ export const blogs = [
         description: (
           <div>
             <p className="mb-2">
-              I found out that almost 90% of a washing machine’s energy use
+              I found out that almost 90% of a washing machine&apos;s energy use
               comes from heating the water. That blew my mind.
               <br />
               So, I switched to cold-water washes, half expecting mediocre
@@ -281,14 +281,14 @@ export const blogs = [
             <p className="mb-2">
               Modern <strong> eco-friendly laundry detergent </strong> is
               formulated to perform well in cold water. The cleaning agents
-              don’t rely on heat, so you’re saving energy without sacrificing
-              freshness.
+              don&apos;t rely on heat, so you&apos;re saving energy without
+              sacrificing freshness.
             </p>
             <h4 className="font-medium mb-1">Reality Check : </h4>
             <p className="mb-2">
-              Cold water is great, but it’s not a magic fix. You still need to
-              separate darks and lights, choose the right cycle, and remember to
-              change your settings.
+              Cold water is great, but it&apos;s not a magic fix. You still need
+              to separate darks and lights, choose the right cycle, and remember
+              to change your settings.
             </p>
           </div>
         ),
@@ -298,12 +298,12 @@ export const blogs = [
         description: (
           <div>
             <p className="mb-2">
-              I used to think more detergent meant cleaner clothes. I’d pour
-              half the bottle into one load. Then I read that most modern,
+              I used to think more detergent meant cleaner clothes. I&apos;d
+              pour half the bottle into one load. Then I read that most modern,
               eco-friendly laundry detergents are super concentrated; you only
-              Cold water is great, but it’s not a magic fix. You still need to
-              separate darks and lights, choose the right cycle, and remember to
-              change your settings.need a small capful.
+              Cold water is great, but it&apos;s not a magic fix. You still need
+              to separate darks and lights, choose the right cycle, and remember
+              to change your settings.need a small capful.
               <br />
               When I tried it, my clothes came out cleaner and softer. No
               residue, no stiffness.
@@ -334,7 +334,7 @@ export const blogs = [
               for a week.
               <br />
               Yes, my clothes lasted longer, stayed brighter, and smelled
-              fresher. But the downside? It took forever. In Dubai’s heat,
+              fresher. But the downside? It took forever. In Dubai&apos;s heat,
               clothes either dry too slowly or get bleached in direct sunlight.
             </p>
 
@@ -345,9 +345,9 @@ export const blogs = [
             </p>
             <h4 className="font-medium mb-1">But : </h4>
             <p className="mb-2">
-              Air drying isn’t always practical. Some fabrics need shade; others
-              wrinkle badly. I found myself going back to the dryer when I
-              needed clothes fast.
+              Air drying isn&apos;t always practical. Some fabrics need shade;
+              others wrinkle badly. I found myself going back to the dryer when
+              I needed clothes fast.
             </p>
           </div>
         ),
@@ -361,7 +361,7 @@ export const blogs = [
               <br />
               Not everything needs a wash after one wear. Jeans can go several
               rounds. Sweaters and hoodies, too. Even shirts are fine for a
-              second wear if they’re not stained or sweaty.
+              second wear if they&apos;re not stained or sweaty.
             </p>
 
             <h4 className="font-medium mb-1">Why It Works : </h4>
@@ -370,7 +370,7 @@ export const blogs = [
               tear. Fabrics retain color and shape longer.
               <br />
               The challenge is more psychological; it feels “wrong” not to wash,
-              even when something’s still clean. But once I got over that
+              even when something&apos;s still clean. But once I got over that
               mindset, laundry day got a lot lighter.
             </p>
           </div>
@@ -385,10 +385,10 @@ export const blogs = [
               online swears by them.
               <br />
               The dryer balls helped a bit; clothes were softer and dried
-              slightly faster. But they made a racket and didn’t feel
+              slightly faster. But they made a racket and didn&apos;t feel
               revolutionary. Vinegar worked well as a natural softener, but
               remembering to add it each time (and dealing with the smell)
-              wasn’t exactly convenient.
+              wasn&apos;t exactly convenient.
             </p>
 
             <h4 className="font-medium mb-1">Why They Works : </h4>
@@ -396,11 +396,11 @@ export const blogs = [
               Dryer balls improve air circulation, reducing drying time. Vinegar
               removes detergent residue, which softens fabric naturally.
             </p>
-            <h4 className="font-medium mb-1">But Here's the Truth : </h4>
+            <h4 className="font-medium mb-1">But Here&apos;s the Truth : </h4>
             <p className="mb-2">
-              These tips are fine if you enjoy experimenting. But they’re not
-              life-changing, and they require consistency that’s hard to
-              maintain.
+              These tips are fine if you enjoy experimenting. But they&apos;re
+              not life-changing, and they require consistency that&apos;s hard
+              to maintain.
             </p>
           </div>
         ),
@@ -412,7 +412,7 @@ export const blogs = [
             <p className="mb-2">
               Most machines now have an “eco” mode, so I tried it out. It uses
               less water and electricity, which sounds great, but only if your
-              clothes aren’t that dirty.
+              clothes aren&apos;t that dirty.
               <br />
               Heavily soiled loads came out half-clean, and I had to wash them
               again, wasting more energy overall.
@@ -420,8 +420,8 @@ export const blogs = [
 
             <h4 className="font-medium mb-1">Why It Sometimes Works : </h4>
             <p className="mb-2">
-              For light loads, it’s efficient. For anything more, it’s hit or
-              miss.
+              For light loads, it&apos;s efficient. For anything more, it&apos;s
+              hit or miss.
             </p>
           </div>
         ),
@@ -440,8 +440,8 @@ export const blogs = [
               cycles, all nice in theory. But in practice, I was spending more
               time managing settings, monitoring loads, and redoing washes.
               <br />
-              Then it hit me: maybe individual effort isn’t the most efficient
-              route.
+              Then it hit me: maybe individual effort isn&apos;t the most
+              efficient route.
               <br />
               Professional laundry services operate at scale. They use
               high-efficiency machines that handle full loads with minimal water
@@ -452,15 +452,15 @@ export const blogs = [
               the most sustainable thing you can do.
               <br />
               Meanwhile, at home, I was wasting water, overusing detergent, and
-              occasionally ruining clothes I’d have to replace. Every
+              occasionally ruining clothes I&apos;d have to replace. Every
               replacement means new manufacturing, packaging, and shipping, all
               of which impact the environment.
               <br />
               <br />
-              So, what’s actually the eco move?
+              So, what&apos;s actually the eco move?
               <br />
-              It’s not doing everything yourself; it’s choosing the most
-              efficient option overall.
+              It&apos;s not doing everything yourself; it&apos;s choosing the
+              most efficient option overall.
             </p>
           </div>
         ),
@@ -470,20 +470,20 @@ export const blogs = [
         description: (
           <div>
             <p className="mb-2">
-              True sustainability isn’t just about turning down your water
-              temperature or swapping in vinegar. It’s about using resources
-              efficiently, time, energy, and fabric lifespan included.
+              True sustainability isn&apos;t just about turning down your water
+              temperature or swapping in vinegar. It&apos;s about using
+              resources efficiently, time, energy, and fabric lifespan included.
               <br />
-              That’s why I started using professional laundry services like
+              That&apos;s why I started using professional laundry services like
               Freshora. They wash smarter, not harder. Their systems are
               optimized for minimal waste, maximum care, and long-term garment
               preservation, often using{" "}
               <strong> green laundry detergent </strong>for optimal results.
               <br />
-              It’s better for your clothes, your schedule, and yes, even the
-              environment.
+              It&apos;s better for your clothes, your schedule, and yes, even
+              the environment.
               <br />
-              So, while it’s great to switch to cold water and cut back on
+              So, while it&apos;s great to switch to cold water and cut back on
               detergent, the real eco-friendly laundry tip might just be letting
               experts handle it, because sometimes, the most sustainable choice
               is the one that simply makes sense.
@@ -496,9 +496,9 @@ export const blogs = [
             </p>
             <h4 className="font-medium mb-1">But : </h4>
             <p className="mb-2">
-              Air drying isn’t always practical. Some fabrics need shade; others
-              wrinkle badly. I found myself going back to the dryer when I
-              needed clothes fast.
+              Air drying isn&apos;t always practical. Some fabrics need shade;
+              others wrinkle badly. I found myself going back to the dryer when
+              I needed clothes fast.
             </p>
           </div>
         ),
@@ -553,14 +553,15 @@ export const blogs = [
     title: "Common Clothes Pressing Mistakes and How to Avoid Them",
     description: (
       <p>
-        If you’ve ever ended up with shiny patches, strange fabric lines, or
-        clothes that suddenly fit differently after ironing, you’re not alone.
-        Pressing may look simple: plug in the iron, glide it over, done. But
-        there’s a fine line between crisp perfection and fabric disaster.
+        If you&apos;ve ever ended up with shiny patches, strange fabric lines,
+        or clothes that suddenly fit differently after ironing, you&apos;re not
+        alone. Pressing may look simple: plug in the iron, glide it over, done.
+        But there&apos;s a fine line between crisp perfection and fabric
+        disaster.
         <br />
         <br />
-        Here’s a guide to the most common clothes pressing mistakes and how you
-        can avoid them for smooth, sharp, and long-lasting garments.
+        Here&apos;s a guide to the most common clothes pressing mistakes and how
+        you can avoid them for smooth, sharp, and long-lasting garments.
       </p>
     ),
     content: [
@@ -574,10 +575,10 @@ export const blogs = [
             repeated pressing without results, wearing out the fabric faster.
             <br />
             <br />
-            <strong>Fix :</strong>Always check the garment’s care label before
-            you iron to press clothes. Start low and gradually increase if
-            needed. Test on a hidden corner if unsure. This step is a basic yet
-            crucial clothing care tip.
+            <strong>Fix :</strong>Always check the garment&apos;s care label
+            before you iron to press clothes. Start low and gradually increase
+            if needed. Test on a hidden corner if unsure. This step is a basic
+            yet crucial clothing care tip.
           </p>
         ),
       },
@@ -600,8 +601,9 @@ export const blogs = [
         title: "3. Pressing Instead of Gliding",
         description: (
           <p>
-            A heavy hand doesn’t make clothes look sharper. Pressing too hard
-            can crush the weave, distort seams, and even leave shiny patches.
+            A heavy hand doesn&apos;t make clothes look sharper. Pressing too
+            hard can crush the weave, distort seams, and even leave shiny
+            patches.
             <br />
             <br />
             <strong>Fix :</strong> Gently iron to press clothes using light
@@ -617,12 +619,12 @@ export const blogs = [
           <p>
             Every fabric has a grain, the natural direction of its threads.
             Ironing across or against it can twist, stretch, or distort the
-            fabric’s original shape.
+            fabric&apos;s original shape.
             <br />
             <br />
             <strong>Fix :</strong> Always iron along the weave. Shirts: move
-            from shoulders to hem; pants: follow the leg’s length. This prevents
-            distortion and keeps clothes looking crisp.
+            from shoulders to hem; pants: follow the leg&apos;s length. This
+            prevents distortion and keeps clothes looking crisp.
           </p>
         ),
       },
@@ -728,7 +730,7 @@ export const blogs = [
         title: "Final Thoughts: Avoid These Common Clothes Pressing Mistakes",
         description: (
           <p>
-            Pressing clothes is more than removing wrinkles; it’s about
+            Pressing clothes is more than removing wrinkles; it&apos;s about
             maintaining shape, texture, and garment lifespan. Most mistakes come
             from rushing or overlooking small details.
             <br />
@@ -794,14 +796,14 @@ export const blogs = [
     description: (
       <p>
         Ever noticed how some clothes look slightly off after ironing? The fit
-        feels different, the fabric doesn’t drape the same, and suddenly your
-        favorite shirt just doesn’t look as sharp as it used to. Most people
-        blame the fabric, the detergent, or even the tailor, but the real
+        feels different, the fabric doesn&apos;t drape the same, and suddenly
+        your favorite shirt just doesn&apos;t look as sharp as it used to. Most
+        people blame the fabric, the detergent, or even the tailor, but the real
         culprit often lies in your ironing habits.
         <br />
         <br />
-        Let’s explore why clothes lose shape after ironing and how you can fix
-        it using simple clothing care tips and proper fabric care.
+        Let&apos;s explore why clothes lose shape after ironing and how you can
+        fix it using simple clothing care tips and proper fabric care.
       </p>
     ),
     content: [
@@ -811,14 +813,14 @@ export const blogs = [
           <p>
             Every fabric has a heat tolerance. Cotton can handle high
             temperatures, but synthetics like polyester or rayon can melt or
-            lose elasticity when overheated. Using the wrong temperature doesn’t
-            just leave shine marks; it weakens the fibers, causing them to
-            stretch, warp, or lose their natural shape.
+            lose elasticity when overheated. Using the wrong temperature
+            doesn&apos;t just leave shine marks; it weakens the fibers, causing
+            them to stretch, warp, or lose their natural shape.
             <br />
             <br />
-            <strong>Fix :</strong> Always check the garment’s care label before
-            ironing. Adjust your iron’s heat based on fabric type. When in
-            doubt, start with low heat and increase gradually.
+            <strong>Fix :</strong> Always check the garment&apos;s care label
+            before ironing. Adjust your iron&apos;s heat based on fabric type.
+            When in doubt, start with low heat and increase gradually.
           </p>
         ),
       },
@@ -844,7 +846,7 @@ export const blogs = [
           <p>
             Completely dry fabrics can become stiff, and ironing them may break
             down elasticity. That “crisp” feeling might seem good, but it makes
-            fibers brittle, meaning your clothes won’t drape naturally.
+            fibers brittle, meaning your clothes won&apos;t drape naturally.
             <br />
             <br />
             <strong>Fix :</strong> Lightly dampen clothes before ironing. This
@@ -880,7 +882,7 @@ export const blogs = [
             <br />
             <br />
             <strong>Fix :</strong> Iron in line with the weave. For shirts, move
-            from shoulders to hem; for trousers, follow the leg’s natural
+            from shoulders to hem; for trousers, follow the leg&apos;’s natural
             direction.
           </p>
         ),
@@ -935,16 +937,16 @@ export const blogs = [
         title: "The Takeaway",
         description: (
           <p>
-            Losing shape after ironing isn’t bad luck; it’s usually the result
-            of heat, pressure, and neglect of proper clothing care tips.
-            Understanding why clothes lose shape after ironing will help you
-            care for your wardrobe more effectively.
+            Losing shape after ironing isn&apos;t bad luck; it&apos;s usually
+            the result of heat, pressure, and neglect of proper clothing care
+            tips. Understanding why clothes lose shape after ironing will help
+            you care for your wardrobe more effectively.
             <br />
             <br />
             With mindful fabric care, your clothes will not only look sharper
             but last longer. Treat your garments with the attention they
-            deserve, and they’ll stay crisp, elegant, and perfectly shaped every
-            time.
+            deserve, and they&apos;ll stay crisp, elegant, and perfectly shaped
+            every time.
           </p>
         ),
       },
@@ -1085,7 +1087,7 @@ export const blogs = [
         description: (
           <div>
             <p>
-              You don’t need to wash stuffed toys weekly. Keep them fresh
+              You don&apos;t need to wash stuffed toys weekly. Keep them fresh
               between washes by:
             </p>
             <ul className="list-disc ml-6">
@@ -1354,16 +1356,16 @@ export const blogs = [
       "Why Regular Curtain Cleaning Is a Must for Every Home: The benefits of regular curtain cleaning",
     description: (
       <p>
-        When was the last time you actually cleaned your curtains? If you can’t
-        remember, you’re not alone. Curtains are one of the most overlooked
-        parts of home cleaning, quietly collecting dust, odors, and allergens
-        while hanging in plain sight.
+        When was the last time you actually cleaned your curtains? If you
+        can&apos;t remember, you&apos;re not alone. Curtains are one of the most
+        overlooked parts of home cleaning, quietly collecting dust, odors, and
+        allergens while hanging in plain sight.
         <br />
         <br />
         But the truth is, the benefits of regular curtain cleaning go far beyond
         appearance. Clean curtains contribute to a healthier, fresher, and more
-        comfortable home environment. Here’s why they deserve more attention and
-        care.
+        comfortable home environment. Here&apos;s why they deserve more
+        attention and care.
       </p>
     ),
     content: [
@@ -1438,7 +1440,7 @@ export const blogs = [
             </p>
             <ul className="list-disc ml-6">
               <li>Remove trapped odors</li>
-              <li>Restore your home’s natural freshness.</li>
+              <li>Restore your home&apos;s natural freshness.</li>
               <li>Prevent lingering smells from circulating.</li>
             </ul>
             <p>
@@ -1475,7 +1477,7 @@ export const blogs = [
             Whether delicate sheer curtains or heavy drapes, professional care
             restores texture, preserves color, and prevents premature wear.
             Clean curtains hang better, look crisp, and instantly enhance any
-            room’s appearance.
+            room&apos;s appearance.
           </p>
         ),
       },
@@ -1574,7 +1576,7 @@ export const blogs = [
             interiors, and make your home feel fresh and breathable every day.
             <br />
             <br />
-            Next time you tackle your cleaning checklist, don’t stop at the
+            Next time you tackle your cleaning checklist, don&apos;t stop at the
             floor or furniture. Look up, your curtains deserve attention too. A
             truly clean home starts from every corner, every fabric, and every
             curtain.
@@ -1631,17 +1633,17 @@ export const blogs = [
       "Common Laundry Mistakes to Avoid: Keep Your Luxury Bags Looking Fresh",
     description: (
       <p>
-        Luxury bags aren’t just accessories; they’re investments, confidence
-        boosters, and often carry memories of special moments. But if you’ve
-        ever noticed dull leather, frayed edges, or mysterious stains on the
-        lining, you know how quickly that “fresh out of the boutique” look can
-        fade.
+        Luxury bags aren&apos;t just accessories; they&apos;re investments,
+        confidence boosters, and often carry memories of special moments. But if
+        you&apos;ve ever noticed dull leather, frayed edges, or mysterious
+        stains on the lining, you know how quickly that “fresh out of the
+        boutique” look can fade.
         <br />
-        The good news? You don’t need a closet full of products or an elaborate
-        at-home setup to preserve your bags. With the right habits and a bit of
-        fabric care, you can maintain their luxury appeal all year long. Here’s
-        a guide highlighting common laundry mistakes to avoid and simple steps
-        to care for your bags.
+        The good news? You don&apos;t need a closet full of products or an
+        elaborate at-home setup to preserve your bags. With the right habits and
+        a bit of fabric care, you can maintain their luxury appeal all year
+        long. Here&apos;s a guide highlighting common laundry mistakes to avoid
+        and simple steps to care for your bags.
       </p>
     ),
     content: [
@@ -1657,7 +1659,8 @@ export const blogs = [
             Stuff bags with acid-free tissue paper or a clean scarf to retain
             their shape. Store them upright in breathable dust covers, not
             plastic, and use silica gel packs in humid areas to prevent moisture
-            damage. This small step preserves the bag’s structure and longevity.
+            damage. This small step preserves the bag&apos;s structure and
+            longevity.
           </p>
         ),
       },
@@ -1713,8 +1716,8 @@ export const blogs = [
             <br />
             <strong>Tip:</strong>
             Use small pouches or organizers to separate cosmetics, pens, and
-            liquids. Protecting the lining preserves the bag’s cleanliness and
-            freshness.
+            liquids. Protecting the lining preserves the bag&apos;s cleanliness
+            and freshness.
           </p>
         ),
       },
@@ -1802,23 +1805,23 @@ export const blogs = [
     description: (
       <div>
         <h3 className="text-lg font-medium">
-          I Tested It So You Don’t Have To
+          I Tested It So You Don&apos;t Have To
         </h3>
 
         <p>
-          I used to treat care labels like suggestions. “Dry Clean Only”? I’d
-          roll my eyes, toss the garment in the washing machine, and hope for
-          the best.
+          I used to treat care labels like suggestions. “Dry Clean Only”?
+          I&apos;d roll my eyes, toss the garment in the washing machine, and
+          hope for the best.
           <br />
           That hope ended the day I ruined a silk blouse worth AED 800. It came
-          out shriveled, dull, and shrunken, barely fitting a child. That’s when
-          I realized I needed to understand when to use dry cleaning versus
+          out shriveled, dull, and shrunken, barely fitting a child. That&apos;s
+          when I realized I needed to understand when to use dry cleaning versus
           washing clothes at home.
           <br />
           <br />
           That hope ended the day I ruined a silk blouse worth AED 800. It came
-          out shriveled, dull, and shrunken, barely fitting a child. That’s when
-          I realized I needed to understand when to use dry cleaning versus
+          out shriveled, dull, and shrunken, barely fitting a child. That&apos;s
+          when I realized I needed to understand when to use dry cleaning versus
           washing clothes at home.
         </p>
       </div>
@@ -1844,8 +1847,8 @@ export const blogs = [
             </ul>
             <p>
               <strong>Takeaway: </strong>
-              Dry cleaning isn’t a luxury; it’s essential fabric care for items
-              that water could ruin.
+              Dry cleaning isn&apos;t a luxury; it&apos;s essential fabric care
+              for items that water could ruin.
             </p>
           </div>
         ),
@@ -1855,7 +1858,7 @@ export const blogs = [
         description: (
           <div>
             <p>
-              Here’s a list of clothes that truly require professional
+              Here&apos;s a list of clothes that truly require professional
               treatment:
             </p>
             <ul className="list-disc ml-6">
@@ -1884,7 +1887,8 @@ export const blogs = [
             <p>
               Remember, the
               <strong>
-                “Dry Clean Only” tag isn’t a suggestion, it’s a warning.
+                “Dry Clean Only” tag isn&apos;t a suggestion, it&apos;s a
+                warning.
               </strong>
             </p>
           </div>
@@ -1912,7 +1916,7 @@ export const blogs = [
             <p>
               <strong>Tip: </strong>Treat these fabrics delicately, in cold
               water, no twisting or wringing, and skip the dryer. This ensures
-              you don’t damage fibers while washing clothes at home.
+              you don&apos;t damage fibers while washing clothes at home.
             </p>
           </div>
         ),
@@ -1952,7 +1956,7 @@ export const blogs = [
         description: (
           <div>
             <p>
-              Professional dry cleaning isn’t just about removing dirt. It
+              Professional dry cleaning isn&apos;t just about removing dirt. It
               restores your clothes.
             </p>
             <ul className="list-disc ml-6">
@@ -1964,9 +1968,9 @@ export const blogs = [
               </li>
             </ul>
             <p>
-              It’s essentially a spa treatment for your wardrobe and ensures the
-              best stain removal results without risking the integrity of your
-              garments.
+              It&apos;s essentially a spa treatment for your wardrobe and
+              ensures the best stain removal results without risking the
+              integrity of your garments.
             </p>
           </div>
         ),
@@ -1975,7 +1979,7 @@ export const blogs = [
         title: "How to Know If Clothes Actually Need Dry Cleaning",
         description: (
           <div>
-            <p>Over-cleaning is common. Here’s a quick check:</p>
+            <p>Over-cleaning is common. Here&apos;s a quick check:</p>
             <ul className="list-disc ml-6">
               <li>
                 <strong>Small Test: </strong>Slightly musty? Air it out
@@ -2001,9 +2005,10 @@ export const blogs = [
         title: "Environmental Considerations",
         description: (
           <p>
-            Traditional solvents like perchloroethylene aren’t eco-friendly.
-            Modern services, like Freshora, use biodegradable hydrocarbon or
-            liquid CO₂ methods, protecting both fabrics and the planet.
+            Traditional solvents like perchloroethylene aren&apos;t
+            eco-friendly. Modern services, like Freshora, use biodegradable
+            hydrocarbon or liquid CO₂ methods, protecting both fabrics and the
+            planet.
             <br />
             Ask your cleaner about the solvent they use; it matters.
           </p>
@@ -2025,9 +2030,9 @@ export const blogs = [
               <li>Expensive or sentimental clothing</li>
             </ul>
             <p>
-              It’s essentially a spa treatment for your wardrobe and ensures the
-              best stain removal results without risking the integrity of your
-              garments.
+              It&apos;s essentially a spa treatment for your wardrobe and
+              ensures the best stain removal results without risking the
+              integrity of your garments.
               <br />
               <br />
             </p>
