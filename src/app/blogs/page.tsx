@@ -22,7 +22,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
           src={image || "/placeholder.svg"}
           alt={title}
           fill
-          className="object-cover"
+          className="object-fit"
         />
       </div>
       <div className="p-4 text-left">
@@ -95,8 +95,8 @@ export const blogs = [
   {
     id: 1,
     slug: "express-laundry-benefits-for-busy-schedules",
-    image:
-      "/images/iron-and-stack-of-shirts-on-ironing-board-space-f-2025-03-25-22-33-47-utc.webp",
+    image: "/images/blogs/express-laundry-benefits-for-busy-schedules-1.jpg",
+    image2: "/images/blogs/express-laundry-benefits-for-busy-schedules-2.jpg",
     meta: {
       title: "Express Laundry Benefits for Busy Schedules",
       description:
@@ -223,8 +223,8 @@ export const blogs = [
   {
     id: 2,
     slug: "eco-friendly-laundry-tips-for-a-greener-clean",
-    image:
-      "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.webp",
+    image: "/images/blogs/eco-friendly-laundry-tips-1.jpg",
+    image2: "/images/blogs/eco-friendly-laundry-tips-2.jpg",
     meta: {
       title: "Eco-Friendly Laundry Tips for a Greener Clean",
       description:
@@ -538,8 +538,8 @@ export const blogs = [
   {
     id: 3,
     slug: "common-clothes-pressing-mistakes",
-    image:
-      "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.webp",
+    image: "/images/blogs/common-clothes-pressing-mistakes-1.jpg",
+    image2: "/images/blogs/common-clothes-pressing-mistakes-2.jpg",
     meta: {
       title: "Common Clothes Pressing Mistakes and How to Avoid Them",
       description:
@@ -780,8 +780,8 @@ export const blogs = [
   {
     id: 4,
     slug: "why-clothes-lose-shape-after-ironing",
-    image:
-      "/images/iron-and-stack-of-shirts-on-ironing-board-space-f-2025-03-25-22-33-47-utc.webp",
+    image: "/images/blogs/why-clothes-lose-shape-after-ironing-1.jpg",
+    image2: "/images/blogs/why-clothes-lose-shape-after-ironing-2.jpg",
     meta: {
       title: "Why Clothes Lose Shape After Ironing and How to Fix It",
       description:
@@ -984,8 +984,8 @@ export const blogs = [
   {
     id: 5,
     slug: "how-to-safely-wash-stuffed-toys",
-    image:
-      "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.webp",
+    image: "/images/blogs/how-to-safely-wash-stuffed-toys-1.jpg",
+    image2: "/images/blogs/how-to-safely-wash-stuffed-toys-2.jpg",
     meta: {
       title: "How to Safely Wash Stuffed Toys Without Damaging Them",
       description:
@@ -1144,8 +1144,8 @@ export const blogs = [
   {
     id: 6,
     slug: "how-to-clean-plush-toys-at-home",
-    image:
-      "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.webp",
+    image: "/images/blogs/how-to-clean-plush-toys-at-home-1.jpg",
+    image2: "/images/blogs/how-to-clean-plush-toys-at-home-2.jpg",
     meta: {
       title: "How to Clean Plush Toys at Home and Keep Them Soft",
       description:
@@ -1253,8 +1253,8 @@ export const blogs = [
   {
     id: 7,
     slug: "eco-friendly-ways-to-clean-curtains",
-    image:
-      "/images/women-sorting-clothes-in-the-laundry-2025-03-14-03-27-51-utc.webp",
+    image: "/images/blogs/eco-friendly-ways-to-clean-curtains-1.jpg",
+    image2: "/images/blogs/eco-friendly-ways-to-clean-curtains-2.jpg",
     meta: {
       title: "Eco-Friendly Ways to Clean Curtains for a Spotless Home",
       description:
@@ -1339,8 +1339,8 @@ export const blogs = [
   {
     id: 8,
     slug: "benefits-of-regular-curtain-cleaning",
-    image:
-      "/images/women-sorting-clothes-in-the-laundry-2025-03-14-03-27-51-utc.webp",
+    image: "/images/blogs/benefits-of-regular-curtain-cleaning-1.jpg",
+    image2: "/images/blogs/benefits-of-regular-curtain-cleaning-2.jpg",
     meta: {
       title: "Benefits of Regular Curtain Cleaning for a Healthier Home",
       description:
@@ -1616,8 +1616,8 @@ export const blogs = [
   {
     id: 9,
     slug: "common-laundry-mistakes-to-avoid",
-    image:
-      "/images/women-sorting-clothes-in-the-laundry-2025-03-14-03-27-51-utc.webp",
+    image: "/images/blogs/common-laundry-mistakes-to-avoid-1.jpg",
+    image2: "/images/blogs/common-laundry-mistakes-to-avoid-2.jpg",
     meta: {
       title: "Common Laundry Mistakes to Avoid for Luxury Bag Care",
       description:
@@ -1788,8 +1788,8 @@ export const blogs = [
   {
     id: 10,
     slug: "when-to-use-dry-cleaning",
-    image:
-      "/images/women-sorting-clothes-in-the-laundry-2025-03-14-03-27-51-utc.webp",
+    image: "/images/blogs/when-to-use-dry-cleaning-1.jpg",
+    image2: "/images/blogs/when-to-use-dry-cleaning-2.jpg",
     meta: {
       title: "When to Use Dry Cleaning Instead of Washing",
       description:
@@ -1819,10 +1819,8 @@ export const blogs = [
           washing clothes at home.
           <br />
           <br />
-          That hope ended the day I ruined a silk blouse worth AED 800. It came
-          out shriveled, dull, and shrunken, barely fitting a child. That&apos;s
-          when I realized I needed to understand when to use dry cleaning versus
-          washing clothes at home.
+          Here&apos;s everything I learned so you don&apos;t have to make the
+          same mistakes.
         </p>
       </div>
     ),

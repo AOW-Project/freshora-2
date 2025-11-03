@@ -203,13 +203,13 @@ const PickupPackages: React.FC = () => {
     serviceId: string;
   } | null>(null);
 
-  useEffect(() => {
-    async function fetchItem() {
-      const item = await getFirstServiceItem("standard-package-service");
-      setServiceItem(item);
-    }
-    fetchItem();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchItem() {
+  //     const item = await getFirstServiceItem("standard-package-service");
+  //     setServiceItem(item);
+  //   }
+  //   fetchItem();
+  // }, []);
 
   console.log(serviceItem?.id, serviceItem?.serviceId);
 

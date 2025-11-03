@@ -112,7 +112,10 @@ export default async function Page({ params }: PageProps) {
           </h1>
           <div className="relative w-full h-56 my-5">
             <Image
-              src="/images/women-sorting-clothes-in-the-laundry-2025-03-14-03-27-51-utc.webp"
+              src={
+                blogData?.image2 ||
+                "/images/women-sorting-clothes-in-the-laundry-2025-03-14-03-27-51-utc.webp"
+              }
               alt={blogData?.title || "blog image"}
               fill
               className="object-cover rounded-2xl"
