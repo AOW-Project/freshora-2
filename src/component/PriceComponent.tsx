@@ -664,7 +664,7 @@ const PricingSection = () => {
               >
                 {/* Mobile-optimized tabs */}
                 <div className="mb-6 sm:mb-8">
-                  <TabsList className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 w-full gap-1 sm:gap-2 p-1 bg-gray-100 rounded-lg h-auto">
+                  <TabsList className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 w-full gap-1 sm:gap-2 p-1 bg-gray-100 rounded-lg h-auto">
                     <TabsTrigger
                       value="popular"
                       className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-primary-green data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:border-primary-green rounded-md whitespace-nowrap"
@@ -694,6 +694,12 @@ const PricingSection = () => {
                       className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-primary-green data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:border-primary-green rounded-md whitespace-nowrap col-span-2 sm:col-span-1"
                     >
                       Luxury Shoes
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="delegate_clothes"
+                      className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-primary-green data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:border-primary-green rounded-md whitespace-nowrap col-span-2 sm:col-span-1"
+                    >
+                      Top Delegate Clothes
                     </TabsTrigger>
                   </TabsList>
                 </div>
@@ -921,6 +927,23 @@ const PricingSection = () => {
                             </td>
                           </tr>
                         ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </TabsContent>
+                {/* Top Delegate Clothes Tab */}
+                <TabsContent value="delegate_clothes" className="mt-6">
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full">
+                      <tbody>
+                        <tr className="border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                          <td className="py-3 px-4 text-gray-700 text-sm sm:text-base">
+                            Items will be added
+                          </td>
+                          <td className="py-3 px-4 font-medium text-primary-green text-sm sm:text-base text-center">
+                            -
+                          </td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>

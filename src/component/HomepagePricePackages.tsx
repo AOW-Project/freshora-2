@@ -32,26 +32,26 @@ function SmallPackageCard({
   };
 
   return (
-    <div className="w-full h-full border border-[#CCCCCC]  overflow-hidden">
+    <div className="w-full h-full min-h-[280px] border border-[#CCCCCC]  overflow-hidden">
       {/* Top section */}
-      <div className="bg-[#F3F6F4] h-1/2 flex flex-col justify-evenly items-center text-secondary-green py-4">
-        <h2 className="text-3xl font-bold text-secondary-green py-2 ">
+      <div className="bg-[#F3F6F4] h-1/2 flex flex-col justify-evenly items-center text-secondary-green p-2 sm:p-4">
+        <h2 className=" text-base sm:text-2xl md:text-3xl font-bold text-secondary-green py-2 ">
           {title}
         </h2>
-        <h3 className="text-3xl font-normal flex items-center gap-2">
+        <h3 className="text-xl sm:text-2xl md:text-3xl font-normal flex items-center gap-2">
           {price.toFixed(2)} <span className="text-xl font-medium">AED</span>
         </h3>
       </div>
 
       {/* Bottom section */}
-      <div className="bg-white h-1/2 py-4 flex items-center text-secondary-green">
+      <div className="bg-white h-1/2 p-4 flex items-center text-secondary-green">
         <div className="w-full flex flex-col items-center justify-center">
-          <h3 className="text-zinc-600 py-2 text-xl font-medium">
+          <h3 className="text-zinc-600 py-2 text-sm sm:text-xl font-medium text-center">
             {description}
           </h3>
           <button
             onClick={handleOrderClick}
-            className="mt-4 px-20 py-3 rounded bg-secondary-green font-semibold text-white transition-colors duration-300 hover:bg-white cursor-pointer cta-button"
+            className="mt-4 px-7 sm:px-20 py-3  text-sm sm:text-base rounded bg-secondary-green font-semibold text-white transition-colors duration-300 hover:bg-white cursor-pointer cta-button"
           >
             Order Now
           </button>
@@ -251,19 +251,19 @@ const PickupPackages: React.FC = () => {
         </p>
       </div>
       {/* offer cards */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="w-full grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-6">
         {/* 1st col offer */}
         <div className="grid grid-cols-1 gap-6">
           {/* small cards  */}
           <SmallPackageCard
-            title="Blanket Service"
-            price={35.0}
-            description="Dry cleaning"
-          />
-          <SmallPackageCard
             title="Designer Shoes"
             price={120.0}
             description="Premium cleaning for high-end formal shoes"
+          />
+          <SmallPackageCard
+            title="Blanket Service"
+            price={35.0}
+            description="Dry cleaning"
           />
         </div>
         {/* {packagesData.map((pkg) => (
@@ -274,7 +274,7 @@ const PickupPackages: React.FC = () => {
               />
             ))} */}
         {/* 2nd col offer */}
-        <div className="w-full flex-grow">
+        <div className="w-full hidden md:flex flex-grow">
           <div className="relative w-full h-full ">
             <Image
               alt="offer-img"
@@ -292,11 +292,22 @@ const PickupPackages: React.FC = () => {
             price={12.0}
             description="Washed and Pressed (Per Sq meter) "
           />
-
           <SmallPackageCard
             title="Wedding Dress"
             price={80.0}
             description="Washed and Pressed"
+          />
+        </div>
+      </div>
+
+      {/* Offer picture for mobile */}
+      <div className="w-full flex sm:hidden flex-grow">
+        <div className="relative w-full h-[600px] ">
+          <Image
+            alt="offer-img"
+            src="/images/redesign/offer-img.jpg"
+            fill
+            className="object-contain rounded"
           />
         </div>
       </div>

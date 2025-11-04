@@ -206,7 +206,7 @@ export default function Footer() {
               Subscribe
             </h3>
             <form className="space-y-3">
-              <div className="w-full min-w-[390px] flex items-center justify-between p-0.5 rounded bg-amber-50 text-black text-sm sm:text-base  overflow-hidden">
+              <div className="w-full min-w-[300px] sm:min-w-[390px] flex items-center justify-between p-0.5 rounded bg-amber-50 text-black text-sm sm:text-base  overflow-hidden">
                 <input
                   type="email"
                   placeholder="Enter your email id receive our special offers"
@@ -215,7 +215,7 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="w-[15%] bg-green-500 hover:bg-green-600 text-white p-2 rounded transition-colors text-sm sm:text-base font-medium focus:outline-none focus:ring-2 focus:ring-green-400"
+                  className="w-14 bg-green-500 hover:bg-green-600 text-white p-2 rounded transition-colors text-sm sm:text-base font-medium focus:outline-none focus:ring-2 focus:ring-green-400"
                 >
                   GO
                 </button>

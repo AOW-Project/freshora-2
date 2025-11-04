@@ -83,7 +83,7 @@ export default function ContactPage() {
       >
         {" "}
         {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
-        <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center z-30">
+        <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center text-center z-30">
           <p>
             Make Freshora as your laundry partner.
             <span className="text-[#FFFF00]">We are just one call away!</span>

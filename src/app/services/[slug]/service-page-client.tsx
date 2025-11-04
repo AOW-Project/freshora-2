@@ -181,7 +181,7 @@ export default function ServicePageClient({
         >
           {" "}
           {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
-          <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center z-30">
+          <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center text-center items-center z-30">
             <p>
               Professional Laundry{" "}
               <span className="text-[#FFFF00]">
@@ -198,31 +198,29 @@ export default function ServicePageClient({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
             {/* Sidebar Categories */}
             <aside className="lg:col-span-3 order-2 lg:order-1">
-              <Card className="sticky top-24 rounded-none border-0 p-0 overflow-hidden shadow-none">
-                <CardContent className="p-0  overflow-hidden ">
-                  <div className="lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
-                    {serviceCategories.map((category) => (
-                      <Link
-                        key={category.slug}
-                        href={`/services/${category.slug}`}
-                        className={`block px-4 sm:px-6 py-3  sm:py-4 transition-colors text-sm border border-gray-500 rounded-tr-sm sm:text-base ${
-                          category.slug === slug
-                            ? "bg-white text-primary-green border-r-0 border-b-0"
-                            : "hover:bg-primary-green bg-gray-50 text-gray-800 hover:text-white"
-                        }`}
-                      >
-                        {category.name}
-                      </Link>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="sticky top-24  overflow-hidden ">
+                <div className="lg:max-h-[calc(100vh-8rem)] border shadow-md shadow-gray-200  rounded-lg overflow-hidden">
+                  {serviceCategories.map((category) => (
+                    <Link
+                      key={category.slug}
+                      href={`/services/${category.slug}`}
+                      className={`block px-4 sm:px-6 py-3  sm:py-4 transition-colors text-sm  border sm:text-base ${
+                        category.slug === slug
+                          ? "bg-gray-50 text-primary-green "
+                          : "hover:bg-primary-green bg-white text-gray-800 hover:text-white"
+                      }`}
+                    >
+                      {category.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </aside>
 
             {/* Main Content */}
             <main className="lg:col-span-6 order-1 lg:order-2">
               {/* Service Details*/}
-              <div className="z-50 bg-white pt-5 pb-2 rounded-lg">
+              <div className="sticky top-24 border shadow shadow-gray-200 z-50 bg-white pt-5 p-4 rounded-lg">
                 <div className="mb-6 ">
                   <h2 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
                     {service.title}

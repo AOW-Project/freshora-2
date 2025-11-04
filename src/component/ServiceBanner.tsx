@@ -10,7 +10,7 @@ const BannerSection = () => {
     >
       {" "}
       {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
-      <div className="text-white text-base sm:text-2xl md:text-3xl space-y-5 font-medium flex flex-col justify-center items-center z-30">
+      <div className="text-white text-base sm:text-2xl md:text-3xl space-y-5 font-medium flex flex-col justify-center text-center items-center z-30">
         <p>
           We Offer a Full Range of Professional Laundry Services,{" "}
           <span className="text-[#FFFF00]">

@@ -96,7 +96,7 @@ export default async function Page({ params }: PageProps) {
       >
         {" "}
         {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
-        <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center z-30">
+        <div className="text-white text-base sm:text-2xl md:text-3xl font-medium text-center flex flex-col justify-center items-center z-30">
           <p>
             Professional Laundry{" "}
             <span className="text-[#FFFF00]">

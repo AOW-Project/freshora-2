@@ -104,7 +104,12 @@ const TestimonialsSection = () => {
           </h1>
         </div>
 
-        <div className="w-full bg-[#F3F6F4] px-12 py-8">
+        <div
+          className="w-full bg-cover bg-center bg-fixed px-12 py-8"
+          style={{
+            backgroundImage: `url('/images/redesign/about-banner.png')`,
+          }}
+        >
           <div>
             <Swiper
               onSwiper={setMainSwiper}
@@ -124,7 +129,7 @@ const TestimonialsSection = () => {
             >
               {testimonials.map((testimonial, index) => (
                 <SwiperSlide key={index}>
-                  <div className="w-full relative space-y-2 h-56 max-w-[600px] rounded bg-white border border-black p-6">
+                  <div className="w-full relative space-y-2 h-auto max-w-[600px] rounded bg-white  border-2 border-primary-green py-10 px-6">
                     <div className="flex gap-2 justify-items">
                       <div className=" relative w-14 h-14 rounded-full border overflow-hidden border-primary-green">
                         <Image
@@ -144,10 +149,10 @@ const TestimonialsSection = () => {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <h4 className="text-zinc-600 text-xl font-medium">
+                      <h4 className="text-zinc-600 text-sm sm:text-xl font-medium">
                         {testimonial.title}
                       </h4>
-                      <p className="text-zinc-600 text-base font-normal">
+                      <p className="text-zinc-600 text-xs sm:text-base font-normal line-clamp-2">
                         &ldquo;{testimonial.quote}&rdquo;
                       </p>
                     </div>
