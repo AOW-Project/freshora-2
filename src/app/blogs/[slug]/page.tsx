@@ -68,7 +68,7 @@ export async function generateMetadata({
   return {
     title: blogData.meta.title,
     description: blogData.meta.description,
-    keywords: ["When to use dry cleaning", "Washing clothes", "stain removal"],
+    keywords: blogData.meta.keywords,
     alternates: {
       canonical: blogData.meta.url,
     },

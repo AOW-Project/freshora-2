@@ -8,34 +8,38 @@ const slides = [
   {
     image: "/images/redesign/hero-img-1.svg",
     alt: "laundry service",
-    title: "Free Pickup & Delivery",
+    title: "Freshness That Lasts",
     subtitle: "Laundry Service in Dubai That Cares for Every Detail",
     description:
-      "Enjoy free pickup and delivery anywhere in Dubai. While you focus on life, we handle your laundry with precision and care.",
+      "Advanced cleaning methods, gentle detergents, and expert hands, your clothes stay fresh, clean, and ready to wear longer.",
+    cta: "Shedule a Pickup",
   },
   {
     image: "/images/redesign/hero-img-2.svg",
     alt: "laundry service",
-    title: "100% happy customers",
+    title: "Convenience at Your Fingertips",
     subtitle: "Premium Laundry Service in Dubai, Made Easy",
     description:
-      "Advanced cleaning methods, gentle detergents, and expert hands, your clothes stay fresh, clean, and ready to wear longer.",
+      "Enjoy free pickup and delivery anywhere in Dubai. While you focus on life, we handle your laundry with precision and care",
+    cta: "Book Free Pickup",
   },
   {
     image: "/images/redesign/hero-img-3.svg",
     alt: "laundry service",
-    title: "Perfectly Pressed, Every Time",
+    title: "Fast. Clean. Reliable.",
     subtitle: "Professional Laundry Service That You Can Rely On",
     description:
       "Quick turnaround and on-time delivery - because laundry should fit your lifestyle, not interrupt it",
+    cta: "Try Our Express Service",
   },
   {
     image: "/images/redesign/hero-img-4.svg",
     alt: "laundry service",
-    title: "Your Happiness, Guaranteed",
+    title: "Gentle Care, Premium Results",
     subtitle: "Dry Cleaning Services with a Personal Touch",
     description:
       "From abayas to designer suits, delicate garments are treated with expert care to preserve their beauty and texture.",
+    cta: "Experience Premium Care",
   },
 ];
 
@@ -114,7 +118,7 @@ export default function HeroSection() {
               <div className="flex items-center justify-center ">
                 <Link href="/services" className="">
                   <button className="bg-secondary-green  text-white  flex flex-nowrap items-center justify-center gap-2 font-roboto-condensed font-semibold  rounded-[4px] px-8 py-2 text-xl cursor-pointer hover:bg-white hover:text-primary-green transition-all ease-in-out duration-500">
-                    Book Free Pickup
+                    {s.cta}
                   </button>
                 </Link>
               </div>

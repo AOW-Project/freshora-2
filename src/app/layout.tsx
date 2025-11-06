@@ -26,7 +26,7 @@ const robotoCondensed = Roboto_Condensed({
 
 export const metadata: Metadata = {
   // Your existing title - it's great!
-  title: "Laundry Service in Dubai | Freshora – Quality and Convenience",
+  title: "Laundry Service in Dubai | Freshora Laundry Experts",
 
   // Your existing description - also great!
   description:
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 
   // Adding the canonical URL
   alternates: {
-    canonical: "https://freshoralaundry.com/",
+    canonical: "https://freshoralaundry.com",
   },
 
   // This is the recommended way to add Google Site Verification
