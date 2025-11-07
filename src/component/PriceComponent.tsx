@@ -952,7 +952,7 @@ const PricingSection = () => {
 
               <div className="flex justify-center mt-6 sm:mt-8">
                 <Link
-                  href="/services"
+                  href="/best-laundry-services-in-dubai"
                   className="px-6 sm:px-8 py-3 bg-secondary-green cta-button text-white font-semibold rounded  transition-colors duration-300 shadow-md text-sm sm:text-base"
                 >
                   View Services

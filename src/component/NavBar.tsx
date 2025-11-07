@@ -279,7 +279,10 @@ const Navbar = () => {
             </Link>
 
             {/* CTA buttons */}
-            <Link href="/services" className="hidden sm:block">
+            <Link
+              href="/best-laundry-services-in-dubai"
+              className="hidden sm:block"
+            >
               <button className="bg-white  text-primary-green  flex flex-nowrap items-center justify-center gap-2 font-roboto-condensed font-medium border border-black rounded-[4px] px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base cta-button">
                 <RiTruckLine size={25} />
                 Schedule Pickup

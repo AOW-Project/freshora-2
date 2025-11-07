@@ -131,7 +131,7 @@ export default function ServicePageClient({
           </Link>
           <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
           <Link
-            href="/services"
+            href="/best-laundry-services-in-dubai"
             className="hover:text-green-400 text-sm sm:text-base transition-colors"
           >
             Services

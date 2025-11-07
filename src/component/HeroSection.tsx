@@ -12,7 +12,7 @@ const slides = [
     subtitle: "Laundry Service in Dubai That Cares for Every Detail",
     description:
       "Advanced cleaning methods, gentle detergents, and expert hands, your clothes stay fresh, clean, and ready to wear longer.",
-    cta: "Shedule a Pickup",
+    cta: "Schedule a Pickup",
   },
   {
     image: "/images/redesign/hero-img-2.svg",
@@ -116,7 +116,7 @@ export default function HeroSection() {
                 {s.description}
               </p>
               <div className="flex items-center justify-center ">
-                <Link href="/services" className="">
+                <Link href="/best-laundry-services-in-dubai" className="">
                   <button className="bg-secondary-green  text-white  flex flex-nowrap items-center justify-center gap-2 font-roboto-condensed font-semibold  rounded-[4px] px-8 py-2 text-xl cursor-pointer hover:bg-white hover:text-primary-green transition-all ease-in-out duration-500">
                     {s.cta}
                   </button>
