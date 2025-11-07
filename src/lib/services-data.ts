@@ -326,7 +326,7 @@ const services: Service[] = [
     title: "Luxury Shoe Cleaning Services",
     description: "Premium shoe care services.",
     fullDescription:
-      "Experience premium Luxury Shoe Cleaning SErvices in Dubai with our certified specialists. From professional shoe cleaning for Italian leather to sneaker cleaning service for designer pairs, we restore shine, protect materials, and extend your footwear’s lifespan with expert techniques and eco-friendly care.",
+      "Experience premium Luxury Shoe Cleaning Services in Dubai with our certified specialists. From professional shoe cleaning for Italian leather to sneaker cleaning service for designer pairs, we restore shine, protect materials, and extend your footwear’s lifespan with expert techniques and eco-friendly care.",
     secondaryTitle: "Luxury Shoe Care at Your Doorstep",
     secondaryDescription:
       "Book trusted shoe cleaning service Dubai today. From luxury dress shoes to sneakers, enjoy meticulous cleaning, restoration, and care-all delivered to your doorstep. ",

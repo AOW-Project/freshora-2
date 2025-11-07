@@ -26,7 +26,7 @@ const robotoCondensed = Roboto_Condensed({
 
 export const metadata: Metadata = {
   // Your existing title - it's great!
-  title: "Laundry Service in Dubai | Freshora Laundry Experts",
+  title: "Best Laundry Service in Dubai | Freshora Laundry Experts",
 
   // Your existing description - also great!
   description:
