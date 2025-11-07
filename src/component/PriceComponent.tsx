@@ -644,13 +644,13 @@ const PricingSection = () => {
       <section className="bg-white py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="my-10">
-            <h2 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
+            <h1 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
               Accessible Luxury,
               <span className="text-secondary-green">
                 {" "}
                 Transparent & Affordable Prices
               </span>
-            </h2>
+            </h1>
             <h3 className="text-xl my-3 font-medium text-gray-600 text-center">
               Our Full Price Table
             </h3>

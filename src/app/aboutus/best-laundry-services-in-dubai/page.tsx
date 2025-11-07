@@ -11,16 +11,17 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Best Laundry Service in Dubai | Freshora Laundry Experts",
     description:
-      " Experience the best laundry service in Dubai with Freshora. Trusted care, high-quality cleaning, and hassle-free pickup & delivery for every garment. ",
+      "Experience the best laundry services in Dubai with Freshora. Trusted care, high-quality cleaning, and hassle-free pickup & delivery for every garment.",
     keywords: [
-      " Affordable- laundry service",
       "Best Laundry Service in Dubai",
+      " Affordable- laundry service",
       "Dry Cleaning Dubai",
       " Free Laundry Pickup and Delivery",
       "Best laundry company in Dubai",
     ],
     alternates: {
-      canonical: "https://freshoralaundry.com/about",
+      canonical:
+        "https://freshoralaundry.com/aboutus/best-laundry-services-in-dubai",
     },
     openGraph: {
       title: "About Freshora Laundry",
@@ -90,7 +91,8 @@ export default function AboutSection() {
                 With over two decades of expertise, we have perfected the
                 balance of advanced technology and meticulous care. From
                 delicate silks to everyday essentials, every garment is handled
-                with precision and respect. <br />
+                with precision and respect, making us the preferred choice for
+                the Best Laundry Services in Dubai. <br />
                 <br />
                 Our promise is simple: to deliver uncompromising quality,
                 eco-conscious practices, and seamless convenience. With free

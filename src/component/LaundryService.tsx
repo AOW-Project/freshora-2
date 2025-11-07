@@ -33,10 +33,10 @@ export default function LaundryService() {
 
           {/* Text Section */}
           <div className="flex-1 w-full text-center lg:text-left lg:pl-2 mt-4">
-            <h1 className="text-lg sm:text-2xl md:text-3xl font-medium mb-3 leading-tight text-secondary-green">
+            <h2 className="text-lg sm:text-2xl md:text-3xl font-medium mb-3 leading-tight text-secondary-green">
               <span className="text-primary-green">Personal </span>
               Laundry Service
-            </h1>
+            </h2>
             <h2 className="text-zinc-600 text-xl font-medium mb-3 sm:mb-6 ">
               Laundry service for your business!
             </h2>

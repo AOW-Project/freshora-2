@@ -39,10 +39,10 @@ export default function HowWeWorkSection() {
           {/* Title */}
 
           <div className="w-full">
-            <h1 className="text-3xl font-medium text-center">
+            <h2 className="text-3xl font-medium text-center">
               <span className="text-primary-green">Why Choose Freshora </span>
               for Laundry Service in Dubai
-            </h1>
+            </h2>
             <h2 className="text-xl font-medium text-[#606060] text-center my-3">
               Get Your Clothes Collected & Delivered
             </h2>

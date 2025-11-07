@@ -106,13 +106,13 @@ export default function ContactPage() {
 
       <section className=" max-w-7xl mx-auto py-8 sm:py-10 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="my-10">
-          <h2 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
+          <h1 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
             Contact
             <span className="text-secondary-green"> Information</span>
-          </h2>
-          <h3 className="text-xl my-3 font-medium text-gray-600 text-center">
+          </h1>
+          <h2 className="text-xl my-3 font-medium text-gray-600 text-center">
             Frequently Asked Questions
-          </h3>
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">

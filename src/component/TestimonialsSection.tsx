@@ -99,9 +99,9 @@ const TestimonialsSection = () => {
     <>
       <section className="py-10 w-full ">
         <div className="w-full flex justify-center bg-white py-5">
-          <h1 className="text-primary-green text-3xl font-medium">
+          <h2 className="text-primary-green text-3xl font-medium">
             Testimonial
-          </h1>
+          </h2>
         </div>
 
         <div

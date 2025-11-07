@@ -355,16 +355,16 @@ export default function FAQPage() {
       {/* FAQ Section */}
       <section className="max-w-7xl mx-auto py-12 px-4">
         <div className="my-10">
-          <h2 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
+          <h1 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
             Reliable Answers
             <span className="text-secondary-green">
               {" "}
               to Our Most Common Questions
             </span>
-          </h2>
-          <h3 className="text-xl my-3 font-medium text-gray-600 text-center">
+          </h1>
+          <h2 className="text-xl my-3 font-medium text-gray-600 text-center">
             Frequently Asked Questions
-          </h3>
+          </h2>
         </div>
 
         {/* Accordion */}

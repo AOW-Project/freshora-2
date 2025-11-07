@@ -238,13 +238,13 @@ const PickupPackages: React.FC = () => {
   return (
     <section className="flex flex-col justify-center  p-6 md:px-12 lg:px-24 items-center gap-6 mb-0 md:mb-8 lg:mb-16">
       <div className="w-full">
-        <h1 className="text-3xl font-medium text-center">
+        <h2 className="text-3xl font-medium text-center">
           <span className="text-primary-green">Our Most Popular </span>
           Package Prices
-        </h1>
-        <h2 className="text-xl font-medium text-[#606060] text-center my-3">
-          Affordable Prices
         </h2>
+        <h3 className="text-xl font-medium text-[#606060] text-center my-3">
+          Affordable Prices
+        </h3>
         <p className="text-center text-zinc-600 text-base font-normal">
           Our prices are simple and affordable which are easy on pocket in
           comparison with the high street prices.

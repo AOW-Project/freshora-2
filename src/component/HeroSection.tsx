@@ -106,9 +106,9 @@ export default function HeroSection() {
                 index % 2 === 0 ? "order-2" : "order-1"
               }`}
             >
-              <h1 className="text-yellow-400 text-4xl  text-center sm:text-left font-light font-roboto-condensed">
+              <h2 className="text-yellow-400 text-4xl  text-center sm:text-left font-light font-roboto-condensed">
                 {s.title}
-              </h1>
+              </h2>
               <h2 className="justify-start text-white text-center sm:text-left text-3xl font-medium my-6 sm:my-3">
                 {s.subtitle}
               </h2>

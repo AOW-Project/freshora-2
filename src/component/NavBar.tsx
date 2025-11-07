@@ -30,7 +30,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { title: "Home", href: "/" },
-  { title: "About Us", href: "/about" },
+  { title: "About Us", href: "/aboutus/best-laundry-services-in-dubai" },
   {
     title: "Services",
     href: "/services",

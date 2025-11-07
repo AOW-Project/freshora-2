@@ -38,7 +38,7 @@ export default function Footer() {
 
   const navItems = [
     { title: "Home", href: "/" },
-    { title: "About Us", href: "/about" },
+    { title: "About Us", href: "/aboutus/best-laundry-services-in-dubai" },
     { title: "Your Orders Cart", href: "/cart" },
     { title: "Schedule Pick up", href: "/services" },
     { title: "Track Your Order", href: "/tracking" },

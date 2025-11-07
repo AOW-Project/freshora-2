@@ -23,9 +23,9 @@ const HistorySection: React.FC = () => {
 
         {/* Text Section */}
         <div className="flex-1 w-full text-center lg:text-left lg:pl-2">
-          <h1 className="text-3xl md:text-4xl font-bold mb-3 sm:mb-6 leading-tight text-secondary-green">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 sm:mb-6 leading-tight text-secondary-green">
             <span className="text-primary-green">A Tradition</span> of Care
-          </h1>
+          </h2>
           <p className=" mb-5 sm:mb-8 leading-relaxed text-sm text-zinc-600  sm:text-base lg:text-lg max-w-2xl mx-auto lg:mx-0">
             Freshora was founded on a vision to redefine everyday laundry with
             exceptional service and craftsmanship. We recognized that modern

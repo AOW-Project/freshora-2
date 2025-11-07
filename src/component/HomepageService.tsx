@@ -111,10 +111,10 @@ export default function ServicesSlider() {
       <div className="container mx-auto ">
         {/* Heading */}
         <div className="text-center mb-12 px-4">
-          <h1 className="text-3xl  font-medium text-primary-green">
+          <h2 className="text-3xl  font-medium text-primary-green">
             Dry Cleaning & Laundry,{" "}
             <span className="text-secondary-green"> Free Delivery</span>
-          </h1>
+          </h2>
           <h2 className="text-xl font-medium text-[#606060] text-center my-3">
             Our Services
           </h2>
