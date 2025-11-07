@@ -9,6 +9,7 @@ export interface Service {
   items?: ServiceItem[];
   id: number;
   slug: string;
+  url?: string;
   title: string;
   description: string;
   fullDescription: string;
@@ -36,11 +37,11 @@ export interface Service {
 const services: Service[] = [
   {
     id: 1,
-    slug: "laundry-services",
+    slug: "professional-laundry-services-in-dubai",
     title: "Laundry Services",
     description: "Professional laundry for all clothes.",
     fullDescription:
-      "Professional Laundry services designed for your lifestyle. Fresh clothes, more free time, zero stress – that’s our promise. From wash and fold service to laundry pickup and delivery, we make cleaning effortless. Enjoy doorstep laundry service with in Dubai with fabric-friendly care, expert stain removal, and spotless results.",
+      "Professional Laundry Services in Dubai are designed for your lifestyle. Fresh clothes, more free time, zero stress – that’s our promise. From wash and fold service to laundry pickup and delivery, we make cleaning effortless. Enjoy doorstep laundry service with in Dubai with fabric-friendly care, expert stain removal, and spotless results.",
     // ✅ Added secondary title and description
     secondaryTitle: "Wash and Fold Laundry Service Delivered to Your Home",
     secondaryDescription:
@@ -93,25 +94,25 @@ const services: Service[] = [
       },
     ],
     items: undefined,
-    metaTitle: "Professional Laundry  in Dubai | Freshora Laundry Experts",
+    metaTitle: "Professional Laundry Services in Dubai | Freshora Laundry Care",
     metaDescription:
       "Get spotless clothes with Freshora’s professional laundry service in Dubai. Free pickup & delivery, eco-friendly cleaning, and expert care for your garments.",
     keywords: [
-      "Professional Laundry",
+      "Professional Laundry Services in Dubai ",
       "wash and fold service",
       " laundry pickup and delivery",
-      "best laundry services",
       "doorstep laundry service with in Dubai",
     ],
-    canonical: "https://freshoralaundry.com/services/laundry-services",
+    canonical:
+      "https://freshoralaundry.com/services/professional-laundry-services-in-dubai",
   },
   {
     id: 2,
-    slug: "dry-cleaning-services",
+    slug: "dry-cleaning-services-in-dubai",
     title: "Dry Cleaning Services",
     description: "Gentle care for delicate garments.",
     fullDescription:
-      "Stay sharp and save time with our premium Dry Clean service in Dubai. From stain removal to delicate fabrics, our professional dry cleaners deliver spotless results. Ideal for suits, dresses, coats, and luxury garments, our eco-friendly process ensures long-lasting freshness and premium garment care every time.",
+      "Stay sharp and save time with our premium Dry Cleaning services in Dubai. From stain removal to delicate fabrics, our professional dry cleaners deliver spotless results. Ideal for suits, dresses, coats, and luxury garments, our eco-friendly process ensures long-lasting freshness and premium garment care every time.",
     secondaryTitle:
       "Best Dry Cleaning Service in Dubai Delivered to Your Doorstep",
     secondaryDescription:
@@ -165,26 +166,27 @@ const services: Service[] = [
       },
     ],
     items: undefined,
-    metaTitle: "Dubai’s Trusted Dry Clean Service | Freshora Laundry",
+    metaTitle: "Premium Dry Cleaning Services in Dubai | Freshora Laundry",
     metaDescription:
-      "Refresh your wardrobe with Freshora’s trusted dry clean service in Dubai. From delicate fabrics to daily wear, we ensure care with a perfect finish.",
+      "Experience Premium Dry Cleaning Services in Dubai with Freshora - expert fabric care, eco-friendly cleaning, and flawless results delivered to your doorstep. ",
     keywords: [
-      "Dry Clean",
-      "professional dry cleaners",
+      "Dry Cleaning Services in Dubai",
+      "out professional dry cleaners",
       "premium garment care",
       "dry cleaning pickup and delivery",
       "affordable dry cleaners in Dubai",
       "luxury dry cleaning in Dubai",
     ],
-    canonical: "https://freshoralaundry.com/services/dry-clean-service",
+    canonical:
+      "https://freshoralaundry.com/services/dry-cleaning-services-in-dubai",
   },
   {
     id: 3,
-    slug: "express-laundry-services",
+    slug: "express-laundry-services-in-dubai",
     title: "Express Laundry Services",
     description: "Same-day laundry services.",
     fullDescription:
-      "Get a fresh look in hours, not days, with Dubai’s trusted Express Laundry. Perfect for business travelers, busy professionals, and urgent laundry needs, our express laundry service ensures spotless results. From suit cleaning service to express laundry and dry cleaning, enjoy same-day turnaround with premium care.",
+      "Get a fresh look in hours, not days, with Express Laundry Services in Dubai. Perfect for business travelers, busy professionals, and urgent laundry needs, our express laundry service ensures spotless results. From suit cleaning service to express laundry and dry cleaning, enjoy same-day turnaround with premium care.",
     secondaryTitle: "Best Express Laundry Services in Dubai at Your Doorstep",
     secondaryDescription:
       "Book hassle-free express laundry services in Dubai today. With fast pickup, express laundry and dry cleaning, and wrinkle-free results, we deliver fresh clothes the very same day.",
@@ -236,25 +238,25 @@ const services: Service[] = [
       },
     ],
     items: undefined,
-    metaTitle: "Express Laundry in Dubai | Freshora Laundry Experts",
+    metaTitle: "Express Laundry Services in Dubai | Freshora Laundry Experts",
     metaDescription:
-      " Freshora provides professional express laundry in Dubai with quick pickup, timely delivery, and expert garment care for a hassle-free experience.",
+      "Freshora provides professional express laundry services in Dubai with quick pickup, timely delivery, and expert garment care for a hassle-free experience.",
     keywords: [
-      "Express Laundry",
+      "Express Laundry Services in Dubai",
       "express laundry service",
       " express laundry and dry cleaning",
-
       "express laundry services in Dubai ",
     ],
-    canonical: "https://freshoralaundry.com/services/express-laundry-services",
+    canonical:
+      "https://freshoralaundry.com/services/express-laundry-services-in-dubai",
   },
   {
     id: 4,
-    slug: "shoe-bag-spa",
-    title: "Shoe Cleaning",
+    slug: "shoe-and-bag-spa-services-in-dubai",
+    title: "Shoe and Bag Spa Services",
     description: "Luxury cleaning for shoes.",
     fullDescription:
-      "Give your accessories new life with our premium shoe service in Dubai. From leather shoe cleaning to delicate handbags, our experts restore, clean, and protect every material with care, offering specialized treatments like color restoration and conditioning for long-lasting beauty.",
+      "Give your accessories new life with our premium shoe and bag spa services in Dubai. From leather shoe cleaning to delicate handbags, our experts restore, clean, and protect every material with care, offering specialized treatments like color restoration and conditioning for long-lasting beauty.",
     secondaryTitle: "Shoe  Delivered to Your Door",
     secondaryDescription:
       "Book our expert shoe cleaning service or sneaker cleaning service today. Enjoy premium care for shoes and handbags-all restored with precision and delivered fresh to your doorstep.",
@@ -306,24 +308,25 @@ const services: Service[] = [
       },
     ],
     items: undefined,
-    metaTitle: "Shoe & Bag Spa in Dubai | Freshora Premium Care",
+    metaTitle: "Shoe and Bag Spa Services in Dubai | Freshora Care",
     metaDescription:
-      "  Restore the beauty of your shoes and bags with Freshora’s premium shoe and bag spa service in Dubai. Expert cleaning, care, and long-lasting freshness.",
+      "Restore the beauty of your shoes and bags with Freshora’s premium shoe and bag spa services in Dubai. Expert cleaning, care, and long-lasting freshness.",
     keywords: [
-      "Shoe and Bag Spa Service",
+      "Shoe and Bag Spa Services in dubai",
       "leather shoe cleaning",
       " shoe cleaning service",
       "sneaker cleaning service",
     ],
-    canonical: "https://freshoralaundry.com/services/shoe-bag-spa",
+    canonical:
+      "https://freshoralaundry.com/services/shoe-and-bag-spa-services-in-dubai",
   },
   {
     id: 5,
-    slug: "luxury-shoe-cleaning",
-    title: "Luxury Shoe Cleaning",
+    slug: "luxury-shoe-cleaning-services-in-dubai",
+    title: "Luxury Shoe Cleaning Services",
     description: "Premium shoe care services.",
     fullDescription:
-      "Experience premium Luxury Shoe Cleaning in Dubai with our certified specialists. From professional shoe cleaning for Italian leather to sneaker cleaning service for designer pairs, we restore shine, protect materials, and extend your footwear’s lifespan with expert techniques and eco-friendly care.",
+      "Experience premium Luxury Shoe Cleaning SErvices in Dubai with our certified specialists. From professional shoe cleaning for Italian leather to sneaker cleaning service for designer pairs, we restore shine, protect materials, and extend your footwear’s lifespan with expert techniques and eco-friendly care.",
     secondaryTitle: "Luxury Shoe Care at Your Doorstep",
     secondaryDescription:
       "Book trusted shoe cleaning service Dubai today. From luxury dress shoes to sneakers, enjoy meticulous cleaning, restoration, and care-all delivered to your doorstep. ",
@@ -374,28 +377,29 @@ const services: Service[] = [
       },
     ],
     items: undefined,
-    metaTitle: "Dubai Luxury Shoe Cleaning Service | Freshora Exclusive Care",
+    metaTitle: "Best Luxury Shoe Cleaning Services in Dubai | Freshora Laundry",
     metaDescription:
       "  Freshora offers expert luxury shoe cleaning service  in Dubai. Gentle care, deep cleaning, and premium restoration to keep your footwear looking flawless.",
     keywords: [
-      "Luxury Shoe Cleaning",
+      "Luxury Shoe Cleaning Services in dubai",
       "professional shoe cleaning",
 
       "sneaker cleaning service",
       "shoe cleaning service Dubai",
     ],
-    canonical: "https://freshoralaundry.com/services/luxury-shoe-cleaning",
+    canonical:
+      "https://freshoralaundry.com/services/luxury-shoe-cleaning-services-in-dubai",
   },
   {
     id: 6,
-    slug: "commercial-laundry-service",
-    title: "Commercial Laundry Service",
+    slug: "commercial-laundry-services-in-dubai",
+    title: "Commercial Laundry Services",
     description: "Laundry solutions for businesses.",
     fullDescription:
-      "When businesses demand spotless laundry, we deliver unmatched quality and care.Our commercial laundry service in Dubai provides reliable, high-volume solutions for hotels, restaurants, salons, and healthcare facilities. From laundry service for hotels to laundry service for restaurants, we ensure consistent hygiene, efficiency, and timely delivery every time.",
+      "When businesses demand spotless laundry, we deliver unmatched quality and care. Our commercial laundry services in Dubai provides reliable, high-volume solutions for hotels, restaurants, salons, and healthcare facilities. From laundry service for hotels to laundry service for restaurants, we ensure consistent hygiene, efficiency, and timely delivery every time.",
     secondaryTitle: "Commercial Laundry at Your Doorstep",
     secondaryDescription:
-      "Trusted commercial laundry service with pickup and delivery-perfect for hotels, restaurants, and businesses needing professional, large-scale care at affordable rates. ",
+      "Trusted commercial laundry services with pickup and delivery-perfect for hotels, restaurants, and businesses needing professional, large-scale care at affordable rates. ",
     image:
       "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.jpg",
     gallery: [
@@ -444,24 +448,24 @@ const services: Service[] = [
       },
     ],
     items: undefined,
-    metaTitle: "Commercial Laundry Service in Dubai | Freshora Business Care",
+    metaTitle: "Commercial Laundry Services in Dubai | Freshora Business Care",
     metaDescription:
-      " Freshora offers reliable commercial laundry service in Dubai for hotels, gyms, and businesses with expert care and timely delivery.",
+      "Freshora offers reliable commercial laundry services in Dubai for hotels, gyms, and businesses with expert care and timely delivery.",
     keywords: [
-      "Commercial Laundry Service",
-      "Laundry Service for Hotels",
-      "Laundry Service for Restaurants",
+      "Commercial Laundry Services in dubai",
+      "From laundry service for hotels",
+      "laundry service for restaurants",
     ],
     canonical:
-      "https://freshoralaundry.com/services/commercial-laundry-service",
+      "https://freshoralaundry.com/services/commercial-laundry-services-in-dubai",
   },
   {
     id: 7,
-    slug: "curtain-cleaning-service",
-    title: "Curtain Cleaning Service",
+    slug: "curtain-cleaning-services-in-dubai",
+    title: "Curtain Cleaning Services",
     description: "Expert curtain cleaning at your doorstep.",
     fullDescription:
-      "Transform dusty drapes into fresh, vibrant curtains with expert cleaning service.Our curtain cleaning service in Dubai restores everything from delicate sheers to blackout drapes. With professional curtain cleaning, drapery cleaning service, and curtain dry cleaning, we remove dust, allergens, and stains while preserving fabric strength, color, and elegance for a healthier home.",
+      "Transform dusty drapes into fresh, vibrant curtains with expert cleaning service.Our curtain cleaning services in Dubai restores everything from delicate sheers to blackout drapes. With professional curtain cleaning, drapery cleaning service, and curtain dry cleaning, we remove dust, allergens, and stains while preserving fabric strength, color, and elegance for a healthier home.",
     secondaryTitle: "Curtain Cleaning at Your Doorstep",
     secondaryDescription:
       "Book trusted curtain washing service in Dubai-fresh, spotless curtains delivered back to your home",
@@ -513,24 +517,26 @@ const services: Service[] = [
       },
     ],
     items: undefined,
-    metaTitle: "Curtain Cleaning Service in Dubai | Freshora Professional Care",
+    metaTitle:
+      "Curtain Cleaning Services in Dubai | Freshora Professional Care",
     metaDescription:
-      "  Revive your curtains with Freshora’s curtain cleaning service in Dubai. Gentle fabric care, expert cleaning, and hassle-free pickup & delivery.",
+      "Revive your curtains with Freshora’s curtain cleaning services in Dubai. Gentle fabric care, expert cleaning, and hassle-free pickup & delivery.",
     keywords: [
-      "Curtain Cleaning Service",
+      "Curtain Cleaning Services in Dubai",
       "professional curtain cleaning",
       "drapery cleaning service",
       "curtain dry cleaning",
     ],
-    canonical: "https://freshoralaundry.com/services/curtain-cleaning-service",
+    canonical:
+      "https://freshoralaundry.com/services/curtain-cleaning-services-in-dubai",
   },
   {
     id: 8,
-    slug: "carpet-cleaning-services",
-    title: "Carpet Cleaning Service",
+    slug: "carpet-cleaning-services-in-dubai",
+    title: "Carpet Cleaning Services",
     description: "Deep cleaning for carpets and rugs.",
     fullDescription:
-      "Revive your carpets with expert cleaning for a healthier, fresher home.Our carpet cleaning services in Dubai use advanced steam technology and eco-friendly methods to eliminate dirt, stains, and allergens. From professional carpet cleaning Dubai to delicate wool rug cleaning service, our certified technicians restore beauty, freshness, and long-lasting comfort to every carpet and rug.  ",
+      "Revive your carpets with expert cleaning for a healthier, fresher home. Our carpet cleaning services in Dubai use advanced steam technology and eco-friendly methods to eliminate dirt, stains, and allergens. From professional carpet cleaning Dubai to delicate wool rug cleaning service, our certified technicians restore beauty, freshness, and long-lasting comfort to every carpet and rug.  ",
     secondaryTitle: "Deep Clean for a Healthier Home",
     secondaryDescription:
       "Our advanced cleaning process removes embedded dirt, allergens, and tough stains, leaving your carpets looking and feeling fresh and new.",
@@ -583,23 +589,24 @@ const services: Service[] = [
     ],
     items: undefined,
     metaTitle:
-      " Professional Carpet Cleaning Service in Dubai | Freshora touch  ",
+      "Professional Carpet Cleaning Services in Dubai | Freshora touch  ",
     metaDescription:
-      "  Freshora offers expert carpet cleaning service in Dubai. Restore freshness, remove dirt, and enjoy spotless carpets with our trusted care.",
+      "Freshora offers expert carpet cleaning services in Dubai. Restore freshness, remove dirt, and enjoy spotless carpets with our trusted care.",
     keywords: [
-      "Carpet Cleaning Service",
+      "Carpet Cleaning Services in dubai",
       "professional carpet cleaning Dubai",
       "delicate wool rug cleaning service",
     ],
-    canonical: "https://freshoralaundry.com/services/carpet-cleaning-service",
+    canonical:
+      "https://freshoralaundry.com/services/carpet-cleaning-services-in-dubai",
   },
   {
     id: 9,
-    slug: "soft-toy-cleaning-service",
-    title: "Soft Toy Cleaning Service",
+    slug: "soft-toy-cleaning-services-in-dubai",
+    title: "Soft Toy Cleaning Services",
     description: "Safe and hygienic cleaning for toys.",
     fullDescription:
-      "Keep childhood memories safe with expert cleaning for toys you treasure most.Our Soft Toy Cleaning Service in Dubai makes plush toys, teddies, and dolls safe, clean, and germ-free. Using non-toxic, child-safe methods, we provide teddy bear cleaning service, kids toy cleaning service, and soft toy sanitization service that preserve softness while removing dust mites, allergens, and stains",
+      "Keep childhood memories safe with expert cleaning for toys you treasure most.Our Soft Toy Cleaning Services in Dubai makes plush toys, teddies, and dolls safe, clean, and germ-free. Using non-toxic, child-safe methods, we provide teddy bear cleaning service, kids toy cleaning service, and soft toy sanitization service that preserve softness while removing dust mites, allergens, and stains",
     secondaryTitle: "Gentle & Hygienic Care for Cherished Friends",
     secondaryDescription:
       "Using non-toxic, child-safe methods, we remove dust mites, allergens, and stains while preserving the softness and shape of your child's favorite toys.",
@@ -648,26 +655,27 @@ const services: Service[] = [
       },
     ],
     items: undefined,
-    metaTitle: "Soft Toy Cleaning Service in Dubai | Freshora Gentle Care",
+    metaTitle: "Soft Toy Cleaning Services in Dubai | Freshora Gentle Care",
     metaDescription:
-      " Keep your kids’ favorite toys fresh, safe, and spotless. Freshora offers expert soft toy cleaning service in Dubai with gentle, hygienic care.",
+      "Keep your kids’ favorite toys fresh, safe, and spotless. Freshora offers expert soft toy cleaning services in Dubai with gentle, hygienic care.",
 
     keywords: [
-      "Soft Toy Cleaning Service",
+      "Soft Toy Cleaning Services in dubai",
       "teddy bear cleaning service",
       "kids toy cleaning service",
       "plush toy cleaning",
       "soft toy sanitization service",
     ],
-    canonical: "https://freshoralaundry.com/services/soft-toy-cleaning-service",
+    canonical:
+      "https://freshoralaundry.com/services/soft-toy-cleaning-services-in-dubai",
   },
   {
     id: 10,
-    slug: "steam-pressing-service",
+    slug: "steam-pressing-services-in-dubai",
     title: "Steam Pressing Service",
     description: "Safe and hygienic cleaning for toys.",
     fullDescription:
-      "Professional steam iron services tailored for clothes that look sharp and feel fresh. From everyday wear to delicate garments, our steam press treatment gives your outfits a polished, well-kept finish. Enjoy doorstep convenience in Dubai with expert care, and results you’ll appreciate  every time.",
+      "Professional steam iron services tailored for clothes that look sharp and feel fresh. From everyday wear to delicate garments, our Steam Pressing Services in Dubai  give your outfits a polished, well-kept finish. Enjoy doorstep convenience in Dubai with expert care, and results you’ll appreciate  every time.",
     secondaryTitle: "Steam Pressing Service Delivered to Your Home",
     secondaryDescription:
       "Book reliable steam pressing with pickup and delivery today and enjoy clothes that are crisp, comfortable, and ready to wear. Our steam press iron restores fabric shape, protects texture, and keeps every detail like the day it was first purchased. \n\n We Proudly Serve",
@@ -720,12 +728,18 @@ const services: Service[] = [
       },
     ],
     items: undefined,
-    metaTitle: "Best Steam Iron for Effortless & Quick Ironing",
+    metaTitle: "Best Steam Pressing Services in Dubai | Freshora Laundry ",
     metaDescription:
-      "Shop high-quality steam irons for effortless, wrinkle-free clothes. Fast, durable, and efficient for home or office use.",
+      " Freshora Laundry offers the Best Steam Pressing Services in Dubai, ensuring wrinkle-free clothes, gentle fabric care, and a crisp, professional finish every time.",
 
-    keywords: ["steam iron", "steam press", "steam press iron"],
-    canonical: "https://freshoralaundry.com/services/steam-pressing-service",
+    keywords: [
+      "Steam Pressing Services in dubai",
+      "steam iron",
+      "steam press",
+      "steam press iron",
+    ],
+    canonical:
+      "https://freshoralaundry.com/services/steam-pressing-services-in-dubai",
   },
 ];
 

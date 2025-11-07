@@ -33,56 +33,56 @@ const navItems: NavItem[] = [
   { title: "About Us", href: "/aboutus/best-laundry-services-in-dubai" },
   {
     title: "Services",
-    href: "/services",
+    href: "/best-laundry-services-in-dubai",
     subItems: [
       {
         title: "Laundry Services",
-        href: "/services/laundry-services",
+        href: "/services/professional-laundry-services-in-dubai",
         icon: "Laundry.svg",
       },
       {
         title: "Dry Cleaning",
-        href: "/services/dry-cleaning-services",
+        href: "/services/dry-cleaning-services-in-dubai",
         icon: "Dry-clean.svg",
       },
       // {
       //   title: "Express Laundry Services",
-      //   href: "/services/express-laundry-services",
+      //   href: "/services/express-laundry-services-in-dubai",
       //   icon: "Express.svg",
       // },
       {
         title: "Shoe & Bag Spa",
-        href: "/services/shoe-bag-spa",
+        href: "/services/shoe-and-bag-spa-services-in-dubai",
         icon: "Shoe-spa.svg",
       },
       {
         title: "Luxury Shoe Cleaning",
-        href: "/services/luxury-shoe-cleaning",
+        href: "/services/luxury-shoe-cleaning-services-in-dubai",
         icon: "Luxury-shoe.svg",
       },
       {
         title: "Commercial Laundry Service",
-        href: "/services/commercial-laundry-service",
+        href: "/services/commercial-laundry-services-in-dubai",
         icon: "Commercial.svg",
       },
       {
         title: "Carpet Cleaning Service",
-        href: "/services/carpet-cleaning-services",
+        href: "/services/carpet-cleaning-services-in-dubai",
         icon: "Carpet.svg",
       },
       // {
       //   title: "Curtain Cleaning Service",
-      //   href: "/services/curtain-cleaning-service",
+      //   href: "/services/curtain-cleaning-services-in-dubai",
       //   icon: "Curtain.svg",
       // },
       {
         title: "Soft Toy Cleaning Service",
-        href: "/services/soft-toy-cleaning-service",
+        href: "/services/soft-toy-cleaning-services-in-dubai",
         icon: "Toy.svg",
       },
       {
         title: "Steam Pressing Service",
-        href: "/services/steam-pressing-service",
+        href: "/services/steam-pressing-services-in-dubai",
         icon: "Steam.svg",
       },
     ],

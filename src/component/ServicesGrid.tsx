@@ -11,7 +11,7 @@ const poppins = Poppins({
 const services = [
   {
     id: 1,
-    slug: "laundry-services",
+    slug: "professional-laundry-services-in-dubai",
     image:
       "/images/women-sorting-clothes-in-the-laundry-2025-03-14-03-27-51-utc.webp",
     title: "Laundry Services",
@@ -19,7 +19,7 @@ const services = [
   },
   {
     id: 2,
-    slug: "dry-cleaning-services",
+    slug: "dry-cleaning-services-in-dubai",
     image:
       "/images/iron-and-stack-of-shirts-on-ironing-board-space-f-2025-03-25-22-33-47-utc.webp",
     title: "Dry Cleaning Services",
@@ -27,7 +27,7 @@ const services = [
   },
   // {
   //   id: 3,
-  //   slug: "express-laundry-services",
+  //   slug: "express-laundry-services-in-dubai",
   //   image:
   //     "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.webp",
   //   title: "Express Laundry Services",
@@ -35,7 +35,7 @@ const services = [
   // },
   {
     id: 4,
-    slug: "shoe-bag-spa",
+    slug: "shoe-and-bag-spa-services-in-dubai",
     image:
       "/images/light-blue-sneakers-and-backpack-2025-01-09-09-02-14-utc.webp",
     title: "Shoe Cleaning",
@@ -44,7 +44,7 @@ const services = [
   },
   {
     id: 5,
-    slug: "luxury-shoe-cleaning",
+    slug: "luxury-shoe-cleaning-services-in-dubai",
     image: "/images/erik-mclean-AnRxcupEQT0-unsplash.webp",
     title: "Luxury Shoe Cleaning",
     description:
@@ -52,7 +52,7 @@ const services = [
   },
   {
     id: 6,
-    slug: "commercial-laundry-service",
+    slug: "commercial-laundry-services-in-dubai",
     image:
       "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.webp",
     title: "Commercial Laundry Service",
@@ -61,7 +61,7 @@ const services = [
   },
   // {
   //   id: 7,
-  //   slug: "curtain-cleaning-service",
+  //   slug: "curtain-cleaning-services-in-dubai",
   //   image:
   //     "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.webp",
   //   title: "Curtain Cleaning Service",
@@ -69,7 +69,7 @@ const services = [
   // },
   {
     id: 8,
-    slug: "carpet-cleaning-services",
+    slug: "carpet-cleaning-services-in-dubai",
     image:
       "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc (1).webp",
     title: "Carpet Cleaning Service",
@@ -77,7 +77,7 @@ const services = [
   },
   {
     id: 9,
-    slug: "soft-toy-cleaning-service",
+    slug: "soft-toy-cleaning-services-in-dubai",
     image:
       "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.webp",
     title: "Soft Toy Cleaning Service",
@@ -85,7 +85,7 @@ const services = [
   },
   {
     id: 10,
-    slug: "steam-pressing-service",
+    slug: "steam-pressing-services-in-dubai",
     image: "/images/steam-pressing-banner.jpg",
     title: "Steam Pressing Service",
     description:

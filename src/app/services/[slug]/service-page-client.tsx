@@ -75,19 +75,46 @@ export default function ServicePageClient({
 
   const serviceCategories = useMemo(
     () => [
-      { name: "Laundry Services", slug: "laundry-services" },
-      { name: "Dry Cleaning Services", slug: "dry-cleaning-services" },
-      // { name: "Express Laundry Services", slug: "express-laundry-services" },
-      { name: "Shoe Cleaning", slug: "shoe-bag-spa" },
-      { name: "Luxury Shoe Cleaning", slug: "luxury-shoe-cleaning" },
+      {
+        name: "Laundry Services",
+        slug: "professional-laundry-services-in-dubai",
+      },
+      {
+        name: "Dry Cleaning Services",
+        slug: "dry-cleaning-services-in-dubai",
+      },
+      // {
+      //   name: "Express Laundry Services",
+      //   slug: "express-laundry-services-in-dubai",
+      // },
+      {
+        name: "Shoe Cleaning",
+        slug: "shoe-and-bag-spa-services-in-dubai",
+      },
+      {
+        name: "Luxury Shoe Cleaning",
+        slug: "luxury-shoe-cleaning-services-in-dubai",
+      },
       {
         name: "Commercial Laundry Service",
-        slug: "commercial-laundry-service",
+        slug: "commercial-laundry-services-in-dubai",
       },
-      // { name: "Curtain Cleaning Service", slug: "laundry-services" },
-      { name: "Carpet Cleaning Service", slug: "carpet-cleaning-services" },
-      { name: "Soft Toy Cleaning Service", slug: "soft-toy-cleaning-service" },
-      { name: "Steam Pressing Service", slug: "steam-pressing-service" },
+      {
+        name: "Carpet Cleaning Service",
+        slug: "carpet-cleaning-services-in-dubai",
+      },
+      // {
+      //   name: "Curtain Cleaning Service",
+      //   slug: "curtain-cleaning-services-in-dubai",
+      // },
+      {
+        name: "Soft Toy Cleaning Service",
+        slug: "soft-toy-cleaning-services-in-dubai",
+      },
+      {
+        name: "Steam Pressing Service",
+        slug: "steam-pressing-services-in-dubai",
+      },
     ],
     []
   );
@@ -220,11 +247,11 @@ export default function ServicePageClient({
             {/* Main Content */}
             <main className="lg:col-span-6 order-1 lg:order-2">
               {/* Service Details*/}
-              <div className="sticky top-24 border shadow shadow-gray-200 z-50 bg-white pt-5 p-4 rounded-lg">
+              <div className="sticky top-24 border shadow-sm shadow-gray-200 z-50 bg-white pt-5 p-4 rounded-lg">
                 <div className="mb-6 ">
-                  <h2 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
+                  <h1 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
                     {service.title}
-                  </h2>
+                  </h1>
                   <h3 className="text-xl my-3 font-medium text-gray-600 text-center">
                     What we offer
                   </h3>
@@ -234,7 +261,8 @@ export default function ServicePageClient({
                 </div>
                 {/* get the services button */}
                 <div className="my-4 h-11 bg-gray-50">
-                  {pathname === "/services/commercial-laundry-service" ? (
+                  {pathname ===
+                  "/services/commercial-laundry-services-in-dubai" ? (
                     <Link href="/contact">
                       <Button
                         onClick={() => setIsNavigating(true)}

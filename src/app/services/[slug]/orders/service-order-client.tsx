@@ -146,48 +146,52 @@ export default function ServiceOrderClient({
     () => [
       {
         name: "Laundry Services",
-        slug: "laundry-services",
+        slug: "professional-laundry-services-in-dubai",
         icon: "Laundry.svg",
       },
       {
         name: "Dry Cleaning Services",
-        slug: "dry-cleaning-services",
+        slug: "dry-cleaning-services-in-dubai",
         icon: "Dry-clean.svg",
       },
       // {
       //   name: "Express Laundry Services",
-      //   slug: "express-laundry-services",
+      //   slug: "express-laundry-services-in-dubai",
       //   icon: "Express.svg",
       // },
-      { name: "Shoe Cleaning", slug: "shoe-bag-spa", icon: "Shoe-spa.svg" },
+      {
+        name: "Shoe Cleaning",
+        slug: "shoe-and-bag-spa-services-in-dubai",
+        icon: "Shoe-spa.svg",
+      },
       {
         name: "Luxury Shoe Cleaning",
-        slug: "luxury-shoe-cleaning",
+        slug: "luxury-shoe-cleaning-services-in-dubai",
         icon: "Luxury-shoe.svg",
       },
       // {
       //   name: "Commercial Laundry Service",
-      //   slug: "commercial-laundry-service",
+      //   slug: "commercial-laundry-services-in-dubai",
       //   icon: "Commercial.svg",
       // },
       // {
       //   name: "Curtain Cleaning Service",
-      //   slug: "curtain-cleaning-service",
+      //   slug: "curtain-cleaning-services-in-dubai",
       //   icon: "Curtain.svg",
       // },
       {
         name: "Carpet Cleaning Service",
-        slug: "carpet-cleaning-services",
+        slug: "carpet-cleaning-services-in-dubai",
         icon: "Carpet.svg",
       },
       {
         name: "Soft Toy Cleaning Service",
-        slug: "soft-toy-cleaning-service",
+        slug: "soft-toy-cleaning-services-in-dubai",
         icon: "Toy.svg",
       },
       {
         name: "Steam Pressing Service",
-        slug: "steam-pressing-service",
+        slug: "steam-pressing-services-in-dubai",
         icon: "Steam.svg",
       },
     ],

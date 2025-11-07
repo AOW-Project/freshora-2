@@ -14,14 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Best Laundry Services in Dubai | Freshora Clean & Care Experts",
     description:
       "Looking for Best Laundry Services in Dubai? Freshora offers dry cleaning, wash & fold, carpet, curtain, shoe & bag cleaning with convenient pickup & delivery.",
-    keywords: [
-      "Laundry Services Dubai",
-      "Dry Cleaning Dubai",
-      "Carpet Cleaning Dubai",
-      "Curtain Cleaning Dubai",
-      "Shoe Cleaning Dubai",
-      "Best Laundry Dubai",
-    ],
+    keywords: ["Best Laundry Services in Dubai"],
     alternates: {
       canonical: "https://freshoralaundry.com/services",
     },
