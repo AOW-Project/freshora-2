@@ -315,7 +315,8 @@ export default function ServiceOrderClient({
           </div>
         ))}
       </div>
-      {pathname === "/services/laundry-services/orders" && (
+      {pathname ===
+        "/services/professional-laundry-services-in-dubai/orders" && (
         <div className="border-t pt-5 mb-6">
           <div className="flex items-start gap-3">
             {/* Custom checkbox container */}
