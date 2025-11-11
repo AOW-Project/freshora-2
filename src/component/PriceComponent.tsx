@@ -14,6 +14,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
 import { useCart } from "@/app/context/cart-context"; // Import cart provider
 
@@ -54,10 +55,12 @@ const ServiceBanner: React.FC = () => {
     >
       {" "}
       {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
-      <div className="text-white text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center z-30">
-        <p>Our prices are simple & affordable which are easy</p>
-        <p className="text-[#FFFF00]">
-          on pocket in comparison with the high street prices.
+      <div className="text-white text-center text-base sm:text-2xl md:text-3xl font-medium flex flex-col justify-center items-center z-30">
+        <p className="max-w-[700px]">
+          Our prices are simple & affordable which are easy
+          <span className="text-[#FFFF00]">
+            {""} on pocket in comparison with the high street prices.
+          </span>
         </p>
       </div>
     </div>
@@ -421,17 +424,27 @@ const householdItems = [
   },
   {
     item: "Premium Carpet (Per Sq meter)",
-    washPress: "30.00",
+    washPress: (
+      <Link
+        href={`https://wa.me/+971509259667?text=${encodeURIComponent(
+          "Hi, I would like to know the prices for Premium carpet service price"
+        )}`}
+        className="flex gap-2 items-center justify-center"
+      >
+        Ask for the Price{" "}
+        <FaWhatsapp size={25} className="text-primary-green" />
+      </Link>
+    ),
     dryCleaning: "-",
     steamPressing: "-",
   },
 ];
 const shoesItems = [
-  { item: "Formal Shoes", price: "100.00" },
-  { item: "Sandals / Flip Flops", price: "60.00" },
-  { item: "Leather/ Mix material Sandal & Flip Flops", price: "80.00" },
-  { item: "Kids Shoe Care", price: "50.00" },
-  { item: "Sneakers / Sports Shoes", price: "80.00" },
+  { item: "Formal Shoes", price: "--" },
+  { item: "Sandals / Flip Flops", price: "--" },
+  { item: "Leather/ Mix material Sandal & Flip Flops", price: "--" },
+  { item: "Kids Shoe Care", price: "--" },
+  { item: "Sneakers / Sports Shoes", price: "--" },
 ];
 
 const luxuryShoes = [
@@ -594,6 +607,8 @@ const PricingSection = () => {
     serviceId: string;
   } | null>(null);
 
+  const whatsappNumber = "+971509259667";
+
   // useEffect(() => {
   //   async function fetchItem() {
   //     const item = await getFirstServiceItem("standard-package-service");
@@ -664,7 +679,7 @@ const PricingSection = () => {
               >
                 {/* Mobile-optimized tabs */}
                 <div className="mb-6 sm:mb-8">
-                  <TabsList className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 w-full gap-1 sm:gap-2 p-1 bg-gray-100 rounded-lg h-auto">
+                  <TabsList className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 w-full gap-1 sm:gap-2 p-1 bg-gray-100 rounded-lg h-auto">
                     <TabsTrigger
                       value="popular"
                       className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-primary-green data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:border-primary-green rounded-md whitespace-nowrap"
@@ -689,12 +704,12 @@ const PricingSection = () => {
                     >
                       Shoes
                     </TabsTrigger>
-                    <TabsTrigger
+                    {/* <TabsTrigger
                       value="luxury_shoes"
                       className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-primary-green data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:border-primary-green rounded-md whitespace-nowrap col-span-2 sm:col-span-1"
                     >
                       Luxury Shoes
-                    </TabsTrigger>
+                    </TabsTrigger> */}
                     <TabsTrigger
                       value="delegate_clothes"
                       className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold bg-white text-black transition-all duration-200 border border-transparent hover:bg-green-50 hover:text-primary-green data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:border-primary-green rounded-md whitespace-nowrap col-span-2 sm:col-span-1"
@@ -907,10 +922,24 @@ const PricingSection = () => {
                       </tbody>
                     </table>
                   </div>
+                  <div className="w-full flex justify-center my-2 text-gray-700 text-lg">
+                    <Link
+                      href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                        "Hi, I would like to know the prices for Shoe cleaning"
+                      )}`}
+                      className="px-6 sm:px-8 py-2 border-2 border-secondary-green text-secondary-green font-semibold rounded  transition-colors duration-300 shadow-md text-sm sm:text-base flex items-center gap-3 -mb-4 group hover:text-white hover:bg-primary-green ease-in-out hover:border-primary-green"
+                    >
+                      Ask for the Prices
+                      <FaWhatsapp
+                        size={25}
+                        className="text-secondary-green transition-colors duration-300 ease-in-out group-hover:text-white"
+                      />
+                    </Link>
+                  </div>
                 </TabsContent>
 
                 {/* Luxury Shoes Tab */}
-                <TabsContent value="luxury_shoes" className="mt-6">
+                {/* <TabsContent value="luxury_shoes" className="mt-6">
                   <div className="overflow-x-auto">
                     <table className="min-w-full">
                       <tbody>
@@ -930,7 +959,7 @@ const PricingSection = () => {
                       </tbody>
                     </table>
                   </div>
-                </TabsContent>
+                </TabsContent> */}
                 {/* Top Delegate Clothes Tab */}
                 <TabsContent value="delegate_clothes" className="mt-6">
                   <div className="overflow-x-auto">
@@ -950,10 +979,10 @@ const PricingSection = () => {
                 </TabsContent>
               </Tabs>
 
-              <div className="flex justify-center mt-6 sm:mt-8">
+              <div className="flex justify-center mt-3 sm:mt-6">
                 <Link
                   href="/best-laundry-services-in-dubai"
-                  className="px-6 sm:px-8 py-3 bg-secondary-green cta-button text-white font-semibold rounded  transition-colors duration-300 shadow-md text-sm sm:text-base"
+                  className="px-14 sm:px-16 py-3 bg-secondary-green  text-white font-semibold rounded  transition-colors duration-300 shadow-md text-sm sm:text-base hover:bg-white hover:text-primary-green border hover:border-primary-green"
                 >
                   View Services
                 </Link>

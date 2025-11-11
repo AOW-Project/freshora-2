@@ -14,6 +14,7 @@ import LoadingOverlay from "@/component/LoadingOverlay";
 import { RiCheckDoubleLine } from "react-icons/ri";
 import CouponCarousel from "@/component/CouponCarousel";
 import { usePathname } from "next/navigation";
+import { FaWhatsapp } from "react-icons/fa";
 
 type FormState = {
   name: string;
@@ -73,6 +74,8 @@ export default function ServicePageClient({
     [form]
   );
 
+  const whatsappNumber = "+971509259667";
+
   const serviceCategories = useMemo(
     () => [
       {
@@ -82,6 +85,10 @@ export default function ServicePageClient({
       {
         name: "Dry Cleaning Services",
         slug: "dry-cleaning-services-in-dubai",
+      },
+      {
+        name: "Steam Pressing Services",
+        slug: "steam-pressing-services-in-dubai",
       },
       // {
       //   name: "Express Laundry Services",
@@ -111,13 +118,17 @@ export default function ServicePageClient({
         name: "Soft Toy Cleaning Service",
         slug: "soft-toy-cleaning-services-in-dubai",
       },
-      {
-        name: "Steam Pressing Service",
-        slug: "steam-pressing-services-in-dubai",
-      },
     ],
     []
   );
+
+  const contactOnlyServices = [
+    "commercial-laundry-services-in-dubai",
+    "shoe-and-bag-spa-services-in-dubai",
+    "luxury-shoe-cleaning-services-in-dubai",
+  ]; //  add services that requires contact
+
+  const requiresContact = contactOnlyServices.includes(slug);
 
   const breadcrumbNav = useMemo(
     () => (
@@ -247,7 +258,7 @@ export default function ServicePageClient({
             {/* Main Content */}
             <main className="lg:col-span-6 order-1 lg:order-2">
               {/* Service Details*/}
-              <div className="sticky top-24 border shadow-sm shadow-gray-200 z-50 bg-white pt-5 p-4 rounded-lg">
+              <div className="sticky top-15 sm:top-24 border shadow-sm shadow-gray-200 z-50 bg-white pt-5 p-4 rounded-lg">
                 <div className="mb-6 ">
                   <h1 className="text-3xl md:text-4xl text-primary-green font-medium  text-center ">
                     {service.title}
@@ -260,26 +271,31 @@ export default function ServicePageClient({
                   </p>
                 </div>
                 {/* get the services button */}
-                <div className="my-4 h-11 bg-gray-50">
-                  {pathname ===
-                  "/services/commercial-laundry-services-in-dubai" ? (
-                    <Link href="/contact">
-                      <Button
-                        onClick={() => setIsNavigating(true)}
-                        className="w-full h-full bg-secondary-green text-white hover:bg-primary-green hover:text-white transition-colors duration-300 ease-in-out font-semibold cursor-pointer"
+                <div className="my-4 bg-gray-50">
+                  {requiresContact ? (
+                    <button className="group rounded-md py-2 w-full bg-secondary-green text-white hover:bg-primary-green transition-colors duration-300 ease-in-out font-semibold flex items-center justify-center cursor-pointer">
+                      <Link
+                        href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                          `Hi, I would like to know the prices for ${service.title}`
+                        )}`}
+                        className="flex justify-center items-center gap-3"
                       >
                         Contact for Prices
-                      </Button>
-                    </Link>
+                        <FaWhatsapp
+                          size={25}
+                          className="text-white transition-colors duration-300 ease-in-out group-hover:text-white"
+                        />
+                      </Link>
+                    </button>
                   ) : (
-                    <Link href={`/services/${slug}/orders`}>
-                      <Button
-                        onClick={() => setIsNavigating(true)}
-                        className="w-full h-full bg-secondary-green text-white hover:bg-primary-green hover:text-white transition-colors duration-300 ease-in-out font-semibold cursor-pointer"
-                      >
+                    <button
+                      className="rounded-md w-full py-2 bg-secondary-green text-white hover:bg-primary-green transition-colors duration-300 ease-in-out font-semibold flex items-center justify-center cursor-pointer"
+                      onClick={() => setIsNavigating(true)}
+                    >
+                      <Link href={`/services/${slug}/orders`}>
                         Get the Service
-                      </Button>
-                    </Link>
+                      </Link>
+                    </button>
                   )}
                 </div>
               </div>

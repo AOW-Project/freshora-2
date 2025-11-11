@@ -154,21 +154,26 @@ export default function ServiceOrderClient({
         slug: "dry-cleaning-services-in-dubai",
         icon: "Dry-clean.svg",
       },
+      {
+        name: "Steam Pressing Service",
+        slug: "steam-pressing-services-in-dubai",
+        icon: "Steam.svg",
+      },
       // {
       //   name: "Express Laundry Services",
       //   slug: "express-laundry-services-in-dubai",
       //   icon: "Express.svg",
       // },
-      {
-        name: "Shoe Cleaning",
-        slug: "shoe-and-bag-spa-services-in-dubai",
-        icon: "Shoe-spa.svg",
-      },
-      {
-        name: "Luxury Shoe Cleaning",
-        slug: "luxury-shoe-cleaning-services-in-dubai",
-        icon: "Luxury-shoe.svg",
-      },
+      // {
+      //   name: "Shoe Cleaning",
+      //   slug: "shoe-and-bag-spa-services-in-dubai",
+      //   icon: "Shoe-spa.svg",
+      // },
+      // {
+      //   name: "Luxury Shoe Cleaning",
+      //   slug: "luxury-shoe-cleaning-services-in-dubai",
+      //   icon: "Luxury-shoe.svg",
+      // },
       // {
       //   name: "Commercial Laundry Service",
       //   slug: "commercial-laundry-services-in-dubai",
@@ -188,11 +193,6 @@ export default function ServiceOrderClient({
         name: "Soft Toy Cleaning Service",
         slug: "soft-toy-cleaning-services-in-dubai",
         icon: "Toy.svg",
-      },
-      {
-        name: "Steam Pressing Service",
-        slug: "steam-pressing-services-in-dubai",
-        icon: "Steam.svg",
       },
     ],
     []
