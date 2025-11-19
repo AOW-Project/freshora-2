@@ -204,7 +204,7 @@ export default function OrderTracker() {
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Status Timeline */}
-            <OrderTimeline currentStatus={"processing"} />
+            <OrderTimeline currentStatus={orderStatus.status} />
             {/* Customer & Address Info */}
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-3">

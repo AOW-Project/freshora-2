@@ -5,7 +5,7 @@ import Image from "next/image";
 // Status configuration array
 const statusConfig = [
   {
-    status: "pending",
+    status: "PENDING",
     icon: Clock,
     img: "/images/redesign/timeline-order-recieved.svg",
     color: "bg-green-400",
@@ -18,7 +18,7 @@ const statusConfig = [
     ),
   },
   {
-    status: "pickedUp",
+    status: "PICKED_UP",
     icon: Package,
     img: "/images/redesign/timeline-pickup-completed.svg",
     color: "bg-green-400",
@@ -26,7 +26,7 @@ const statusConfig = [
     subtitle: "Your items are in safe hands",
   },
   {
-    status: "processing",
+    status: "IN_PROGRESS",
     icon: Loader2,
     img: "/images/redesign/timeline-processing.svg",
     color: "bg-green-400",
@@ -34,7 +34,7 @@ const statusConfig = [
     subtitle: "Your items are being carefully serviced",
   },
   {
-    status: "outForDelivery",
+    status: "OUT_FOR_DELIVERY",
     icon: Truck,
     img: "/images/redesign/timeline-out-for-delivery.svg",
     color: "bg-green-400",
@@ -42,7 +42,7 @@ const statusConfig = [
     subtitle: "Our delivery partner is on the way to return your items",
   },
   {
-    status: "delivered",
+    status: "DELIVERED",
     icon: CheckCircle,
     img: "/images/redesign/timeline-delivered.svg",
     color: "bg-green-400",
@@ -66,7 +66,7 @@ const getStatusState = (statusIndex: number, currentStatusIndex: number) => {
   return "pending";
 };
 
-const OrderTimeline = ({ currentStatus = "delivered" }) => {
+const OrderTimeline = ({ currentStatus = "PENDING" }) => {
   const currentStatusIndex = getCurrentStatusIndex(currentStatus);
 
   return (
