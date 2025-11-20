@@ -209,7 +209,7 @@ export default function CartPage() {
                         <div className="flex flex-col items-start">
                           <h3 className="font-semibold">{item.name}</h3>
                           <p className="text-sm text-gray-600">
-                            {item.serviceType} ( {item.category} )
+                            {item.serviceSlug} ( {item.category} )
                           </p>
                         </div>
 
