@@ -1,4 +1,6 @@
 "use client";
+// import { CartItem } from "@/app/dashboard/order/order-cart/components/PickupForm/types";
+
 
 import {
   createContext,
@@ -10,14 +12,15 @@ import {
   useMemo,
 } from "react";
 
-interface CartItem {
+export interface CartItem {
   id: string;
   name: string;
-  category?: string;
-  serviceType?: string;
   price: number;
   quantity: number;
-  title?: string;
+
+  category: string;        // REQUIRED
+  serviceType: string;     // REQUIRED
+  serviceSlug?: string;
 }
 
 interface CartContextType {
@@ -38,102 +41,108 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // --- Save cart to localStorage ---
+  // ---- Save to storage + notify ----
   const saveCartToStorage = useCallback((items: CartItem[]) => {
     try {
       localStorage.setItem("cart", JSON.stringify(items));
-    } catch (error: unknown) {
+      window.dispatchEvent(new Event("cart-updated"));
+    } catch (error) {
       console.error("Failed to save to localStorage:", error);
     }
   }, []);
 
-  // --- Load cart from localStorage on mount ---
+  // ---- Sync cart from storage on mount + when event fires ----
   useEffect(() => {
-    try {
-      setIsLoading(true);
-      const localCart = localStorage.getItem("cart");
-      if (localCart) {
-        setCartItems(JSON.parse(localCart));
-      }
-    } catch (error: unknown) {
-      console.error("Failed to load from localStorage:", error);
-      setCartItems([]);
-    } finally {
+    const syncCart = () => {
+      const stored = localStorage.getItem("cart");
+      setCartItems(stored ? JSON.parse(stored) : []);
       setIsLoading(false);
-    }
+    };
+
+    // load on mount
+    syncCart();
+
+    window.addEventListener("cart-updated", syncCart);
+    window.addEventListener("storage", syncCart);
+
+    return () => {
+      window.removeEventListener("cart-updated", syncCart);
+      window.removeEventListener("storage", syncCart);
+    };
   }, []);
 
-  // --- Add item to cart ---
+  // ---- Add item ----
   const addToCart = useCallback(
     async (item: Partial<CartItem>) => {
-      setCartItems((prevItems) => {
-        const existingIndex = prevItems.findIndex(
-          (cartItem) => cartItem.id === item.id
-        );
+      setCartItems((prev) => {
+        const existingIndex = prev.findIndex((i) => i.id === item.id);
 
-        let updatedItems: CartItem[];
+        let updated: CartItem[];
 
-        const newItem: CartItem = {
-          id: item.id!,
-          name: item.name!,
-          price: item.price!,
-          quantity: item.quantity!,
-          category: item.category ?? "Item",
-          serviceType: item.serviceType ?? "Service",
-          title: item.title,
-        };
+   const newItem: CartItem = {
+  id: item.id!,
+  name: item.name!,
+  price: item.price!,
+  quantity: item.quantity!,
+  category: item.category ?? "General",
+  serviceType: item.serviceType ?? "Service",
+  serviceSlug: item.serviceSlug,
+};
 
-        if (existingIndex >= 0) {
-          updatedItems = [...prevItems];
-          updatedItems[existingIndex].quantity += item.quantity ?? 1;
-        } else {
-          updatedItems = [...prevItems, newItem];
+       if (existingIndex >= 0) {
+  updated = [...prev];
+  updated[existingIndex] = newItem; // overwrite instead of add
+} else {
+          updated = [...prev, newItem];
         }
 
-        saveCartToStorage(updatedItems);
-        return updatedItems;
+        saveCartToStorage(updated);
+        return updated;
       });
     },
     [saveCartToStorage]
   );
 
-  // --- Remove item from cart ---
+  // ---- Remove item ----
   const removeFromCart = useCallback(
     async (itemId: string) => {
-      setCartItems((prevItems) => {
-        const updatedItems = prevItems.filter((item) => item.id !== itemId);
-        saveCartToStorage(updatedItems);
-        return updatedItems;
+      setCartItems((prev) => {
+        const updated = prev.filter((i) => i.id !== itemId);
+        saveCartToStorage(updated);
+        return updated;
       });
     },
     [saveCartToStorage]
   );
 
-  // --- Update item quantity ---
+  // ---- Update quantity ----
   const updateQuantity = useCallback(
     async (itemId: string, quantity: number) => {
       if (quantity <= 0) {
         await removeFromCart(itemId);
         return;
       }
-      setCartItems((prevItems) => {
-        const updatedItems = prevItems.map((item) =>
+
+      setCartItems((prev) => {
+        const updated = prev.map((item) =>
           item.id === itemId ? { ...item, quantity } : item
         );
-        saveCartToStorage(updatedItems);
-        return updatedItems;
+
+        saveCartToStorage(updated);
+        return updated;
       });
     },
     [removeFromCart, saveCartToStorage]
   );
 
-  // --- Clear cart ---
+  // ---- Clear cart ----
   const clearCart = useCallback(async () => {
     setCartItems([]);
     localStorage.removeItem("cart");
+    window.dispatchEvent(new Event("cart-updated"));
   }, []);
 
-  // --- Replace entire cart (useful for syncing) ---
+  // ---- Replace whole cart ----
   const replaceCart = useCallback(
     async (newItems: CartItem[]) => {
       setCartItems(newItems);
@@ -142,20 +151,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     [saveCartToStorage]
   );
 
-  // --- Get total items ---
-  const getTotalItems = useCallback(() => {
-    return cartItems.reduce((total, item) => total + item.quantity, 0);
-  }, [cartItems]);
+  // ---- Total items ----
+  const getTotalItems = useCallback(
+    () => cartItems.reduce((t, item) => t + item.quantity, 0),
+    [cartItems]
+  );
 
-  // --- Get total price ---
-  const getTotalPrice = useCallback(() => {
-    return cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
-  }, [cartItems]);
+  // ---- Total price ----
+  const getTotalPrice = useCallback(
+    () => cartItems.reduce((t, item) => t + item.price * item.quantity, 0),
+    [cartItems]
+  );
 
-  // --- Context value ---
   const value = useMemo(
     () => ({
       cartItems,

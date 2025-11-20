@@ -244,7 +244,7 @@ export default function ServiceOrderClient({
           // Apply +50% if express selected
           price: isChecked ? item.price * 1.5 : item.price,
           quantity: item.quantity,
-          serviceType: service.title, // ✅ e.g. "Laundry Services (Wash & Press)"
+          serviceSlug: isChecked ? "Express Laundry" : service!.title, // ✅ e.g. "Laundry Services (Wash & Press)"
           category: item.category, // ✅ e.g. "men" | "women" | "household"
         };
 

@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Minus, Plus, Trash2 } from "lucide-react";
 import { useCart } from "../context/cart-context";
-import PickupForm from "@/component/SchedulePickupModal";
+// import PickupForm from "@/component/SchedulePickupModal";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import PickupForm from "./components/PickupForm/PickupForm";
 
 const parseFeatureString = (feature: string) => {
   const match = feature.match(/^(\d+)\s+(.*)/);
