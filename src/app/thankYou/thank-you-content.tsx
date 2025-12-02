@@ -41,7 +41,7 @@ export default function ThankYouContent() {
                 </Button>
               </Link>
             )}
-            <Link href="/services">
+            <Link href="/best-laundry-services-in-dubai">
               <Button variant="outline" className="w-full shadow-md">
                 Continue Shopping
               </Button>
