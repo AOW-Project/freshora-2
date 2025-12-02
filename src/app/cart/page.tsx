@@ -117,7 +117,7 @@ export default function CartPage() {
               <p className="text-gray-600 mb-8">
                 Add some items to your cart to get started.
               </p>
-              <Link href="/services">
+              <Link href="/best-laundry-services-in-dubai">
                 <Button className="bg-secondary-green cta-button rounded">
                   Browse Services
                 </Button>

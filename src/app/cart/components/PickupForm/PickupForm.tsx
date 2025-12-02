@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { X } from "lucide-react";
@@ -26,6 +27,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const router = useRouter();
 
   const {
     control,
@@ -39,11 +41,7 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
 
   // Memo (still must be above conditional return)
   const disableSubmit = useMemo(
-    () =>
-      isSubmitting ||
-      loading ||
-      cartItems.length === 0 ||
-      !isValid,
+    () => isSubmitting || loading || cartItems.length === 0 || !isValid,
     [isSubmitting, loading, cartItems.length, isValid]
   );
 
@@ -89,11 +87,14 @@ export default function PickupForm({ open, onClose }: PickupFormProps) {
       const data = await res.json();
 
       if (data.success) {
-        setMessage(`Order placed successfully! Order Number: ${data.data.orderNumber}`);
+        setMessage(
+          `Order placed successfully! Order Number: ${data.data.orderNumber}`
+        );
 
         setTimeout(() => {
           clearCart();
           onClose();
+          router.push("/thankYou");
         }, 800);
       } else {
         setMessage(data.message ?? "Failed to place order");
