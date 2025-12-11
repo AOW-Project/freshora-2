@@ -51,22 +51,54 @@ export async function generateStaticParams() {
 }
 
 // Fetch service from backend
+// async function fetchServiceBySlug(slug: string): Promise<Service | null> {
+//   try {
+//     const res = await fetch(
+//       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/services/${slug}`,
+//       // `http://localhost:4000/api/services/${slug}`,
+//       {
+//         next: { revalidate: 3600 }, // Revalidate every hour
+//       }
+//     );
+
+//     if (!res.ok) return null;
+
+//     const result = await res.json();
+//     return result.success ? result.data : null;
+//   } catch (err) {
+//     console.error("Fetch service failed:", err);
+//     return null;
+//   }
+// }
+// server-side helper
+
+async function fetchWithTimeout(
+  url: string,
+  init: RequestInit = {},
+  timeoutMs = 5000
+) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { ...init, signal: controller.signal });
+    return res;
+  } finally {
+    clearTimeout(id);
+  }
+}
+
 async function fetchServiceBySlug(slug: string): Promise<Service | null> {
   try {
-    const res = await fetch(
+    const res = await fetchWithTimeout(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/services/${slug}`,
-      // `http://localhost:4000/api/services/${slug}`,
-      {
-        next: { revalidate: 3600 }, // Revalidate every hour
-      }
+      { next: { revalidate: 3600 } },
+      5000 // 5s timeout - adjust as needed
     );
-
-    if (!res.ok) return null;
-
+    if (!res || !res.ok) return null;
     const result = await res.json();
     return result.success ? result.data : null;
   } catch (err) {
-    console.error("Fetch service failed:", err);
+    console.error("Fetch service failed (timeout or network):", err);
     return null;
   }
 }
