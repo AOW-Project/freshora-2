@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import ServiceOrderClient from "./service-order-client";
 import Link from "next/link";
+import ServiceOrderClient from "./service-order-client";
 
-// --- Type Definitions ---
+// --- Types ---
 interface ServiceItem {
   id: string;
   name: string;
@@ -11,7 +11,6 @@ interface ServiceItem {
   unit?: string;
   image?: string;
 }
-
 interface Service {
   id: string;
   slug: string;
@@ -22,113 +21,68 @@ interface Service {
   rating: number;
   reviews: number;
   duration: string;
-  items: {
-    [category: string]: ServiceItem[];
-  };
+  items: Record<string, ServiceItem[]>;
 }
 
-// Fetch all services to generate static paths
-async function fetchAllServices() {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/services`
-    );
-    const result = await res.json();
-    console.log("fetched services succesfully");
-    return result.success ? (result.data as Service[]) : [];
-  } catch (err) {
-    console.error("Failed to fetch all services for static generation:", err);
-    return [];
-  }
-}
-
-export async function generateStaticParams() {
-  const services = await fetchAllServices();
-
-  return services.map((service) => ({
-    slug: service.slug,
-  }));
-}
-
-// Fetch service from backend
-// async function fetchServiceBySlug(slug: string): Promise<Service | null> {
-//   try {
-//     const res = await fetch(
-//       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/services/${slug}`,
-//       // `http://localhost:4000/api/services/${slug}`,
-//       {
-//         next: { revalidate: 3600 }, // Revalidate every hour
-//       }
-//     );
-
-//     if (!res.ok) return null;
-
-//     const result = await res.json();
-//     return result.success ? result.data : null;
-//   } catch (err) {
-//     console.error("Fetch service failed:", err);
-//     return null;
-//   }
-// }
-// server-side helper
-
+// --- Timeout Helper ---
 async function fetchWithTimeout(
   url: string,
   init: RequestInit = {},
   timeoutMs = 5000
 ) {
   const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), timeoutMs);
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
   try {
-    const res = await fetch(url, { ...init, signal: controller.signal });
-    return res;
+    return await fetch(url, { ...init, signal: controller.signal });
   } finally {
-    clearTimeout(id);
+    clearTimeout(timer);
   }
 }
 
+// --- Runtime Fetch (Only Run on Page Load) ---
 async function fetchServiceBySlug(slug: string): Promise<Service | null> {
   try {
     const res = await fetchWithTimeout(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/services/${slug}`,
-      { next: { revalidate: 3600 } },
-      5000 // 5s timeout - adjust as needed
+      { cache: "no-store" }, // no stale data, ensures freshness
+      5000
     );
-    if (!res || !res.ok) return null;
-    const result = await res.json();
-    return result.success ? result.data : null;
-  } catch (err) {
-    console.error("Fetch service failed (timeout or network):", err);
+
+    if (!res.ok) return null;
+    const json = await res.json();
+
+    return json.success ? json.data : null;
+  } catch (error) {
+    console.error("Service fetch failed:", error);
     return null;
   }
 }
 
-// --- Next.js Page Props ---
+// --- Page Props ---
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+// --- No generateStaticParams because we fetch data dynamically ---
+export const dynamic = "force-dynamic"; // ensure SSR + fresh data
+
+// --- Page Component ---
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
-  // testing
+
   const service = await fetchServiceBySlug(slug);
 
-  if (!service) {
-    notFound();
-  }
+  if (!service) notFound();
 
   return (
     <>
       {/* Header Banner */}
       <div
-        className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center bg-fixed flex items-center justify-center px-6"
-        style={{
-          backgroundImage: `url('/images/redesign/about-banner.png')`,
-        }}
+        className="relative h-48 sm:h-56 md:h-64 lg:h-72 bg-cover bg-center flex items-center justify-center px-6"
+        style={{ backgroundImage: "url('/images/redesign/about-banner.png')" }}
       >
-        {" "}
-        {/* <div className="absolute w-full h-full text-center bg-[#09ff0065] z-20"></div> */}
-        <div className="text-white text-base sm:text-2xl md:text-3xl font-medium text-center flex flex-col justify-center items-center z-30">
+        <div className="text-white text-base sm:text-2xl md:text-3xl font-medium text-center z-30">
           <p>
             Professional Laundry{" "}
             <span className="text-[#FFFF00]">
@@ -137,29 +91,28 @@ export default async function Page({ params }: PageProps) {
           </p>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="w-full max-w-7xl mx-auto px-6 py-5 bg-white ">
-          <nav className="flex items-center space-x-1 sm:space-x-2 text-black">
-            <Link
-              href="/"
-              className="hover:text-green-400 text-sm sm:text-base transition-colors"
-            >
-              Home
-            </Link>
-            <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
-            <Link
-              href="/best-laundry-services-in-dubai"
-              className="hover:text-green-400 text-sm sm:text-base transition-colors"
-            >
-              Services
-            </Link>
-            <span className="px-1 sm:px-2 text-sm sm:text-base">/</span>
 
-            <span className="text-green-400 capitalize">Order</span>
-          </nav>
-        </div>
+      {/* Breadcrumb */}
+      <div className="max-w-7xl mx-auto px-6 py-5">
+        <nav className="flex items-center space-x-2 text-black">
+          <Link href="/" className="hover:text-green-400">
+            Home
+          </Link>
+          <span>/</span>
+
+          <Link
+            href="/best-laundry-services-in-dubai"
+            className="hover:text-green-400"
+          >
+            Services
+          </Link>
+          <span>/</span>
+
+          <span className="text-green-400 capitalize">Order</span>
+        </nav>
       </div>
-      <ServiceOrderClient slug={slug} service={service} />;
+
+      <ServiceOrderClient slug={slug} service={service} />
     </>
   );
 }
