@@ -271,7 +271,7 @@ export default function ContactPage() {
         <div className="h-80 sm:h-96 lg:h-full min-h-[400px] order-1 lg:order-2">
           <iframe
             title="Business Location"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3103.009160312709!2d-77.455!3d38.752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b65cf1dff9f1b1%3A0x5d812!2s6494%20Signal%20Hill%20Rd%2C%20Manassas%2C%20VA%2020110!5e0!3m2!1sen!2sus!4v1234567890"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3516.8611032848944!2d55.30585108613628!3d25.17302901260617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f69b1dfb81491%3A0xb983bc4a672a7421!2sFRESHORA%20LAUNDRY!5e1!3m2!1sen!2sin!4v1765799763607!5m2!1sen!2sin"
             width="100%"
             height="100%"
             style={{ border: 0 }}
