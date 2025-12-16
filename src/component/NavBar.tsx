@@ -51,39 +51,40 @@ const navItems: NavItem[] = [
       //   icon: "Express.svg",
       // },
       {
+        title: "Steam Pressing Service",
+        href: "/services/steam-pressing-services-in-dubai",
+        icon: "Steam.svg",
+      },
+      {
         title: "Shoe & Bag Spa",
         href: "/services/shoe-and-bag-spa-services-in-dubai",
         icon: "Shoe-spa.svg",
       },
+      // {
+      //   title: "Luxury Shoe Cleaning",
+      //   href: "/services/luxury-shoe-cleaning-services-in-dubai",
+      //   icon: "Luxury-shoe.svg",
+      // },
       {
-        title: "Luxury Shoe Cleaning",
-        href: "/services/luxury-shoe-cleaning-services-in-dubai",
-        icon: "Luxury-shoe.svg",
-      },
-      {
-        title: "Commercial Laundry Service",
-        href: "/services/commercial-laundry-services-in-dubai",
-        icon: "Commercial.svg",
+        title: "Curtain Cleaning Service",
+        href: "/services/curtain-cleaning-services-in-dubai",
+        icon: "Curtain.svg",
       },
       {
         title: "Carpet Cleaning Service",
         href: "/services/carpet-cleaning-services-in-dubai",
         icon: "Carpet.svg",
       },
-      // {
-      //   title: "Curtain Cleaning Service",
-      //   href: "/services/curtain-cleaning-services-in-dubai",
-      //   icon: "Curtain.svg",
-      // },
+      {
+        title: "Commercial Laundry Service",
+        href: "/services/commercial-laundry-services-in-dubai",
+        icon: "Commercial.svg",
+      },
+
       {
         title: "Soft Toy Cleaning Service",
         href: "/services/soft-toy-cleaning-services-in-dubai",
         icon: "Toy.svg",
-      },
-      {
-        title: "Steam Pressing Service",
-        href: "/services/steam-pressing-services-in-dubai",
-        icon: "Steam.svg",
       },
     ],
   },
@@ -137,7 +138,7 @@ const Navbar = () => {
             <div className="flex flex-row justify-center flex-nowrap items-center gap-1">
               <LuClock4 className="text-primary-green" size={16} />
               <span className="truncate flex flex-nowrap">
-                Mon to Friday - 8 am to 8pm Sat-Sun - 10am to 8pm{" "}
+                Mon to Friday - 8 am to 11pm Sat-Sun - 10am to 11pm{" "}
               </span>
             </div>
             <div className="flex flex-row justify-center flex-nowrap items-center gap-1">
@@ -189,10 +190,12 @@ const Navbar = () => {
                   : "text-lg sm:text-xl lg:text-2xl"
               }`}
             >
-              <span className="text-primary-green font-roboto-condensed">
+              <span className="text-secondary-green font-roboto-condensed">
                 Freshora{" "}
               </span>
-              <span className="text-black font-roboto-condensed">Laundry</span>
+              <span className="text-primary-green font-roboto-condensed">
+                Laundry
+              </span>
             </span>
           </Link>
 
@@ -280,7 +283,7 @@ const Navbar = () => {
 
             {/* CTA buttons */}
             <Link
-              href="/best-laundry-services-in-dubai"
+              href="/services/professional-laundry-services-in-dubai/orders"
               className="hidden sm:block"
             >
               <button className="bg-white  text-primary-green  flex flex-nowrap items-center justify-center gap-2 font-roboto-condensed font-medium border border-black rounded-[4px] px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base cta-button">
@@ -353,7 +356,7 @@ const Navbar = () => {
 
           {/* Bottom CTA buttons */}
           <div className="mt-auto px-4 py-3 space-y-3">
-            <Link href="/services">
+            <Link href="/services/professional-laundry-services-in-dubai/orders">
               <button
                 onClick={() => setMobileOpen(false)}
                 className="w-full bg-white  text-primary-green  flex flex-nowrap items-center justify-center gap-2 font-roboto-condensed font-medium border border-black rounded-[4px] px-4 py-3 mb-3 active:text-white active:bg-secondary-green"
