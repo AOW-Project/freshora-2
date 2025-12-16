@@ -17,10 +17,6 @@ const BannerSection = () => {
             Ensuring Freshness & Care for Every Fabric
           </span>
         </p>
-        <button className="text-white border-2 rounded-full px-8 py-3 bg-secondary-green hover:bg-primary-green transition-colors ease-in-out duration-500 border-[#FFFF00] text-xl font-medium cursor-pointer">
-          <p className="uppercase">Specials Welcome Offer</p>
-          <p className="text-base font-normal">Click here</p>
-        </button>
       </div>
     </div>
   );

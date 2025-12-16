@@ -1,4 +1,4 @@
-import { Clock, CreditCard, Leaf } from "lucide-react";
+import { Clock, CreditCard, Heart, Leaf } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -187,16 +187,17 @@ export default function AboutSection() {
               >
                 <div className="flex items-start space-x-3 sm:space-x-4">
                   <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-green-100 rounded-full flex items-center justify-center group-hover:bg-green-600 transition-colors duration-300 flex-shrink-0">
-                    <CreditCard className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-green-600 group-hover:text-white transition-colors duration-300" />
+                    <Heart className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-green-600 group-hover:text-white transition-colors duration-300" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-bold text-lg sm:text-xl text-gray-800 mb-2">
                       <span className="group-hover:text-green-600 transition-colors">
-                        Secure Online Payments
+                        Pure Care for Every Fabric
                       </span>
                     </h3>
                     <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                      Manage orders and billing instantly.
+                      Professional, fabric-safe cleaning that protects colors,
+                      texture, and quality.
                     </p>
                   </div>
                 </div>

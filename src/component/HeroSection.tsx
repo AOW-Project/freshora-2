@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import WhatsAppFloatingButton from "./WhatsAppFloatingButton";
 
 const slides = [
   {
@@ -137,6 +138,7 @@ export default function HeroSection() {
           </div>
         ))}
       </div>
+      <WhatsAppFloatingButton />
     </section>
   );
 }

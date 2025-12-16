@@ -74,10 +74,7 @@ export default function RootLayout({
               as="image"
               fetchPriority="high"
             />
-            <main className="relative z-20">
-              {children}
-              <WhatsAppFloatingButton />
-            </main>
+            <main className="relative z-20">{children}</main>
             <Footer />
           </div>
           <ToastContainer />

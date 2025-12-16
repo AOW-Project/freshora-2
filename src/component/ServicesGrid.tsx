@@ -25,6 +25,15 @@ const services = [
     title: "Dry Cleaning Services",
     description: "Care so gentle, even labels would approve.",
   },
+  {
+    id: 3,
+    slug: "steam-pressing-services-in-dubai",
+    image: "/images/steam-pressing-banner.jpg",
+    title: "Steam Pressing Service",
+    description:
+      "Wrinkles erased, confidence intact. A standard of polish that matches the pace of the city.",
+  },
+
   // {
   //   id: 3,
   //   slug: "express-laundry-services-in-dubai",
@@ -42,33 +51,24 @@ const services = [
     description:
       "Fresh enough for first steps, because the shoes you love should outlast the dirt.",
   },
+  // {
+  //   id: 5,
+  //   slug: "luxury-shoe-cleaning-services-in-dubai",
+  //   image: "/images/erik-mclean-AnRxcupEQT0-unsplash.webp",
+  //   title: "Luxury Shoe Cleaning",
+  //   description:
+  //     "Conditioned, polished, protected — Because luxury deserves more than a wipe-down.",
+  // },
   {
     id: 5,
-    slug: "luxury-shoe-cleaning-services-in-dubai",
-    image: "/images/erik-mclean-AnRxcupEQT0-unsplash.webp",
-    title: "Luxury Shoe Cleaning",
-    description:
-      "Conditioned, polished, protected — Because luxury deserves more than a wipe-down.",
+    slug: "curtain-cleaning-services-in-dubai",
+    image:
+      "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.webp",
+    title: "Curtain Cleaning Service",
+    description: "Every breeze leaves something behind — we take it out.",
   },
   {
     id: 6,
-    slug: "commercial-laundry-services-in-dubai",
-    image:
-      "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.webp",
-    title: "Commercial Laundry Service",
-    description:
-      "High volume, tight deadlines, zero excuses. Bulk care with boutique standards.",
-  },
-  // {
-  //   id: 7,
-  //   slug: "curtain-cleaning-services-in-dubai",
-  //   image:
-  //     "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.webp",
-  //   title: "Curtain Cleaning Service",
-  //   description: "Every breeze leaves something behind — we take it out.",
-  // },
-  {
-    id: 8,
     slug: "carpet-cleaning-services-in-dubai",
     image:
       "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc (1).webp",
@@ -76,20 +76,22 @@ const services = [
     description: "Dust and stains pulled from where your vacuum can’t reach.",
   },
   {
+    id: 7,
+    slug: "commercial-laundry-services-in-dubai",
+    image:
+      "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.webp",
+    title: "Commercial Laundry Service",
+    description:
+      "High volume, tight deadlines, zero excuses. Bulk care with boutique standards.",
+  },
+
+  {
     id: 9,
     slug: "soft-toy-cleaning-services-in-dubai",
     image:
       "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.webp",
     title: "Soft Toy Cleaning Service",
     description: "Playmates deserve the same care as playtime.",
-  },
-  {
-    id: 10,
-    slug: "steam-pressing-services-in-dubai",
-    image: "/images/steam-pressing-banner.jpg",
-    title: "Steam Pressing Service",
-    description:
-      "Wrinkles erased, confidence intact. A standard of polish that matches the pace of the city.",
   },
 ];
 

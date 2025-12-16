@@ -127,7 +127,7 @@ const Navbar = () => {
             scrolled ? "h-0 overflow-hidden opacity-0" : "h-auto opacity-100"
           }`}
         >
-          <div className="w-full mx-auto flex flex-wrap justify-between items-center py-2 px-12">
+          <div className="w-full mx-auto flex flex-nowrap justify-between items-center py-2 px-6">
             <div className="flex flex-row justify-center flex-nowrap items-center gap-1">
               <GrLocation className="text-primary-green" size={16} />
               <span className="truncate flex flex-nowrap">
@@ -138,7 +138,7 @@ const Navbar = () => {
             <div className="flex flex-row justify-center flex-nowrap items-center gap-1">
               <LuClock4 className="text-primary-green" size={16} />
               <span className="truncate flex flex-nowrap">
-                Mon to Friday - 8 am to 11pm Sat-Sun - 10am to 11pm{" "}
+                Mon to Friday - 8am to 11pm Sat-Sun - 10am to 11pm{" "}
               </span>
             </div>
             <div className="flex flex-row justify-center flex-nowrap items-center gap-1">

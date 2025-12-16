@@ -29,7 +29,7 @@ const GuaranteeSection: React.FC = () => {
             instance of loss or damage, we provide reimbursement up to the full
             value of the item, with a 1,000 maximum per order.
           </p>
-          <Link href="/services" className="">
+          <Link href="/best-laundry-services-in-dubai" className="">
             <button className="bg-primary-green text-white  flex flex-nowrap items-center justify-center gap-2 font-roboto-condensed font-semibold  rounded-[4px] px-8 py-2 text-xl cursor-pointer hover:bg-white hover:text-primary-green transition-all ease-in-out duration-500">
               Get Service Now
             </button>

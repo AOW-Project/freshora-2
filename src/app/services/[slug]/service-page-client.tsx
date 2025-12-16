@@ -208,7 +208,7 @@ export default function ServicePageClient({
                 ))}
               </div>
 
-              <CouponCarousel />
+              {/* <CouponCarousel /> */}
             </main>
 
             {/* Sidebar Right */}
@@ -253,13 +253,13 @@ export default function ServicePageClient({
                 </CardContent>
               </Card>
 
-              <div className="sticky top-24 bg-secondary-green text-center text-white py-6 rounded">
+              {/* <div className="sticky top-24 bg-secondary-green text-center text-white py-6 rounded">
                 <h2 className="text-xl font-medium text-yellow-300">Special</h2>
                 <h2 className="text-xl font-medium text-yellow-300">
                   Welcome Offer
                 </h2>
                 <p>Click Here</p>
-              </div>
+              </div> */}
             </aside>
           </div>
         </div>

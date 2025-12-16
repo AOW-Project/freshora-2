@@ -58,6 +58,11 @@ export default function Footer() {
       href: "/services/dry-cleaning-services-in-dubai",
       icon: "Dry-clean.svg",
     },
+    {
+      title: "Steam Pressing Service",
+      href: "/services/steam-pressing-services-in-dubai",
+      icon: "Steam.svg",
+    },
     // {
     //   title: "Express Laundry Services",
     //   href: "/services/express-laundry-services-in-dubai",
@@ -79,24 +84,19 @@ export default function Footer() {
       icon: "Commercial.svg",
     },
     {
+      title: "Curtain Cleaning Service",
+      href: "/services/curtain-cleaning-services-in-dubai",
+      icon: "Curtain.svg",
+    },
+    {
       title: "Carpet Cleaning Service",
       href: "/services/carpet-cleaning-services-in-dubai",
       icon: "Carpet.svg",
     },
-    // {
-    //   title: "Curtain Cleaning Service",
-    //   href: "/services/curtain-cleaning-services-in-dubai",
-    //   icon: "Curtain.svg",
-    // },
     {
       title: "Soft Toy Cleaning Service",
       href: "/services/soft-toy-cleaning-services-in-dubai",
       icon: "Toy.svg",
-    },
-    {
-      title: "Steam Pressing Service",
-      href: "/services/steam-pressing-services-in-dubai",
-      icon: "Steam.svg",
     },
   ];
 

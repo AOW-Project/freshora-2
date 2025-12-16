@@ -12,10 +12,10 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <HomepageServices />
       <LaundryExperience />
       <HowWeWorkSection />
       <LaundryService />
-      <HomepageServices />
       {/* <HomepagePricingCards /> */}
       {/* <HomepagePricePackages /> */}
       <TestimonialsSection />

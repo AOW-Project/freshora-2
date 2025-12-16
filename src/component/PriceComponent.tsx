@@ -1032,7 +1032,6 @@ const PricingSection = () => {
             </div>
           </section> */}
         </div>
-        <HomepagePricePackages />
       </section>
     </>
   );
