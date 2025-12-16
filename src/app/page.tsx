@@ -17,7 +17,7 @@ export default function HomePage() {
       <LaundryService />
       <HomepageServices />
       {/* <HomepagePricingCards /> */}
-      <HomepagePricePackages />
+      {/* <HomepagePricePackages /> */}
       <TestimonialsSection />
       {/* <MapSection/> */}
     </>

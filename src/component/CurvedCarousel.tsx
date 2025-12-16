@@ -76,7 +76,7 @@ export default function CurvedCarousel() {
         className="overflow-hidden relative z-0 pb-16"
       >
         {services.map((service, index) => (
-          <SwiperSlide key={index} className="relative">
+          <SwiperSlide key={index} className="relative cursor-grab">
             <img
               src={service.src}
               alt={service.alt}
