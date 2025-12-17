@@ -33,10 +33,10 @@ const SERVICE_CATEGORIES = [
     name: "Carpet Cleaning Service",
     slug: "carpet-cleaning-services-in-dubai",
   },
-  {
-    name: "Soft Toy Cleaning Service",
-    slug: "soft-toy-cleaning-services-in-dubai",
-  },
+  // {
+  //   name: "Soft Toy Cleaning Service",
+  //   slug: "soft-toy-cleaning-services-in-dubai",
+  // },
 ];
 
 const CONTACT_ONLY = [

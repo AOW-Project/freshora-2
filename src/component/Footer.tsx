@@ -73,11 +73,11 @@ export default function Footer() {
       href: "/services/shoe-and-bag-spa-services-in-dubai",
       icon: "Shoe-spa.svg",
     },
-    {
-      title: "Luxury Shoe Cleaning",
-      href: "/services/luxury-shoe-cleaning-services-in-dubai",
-      icon: "Luxury-shoe.svg",
-    },
+    // {
+    //   title: "Luxury Shoe Cleaning",
+    //   href: "/services/luxury-shoe-cleaning-services-in-dubai",
+    //   icon: "Luxury-shoe.svg",
+    // },
     {
       title: "Commercial Laundry Service",
       href: "/services/commercial-laundry-services-in-dubai",
@@ -93,11 +93,11 @@ export default function Footer() {
       href: "/services/carpet-cleaning-services-in-dubai",
       icon: "Carpet.svg",
     },
-    {
-      title: "Soft Toy Cleaning Service",
-      href: "/services/soft-toy-cleaning-services-in-dubai",
-      icon: "Toy.svg",
-    },
+    // {
+    //   title: "Soft Toy Cleaning Service",
+    //   href: "/services/soft-toy-cleaning-services-in-dubai",
+    //   icon: "Toy.svg",
+    // },
   ];
 
   return (

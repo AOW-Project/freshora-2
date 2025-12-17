@@ -57,7 +57,7 @@ export default function Services() {
       <ServicesGrid />
       {/* <LaundryService /> */}
       <FeaturesComponent />
-      <CouponCarousel />
+      {/* <CouponCarousel /> */}
     </>
   );
 }

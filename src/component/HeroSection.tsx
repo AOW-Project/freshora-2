@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import WhatsAppFloatingButton from "./WhatsAppFloatingButton";
 
 const slides = [
   {
@@ -123,7 +122,10 @@ export default function HeroSection() {
                 {s.description}
               </p>
               <div className="flex items-center justify-center self-center lg:self-start gap-3 ">
-                <Link href="/best-laundry-services-in-dubai" className="">
+                <Link
+                  href="/services/professional-laundry-services-in-dubai/orders"
+                  className=""
+                >
                   <button className="flex items-center justify-center gap-2 bg-[#30e87a] text-secondary-green font-bold text-sm sm:text-base md:text-lg h-14 px-8 rounded-lg  shadow-[0_0_20px_rgba(48,232,122,0.3)] hover:shadow-[0_0_30px_rgba(48,232,122,0.5)] transform hover:-translate-y-1 hover:bg-white/90 transition-all ease-in-out duration-500">
                     {s.cta}
                   </button>
@@ -138,7 +140,6 @@ export default function HeroSection() {
           </div>
         ))}
       </div>
-      <WhatsAppFloatingButton />
     </section>
   );
 }

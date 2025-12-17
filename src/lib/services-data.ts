@@ -118,7 +118,7 @@ const services: Service[] = [
     secondaryDescription:
       "Enjoy convenience with dry cleaning pickup and delivery. Whether you need affordable dry cleaners in Dubai or luxury dry cleaning in Dubai, we guarantee wrinkle-free results and expert fabric care-right at your doorstep.",
     image:
-      "/images/iron-and-stack-of-shirts-on-ironing-board-space-f-2025-03-25-22-33-47-utc.jpg",
+      "/images/iron-and-stack-of-shirts-on-ironing-board-space-f-2025-03-25-22-33-47-utc.webp",
     gallery: [
       "/images/clothing-garment-rack-with-hanging-polos-2025-03-15-07-54-07-utc.jpeg",
       "/images/ironing-board-with-iron-and-linen-2024-10-17-04-27-08-utc.jpg",
@@ -261,7 +261,7 @@ const services: Service[] = [
     secondaryDescription:
       "Book our expert shoe cleaning service or sneaker cleaning service today. Enjoy premium care for shoes and handbags-all restored with precision and delivered fresh to your doorstep.",
     image:
-      "/images/light-blue-sneakers-and-backpack-2025-01-09-09-02-14-utc.jpg",
+      "/images/light-blue-sneakers-and-backpack-2025-01-09-09-02-14-utc.webp",
     gallery: [
       "/images/shoe-polisher-2024-10-23-08-39-38-utc.jpg",
       "/images/shoes-and-bags-displayed-at-store-2024-10-11-10-45-42-utc.jpg",
@@ -332,7 +332,7 @@ const services: Service[] = [
       "Book trusted shoe cleaning service Dubai today. From luxury dress shoes to sneakers, enjoy meticulous cleaning, restoration, and care-all delivered to your doorstep. ",
     image: "/images/erik-mclean-AnRxcupEQT0-unsplash.webp",
     gallery: [
-      "/images/83b6f078-38db-4b2d-88c3-123a4ac7e796.jfif",
+      "/images/shoemaker-sharpens-the-shoe-sole-footwear-repair-2024-12-02-20-55-16-utc.jpg",
       "/images/pexels-ashis-sarker-706183433-18155790.jpg",
     ],
     features: [
@@ -401,7 +401,7 @@ const services: Service[] = [
     secondaryDescription:
       "Trusted commercial laundry services with pickup and delivery-perfect for hotels, restaurants, and businesses needing professional, large-scale care at affordable rates. ",
     image:
-      "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.jpg",
+      "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.webp",
     gallery: [
       "/images/woman-working-in-laundry-2025-04-03-06-15-04-utc.jpg",
       "/images/clothes-in-basket-2025-04-01-05-55-39-utc.jpg",
@@ -470,7 +470,7 @@ const services: Service[] = [
     secondaryDescription:
       "Book trusted curtain washing service in Dubai-fresh, spotless curtains delivered back to your home",
     image:
-      "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.jpg",
+      "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.webp",
     gallery: [
       "/images/house-cleaning-woman-in-gloves-with-a-rag-cleanin-2024-12-08-01-28-27-utc.jpg",
       "/images/asian-cleaning-service-woman-worker-cleaning-in-li-2025-03-24-14-55-20-utc.jpg",
@@ -541,7 +541,7 @@ const services: Service[] = [
     secondaryDescription:
       "Our advanced cleaning process removes embedded dirt, allergens, and tough stains, leaving your carpets looking and feeling fresh and new.",
     image:
-      "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc.jpg",
+      "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc.webp",
     gallery: [
       "/images/housekeeper-is-using-cordless-vacuum-cleaner-with-2024-10-12-16-32-25-utc.jpg",
       "/images/close-up-of-professional-cleaner-using-brush-while-2024-12-13-22-35-19-utc.jpg",
@@ -611,7 +611,7 @@ const services: Service[] = [
     secondaryDescription:
       "Using non-toxic, child-safe methods, we remove dust mites, allergens, and stains while preserving the softness and shape of your child's favorite toys.",
     image:
-      "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.jpg",
+      "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.webp",
     gallery: [
       "/images/rabbit-toy-in-the-laundry-2025-01-07-04-47-31-utc.jpg",
       "/images/plush-toys-bunny-and-teddy-bear-are-dried-on-a-clo-2024-12-02-22-58-13-utc.jpg",

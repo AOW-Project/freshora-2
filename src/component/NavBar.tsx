@@ -81,11 +81,11 @@ const navItems: NavItem[] = [
         icon: "Commercial.svg",
       },
 
-      {
-        title: "Soft Toy Cleaning Service",
-        href: "/services/soft-toy-cleaning-services-in-dubai",
-        icon: "Toy.svg",
-      },
+      // {
+      //   title: "Soft Toy Cleaning Service",
+      //   href: "/services/soft-toy-cleaning-services-in-dubai",
+      //   icon: "Toy.svg",
+      // },
     ],
   },
   { title: "Prices", href: "/prices" },
@@ -123,7 +123,7 @@ const Navbar = () => {
       >
         {/* Top Info Bar */}
         <div
-          className={`hidden xl:block bg-white- text-sm text-gray-700 transition-all duration-300 ${
+          className={`hidden xl:block text-sm text-gray-700 transition-all duration-300 ${
             scrolled ? "h-0 overflow-hidden opacity-0" : "h-auto opacity-100"
           }`}
         >

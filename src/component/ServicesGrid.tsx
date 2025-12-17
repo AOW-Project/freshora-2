@@ -85,14 +85,14 @@ const services = [
       "High volume, tight deadlines, zero excuses. Bulk care with boutique standards.",
   },
 
-  {
-    id: 9,
-    slug: "soft-toy-cleaning-services-in-dubai",
-    image:
-      "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.webp",
-    title: "Soft Toy Cleaning Service",
-    description: "Playmates deserve the same care as playtime.",
-  },
+  // {
+  //   id: 9,
+  //   slug: "soft-toy-cleaning-services-in-dubai",
+  //   image:
+  //     "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.webp",
+  //   title: "Soft Toy Cleaning Service",
+  //   description: "Playmates deserve the same care as playtime.",
+  // },
 ];
 
 const ServicesGrid = () => {

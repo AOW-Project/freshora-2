@@ -13,6 +13,7 @@ import {
   ShoppingCart,
   ChevronLeft,
   ChevronRight,
+  ArrowUpRight,
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
@@ -669,6 +670,18 @@ const PricingSection = () => {
             <h3 className="text-xl my-3 font-medium text-gray-600 text-center">
               Our Full Price Table
             </h3>
+          </div>
+          {/* Get price list button */}
+          <div className="w-full flex justify-center items-center">
+            <button
+              onClick={() =>
+                window.open("/files/Freshora-care-full-price-list.pdf")
+              }
+              className="px-14 sm:px-16 py-3 bg-secondary-green  text-white font-semibold rounded  transition-colors duration-300 shadow-md text-sm sm:text-base hover:bg-white hover:text-primary-green border hover:border-primary-green flex gap-3"
+            >
+              Get Price List
+              <ArrowUpRight />
+            </button>{" "}
           </div>
           <Card className="mb-12 sm:mb-16 lg:mb-20 shadow-lg border-none min-h-[400px]">
             <CardContent className="p-3 sm:p-6 lg:p-8">

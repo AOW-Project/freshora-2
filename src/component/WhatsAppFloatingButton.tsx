@@ -21,18 +21,19 @@ export default function WhatsAppFloatingButton() {
     w-[60px] h-[60px] rounded-full
     flex items-center justify-center
     shadow-lg cursor-pointer bg-transparent
-    transition-all duration-300 ease-out
+    transition-all duration-300 ease-out animate-bounce
     ${visible ? "scale-100 opacity-100" : "scale-50 opacity-0"}
     hover:scale-105
     group
+    
   `}
     >
       {/* notification icon */}
-      <div
+      {/* <div
         className="absolute top-1 right-0 rounded-full transform -translate-x-1/2 z-[1002]
       w-3 h-3
        bg-red-700 animate-pulse group-hover:hidden"
-      ></div>
+      ></div> */}
 
       {/* Circular Text Around Icon */}
       <svg
@@ -45,7 +46,7 @@ export default function WhatsAppFloatingButton() {
             d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
           />
         </defs>
-        <text className="fill-[#075E54] text-[24px] font-medium">
+        <text className="fill-[#00a63e] text-[24px] font-medium">
           <textPath href="#circlePath" startOffset="0%">
             Ask your questions • Ask your questions •
           </textPath>
