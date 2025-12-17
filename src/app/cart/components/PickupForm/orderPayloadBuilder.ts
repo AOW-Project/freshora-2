@@ -23,7 +23,7 @@ export const buildOrderPayload = ({
       email: formData.email.toLowerCase().trim(),
       phone: formData.phone?.trim() ?? "",
       address: formData.address.trim(),
-      city: formData.city.trim(),
+      city: formData.city?.trim() ?? "",
       zipCode: formData.zipCode?.trim() ?? "",
     },
 
