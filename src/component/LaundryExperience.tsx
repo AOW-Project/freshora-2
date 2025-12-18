@@ -14,6 +14,7 @@ import {
   Smile,
 } from "lucide-react";
 import { RiCheckDoubleLine } from "react-icons/ri";
+import Link from "next/link";
 
 // ✅ Updated statsData: values removed, icons changed to match labels
 const statsData = [
@@ -124,8 +125,8 @@ export default function LaundryStats() {
               },
               {
                 icon: "/images/redesign/laundry-exp-pay.svg",
-                title: "Pay in Seconds",
-                desc: "Book and pay online from any device - fast, secure, and effortless",
+                title: "Transparent Pricing",
+                desc: "Clear prices upfront, No hidden charges. On-time delivery you can count on, every time.",
               },
               {
                 icon: "/images/redesign/laundry-exp-eco.svg",
@@ -133,18 +134,19 @@ export default function LaundryStats() {
                 desc: "We use gentle, non-toxic solutions that care for fabrics, skin, and the environment.",
               },
             ].map((card, i) => (
-              <div
+              <Link
+                href="/best-laundry-services-in-dubai"
                 key={i}
-                className="bg-[#F3F6F4] p-5 sm:p-6 lg:p-8 rounded shadow-md hover:shadow-lg transition relative flex flex-col items-center justify-center"
+                className="bg-white p-5 sm:p-6 lg:p-8 rounded shadow-md border border-[#cdead7]  hover:shadow-lg transition relative flex flex-col items-center justify-center"
               >
-                <h3 className="font-semibold text-secondary-green mb-4 mt-6 text-base sm:text-lg">
+                <h3 className="font-semibold text-secondary-green mb-4 mt-6 text-md sm:text-lg">
                   {card.title}
                 </h3>
                 <p className="text-gray-600 text-sm sm:text-base">
                   {card.desc}
                 </p>
                 {/* floater */}
-                <div className="absolute -top-[25%] left-[50%] -translate-x-1/2 w-24 h-24 rounded-full border border-primary-green bg-white hidden sm:flex items-center justify-center">
+                <div className="absolute -top-[25%] left-[50%] -translate-x-1/2 w-24 h-24 rounded-full border shadow-md border-[#cdead7] bg-white hidden sm:flex items-center justify-center">
                   <Image
                     src={card.icon}
                     alt="Laundry Experience"
@@ -154,7 +156,7 @@ export default function LaundryStats() {
                     priority
                   />
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

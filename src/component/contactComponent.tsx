@@ -145,14 +145,14 @@ export default function ContactPage() {
                 +971 50 925 9667
               </a>
             </p>
-            <p className="text-gray-600 text-sm">
+            {/* <p className="text-gray-600 text-sm">
               <a
                 href="tel:+971045799667"
                 className="hover:text-green-600 transition-colors"
               >
                 +971 (0) 4 579 9667
               </a>
-            </p>
+            </p> */}
           </div>
 
           <div className="text-center">
@@ -173,9 +173,9 @@ export default function ContactPage() {
               Opening Hours
             </h3>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Mon-Fri 08:00 AM - 08:00 PM
+              Mon-Fri 08:00 AM - 11:00 PM
               <br />
-              Sat-Sun: 10am - 8pm
+              Sat-Sun: 10:00 AM - 11:00 PM
             </p>
           </div>
         </div>

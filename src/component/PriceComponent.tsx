@@ -413,13 +413,13 @@ const householdItems = [
   },
   {
     item: "Curtains (Per Sq meter)",
-    washPress: "12.00",
-    dryCleaning: "18.00",
+    washPress: "-",
+    dryCleaning: "20.00-25.00",
     steamPressing: "10.00",
   },
   {
     item: "Normal Carpet (Per Sq meter)",
-    washPress: "25.00",
+    washPress: "20.00",
     dryCleaning: "-",
     steamPressing: "-",
   },

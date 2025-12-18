@@ -37,12 +37,12 @@ const navItems: NavItem[] = [
     subItems: [
       {
         title: "Laundry Services",
-        href: "/services/professional-laundry-services-in-dubai",
+        href: "/services/professional-laundry-services-in-dubai/orders",
         icon: "Laundry.svg",
       },
       {
         title: "Dry Cleaning",
-        href: "/services/dry-cleaning-services-in-dubai",
+        href: "/services/dry-cleaning-services-in-dubai/orders",
         icon: "Dry-clean.svg",
       },
       // {
@@ -52,7 +52,7 @@ const navItems: NavItem[] = [
       // },
       {
         title: "Steam Pressing Service",
-        href: "/services/steam-pressing-services-in-dubai",
+        href: "/services/steam-pressing-services-in-dubai/orders",
         icon: "Steam.svg",
       },
       {
@@ -67,12 +67,12 @@ const navItems: NavItem[] = [
       // },
       {
         title: "Curtain Cleaning Service",
-        href: "/services/curtain-cleaning-services-in-dubai",
+        href: "/services/curtain-cleaning-services-in-dubai/orders",
         icon: "Curtain.svg",
       },
       {
         title: "Carpet Cleaning Service",
-        href: "/services/carpet-cleaning-services-in-dubai",
+        href: "/services/carpet-cleaning-services-in-dubai/orders",
         icon: "Carpet.svg",
       },
       {
@@ -127,7 +127,7 @@ const Navbar = () => {
             scrolled ? "h-0 overflow-hidden opacity-0" : "h-auto opacity-100"
           }`}
         >
-          <div className="w-full mx-auto flex flex-nowrap justify-between items-center py-2 px-6">
+          <div className="w-full mx-auto flex flex-nowrap justify-between items-center py-2 px-12">
             <div className="flex flex-row justify-center flex-nowrap items-center gap-1">
               <GrLocation className="text-primary-green" size={16} />
               <span className="truncate flex flex-nowrap">
@@ -156,14 +156,14 @@ const Navbar = () => {
                 </a>
               </span>
             </div>
-            <div className="flex flex-row justify-center flex-nowrap items-center gap-1">
+            {/* <div className="flex flex-row justify-center flex-nowrap items-center gap-1">
               <FaPhoneAlt className="text-primary-green" />
               <span className="flex items-center gap-1">
                 <a href="tel:+971045799667">
                   <span className="text-base">+971 (0) 4 579 9667</span>
                 </a>
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
 

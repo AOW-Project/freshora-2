@@ -143,8 +143,8 @@ export default function Footer() {
                 <li className="flex items-start gap-2">
                   <LuClock4 className="text-white" size={16} />
                   <div>
-                    <p>Monday-Friday: 8 am to 8pm</p>
-                    <p> Saturday-Sunday: 10am to 8pm</p>
+                    <p>Monday-Friday: 8 am to 11pm</p>
+                    <p> Saturday-Sunday: 10am to 11pm</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-2">
@@ -162,12 +162,12 @@ export default function Footer() {
                     +971 50 925 9667
                   </a>
                 </li>
-                <li className="flex items-start gap-2">
+                {/* <li className="flex items-start gap-2">
                   <FaPhoneAlt className="text-white" />
                   <a href="tel:+971045799667" className=" hover:underline">
                     +971 (0) 4 579 9667
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
@@ -229,7 +229,7 @@ export default function Footer() {
                 {
                   Icon: FaFacebookF,
                   label: "Facebook",
-                  href: "https://www.facebook.com/profile.php?id=61579978694620",
+                  href: "https://www.facebook.com/profile.php?id=61583944740435",
                 },
                 {
                   Icon: FaInstagram,
