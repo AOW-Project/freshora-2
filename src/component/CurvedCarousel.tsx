@@ -6,6 +6,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/pagination";
+import Image from "next/image";
 
 export default function CurvedCarousel() {
   const services = [
@@ -20,7 +21,7 @@ export default function CurvedCarousel() {
       src: "/images/iron-and-stack-of-shirts-on-ironing-board-space-f-2025-03-25-22-33-47-utc.webp",
     },
     {
-      alt: "Express Laundry Service",
+      alt: "Express Laundry",
 
       src: "/images/close-up-of-businessman-holding-shirts-2024-09-28-03-21-06-utc.webp",
     },
@@ -30,28 +31,28 @@ export default function CurvedCarousel() {
       src: "/images/light-blue-sneakers-and-backpack-2025-01-09-09-02-14-utc.webp",
     },
     {
-      alt: "Luxury Shoe Cleaning Service",
+      alt: "Luxury Shoe Cleaning",
 
       src: "/images/erik-mclean-AnRxcupEQT0-unsplash.webp",
     },
     {
-      alt: "Commercial Laundry Service",
+      alt: "Commercial Laundry",
       src: "/images/panoramic-shot-of-happy-maid-looking-at-dirty-bedd-2024-11-19-10-14-40-utc.webp",
     },
     {
-      alt: "Carpet Cleaning Service",
+      alt: "Carpet Cleaning",
       src: "/images/a-closeup-view-of-vacuuming-a-carpet-in-a-contempo-2024-12-13-14-23-46-utc.webp",
     },
     {
-      alt: "Curtain Cleaning Service",
+      alt: "Curtain Cleaning",
       src: "/images/white-transparent-curtain-closes-the-window-indoo-2025-01-15-12-40-54-utc.webp",
     },
     {
-      alt: "Soft Toy Cleaning Service",
+      alt: "Soft Toy Cleaning",
       src: "/images/stuffed-rabbit-in-washing-machine-2025-01-07-09-52-38-utc.webp",
     },
     {
-      alt: "Steam Pressing Service",
+      alt: "Steam Pressing",
       src: "/images/steam-pressing-banner.jpg",
     },
   ];
@@ -77,10 +78,12 @@ export default function CurvedCarousel() {
       >
         {services.map((service, index) => (
           <SwiperSlide key={index} className="relative cursor-grab">
-            <img
+            <Image
               src={service.src}
               alt={service.alt}
-              className="w-full h-[350px] object-cover md:h-[450px]"
+              width={500}
+              height={450}
+              className="w-full h-[400px] object-cover md:h-[450px]"
             />
             <div className="absolute z-50 w-full h-[25%] text-xl pt-2 font-medium bg-primary-green/70 text-white bottom-0 text-center">
               {service.alt}
