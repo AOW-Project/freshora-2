@@ -30,6 +30,10 @@ const SERVICE_CATEGORIES = [
     slug: "commercial-laundry-services-in-dubai",
   },
   {
+    name: "Curtain Cleaning Service",
+    slug: "curtain-cleaning-services-in-dubai",
+  },
+  {
     name: "Carpet Cleaning Service",
     slug: "carpet-cleaning-services-in-dubai",
   },
@@ -152,7 +156,11 @@ export default function ServicePageClient({
                   ) : (
                     <Link
                       prefetch
-                      href={`/services/${slug}/orders`}
+                      href={
+                        slug !== "curtain-cleaning-services-in-dubai"
+                          ? `/services/${slug}/orders`
+                          : `/services/dry-cleaning-services-in-dubai/orders`
+                      }
                       className="rounded-md w-full py-2 bg-secondary-green text-white 
              hover:bg-primary-green transition-colors duration-300 font-semibold 
              flex items-center justify-center cursor-pointer"

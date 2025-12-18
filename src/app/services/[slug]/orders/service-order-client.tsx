@@ -179,11 +179,11 @@ export default function ServiceOrderClient({
       //   slug: "commercial-laundry-services-in-dubai",
       //   icon: "Commercial.svg",
       // },
-      {
-        name: "Curtain Cleaning Service",
-        slug: "curtain-cleaning-services-in-dubai",
-        icon: "Curtain.svg",
-      },
+      // {
+      //   name: "Curtain Cleaning Service",
+      //   slug: "curtain-cleaning-services-in-dubai",
+      //   icon: "Curtain.svg",
+      // },
       {
         name: "Carpet Cleaning Service",
         slug: "carpet-cleaning-services-in-dubai",

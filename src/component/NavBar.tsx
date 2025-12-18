@@ -67,7 +67,7 @@ const navItems: NavItem[] = [
       // },
       {
         title: "Curtain Cleaning Service",
-        href: "/services/curtain-cleaning-services-in-dubai/orders",
+        href: "/services/dry-cleaning-services-in-dubai/orders",
         icon: "Curtain.svg",
       },
       {
