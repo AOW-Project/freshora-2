@@ -21,10 +21,10 @@ const SERVICE_CATEGORIES = [
   { name: "Dry Cleaning Services", slug: "dry-cleaning-services-in-dubai" },
   { name: "Steam Pressing Services", slug: "steam-pressing-services-in-dubai" },
   { name: "Shoe Cleaning", slug: "shoe-and-bag-spa-services-in-dubai" },
-  {
-    name: "Luxury Shoe Cleaning",
-    slug: "luxury-shoe-cleaning-services-in-dubai",
-  },
+  // {
+  //   name: "Luxury Shoe Cleaning",
+  //   slug: "luxury-shoe-cleaning-services-in-dubai",
+  // },
   {
     name: "Commercial Laundry Service",
     slug: "commercial-laundry-services-in-dubai",
@@ -252,10 +252,10 @@ export default function ServicePageClient({
                         <a href="tel:+971509259667">+971 50 925 9667</a>
                       </div>
 
-                      <div className="flex gap-3">
+                      {/* <div className="flex gap-3">
                         <Phone className="h-4 w-4 text-green-600" />
                         <a href="tel:+971045799667">+971 4 579 9667</a>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </CardContent>

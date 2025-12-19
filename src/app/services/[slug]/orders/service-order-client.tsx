@@ -11,6 +11,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import { toast } from "react-toastify";
+import { FaWhatsapp } from "react-icons/fa";
 
 // --- Type Definitions ---
 interface ServiceItem {
@@ -164,11 +165,11 @@ export default function ServiceOrderClient({
       //   slug: "express-laundry-services-in-dubai",
       //   icon: "Express.svg",
       // },
-      // {
-      //   name: "Shoe Cleaning",
-      //   slug: "shoe-and-bag-spa-services-in-dubai",
-      //   icon: "Shoe-spa.svg",
-      // },
+      {
+        name: "Shoe Cleaning",
+        slug: "shoe-and-bag-spa-services-in-dubai",
+        icon: "Shoe-spa.svg",
+      },
       // {
       //   name: "Luxury Shoe Cleaning",
       //   slug: "luxury-shoe-cleaning-services-in-dubai",
@@ -502,61 +503,84 @@ export default function ServiceOrderClient({
         {/* --- RESPONSIVE LAYOUT FIX --- */}
         <div className="max-w-7xl mx-auto px-4 py-20 grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
-          <div className="lg:col-span-2">
-            <Card className="p-0 relative rounded-none">
-              <CardContent className="p-4">
-                <Tabs
-                  defaultValue={categories[0]}
-                  className="w-full border-0 shadow-0"
+          {slug === "shoe-and-bag-spa-services-in-dubai" ? (
+            <div className="bg-white p-5 border rounded-lg shadow-sm">
+              <p className="text-gray-600 mt-4 leading-relaxed">
+                Give your accessories new life with our premium shoe and bag spa
+                services in Dubai. From leather shoe cleaning to delicate
+                handbags, our experts restore, clean, and protect every material
+                with care, offering specialized treatments like color
+                restoration and conditioning for long-lasting beauty.
+              </p>
+
+              <div className="mt-4">
+                <Link
+                  href={`https://wa.me/+971509259667?text=${encodeURIComponent(
+                    `Hi, I would like to know the prices for ${service.title}`
+                  )}`}
+                  className="flex justify-center items-center gap-3 bg-secondary-green hover:bg-primary-green text-white py-2 rounded-md"
                 >
-                  <TabsList
-                    className="grid gap-4 absolute right-0 -top-12 w-full bg-white"
-                    style={{
-                      gridTemplateColumns: `repeat(${categories.length}, minmax(0, 1fr))`,
-                    }}
+                  Contact for Prices <FaWhatsapp size={22} />
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="lg:col-span-2">
+              <Card className="p-0 relative rounded-none">
+                <CardContent className="p-4">
+                  <Tabs
+                    defaultValue={categories[0]}
+                    className="w-full border-0 shadow-0"
                   >
-                    {categories.map((category) => (
-                      <TabsTrigger
-                        className={`py-3 rounded-t-xl rounded-b-none border-0 transition-all duration-300 data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:font-semibold data-[state=inactive]:bg-gray-100 data-[state=inactive]:text-gray-600 hover:bg-primary-green/80 hover:text-white cursor-pointer
+                    <TabsList
+                      className="grid gap-4 absolute right-0 -top-12 w-full bg-white"
+                      style={{
+                        gridTemplateColumns: `repeat(${categories.length}, minmax(0, 1fr))`,
+                      }}
+                    >
+                      {categories.map((category) => (
+                        <TabsTrigger
+                          className={`py-3 rounded-t-xl rounded-b-none border-0 transition-all duration-300 data-[state=active]:bg-primary-green data-[state=active]:text-white data-[state=active]:font-semibold data-[state=inactive]:bg-gray-100 data-[state=inactive]:text-gray-600 hover:bg-primary-green/80 hover:text-white cursor-pointer
         `}
+                          key={category}
+                          value={category}
+                        >
+                          {category
+                            .replace(/-/g, " ")
+                            .replace(/\b\w/g, (l) => l.toUpperCase())}
+                        </TabsTrigger>
+                      ))}
+                    </TabsList>
+                    {categories.map((category) => (
+                      <TabsContent
                         key={category}
                         value={category}
+                        className="mt-6"
                       >
-                        {category
-                          .replace(/-/g, " ")
-                          .replace(/\b\w/g, (l) => l.toUpperCase())}
-                      </TabsTrigger>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          {service.items[category]
+                            .slice()
+                            .sort(
+                              (a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0)
+                            ) // ✅ enforce order
+                            .map((item) => (
+                              <ItemCard
+                                key={item.id}
+                                item={item}
+                                category={category}
+                                quantities={quantities}
+                                onAddToOrder={handleAddToOrder}
+                                onUpdateQuantity={updateQuantity}
+                              />
+                            ))}
+                        </div>
+                      </TabsContent>
                     ))}
-                  </TabsList>
-                  {categories.map((category) => (
-                    <TabsContent
-                      key={category}
-                      value={category}
-                      className="mt-6"
-                    >
-                      <div className="grid md:grid-cols-2 gap-4">
-                        {service.items[category]
-                          .slice()
-                          .sort(
-                            (a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0)
-                          ) // ✅ enforce order
-                          .map((item) => (
-                            <ItemCard
-                              key={item.id}
-                              item={item}
-                              category={category}
-                              quantities={quantities}
-                              onAddToOrder={handleAddToOrder}
-                              onUpdateQuantity={updateQuantity}
-                            />
-                          ))}
-                      </div>
-                    </TabsContent>
-                  ))}
-                </Tabs>
-              </CardContent>
-            </Card>
-          </div>
+                  </Tabs>
+                </CardContent>
+              </Card>
+            </div>
+          )}
 
           {/* Sidebar / Stacked Summary */}
           <div className="lg:sticky lg:top-24 h-fit">

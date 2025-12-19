@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/pagination";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function CurvedCarousel() {
   const services = [
@@ -78,13 +79,15 @@ export default function CurvedCarousel() {
       >
         {services.map((service, index) => (
           <SwiperSlide key={index} className="relative cursor-grab">
-            <Image
-              src={service.src}
-              alt={service.alt}
-              width={500}
-              height={450}
-              className="w-full h-[400px] object-cover md:h-[450px]"
-            />
+            <Link href="/services/professional-laundry-services-in-dubai/orders">
+              <Image
+                src={service.src}
+                alt={service.alt}
+                width={500}
+                height={450}
+                className="w-full h-[400px] object-cover md:h-[450px]"
+              />
+            </Link>
             <div className="absolute z-50 w-full h-[25%] text-xl pt-2 font-medium bg-primary-green/70 text-white bottom-0 text-center">
               {service.alt}
             </div>
